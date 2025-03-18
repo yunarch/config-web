@@ -20,7 +20,7 @@ With `@yunarch/config-web`, you get a well-balanced setup for your web projects,
 
 ## Why use this?
 
-Even experienced developers can waste valuable time configuring tools from scratch. Instead of manually setting up linters, formatters, and TypeScript settings, this package provides a ready-to-use configuration and extensible. It helps maintain clean, consistent code without the overhead of ongoing configuration maintenance.
+Even experienced developers can waste valuable time configuring tools from scratch. Instead of manually setting up linters, formatters, and TypeScript settings, this package provides a ready-to-use configuration that is both easy to implement and extensible. It helps maintain clean, consistent code without the overhead of ongoing tools configuration maintenance.
 
 ## What’s included?
 

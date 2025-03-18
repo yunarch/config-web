@@ -4,23 +4,28 @@
 
 With `@yunarch/config-web`, you get a well-balanced setup for your web projects, eliminating the hassle of manual configuration. These configurations serve as a strong foundation that you can extend and customize as needed.
 
-- [Why use this?](#why-use-this)
-- [What’s included?](#whats-included)
-- [Installation](#installation)
-- [Code Formatting](#code-formatting)
+- [📖 Why use this?](#-why-use-this)
+- [📦 What’s included?](#-whats-included)
+- [⚙️ Installation](#️-installation)
+- [📐 Code Formatting](#-code-formatting)
   - [Prettier](#prettier)
   - [Biome](#biome)
-- [Linting](#linting)
-- [Typescript](#typescript)
-- [CLI Tools](#cli-tools)
+- [🧹 Linting](#-linting)
+- [🔵 Typescript](#-typescript)
+- [🔧 CLI Tools](#-cli-tools)
   - [`swagger-sync`](#swagger-sync)
   - [`turbo-select`](#turbo-select)
 
-## Why use this?
+## 📖 Why use this?
 
 Even experienced developers can waste valuable time configuring tools from scratch. Instead of manually setting up linters, formatters, and TypeScript settings, this package provides a ready-to-use configuration that is both easy to implement and extensible. It helps maintain clean, consistent code without the overhead of ongoing tools configuration maintenance.
 
-## What’s included?
+> [!IMPORTANT]
+> Please keep in mind that this is still **a personal config** with a lot of opinions. Changes might not always work for everyone and every use case.
+>
+> If you are using this config directly, I suggest you **review the changes every time you update**. Or if you want more control over the rules, always feel free to fork it. Thanks!
+
+## 📦 What’s included?
 
 This package provides ready-to-use configurations for:
 
@@ -32,7 +37,7 @@ This package provides ready-to-use configurations for:
 > [!Tip]
 > You can use these configurations as-is or extend them to suit your project's specific needs.
 
-## Installation
+## ⚙️ Installation
 
 1. To get started, install the package as a development dependency:
 
@@ -56,7 +61,7 @@ npm install --save-dev eslint
 npm install --save-dev oxlint
 ```
 
-## Code Formatting
+## 📐 Code Formatting
 
 This package comes with configurations for both `Prettier` and `Biome` to ensure consistent formatting across your codebase.
 
@@ -107,11 +112,11 @@ To use the Biome formatter, create a `biome.json` [configuration file](https://b
 > }
 > ```
 
-## Linting
+## 🧹 Linting
 
 TODO
 
-## Typescript
+## 🔵 Typescript
 
 Create the `tsconfig.json` file with the following content:
 
@@ -131,7 +136,7 @@ import "@yunarch/config-web/reset.d.ts";
 > [!NOTE]
 > The `reset.d.ts` should be at the same level as the `tsconfig.json` file.
 
-## CLI Tools
+## 🔧 CLI Tools
 
 This package ships with useful command-line tools to streamline your workflow.
 

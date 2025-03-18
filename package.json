@@ -39,7 +39,7 @@
     "./linter-eslint": "./dist/linters/eslint.config.js",
     "./linter-oxlint": "./dist/linters/oxlint.config.json",
     "./linter-biome": "./dist/linters/biome.config.json",
-    "./tsconfig": "./dist/ts/tsconfig-base.json",
+    "./tsconfig-base": "./dist/ts/tsconfig-base.json",
     "./reset.d.ts": "./dist/ts/reset.d.ts"
   },
   "type": "module",

@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Base TypeScript Configuration",
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "Preserve",
+    "composite": false,
+    "skipLibCheck": true,
+
+    /* Bundler */
+    "moduleResolution": "Bundler",
+    "isolatedModules": true,
+    "inlineSources": false,
+    "esModuleInterop": true,
+    "declarationMap": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+
+    /* Linting */
+    "strict": true,
+    "strictNullChecks": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "forceConsistentCasingInFileNames": true,
+    "noUncheckedIndexedAccess": true,
+
+    /* Types */
+    "declaration": true,
+
+    /* Others */
+    "preserveWatchOutput": true
+  },
+  "exclude": ["node_modules"]
+}

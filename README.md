@@ -133,7 +133,7 @@ Additionally, this package includes a `ts-reset` configuration to enhance TypeSc
 import "@yunarch/config-web/reset.d.ts";
 ```
 
-Then, include this file in your tsconfig.json, for example:
+Then, include this file in your `tsconfig.json`, for example:
 
 ```jsonc
 {

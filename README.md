@@ -99,6 +99,19 @@ To use the Biome formatter, create a `biome.json` [configuration file](https://b
 }
 ```
 
+> [!IMPORTANT]
+> If you are also using `@yunarch/config-web/linter-biome`, the formatter configuration `@yunarch/config-web/formatter-biome` must be placed **before** it in the configuration.
+>
+> ```jsonc
+> {
+>   "extends": [
+>     "@yunarch/config-web/formatter-biome",
+>     "@yunarch/config-web/linter-biome",
+>   ],
+>   // overrides here...
+> }
+> ```
+
 ## Linting
 
 TODO

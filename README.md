@@ -13,8 +13,6 @@ With `@yunarch/config-web`, you get a well-balanced setup for your web projects,
 - [🧹 Linting](#-linting)
 - [🔵 Typescript](#-typescript)
 - [🔧 CLI Tools](#-cli-tools)
-  - [`swagger-sync`](#swagger-sync)
-  - [`turbo-select`](#turbo-select)
 
 ## 📖 Why use this?
 
@@ -152,32 +150,8 @@ Learn more from [Typescript docs here](https://www.typescriptlang.org/tsconfig/#
 
 This package ships with useful command-line tools to streamline your workflow.
 
+- **`swagger-sync`**: CLI tool designed to synchronize a local Swagger file with a remote API and generate API models. It helps keep your API documentation up to date with your actual API and automatically generates models based on the Swagger specification.
+- **`turbo-select`**: CLI tool for filtering and selecting a single package from your Turborepo package list and executing a script command. Additionally, it can prompt you to select an environment mode (development, staging, production) — useful for adjusting settings based on the environment (e.g., when using Vite).
+
 > [!NOTE]
 > All the CLI tools include a `--help` flag, which provides detailed information on usage and available options.
-
-### `swagger-sync`
-
-CLI tool designed to synchronize a local Swagger file with a remote API and generate API models. It helps keep your API documentation up to date with your actual API and automatically generates models based on the Swagger specification.
-
-To use `swagger-sync`, you could, for example, have the following scripts on your `package.json`:
-
-```json
-"format:gen": "prettier --write ./gen ./swagger.json",
-"sync-swagger": "swagger-sync --url=https://url/to/swagger.json --output=./swagger.json --models-folder=./gen --format-script=format:gen",
-```
-
-> [!NOTE]
-> The optional `--format-script` argument allows you to automatically run a format script (e.g., format:gen) after the models are generated, but you can run any script of your choice here.
-
-### `turbo-select`
-
-CLI tool for filtering and selecting a single package from your Turborepo package list and executing a script command. Additionally, it can prompt you to select an environment mode (development, staging, production) — useful for adjusting settings based on the environment (e.g., when using Vite).
-
-> [!WARNING]
-> You must have [turborepo](https://turbo.build/repo/docs/getting-started) installed and configured in your project to use this tool.
-
-To use `turbo-select`, you could, for example, have the following scripts on your `package.json`:
-
-```json
-"dev:select": "turbo-select --run=dev --select-env",
-```

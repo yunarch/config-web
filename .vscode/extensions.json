@@ -1,0 +1,13 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "oxc.oxc-vscode",
+    "esbenp.prettier-vscode",
+    "biomejs.biome",
+
+    "aaron-bond.better-comments",
+    "streetsidesoftware.code-spell-checker",
+
+    "mhutchie.git-graph"
+  ]
+}

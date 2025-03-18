@@ -1,0 +1,14 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.removeUnusedImports": "always"
+  },
+  "explorer.sortOrder": "type",
+  "files.trimTrailingWhitespace": true,
+  "workbench.editor.highlightModifiedTabs": true,
+  "problems.decorations.enabled": true
+}

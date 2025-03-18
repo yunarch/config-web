@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json.schemastore.org/package",
+  "version": "0.0.0",
+  "name": "@yunarch/config-web",
+  "description": "Shared configurations for web projects.",
+  "keywords": [
+    "config",
+    "eslint",
+    "oxlint",
+    "prettier",
+    "biome",
+    "typescript",
+    "tools"
+  ],
+  "author": {
+    "name": "Adrian Lopez Gonzalez",
+    "url": "https://github.com/yunarch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yunarch/config-web"
+  },
+  "bugs": {
+    "url": "https://github.com/yunarch/config-web/issues"
+  },
+  "engines": {
+    "bun": ">=1",
+    "node": ">=22"
+  },
+  "type": "module",
+  "files": [
+    "README.md",
+    "LICENSE.md",
+    "dist",
+    "./index.js"
+  ],
+  "bin": {
+    "swagger-sync": "./dist/cli/swagger-sync.js",
+    "turbo-select": "./dist/cli/turbo-select.js"
+  },
+  "exports": {
+    ".": "./index.js",
+    "./formatter-prettier": "./dist/formatters/prettier.config.js",
+    "./formatter-biome": "./dist/formatters/biome.config.json",
+    "./linter-eslint": "./dist/linters/eslint.config.js",
+    "./linter-oxlint": "./dist/linters/oxlint.config.json",
+    "./linter-biome": "./dist/linters/biome.config.json",
+    "./tsconfig": "./dist/ts/tsconfig-base.json",
+    "./reset.d.ts": "./dist/ts/reset.d.ts"
+  },
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "tsup"
+  },
+  "peerDependencies": {
+    "biome": "0",
+    "prettier": "3",
+    "turbo": "2"
+  },
+  "peerDependenciesMeta": {
+    "biome": {
+      "optional": true
+    },
+    "prettier": {
+      "optional": true
+    },
+    "turbo": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "@inquirer/confirm": "5.1.8",
+    "@inquirer/select": "4.1.0",
+    "@total-typescript/ts-reset": "0.6.1",
+    "commander": "13.1.0",
+    "ora": "8.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "22.13.10",
+    "rimraf": "6.0.1",
+    "tsup": "8.4.0",
+    "typescript": "5.8.2"
+  },
+  "packageManager": "bun@1.2.5"
+}

@@ -83,9 +83,6 @@ export default {
 };
 ```
 
-> [!WARNING]
-> The Prettier configuration is only shipped as **ESM**. That means your `package.json` must include `"type": "module"`.
-
 ### Biome
 
 To use the Biome formatter, create a `biome.json` [configuration file](https://biomejs.dev/reference/configuration/):

@@ -23,7 +23,8 @@
       "**/coverage",
       "**/*.sw[op]",
       "**/*.log",
-      "**/*.env"
+      "**/*.env",
+      "**/mockServiceWorker.js"
     ]
   },
   "javascript": {

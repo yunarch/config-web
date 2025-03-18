@@ -1,5 +1,5 @@
-import { defineConfig } from "tsup";
-import { readFile, writeFile, unlink, copyFile } from "node:fs/promises";
+import { defineConfig } from 'tsup';
+import { readFile, writeFile, unlink, copyFile } from 'node:fs/promises';
 
 /**
  * Parses a JSONC file into a JSON file.
@@ -9,9 +9,9 @@ import { readFile, writeFile, unlink, copyFile } from "node:fs/promises";
  */
 async function parseJSONC(filePath: string, outputPath: string) {
   const get2ndOrSpaces = (match: string, str: string) => {
-    return str || match.replace(/[^\t\r\n ]/g, " ");
+    return str || match.replace(/[^\t\r\n ]/g, ' ');
   };
-  const data = await readFile(filePath, "utf8");
+  const data = await readFile(filePath, 'utf8');
   await writeFile(
     outputPath,
     JSON.stringify(
@@ -29,26 +29,33 @@ async function parseJSONC(filePath: string, outputPath: string) {
 
 // Configuration for the tsup bundler.
 export default defineConfig([
+  // Main entry point
+  {
+    entry: ['./src/index.ts'],
+    outDir: './dist',
+    format: ['esm'],
+    minify: true,
+  },
   // Cli
   {
-    entry: ["./src/cli/swagger-sync.ts", "./src/cli/turbo-select.ts"],
-    outDir: "./dist/cli",
-    format: ["cjs"],
-    outExtension: () => ({ js: ".js" }),
+    entry: ['./src/cli/swagger-sync.ts', './src/cli/turbo-select.ts'],
+    outDir: './dist/cli',
+    format: ['cjs'],
+    outExtension: () => ({ js: '.js' }),
     minify: true,
     clean: true,
   },
   // Formatters
   {
-    entry: ["./src/formatters/prettier.config.ts"],
-    outDir: "./dist/formatters",
-    format: ["esm"],
+    entry: ['./src/formatters/prettier.config.ts'],
+    outDir: './dist/formatters',
+    format: ['esm', 'cjs'],
     minify: true,
     clean: true,
     onSuccess: async () => {
       await parseJSONC(
-        "./src/formatters/biome.config.jsonc",
-        "./dist/formatters/biome.config.json"
+        './src/formatters/biome.config.jsonc',
+        './dist/formatters/biome.config.json'
       );
     },
   },
@@ -58,16 +65,16 @@ export default defineConfig([
   // },
   // Typescript
   {
-    entry: ["./src/ts/reset.d.ts"],
-    outDir: "./dist/ts",
-    format: ["esm"],
+    entry: ['./src/ts/reset.d.ts'],
+    outDir: './dist/ts',
+    format: ['esm'],
     clean: true,
     onSuccess: async () => {
-      unlink("./dist/ts/reset.d.js");
-      await copyFile("./src/ts/reset.d.ts", "./dist/ts/reset.d.ts");
+      unlink('./dist/ts/reset.d.js');
+      await copyFile('./src/ts/reset.d.ts', './dist/ts/reset.d.ts');
       await parseJSONC(
-        "./src/ts/tsconfig-base.jsonc",
-        "./dist/ts/tsconfig-base.json"
+        './src/ts/tsconfig-base.jsonc',
+        './dist/ts/tsconfig-base.json'
       );
     },
   },

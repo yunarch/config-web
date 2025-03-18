@@ -1,7 +1,7 @@
-import { Command } from "commander";
-import { styleText, promisify, types } from "node:util";
-import { exec } from "node:child_process";
-import ora from "ora";
+import { Command } from 'commander';
+import { styleText, promisify, types } from 'node:util';
+import { exec } from 'node:child_process';
+import ora from 'ora';
 
 // Async version of exec
 const asyncExec = promisify(exec);
@@ -18,11 +18,11 @@ export async function runTask<T = string>(task: {
 }) {
   const { command, name } = task;
   const spinner = ora(name);
-  spinner.spinner = "aesthetic";
+  spinner.spinner = 'aesthetic';
   spinner.start();
   try {
     const result =
-      typeof command === "string"
+      typeof command === 'string'
         ? await asyncExec(command)
         : types.isPromise(command)
           ? await command
@@ -33,12 +33,12 @@ export async function runTask<T = string>(task: {
     await new Promise((resolve) => {
       setTimeout(resolve, 0);
     });
-    return result && typeof result === "object" && "stdout" in result
+    return result && typeof result === 'object' && 'stdout' in result
       ? result.stdout
       : result;
   } catch (error) {
     const e = error as { stderr?: string; message?: string };
-    spinner.fail(styleText("red", e?.stderr ?? e.message ?? ""));
+    spinner.fail(styleText('red', e?.stderr ?? e.message ?? ''));
     throw error;
   }
 }
@@ -51,16 +51,16 @@ export function createBaseProgram() {
   const program = new Command();
   program
     .configureHelp({
-      styleTitle: (str) => styleText("bold", str),
-      styleCommandText: (str) => styleText("cyan", str),
-      styleCommandDescription: (str) => styleText("magenta", str),
-      styleDescriptionText: (str) => styleText("italic", str),
-      styleOptionText: (str) => styleText("green", str),
-      styleArgumentText: (str) => styleText("yellow", str),
-      styleSubcommandText: (str) => styleText("blue", str),
+      styleTitle: (str) => styleText('bold', str),
+      styleCommandText: (str) => styleText('cyan', str),
+      styleCommandDescription: (str) => styleText('magenta', str),
+      styleDescriptionText: (str) => styleText('italic', str),
+      styleOptionText: (str) => styleText('green', str),
+      styleArgumentText: (str) => styleText('yellow', str),
+      styleSubcommandText: (str) => styleText('blue', str),
     })
     .configureOutput({
-      outputError: (str, write) => write(styleText("red", str)),
+      outputError: (str, write) => write(styleText('red', str)),
     });
   return program;
 }

@@ -33,15 +33,14 @@ export default defineConfig([
   {
     entry: ['./src/index.ts'],
     outDir: './dist',
-    format: ['esm'],
+    format: 'esm',
     minify: true,
   },
   // Cli
   {
     entry: ['./src/cli/swagger-sync.ts', './src/cli/turbo-select.ts'],
     outDir: './dist/cli',
-    format: ['cjs'],
-    outExtension: () => ({ js: '.js' }),
+    format: 'esm',
     minify: true,
     clean: true,
   },
@@ -49,7 +48,7 @@ export default defineConfig([
   {
     entry: ['./src/formatters/prettier.config.ts'],
     outDir: './dist/formatters',
-    format: ['esm', 'cjs'],
+    format: 'esm',
     minify: true,
     clean: true,
     onSuccess: async () => {
@@ -67,7 +66,7 @@ export default defineConfig([
   {
     entry: ['./src/ts/reset.d.ts'],
     outDir: './dist/ts',
-    format: ['esm'],
+    format: 'esm',
     clean: true,
     onSuccess: async () => {
       unlink('./dist/ts/reset.d.js');

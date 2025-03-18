@@ -4,6 +4,13 @@
 
 With `@yunarch/config-web`, you get a well-balanced setup for your web projects, eliminating the hassle of manual configuration. These configurations serve as a strong foundation that you can extend and customize as needed.
 
+> [!NOTE]
+> This package is pure [ESM](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules). This means you need to ensure to use an **ESM-Compatible Environment** (Your runtime or bundler must support ESM) and enable **Package Type module** by adding the following to you `package.json`:
+>
+> ```json
+> "type": "module"
+> ```
+
 - [📖 Why use this?](#-why-use-this)
 - [📦 What’s included?](#-whats-included)
 - [⚙️ Installation](#️-installation)

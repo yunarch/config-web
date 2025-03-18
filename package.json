@@ -53,12 +53,12 @@
     "build": "tsup"
   },
   "peerDependencies": {
-    "biome": "0",
+    "@biomejs/biome": "1",
     "prettier": "3",
     "turbo": "2"
   },
   "peerDependenciesMeta": {
-    "biome": {
+    "@biomejs/biome": {
       "optional": true
     },
     "prettier": {
@@ -76,7 +76,9 @@
     "ora": "8.2.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.9.4",
     "@types/node": "22.13.10",
+    "prettier": "3.5.3",
     "rimraf": "6.0.1",
     "tsup": "8.4.0",
     "typescript": "5.8.2"

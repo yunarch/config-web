@@ -28,12 +28,7 @@
     "node": ">=22"
   },
   "type": "module",
-  "files": [
-    "README.md",
-    "LICENSE.md",
-    "dist",
-    "./index.js"
-  ],
+  "files": ["README.md", "LICENSE.md", "dist", "./index.js"],
   "bin": {
     "swagger-sync": "./dist/cli/swagger-sync.js",
     "turbo-select": "./dist/cli/turbo-select.js"
@@ -54,17 +49,13 @@
   },
   "peerDependencies": {
     "@biomejs/biome": "1",
-    "prettier": "3",
-    "turbo": "2"
+    "prettier": "3"
   },
   "peerDependenciesMeta": {
     "@biomejs/biome": {
       "optional": true
     },
     "prettier": {
-      "optional": true
-    },
-    "turbo": {
       "optional": true
     }
   },

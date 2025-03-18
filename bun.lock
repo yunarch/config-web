@@ -21,12 +21,10 @@
       "peerDependencies": {
         "@biomejs/biome": "1",
         "prettier": "3",
-        "turbo": "2",
       },
       "optionalPeers": [
         "@biomejs/biome",
         "prettier",
-        "turbo",
       ],
     },
   },

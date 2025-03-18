@@ -1,6 +1,4 @@
-<div>
-  <h1><a href="https://npm.im/@yunarch/config-web">@yunarch/config-web</a></h1>
-</div>
+<h1><a href="https://npm.im/@yunarch/config-web">@yunarch/config-web</a></h1>
 
 > A curated set of linters (ESLint, Oxlint, Biome), formatters (Biome, Prettier), TypeScript configurations for web projects, and useful CLI tools.
 

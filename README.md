@@ -84,7 +84,7 @@ import defaultConfig from "@yunarch/config-web/formatter-prettier";
 /** @type {import("prettier").Options} */
 export default {
   ...defaultConfig,
-  // overrides here...
+  // Add your overrides here...
 };
 ```
 
@@ -95,7 +95,7 @@ To use the Biome formatter, create a `biome.json` [configuration file](https://b
 ```jsonc
 {
   "extends": ["@yunarch/config-web/formatter-biome"],
-  // overrides here...
+  // Add your overrides here...
 }
 ```
 
@@ -108,7 +108,7 @@ To use the Biome formatter, create a `biome.json` [configuration file](https://b
 >     "@yunarch/config-web/formatter-biome",
 >     "@yunarch/config-web/linter-biome",
 >   ],
->   // overrides here...
+>   // Add your overrides here...
 > }
 > ```
 
@@ -123,24 +123,34 @@ Create the `tsconfig.json` file with the following content:
 ```jsonc
 {
   "extends": "@yunarch/config-web/tsconfig-base",
-  // overrides here...
+  // Add your overrides here...
 }
 ```
 
-Additionally, this package includes a `ts-reset` configuration to improve typescript built-in types. To use it, create a `reset.d.ts` file in your project with the following content:
+Additionally, this package includes a `ts-reset` configuration to enhance TypeScript's built-in types. To use it, create a `reset.d.ts` file in your project with the following content:
 
 ```ts
 import "@yunarch/config-web/reset.d.ts";
 ```
 
-> [!NOTE]
-> The `reset.d.ts` should be at the same level as the `tsconfig.json` file.
+Then, include this file in your tsconfig.json, for example:
+
+```jsonc
+{
+  "extends": "@yunarch/config-web/tsconfig-base",
+  "include": ["./reset.d.ts" /* other files... */],
+  // Add your overrides here...
+}
+```
+
+> [!TIP]
+> You can use a glob pattern like `"include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]` to automatically include all relevant files, so you don't have to add them manually.
 
 ## 🔧 CLI Tools
 
 This package ships with useful command-line tools to streamline your workflow.
 
-> [!Tip]
+> [!NOTE]
 > All the CLI tools include a `--help` flag, which provides detailed information on usage and available options.
 
 ### `swagger-sync`

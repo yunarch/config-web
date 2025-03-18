@@ -146,6 +146,8 @@ Then, include this file in your `tsconfig.json`, for example:
 > [!TIP]
 > You can use a glob pattern like `"include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]` to automatically include all relevant files, so you don't have to add them manually.
 
+Learn more from [Typescript docs here](https://www.typescriptlang.org/tsconfig/#extends).
+
 ## 🔧 CLI Tools
 
 This package ships with useful command-line tools to streamline your workflow.

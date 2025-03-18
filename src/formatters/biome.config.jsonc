@@ -1,0 +1,47 @@
+{
+  "formatter": {
+    "enabled": true,
+    "useEditorconfig": true,
+    "formatWithErrors": false,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineEnding": "lf",
+    "lineWidth": 80,
+    "attributePosition": "auto",
+    "bracketSpacing": true,
+    "ignore": [
+      "**/.DS_Store",
+      "**/node_modules",
+      "**/npm-debug.log",
+      "**/dist",
+      "**/package-lock.json",
+      "**/yarn.lock",
+      "**/bun.lock",
+      "**/bun.lockb",
+      "**/.vscode",
+      "**/.idea",
+      "**/coverage",
+      "**/*.sw[op]",
+      "**/*.log",
+      "**/*.env"
+    ]
+  },
+  "javascript": {
+    "formatter": {
+      "jsxQuoteStyle": "double",
+      "quoteProperties": "asNeeded",
+      "trailingCommas": "es5",
+      "semicolons": "always",
+      "arrowParentheses": "always",
+      "bracketSameLine": false,
+      "quoteStyle": "single",
+      "attributePosition": "auto",
+      "bracketSpacing": true
+    }
+  },
+  "overrides": [
+    { "include": ["**/*.hbs"] },
+    { "include": ["**/package.json"], "formatter": { "indentStyle": "space" } },
+    { "include": ["**/*.mdx"] }
+  ]
+}

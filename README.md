@@ -90,11 +90,12 @@ export default {
 
 ### Biome
 
-To use the Biome formatter, create a `biome.json` [configuration file](https://biomejs.dev/reference/configuration/) in your project root:
+To use the Biome formatter, create a `biome.json` [configuration file](https://biomejs.dev/reference/configuration/):
 
-```json
+```jsonc
 {
-  "extends": ["@yunarch/config-web/formatter-biome"]
+  "extends": ["@yunarch/config-web/formatter-biome"],
+  // overrides here...
 }
 ```
 
@@ -106,16 +107,16 @@ TODO
 
 Create the `tsconfig.json` file with the following content:
 
-```json
+```jsonc
 {
-  "extends": "@yunarch/config-web/tsconfig-base"
+  "extends": "@yunarch/config-web/tsconfig-base",
   // overrides here...
 }
 ```
 
 Additionally, this package includes a `ts-reset` configuration to improve typescript built-in types. To use it, create a `reset.d.ts` file in your project with the following content:
 
-```typescript
+```ts
 import "@yunarch/config-web/reset.d.ts";
 ```
 

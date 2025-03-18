@@ -142,7 +142,7 @@ To use `swagger-sync`, you could, for example, have the following scripts on you
 ```
 
 > [!NOTE]
-> The `--format-script` argument is optional. It allows you to automatically run a format script (e.g., format:gen) after the models are generated, but you can run any script of your choice here.
+> The optional `--format-script` argument allows you to automatically run a format script (e.g., format:gen) after the models are generated, but you can run any script of your choice here.
 
 ### `turbo-select`
 

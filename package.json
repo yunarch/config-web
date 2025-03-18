@@ -10,7 +10,7 @@
     "prettier",
     "biome",
     "typescript",
-    "tools"
+    "tooling"
   ],
   "author": {
     "name": "Adrian Lopez Gonzalez",
@@ -27,14 +27,13 @@
     "bun": ">=1",
     "node": ">=22"
   },
-  "type": "module",
-  "files": ["README.md", "LICENSE.md", "dist", "./index.js"],
+  "files": ["README.md", "LICENSE.md", "dist"],
   "bin": {
     "swagger-sync": "./dist/cli/swagger-sync.js",
     "turbo-select": "./dist/cli/turbo-select.js"
   },
   "exports": {
-    ".": "./index.js",
+    ".": "./dist/index.js",
     "./formatter-prettier": "./dist/formatters/prettier.config.js",
     "./formatter-biome": "./dist/formatters/biome.config.json",
     "./linter-eslint": "./dist/linters/eslint.config.js",
@@ -43,7 +42,10 @@
     "./tsconfig": "./dist/ts/tsconfig-base.json",
     "./reset.d.ts": "./dist/ts/reset.d.ts"
   },
+  "type": "module",
   "scripts": {
+    "postinstall": "husky",
+    "lint:ts": "tsc --noEmit",
     "clean": "rimraf dist",
     "build": "tsup"
   },
@@ -67,8 +69,11 @@
     "ora": "8.2.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "19.8.0",
+    "@commitlint/config-conventional": "19.8.0",
     "@biomejs/biome": "1.9.4",
     "@types/node": "22.13.10",
+    "husky": "9.1.7",
     "prettier": "3.5.3",
     "rimraf": "6.0.1",
     "tsup": "8.4.0",

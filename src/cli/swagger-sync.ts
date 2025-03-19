@@ -62,19 +62,19 @@ async function syncSwaggerFiles({
 
 /**
  * Generates models and a swagger type definition file based on the provided input and output paths.
- * Optionally formats the generated files using a specified script.
+ * Optionally runs a post script after the generated files has finished.
  *
- * @param params - The input and output paths and the optional format script.
+ * @param params - The input and output paths and the optional post script.
  * @returns Resolves when all tasks are completed or rejects if an error occurs.
  */
 async function generateModels({
   localSwaggerPath,
   modelsFolder,
-  formatScript,
+  postScript,
 }: {
   localSwaggerPath: string;
   modelsFolder: string;
-  formatScript?: string;
+  postScript?: string;
 }) {
   await runTask({
     name: 'Generating models',
@@ -90,10 +90,10 @@ async function generateModels({
       );
     },
   });
-  if (formatScript) {
+  if (postScript) {
     await runTask({
-      name: 'Formatting models',
-      command: `node --run ${formatScript}`,
+      name: 'Running post script',
+      command: `node --run ${postScript}`,
     });
   }
 }
@@ -107,14 +107,14 @@ async function run({
   url: remoteSwaggerUrl,
   output: localSwaggerPath,
   modelsFolder,
-  formatScript,
   forceGenModels,
+  postScript,
 }: {
   url: string;
   output: string;
   modelsFolder: string;
-  formatScript?: string;
   forceGenModels?: boolean;
+  postScript?: string;
 }) {
   console.log(styleText('magenta', '\n🚀 Swagger-sync ✨\n'));
   const hasLocalSwaggerPath = existsSync(localSwaggerPath);
@@ -159,7 +159,7 @@ async function run({
       process.exit(0);
     }
   }
-  await generateModels({ localSwaggerPath, modelsFolder, formatScript });
+  await generateModels({ localSwaggerPath, modelsFolder, postScript });
   console.log(
     styleText('green', '\n✅ Sync swagger and models generation completed!\n')
   );
@@ -181,12 +181,12 @@ createBaseProgram()
     'The path to save the generated models and swagger type definition.'
   )
   .option(
-    '--format-script <script>',
-    'A package.json script to format the generated files.'
-  )
-  .option(
     '--force-gen-models',
     'Force the generation of models even if the local and remote swagger files are identical.'
+  )
+  .option(
+    '--post-script <script>',
+    'A package.json script name to be executed after the generated files has finished. (e.g. to run a formatter)'
   )
   .action(async (options) => {
     try {
@@ -194,8 +194,8 @@ createBaseProgram()
         url: options.url,
         output: options.output,
         modelsFolder: options.modelsFolder,
-        formatScript: options.formatScript,
         forceGenModels: options.forceGenModels,
+        postScript: options.postScript,
       });
     } catch (error) {
       console.error(error);

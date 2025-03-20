@@ -87,3 +87,6 @@ build
 
 # MSW
 mockServiceWorker.js
+
+# Others
+src/linters/**/typegen.d.ts

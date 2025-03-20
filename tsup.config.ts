@@ -62,10 +62,10 @@ export default defineConfig([
     clean: true,
     shims: true,
     onSuccess: async () => {
-      // await parseJSONC(
-      //   './src/linters/oxlint.config.jsonc',
-      //   './dist/linters/oxlint.config.json'
-      // );
+      await parseJSONC(
+        './src/linters/oxlint.config.jsonc',
+        './dist/linters/oxlint.config.json'
+      );
     },
   },
   // Typescript

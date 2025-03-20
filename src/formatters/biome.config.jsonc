@@ -8,16 +8,21 @@
       // Build artifacts
       "**/dist/",
       "**/out/",
+      "**/output",
+      "**/.output",
       "**/build/",
+      "**/*.min.*",
       // Dependencies
-      "**/.turbo/",
       "**/.yarn/",
       "**/.yarnrc.yml",
       "**/package-lock.json",
       "**/yarn.lock",
-      "bun.lock",
+      "**/bun.lock",
       "**/bun.lockb",
       "**/pnpm-lock.yaml",
+      "**/.vite-inspect",
+      "**/.vitepress/cache",
+      "**/vite.config.*.timestamp-*",
       // Logs
       "**/*.log",
       "**/npm-debug.log*",
@@ -30,13 +35,28 @@
       // Tests
       "**/coverage/",
       "**/.nyc_output/",
-      // Editor/IDE configurations
+      "**/__snapshots__",
+      // Editor/IDE/frameworks/tools configurations
       "**/.vscode/",
       "**/.idea/",
+      "**/.cache",
+      "**/.nuxt",
+      "**/.next",
+      "**/.svelte-kit",
+      "**/.vercel",
+      "**/.changeset",
+      "**/.turbo/",
       // Misc
       "**/.DS_Store",
       "**/Thumbs.db",
-      "**/mockServiceWorker.js"
+      "**/temp",
+      "**/.temp",
+      "**/tmp",
+      "**/.tmp",
+      "**/.history",
+      "**/mockServiceWorker.js",
+      "**/CHANGELOG*.md",
+      "**/LICENSE*"
     ],
     "useEditorconfig": true,
     "formatWithErrors": false,

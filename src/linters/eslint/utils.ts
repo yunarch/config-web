@@ -1,5 +1,10 @@
-import { Linter } from 'eslint';
-import { Awaitable, OptionsOverrides, TypedFlatConfigItem } from './types';
+import type { Linter } from 'eslint';
+import type {
+  Awaitable,
+  OptionsConfig,
+  OptionsOverrides,
+  TypedFlatConfigItem,
+} from './types';
 import type { RuleList } from './typegen';
 
 /**
@@ -26,6 +31,22 @@ export async function combine(
 ): Promise<TypedFlatConfigItem[]> {
   const resolved = await Promise.all(configs);
   return resolved.flat();
+}
+
+/**
+ * Utility function to get the overrides object from the options config object.
+ *
+ * @param options - The options object.
+ * @param key - The key to extract from the options object.
+ * @returns The overrides object from the options object, undefined if not present.
+ */
+export function getOverridesFromOptionsConfig<K extends keyof OptionsConfig>(
+  options: OptionsConfig,
+  key: K
+): Exclude<OptionsConfig[K] | undefined, boolean> {
+  return !options[key] || typeof options[key] === 'boolean'
+    ? undefined
+    : (options[key] as any);
 }
 
 /**

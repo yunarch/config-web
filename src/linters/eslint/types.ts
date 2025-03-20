@@ -49,18 +49,22 @@ export type OptionsConfig = {
       linterOptions?: Linter.LinterOptions;
     };
   };
-  /**
-   * Enable TypeScript support.
-   */
-  typescript?: boolean;
+  // /**
+  //  * Enable TypeScript support.
+  //  */
+  // typescript?: boolean;
   /**
    * Enable `eslint-plugin-import` rules.
+   *
+   * @default true
    */
-  import?: boolean;
+  imports?: boolean | OptionsOverrides<'yunarch/unicorn/rules'>;
   /**
    * Enable `eslint-plugin-unicorn` rules.
+   *
+   * @default true
    */
-  unicorn?: boolean;
+  unicorn?: boolean | OptionsOverrides<'yunarch/import/rules'>;
   /**
    * Whether oxlint is enabled, so it will disable the rules that oxlint handles.
    * It will try to auto-detect if oxlint.json exists.

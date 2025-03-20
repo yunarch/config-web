@@ -1,4 +1,4 @@
-import { interopDefault } from './eslint/utils';
+import { getOverridesFromOptionsConfig, interopDefault } from './eslint/utils';
 import { base } from './eslint/configs/base';
 import type {
   Awaitable,
@@ -6,9 +6,15 @@ import type {
   TypedFlatConfigItem,
 } from './eslint/types';
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
+import { imports } from './eslint/configs/imports';
+import { unicorn } from './eslint/configs/unicorn';
 
 export function factoryEslintConfig(options: OptionsConfig = {}) {
-  const { gitignore = true } = options;
+  const {
+    gitignore = true,
+    imports: enableImports = true,
+    unicorn: enableUnicorn = true,
+  } = options;
   const configs: Awaitable<TypedFlatConfigItem[]>[] = [];
   if (gitignore) {
     if (typeof gitignore !== 'boolean') {
@@ -32,6 +38,14 @@ export function factoryEslintConfig(options: OptionsConfig = {}) {
     }
   }
   configs.push(base(options.base, options.ignores, options.oxlint));
+  if (enableImports) {
+    configs.push(imports(getOverridesFromOptionsConfig(options, 'imports')));
+  }
+  if (enableUnicorn) {
+    configs.push(unicorn(getOverridesFromOptionsConfig(options, 'unicorn')));
+  }
+
+  // Compose eslint configs
   const composer = new FlatConfigComposer<TypedFlatConfigItem>();
   composer.append(...configs);
   return composer;

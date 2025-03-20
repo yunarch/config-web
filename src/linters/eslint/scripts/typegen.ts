@@ -3,9 +3,11 @@ import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
 import fs from 'node:fs/promises';
-import { base } from '../configs/base';
 import { combine } from '../utils';
 import type { TypedFlatConfigItem } from '../types';
+import { base } from '../configs/base';
+import { imports } from '../configs/imports';
+import { unicorn } from '../configs/unicorn';
 
 /**
  * Extracts rule lists from an array of linter configurations and generates a TypeScript interface.
@@ -45,7 +47,9 @@ const configs = await combine(
       },
     },
   },
-  base()
+  base(),
+  imports(),
+  unicorn()
 );
 
 // Generate typegen.d.ts

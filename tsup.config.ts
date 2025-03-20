@@ -53,23 +53,21 @@ export default defineConfig([
     },
   },
   // Linters
-  // {
-  //   entry: ['./src/linters/eslint.config.ts'],
-  //   outDir: './dist/linters',
-  //   minify: true,
-  //   clean: true,
-  //   shims: true,
-  //   onSuccess: async () => {
-  //     await parseJSONC(
-  //       './src/linters/biome.config.jsonc',
-  //       './dist/linters/biome.config.json'
-  //     );
-  //     await parseJSONC(
-  //       './src/linters/oxlint.config.jsonc',
-  //       './dist/linters/oxlint.config.json'
-  //     );
-  //   },
-  // },
+  {
+    entry: ['./src/linters/eslint.config.ts'],
+    outDir: './dist/linters',
+    format: 'esm',
+    dts: true,
+    minify: true,
+    clean: true,
+    shims: true,
+    onSuccess: async () => {
+      // await parseJSONC(
+      //   './src/linters/oxlint.config.jsonc',
+      //   './dist/linters/oxlint.config.json'
+      // );
+    },
+  },
   // Typescript
   {
     entry: ['./src/ts/reset.d.ts'],

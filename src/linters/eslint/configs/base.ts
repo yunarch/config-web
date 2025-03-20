@@ -1,7 +1,7 @@
 import globals from 'globals';
 import eslint from '@eslint/js';
 import type { OptionsConfig, TypedFlatConfigItem } from '../types';
-import { getOptionsOverridesRules } from '../utils';
+import { getRulesFromOptionsOverrides } from '../utils';
 
 /**
  * Base ESLint configuration.
@@ -13,11 +13,11 @@ import { getOptionsOverridesRules } from '../utils';
  */
 export function base(
   options: OptionsConfig['base'] = {},
-  ignores?: string[],
+  ignores?: OptionsConfig['ignores'],
   hasOtherLintersEnabled?: boolean
 ): TypedFlatConfigItem[] {
-  const languageOptions = options.overrides?.setup?.languageOptions ?? {};
-  const linterOptions = options.overrides?.setup?.linterOptions ?? {};
+  const languageOptions = options.overrides?.languageOptions ?? {};
+  const linterOptions = options.overrides?.linterOptions ?? {};
   return [
     {
       name: 'yunarch/base/ignores',
@@ -556,7 +556,7 @@ export function base(
           },
         ],
         // Override rules
-        ...getOptionsOverridesRules(options),
+        ...getRulesFromOptionsOverrides(options),
       },
     },
   ];

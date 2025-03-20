@@ -29,13 +29,16 @@ export async function combine(
 }
 
 /**
- * Utility function to get the override rules object from options.
+ * Utility function to get the rules object from an options object.
  *
- * @param overrideRules - Override rules object.
- * @returns Override rules object with the correct type.
+ * @param options - Options object.
+ * @returns extracted rules object from options object.
  */
-export function getOptionsOverridesRules<T extends keyof RuleList>(
+export function getRulesFromOptionsOverrides<T extends keyof RuleList>(
   options?: OptionsOverrides<T>
 ): Linter.RulesRecord {
-  return options?.overrides?.rules ?? {};
+  return {
+    ...(options?.overrides?.rules ?? {}),
+    ...(options?.extends?.rules ?? {}),
+  };
 }

@@ -1,12 +1,15 @@
 import type { Linter } from 'eslint';
-import type { RuleList } from './typegen';
+import type { RuleList, RuleOptions } from './typegen';
 import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore';
 
 export type Awaitable<T> = T | Promise<T>;
 
 export type RulesRecord<K extends keyof RuleList> = RuleList[K];
 
-export type TypedFlatConfigItem = Omit<Linter.Config, 'plugins'> & {
+export type TypedFlatConfigItem = Omit<
+  Linter.Config<Linter.RulesRecord & RuleOptions>,
+  'plugins'
+> & {
   /**
    * An object containing a name-value mapping of plugin names to plugin objects.
    * When `files` is specified, these plugins are only available to the matching files.
@@ -19,6 +22,9 @@ export type TypedFlatConfigItem = Omit<Linter.Config, 'plugins'> & {
 export type OptionsOverrides<K extends keyof RuleList> = {
   overrides?: {
     rules?: RulesRecord<K>;
+  };
+  extends?: {
+    rules?: RuleOptions;
   };
 };
 
@@ -39,10 +45,8 @@ export type OptionsConfig = {
    */
   base?: OptionsOverrides<'yunarch/base/rules'> & {
     overrides?: {
-      setup?: {
-        languageOptions?: Linter.LanguageOptions;
-        linterOptions?: Linter.LinterOptions;
-      };
+      languageOptions?: Linter.LanguageOptions;
+      linterOptions?: Linter.LinterOptions;
     };
   };
   /**

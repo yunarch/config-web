@@ -1,6 +1,6 @@
 <h1><a href="https://npm.im/@yunarch/config-web">@yunarch/config-web</a></h1>
 
-> A curated set of linters (ESLint, Oxlint, Biome), formatters (Biome, Prettier), TypeScript configurations for web projects, and useful CLI tools.
+> A curated set of linters (ESLint, Oxlint), formatters (Prettier, Biome), TypeScript configurations for web projects, and useful CLI tools.
 
 > [!NOTE]
 > This package is pure [ESM](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules). This means you need to ensure to use an **ESM-Compatible Environment** (Your runtime or bundler must support ESM) and enable **Package Type module** by adding the following to you `package.json`:

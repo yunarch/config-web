@@ -12,19 +12,12 @@ async function parseJSONC(filePath: string, outputPath: string) {
     return str || match.replace(/[^\t\r\n ]/g, ' ');
   };
   const data = await readFile(filePath, 'utf8');
-  await writeFile(
-    outputPath,
-    JSON.stringify(
-      JSON.parse(
-        data
-          .replace(
-            /("(?:[^"\\]+|\\.)*")|\/\/[^\r\n]*|\/\*[^]*?\*\//g,
-            get2ndOrSpaces
-          )
-          .replace(/("([^"\\]+|\\.)*")|,\s*(?=[\}\]])/g, get2ndOrSpaces)
-      )
-    )
-  );
+  const jsonString = data
+    .replace(/("(?:[^"\\]+|\\.)*")|\/\/[^\r\n]*|\/\*[^]*?\*\//g, get2ndOrSpaces)
+    .replace(/("([^"\\]+|\\.)*")|,\s*(?=[\}\]])/g, get2ndOrSpaces);
+  const jsonObject = JSON.parse(jsonString) as Record<string, unknown>;
+  if ('$schema' in jsonObject) delete jsonObject['$schema'];
+  await writeFile(outputPath, JSON.stringify(jsonObject));
 }
 
 // Configuration for the tsup bundler.
@@ -43,6 +36,7 @@ export default defineConfig([
     format: 'esm',
     minify: true,
     clean: true,
+    shims: true,
   },
   // Formatters
   {
@@ -60,7 +54,21 @@ export default defineConfig([
   },
   // Linters
   // {
-
+  //   entry: ['./src/linters/eslint.config.ts'],
+  //   outDir: './dist/linters',
+  //   minify: true,
+  //   clean: true,
+  //   shims: true,
+  //   onSuccess: async () => {
+  //     await parseJSONC(
+  //       './src/linters/biome.config.jsonc',
+  //       './dist/linters/biome.config.json'
+  //     );
+  //     await parseJSONC(
+  //       './src/linters/oxlint.config.jsonc',
+  //       './dist/linters/oxlint.config.json'
+  //     );
+  //   },
   // },
   // Typescript
   {

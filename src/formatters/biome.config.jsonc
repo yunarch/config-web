@@ -1,6 +1,43 @@
 {
+  "$schema": "../../node_modules/@biomejs/biome/configuration_schema.json",
   "formatter": {
     "enabled": true,
+    "ignore": [
+      // Node modules
+      "**/node_modules/",
+      // Build artifacts
+      "**/dist/",
+      "**/out/",
+      "**/build/",
+      // Dependencies
+      "**/.turbo/",
+      "**/.yarn/",
+      "**/.yarnrc.yml",
+      "**/package-lock.json",
+      "**/yarn.lock",
+      "bun.lock",
+      "**/bun.lockb",
+      "**/pnpm-lock.yaml",
+      // Logs
+      "**/*.log",
+      "**/npm-debug.log*",
+      "**/yarn-debug.log*",
+      "**/yarn-error.log*",
+      ".pnp.*",
+      "**/.pnp",
+      "**/.pnp.js",
+      "**/.pnp.cjs",
+      // Tests
+      "**/coverage/",
+      "**/.nyc_output/",
+      // Editor/IDE configurations
+      "**/.vscode/",
+      "**/.idea/",
+      // Misc
+      "**/.DS_Store",
+      "**/Thumbs.db",
+      "**/mockServiceWorker.js"
+    ],
     "useEditorconfig": true,
     "formatWithErrors": false,
     "indentStyle": "space",
@@ -8,24 +45,7 @@
     "lineEnding": "lf",
     "lineWidth": 80,
     "attributePosition": "auto",
-    "bracketSpacing": true,
-    "ignore": [
-      "**/.DS_Store",
-      "**/node_modules",
-      "**/npm-debug.log",
-      "**/dist",
-      "**/package-lock.json",
-      "**/yarn.lock",
-      "**/bun.lock",
-      "**/bun.lockb",
-      "**/.vscode",
-      "**/.idea",
-      "**/coverage",
-      "**/*.sw[op]",
-      "**/*.log",
-      "**/*.env",
-      "**/mockServiceWorker.js"
-    ]
+    "bracketSpacing": true
   },
   "javascript": {
     "formatter": {
@@ -45,7 +65,12 @@
     { "include": ["**/package.json"], "formatter": { "indentStyle": "space" } },
     { "include": ["**/*.mdx"] }
   ],
+  // Disable linter as we prefer to use OxLint or a combination of OxLint and ESLint
   "linter": {
+    "enabled": false
+  },
+  // Disable organizeImports as we prefer sort it by eslint or OxLint
+  "organizeImports": {
     "enabled": false
   }
 }

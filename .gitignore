@@ -63,6 +63,7 @@ expo-env.d.ts
 
 # Optional eslint cache
 .eslintcache
+.eslint-config-inspector
 
 # Runtime data
 pids

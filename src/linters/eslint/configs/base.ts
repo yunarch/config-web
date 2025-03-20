@@ -200,6 +200,7 @@ export function base(
             varsIgnorePattern: '^_',
           },
         ],
+        // Overrides
         ...getRulesFromOptionsOverrides(options),
       },
     },

@@ -7,6 +7,7 @@ import { combine } from '../utils';
 import type { TypedFlatConfigItem } from '../types';
 import { base } from '../configs/base';
 import { imports } from '../configs/imports';
+import { jsdoc } from '../configs/jsdoc';
 import { unicorn } from '../configs/unicorn';
 
 /**
@@ -49,6 +50,7 @@ const configs = await combine(
   },
   base(),
   imports(),
+  jsdoc(),
   unicorn()
 );
 

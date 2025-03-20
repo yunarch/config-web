@@ -31,6 +31,7 @@ export function unicorn(
           'warn',
           { checkInfinity: true, checkNaN: true },
         ],
+        // Overrides
         ...getRulesFromOptionsOverrides(options),
       },
     },

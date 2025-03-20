@@ -49,6 +49,7 @@ export function imports(
             'newlines-between': 'never',
           },
         ],
+        // Overrides
         ...getRulesFromOptionsOverrides(options),
       },
     },

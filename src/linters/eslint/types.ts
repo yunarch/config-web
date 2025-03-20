@@ -60,6 +60,12 @@ export type OptionsConfig = {
    */
   imports?: boolean | OptionsOverrides<'yunarch/unicorn/rules'>;
   /**
+   * Enable `eslint-plugin-jsdoc` rules.
+   *
+   * @default true
+   */
+  jsdoc?: boolean | OptionsOverrides<'yunarch/jsdoc/rules'>;
+  /**
    * Enable `eslint-plugin-unicorn` rules.
    *
    * @default true

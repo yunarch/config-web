@@ -2,6 +2,7 @@ import { getOverridesFromOptionsConfig, interopDefault } from './eslint/utils';
 import { base } from './eslint/configs/base';
 import type {
   Awaitable,
+  ConfigNames,
   OptionsConfig,
   TypedFlatConfigItem,
 } from './eslint/types';
@@ -50,8 +51,12 @@ export function factoryEslintConfig(options: OptionsConfig = {}) {
     configs.push(unicorn(getOverridesFromOptionsConfig(options, 'unicorn')));
   }
 
+  // Add disables
+
+  // Add oxlint
+
   // Compose eslint configs
-  const composer = new FlatConfigComposer<TypedFlatConfigItem>();
+  const composer = new FlatConfigComposer<TypedFlatConfigItem, ConfigNames>();
   composer.append(...configs);
   return composer;
 }

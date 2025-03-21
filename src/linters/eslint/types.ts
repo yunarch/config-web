@@ -4,10 +4,14 @@ import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore';
 
 export type Awaitable<T> = T | Promise<T>;
 
-export type RulesRecord<K extends keyof RuleList> = RuleList[K];
+export type Rules = RuleOptions;
+
+export type ConfigNames = keyof RuleList;
+
+export type RuleListRecord<K extends ConfigNames> = RuleList[K];
 
 export type TypedFlatConfigItem = Omit<
-  Linter.Config<Linter.RulesRecord & RuleOptions>,
+  Linter.Config<Linter.RulesRecord & Rules>,
   'plugins'
 > & {
   /**
@@ -19,13 +23,15 @@ export type TypedFlatConfigItem = Omit<
   plugins?: Record<string, any>;
 };
 
-export type OptionsOverrides<K extends keyof RuleList> = {
-  overrides?: {
-    rules?: RulesRecord<K>;
-  };
-  extends?: {
-    rules?: RuleOptions;
-  };
+export type OptionsOverrides<K extends ConfigNames> = {
+  /**
+   * Overrides the rules used in the specified configuration.
+   */
+  overrides?: RuleListRecord<K>;
+  /**
+   * Adds additional rules to the specified configuration.
+   */
+  extends?: TypedFlatConfigItem['rules'];
 };
 
 export type OptionsConfig = {
@@ -44,15 +50,13 @@ export type OptionsConfig = {
    * Base configuration options.
    */
   base?: OptionsOverrides<'yunarch/base/rules'> & {
-    overrides?: {
-      languageOptions?: Linter.LanguageOptions;
-      linterOptions?: Linter.LinterOptions;
-    };
+    languageOptions?: Linter.LanguageOptions;
+    linterOptions?: Linter.LinterOptions;
   };
-  // /**
-  //  * Enable TypeScript support.
-  //  */
-  // typescript?: boolean;
+  /**
+   * Enable TypeScript support.
+   */
+  typescript?: boolean;
   /**
    * Enable `eslint-plugin-import` rules.
    *

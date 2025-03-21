@@ -1,11 +1,10 @@
-import type { Linter } from 'eslint';
 import type {
   Awaitable,
+  ConfigNames,
   OptionsConfig,
   OptionsOverrides,
   TypedFlatConfigItem,
 } from './types';
-import type { RuleList } from './typegen';
 
 /**
  * Interop default export from module.
@@ -55,11 +54,11 @@ export function getOverridesFromOptionsConfig<K extends keyof OptionsConfig>(
  * @param options - Options object.
  * @returns extracted rules object from options object.
  */
-export function getRulesFromOptionsOverrides<T extends keyof RuleList>(
-  options?: OptionsOverrides<T>
-): Linter.RulesRecord {
+export function getRulesFromOptionsOverrides<K extends ConfigNames>(
+  options?: OptionsOverrides<K>
+) {
   return {
-    ...(options?.overrides?.rules ?? {}),
-    ...(options?.extends?.rules ?? {}),
+    ...(options?.overrides ?? {}),
+    ...(options?.extends ?? {}),
   };
 }

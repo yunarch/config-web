@@ -16,8 +16,8 @@ export function base(
   ignores?: OptionsConfig['ignores'],
   hasOtherLintersEnabled?: boolean
 ): TypedFlatConfigItem[] {
-  const languageOptions = options.overrides?.languageOptions ?? {};
-  const linterOptions = options.overrides?.linterOptions ?? {};
+  const languageOptions = options.languageOptions ?? {};
+  const linterOptions = options.linterOptions ?? {};
   return [
     {
       name: 'yunarch/base/ignores',

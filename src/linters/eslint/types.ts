@@ -50,7 +50,9 @@ export type OptionsConfig = {
    * Base configuration options.
    */
   base?: OptionsOverrides<'yunarch/base/rules'> & {
-    languageOptions?: Linter.LanguageOptions;
+    /**
+     * Extends the default base linter options.
+     */
     linterOptions?: Linter.LinterOptions;
   };
   /**
@@ -76,8 +78,14 @@ export type OptionsConfig = {
    */
   unicorn?: boolean | OptionsOverrides<'yunarch/import/rules'>;
   /**
-   * Whether oxlint is enabled, so it will disable the rules that oxlint handles.
-   * It will try to auto-detect if oxlint.json exists.
+   * Whether oxlint is enabled and therefore eslint rules that are covered by oxlint should be disabled.
+   *
+   * @default undefined
    */
-  oxlint?: boolean;
+  oxlint?: {
+    /**
+     * The path to the oxlint configuration file (e.g. `./.oxlintrc.json`) to read and disable the rules that covers.
+     */
+    oxlintConfigPath: string;
+  };
 };

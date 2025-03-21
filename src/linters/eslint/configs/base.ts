@@ -16,7 +16,6 @@ export function base(
   ignores?: OptionsConfig['ignores'],
   hasOtherLintersEnabled?: boolean
 ): TypedFlatConfigItem[] {
-  const languageOptions = options.languageOptions ?? {};
   const linterOptions = options.linterOptions ?? {};
   return [
     {
@@ -82,7 +81,7 @@ export function base(
     {
       name: 'yunarch/base/setup',
       languageOptions: {
-        ecmaVersion: languageOptions.ecmaVersion ?? 2022,
+        ecmaVersion: 2022,
         globals: {
           ...globals.browser,
           ...globals.es2021,
@@ -90,17 +89,15 @@ export function base(
           document: 'readonly',
           navigator: 'readonly',
           window: 'readonly',
-          ...languageOptions.globals,
         },
         parserOptions: {
           ecmaFeatures: {
             jsx: true,
-            ...languageOptions.parserOptions?.ecmaFeatures,
           },
-          ecmaVersion: languageOptions.parserOptions?.ecmaVersion ?? 2022,
-          sourceType: languageOptions.parserOptions?.sourceType ?? 'module',
+          ecmaVersion: 2022,
+          sourceType: 'module',
         },
-        sourceType: languageOptions.sourceType ?? 'module',
+        sourceType: 'module',
       },
       linterOptions: {
         ...linterOptions,

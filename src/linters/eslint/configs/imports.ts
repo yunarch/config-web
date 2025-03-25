@@ -1,30 +1,37 @@
+import { GLOB_TS, GLOB_TSX } from '../globs';
 import { pluginImport } from '../plugins';
-import type { OptionsConfig, TypedFlatConfigItem } from '../types';
-import { getRulesFromOptionsOverrides } from '../utils';
+import type { TypedFlatConfigItem } from '../types';
 
-export function imports(
-  options: Exclude<OptionsConfig['imports'], boolean> = {}
-): TypedFlatConfigItem[] {
+/**
+ * Imports ESLint configuration. The configuration for `eslint-plugin-import`.
+ *
+ * @returns An array of ESLint configurations.
+ */
+export function imports(): TypedFlatConfigItem[] {
   return [
     {
       name: 'yunarch/import/rules',
       plugins: {
-        import: pluginImport,
+        'import-x': pluginImport,
       },
       rules: {
         ...pluginImport.flatConfigs.recommended.rules,
-        'import/first': 'error',
-        'import/newline-after-import': 'warn',
-        'import/no-absolute-path': 'warn',
-        'import/no-cycle': ['error', { ignoreExternal: false, maxDepth: 3 }],
-        'import/no-amd': 'error',
-        'import/no-mutable-exports': 'error',
-        'import/no-relative-packages': 'warn',
-        'import/no-self-import': 'error',
-        'import/no-useless-path-segments': 'warn',
-        'import/no-duplicates': ['error', { 'prefer-inline': true }],
-        'import/no-dynamic-require': 'error',
-        'import/order': [
+        'import-x/first': 'error',
+        'import-x/consistent-type-specifier-style': [
+          'error',
+          'prefer-top-level',
+        ],
+        'import-x/newline-after-import': 'warn',
+        'import-x/no-absolute-path': 'warn',
+        'import-x/no-cycle': ['error', { ignoreExternal: false, maxDepth: 3 }],
+        'import-x/no-amd': 'error',
+        'import-x/no-mutable-exports': 'error',
+        'import-x/no-relative-packages': 'warn',
+        'import-x/no-self-import': 'error',
+        'import-x/no-useless-path-segments': 'warn',
+        'import-x/no-duplicates': ['error', { 'prefer-inline': true }],
+        'import-x/no-dynamic-require': 'error',
+        'import-x/order': [
           'warn',
           {
             groups: [
@@ -49,8 +56,18 @@ export function imports(
             'newlines-between': 'never',
           },
         ],
-        // Overrides
-        ...getRulesFromOptionsOverrides(options),
+      },
+    },
+    {
+      name: 'yunarch/import/typescript/rules',
+      files: [GLOB_TS, GLOB_TSX],
+      settings: {
+        'import-x/resolver': {
+          typescript: true,
+        },
+      },
+      rules: {
+        ...pluginImport.flatConfigs.typescript.rules,
       },
     },
   ];

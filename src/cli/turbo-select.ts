@@ -1,5 +1,5 @@
-import { styleText } from 'node:util';
 import { execSync } from 'node:child_process';
+import { styleText } from 'node:util';
 import select from '@inquirer/select';
 import { createBaseProgram } from './utils';
 
@@ -42,16 +42,16 @@ async function selectEnvironmentMode() {
 }
 
 /**
- * Main function to run the CLI script
+ * Main function to run the CLI script.
  *
  * @param options - The CLI options.
  */
-async function run({ run, selectEnv }: { run: string; selectEnv?: boolean }) {
+async function run({ task, selectEnv }: { task: string; selectEnv?: boolean }) {
   console.log(styleText('magenta', '\n🚀 Turbo-Select ✨\n'));
   const filter = await selectTurboPackages();
   const environment = selectEnv ? await selectEnvironmentMode() : undefined;
   execSync(
-    `turbo run ${run} --ui stream ${filter ? `--filter=${filter}` : ''} ${environment ? `-- --mode ${environment}` : ''}`,
+    `turbo run ${task} --ui stream ${filter ? `--filter=${filter}` : ''} ${environment ? `-- --mode ${environment}` : ''}`,
     {
       encoding: 'utf8',
       stdio: 'inherit',
@@ -73,10 +73,10 @@ createBaseProgram()
     '--select-env',
     'An environment mode (development, staging, production) If using for example vite.'
   )
-  .action(async (options) => {
+  .action(async (options: { run: string; selectEnv?: boolean }) => {
     try {
       await run({
-        run: options.run,
+        task: options.run,
         selectEnv: options.selectEnv,
       });
     } catch (error) {

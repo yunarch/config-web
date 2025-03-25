@@ -1,6 +1,6 @@
-import { Command } from 'commander';
-import { styleText, promisify, types } from 'node:util';
 import { exec } from 'node:child_process';
+import { styleText, promisify, types } from 'node:util';
+import { Command } from 'commander';
 import ora from 'ora';
 
 // Async version of exec
@@ -33,18 +33,19 @@ export async function runTask<T = string>(task: {
     await new Promise((resolve) => {
       setTimeout(resolve, 0);
     });
-    return result && typeof result === 'object' && 'stdout' in result
+    return typeof result === 'object' && result && 'stdout' in result
       ? result.stdout
       : result;
   } catch (error) {
     const e = error as { stderr?: string; message?: string };
-    spinner.fail(styleText('red', e?.stderr ?? e.message ?? ''));
+    spinner.fail(styleText('red', e.stderr ?? e.message ?? ''));
     throw error;
   }
 }
 
 /**
  * Creates a new instance of the base program with custom help and output configurations.
+ *
  * @returns the base program instance.
  */
 export function createBaseProgram() {
@@ -60,7 +61,9 @@ export function createBaseProgram() {
       styleSubcommandText: (str) => styleText('blue', str),
     })
     .configureOutput({
-      outputError: (str, write) => write(styleText('red', str)),
+      outputError: (str, write) => {
+        write(styleText('red', str));
+      },
     });
   return program;
 }

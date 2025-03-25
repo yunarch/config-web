@@ -1,5 +1,5 @@
-import { defineConfig } from 'tsup';
 import { readFile, writeFile, unlink, copyFile } from 'node:fs/promises';
+import { defineConfig } from 'tsup';
 
 /**
  * Parses a JSONC file into a JSON file.
@@ -8,15 +8,22 @@ import { readFile, writeFile, unlink, copyFile } from 'node:fs/promises';
  * @param outputPath - The path to the output JSON file.
  */
 async function parseJSONC(filePath: string, outputPath: string) {
-  const get2ndOrSpaces = (match: string, str: string) => {
-    return str || match.replace(/[^\t\r\n ]/g, ' ');
-  };
   const data = await readFile(filePath, 'utf8');
   const jsonString = data
-    .replace(/("(?:[^"\\]+|\\.)*")|\/\/[^\r\n]*|\/\*[^]*?\*\//g, get2ndOrSpaces)
-    .replace(/("([^"\\]+|\\.)*")|,\s*(?=[\}\]])/g, get2ndOrSpaces);
+    .replaceAll(
+      /(?<temp1>"(?:[^"\\]+|\\.)*")|\/\/[^\r\n]*|\/\*[^]*?\*\//g,
+      (match: string, str: string) => {
+        return str || match.replaceAll(/[^\t\r\n ]/g, ' ');
+      }
+    )
+    .replaceAll(
+      /(?<temp2>"(?<temp1>[^"\\]+|\\.)*")|,\s*(?=[}\]])/g,
+      (match: string, str: string) => {
+        return str || match.replaceAll(/[^\t\r\n ]/g, ' ');
+      }
+    );
   const jsonObject = JSON.parse(jsonString) as Record<string, unknown>;
-  if ('$schema' in jsonObject) delete jsonObject['$schema'];
+  if ('$schema' in jsonObject) delete jsonObject.$schema;
   await writeFile(outputPath, JSON.stringify(jsonObject));
 }
 
@@ -75,7 +82,7 @@ export default defineConfig([
     format: 'esm',
     clean: true,
     onSuccess: async () => {
-      unlink('./dist/ts/reset.d.js');
+      await unlink('./dist/ts/reset.d.js');
       await copyFile('./src/ts/reset.d.ts', './dist/ts/reset.d.ts');
       await parseJSONC(
         './src/ts/tsconfig-base.jsonc',

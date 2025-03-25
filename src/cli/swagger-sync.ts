@@ -1,8 +1,8 @@
 import { existsSync } from 'node:fs';
 import { readFile, writeFile } from 'node:fs/promises';
 import { styleText } from 'node:util';
-import { createBaseProgram, runTask } from './utils';
 import confirm from '@inquirer/confirm';
+import { createBaseProgram, runTask } from './utils';
 
 /**
  * Gets the local and remote swagger files and returns their content.
@@ -46,9 +46,9 @@ async function syncSwaggerFiles({
   forceGenModels: boolean;
 }) {
   const userConfirmed = await confirm({
-    message: !forceGenModels
-      ? 'Do you want to use the remote swagger and generate new API models? (y/n)?'
-      : 'Do you want to use the remote swagger? (y/n)?',
+    message: forceGenModels
+      ? 'Do you want to use the remote swagger? (y/n)?'
+      : 'Do you want to use the remote swagger and generate new API models? (y/n)?',
   });
   if (userConfirmed) {
     await runTask({
@@ -99,7 +99,7 @@ async function generateModels({
 }
 
 /**
- * Main function to run the CLI script
+ * Main function to run the CLI script.
  *
  * @param options - The CLI options.
  */
@@ -148,16 +148,14 @@ async function run({
       console.log(styleText('yellow', '\n⚠️  Sync remote swagger skipped.\n'));
       if (!forceGenModels) process.exit(0);
     }
-  } else {
-    if (!forceGenModels && existsSync(modelsFolder)) {
-      console.log(
-        styleText(
-          'blue',
-          '\nLocal and remote swagger are identical. No updates required.\n'
-        )
-      );
-      process.exit(0);
-    }
+  } else if (!forceGenModels && existsSync(modelsFolder)) {
+    console.log(
+      styleText(
+        'blue',
+        '\nLocal and remote swagger are identical. No updates required.\n'
+      )
+    );
+    process.exit(0);
   }
   await generateModels({ localSwaggerPath, modelsFolder, postScript });
   console.log(
@@ -188,18 +186,26 @@ createBaseProgram()
     '--post-script <script>',
     'A package.json script name to be executed after the generated files has finished. (e.g. to run a formatter)'
   )
-  .action(async (options) => {
-    try {
-      await run({
-        url: options.url,
-        output: options.output,
-        modelsFolder: options.modelsFolder,
-        forceGenModels: options.forceGenModels,
-        postScript: options.postScript,
-      });
-    } catch (error) {
-      console.error(error);
-      process.exit(1);
+  .action(
+    async (options: {
+      url: string;
+      output: string;
+      modelsFolder: string;
+      forceGenModels?: boolean;
+      postScript?: string;
+    }) => {
+      try {
+        await run({
+          url: options.url,
+          output: options.output,
+          modelsFolder: options.modelsFolder,
+          forceGenModels: options.forceGenModels,
+          postScript: options.postScript,
+        });
+      } catch (error) {
+        console.error(error);
+        process.exit(1);
+      }
     }
-  })
+  )
   .parseAsync(process.argv);

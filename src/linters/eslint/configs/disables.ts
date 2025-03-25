@@ -1,4 +1,4 @@
-import { GLOB_SRC, GLOB_SRC_EXT } from '../globs';
+import { GLOB_DTS, GLOB_SRC, GLOB_SRC_EXT } from '../globs';
 import { pluginOxlint, pluginPrettier } from '../plugins';
 import type { OptionsConfig, TypedFlatConfigItem } from '../types';
 
@@ -20,6 +20,13 @@ export function disables(options: {
         'no-console': 'off',
         '@typescript-eslint/no-floating-promises': 'off',
         'unicorn/no-process-exit': 'off',
+      },
+    },
+    {
+      files: [GLOB_DTS],
+      name: 'yunarch/disables/dts',
+      rules: {
+        '@typescript-eslint/consistent-indexed-object-style': 'off',
       },
     },
     {

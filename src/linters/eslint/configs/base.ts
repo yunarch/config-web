@@ -1,7 +1,6 @@
 import globals from 'globals';
-import eslint from '@eslint/js';
+import { pluginEslint } from '../plugins';
 import type { OptionsConfig, TypedFlatConfigItem } from '../types';
-import { getRulesFromOptionsOverrides } from '../utils';
 
 /**
  * Base ESLint configuration.
@@ -109,7 +108,7 @@ export function base(
     {
       name: 'yunarch/base/rules',
       rules: {
-        ...eslint.configs.recommended.rules,
+        ...pluginEslint.configs.recommended.rules,
         'array-callback-return': ['error', { allowImplicit: true }],
         'block-scoped-var': 'error',
         curly: ['error', 'multi-line', 'consistent'],
@@ -126,7 +125,8 @@ export function base(
         'no-implied-eval': 'error',
         'no-extend-native': 'error',
         'no-extra-bind': 'error',
-        'no-floating-decimal': 'error',
+        /** @deprecated */
+        // 'no-floating-decimal': 'error',
         'no-implicit-coercion': ['error', { allow: ['!!', '+'] }],
         'no-iterator': 'error',
         'no-labels': 'error',
@@ -177,7 +177,8 @@ export function base(
         ],
         'func-names': ['error', 'as-needed'],
         'new-cap': ['error', { capIsNew: false }],
-        'new-parens': 'warn',
+        /** @deprecated */
+        // 'new-parens': 'warn',
         'no-array-constructor': 'error',
         'no-bitwise': 'error',
         'no-lonely-if': 'warn',
@@ -197,8 +198,6 @@ export function base(
             varsIgnorePattern: '^_',
           },
         ],
-        // Overrides
-        ...getRulesFromOptionsOverrides(options),
       },
     },
   ];

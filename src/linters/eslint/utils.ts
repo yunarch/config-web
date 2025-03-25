@@ -1,10 +1,4 @@
-import type {
-  Awaitable,
-  ConfigNames,
-  OptionsConfig,
-  OptionsOverrides,
-  TypedFlatConfigItem,
-} from './types';
+import type { Awaitable, TypedFlatConfigItem } from './types';
 
 /**
  * Interop default export from module.
@@ -16,7 +10,11 @@ export async function interopDefault<T>(
   module: Awaitable<T>
 ): Promise<T extends { default: infer U } ? U : T> {
   const resolved = await module;
-  return (resolved as any).default ?? resolved;
+  return (
+    typeof resolved === 'object' && resolved && 'default' in resolved
+      ? resolved.default
+      : resolved
+  ) as T extends { default: infer D } ? D : T;
 }
 
 /**
@@ -30,35 +28,4 @@ export async function combine(
 ): Promise<TypedFlatConfigItem[]> {
   const resolved = await Promise.all(configs);
   return resolved.flat();
-}
-
-/**
- * Utility function to get the overrides object from the options config object.
- *
- * @param options - The options object.
- * @param key - The key to extract from the options object.
- * @returns The overrides object from the options object, undefined if not present.
- */
-export function getOverridesFromOptionsConfig<K extends keyof OptionsConfig>(
-  options: OptionsConfig,
-  key: K
-): Exclude<OptionsConfig[K] | undefined, boolean> {
-  return !options[key] || typeof options[key] === 'boolean'
-    ? undefined
-    : (options[key] as any);
-}
-
-/**
- * Utility function to get the rules object from an options object.
- *
- * @param options - Options object.
- * @returns extracted rules object from options object.
- */
-export function getRulesFromOptionsOverrides<K extends ConfigNames>(
-  options?: OptionsOverrides<K>
-) {
-  return {
-    ...(options?.overrides ?? {}),
-    ...(options?.extends ?? {}),
-  };
 }

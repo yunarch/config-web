@@ -17,10 +17,6 @@ export function imports(): TypedFlatConfigItem[] {
       rules: {
         ...pluginImport.flatConfigs.recommended.rules,
         'import-x/first': 'error',
-        'import-x/consistent-type-specifier-style': [
-          'error',
-          'prefer-top-level',
-        ],
         'import-x/newline-after-import': 'warn',
         'import-x/no-absolute-path': 'warn',
         'import-x/no-cycle': ['error', { ignoreExternal: false, maxDepth: 3 }],

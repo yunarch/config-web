@@ -1,14 +1,13 @@
+import type { ParserOptions } from '@typescript-eslint/parser';
 import type { Linter } from 'eslint';
-import type { RuleList, RuleOptions } from './typegen';
 import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore';
+import type { RuleOptions } from './typegen';
+
+export type { ConfigNames } from './typegen';
 
 export type Awaitable<T> = T | Promise<T>;
 
-export type Rules = RuleOptions;
-
-export type ConfigNames = keyof RuleList;
-
-export type RuleListRecord<K extends ConfigNames> = RuleList[K];
+export interface Rules extends RuleOptions {}
 
 export type TypedFlatConfigItem = Omit<
   Linter.Config<Linter.RulesRecord & Rules>,
@@ -20,21 +19,11 @@ export type TypedFlatConfigItem = Omit<
    *
    * @see https://eslint.org/docs/latest/user-guide/configuring/configuration-files-new#using-plugins-in-your-configuration
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Any is required for compatibility.
   plugins?: Record<string, any>;
 };
 
-export type OptionsOverrides<K extends ConfigNames> = {
-  /**
-   * Overrides the rules used in the specified configuration.
-   */
-  overrides?: RuleListRecord<K>;
-  /**
-   * Adds additional rules to the specified configuration.
-   */
-  extends?: TypedFlatConfigItem['rules'];
-};
-
-export type OptionsConfig = {
+export interface OptionsConfig {
   /**
    * Automatic configures ignores based on `.gitignore`.
    *
@@ -47,9 +36,15 @@ export type OptionsConfig = {
    */
   ignores?: Linter.Config['ignores'];
   /**
+   * Additional extensions for components.
+   *
+   * @example ['vue']
+   */
+  extraFileExtensions?: string[];
+  /**
    * Base configuration options.
    */
-  base?: OptionsOverrides<'yunarch/base/rules'> & {
+  base?: {
     /**
      * Extends the default base linter options.
      */
@@ -57,26 +52,56 @@ export type OptionsConfig = {
   };
   /**
    * Enable TypeScript support.
+   *
+   * @default false
    */
-  typescript?: boolean;
+  typescript?:
+    | boolean
+    | {
+        /**
+         * Path to the `tsconfig.json` file/s.
+         * It will enable type-aware linting unless `disableTypeAware` is `true`.
+         */
+        tsconfigPath?: string | string[];
+        /**
+         * Additional parser options for TypeScript.
+         */
+        parserOptions?: Partial<ParserOptions>;
+        /**
+         * Whether to disable type-aware rules.
+         */
+        disableTypeAware?: boolean;
+        /**
+         * Glob patterns for files that should be type aware.
+         * By default it includes any typescript file.
+         *
+         * Only used when `typeAware` is `true`.
+         */
+        filesTypeAware?: string[];
+        /**
+         * Glob patterns for files that should not be type aware.
+         * By default it includes any markdown and astro typescript files.
+         */
+        ignoresTypeAware?: string[];
+      };
   /**
    * Enable `eslint-plugin-import` rules.
    *
    * @default true
    */
-  imports?: boolean | OptionsOverrides<'yunarch/unicorn/rules'>;
+  imports?: boolean;
   /**
    * Enable `eslint-plugin-jsdoc` rules.
    *
    * @default true
    */
-  jsdoc?: boolean | OptionsOverrides<'yunarch/jsdoc/rules'>;
+  jsdoc?: boolean;
   /**
    * Enable `eslint-plugin-unicorn` rules.
    *
    * @default true
    */
-  unicorn?: boolean | OptionsOverrides<'yunarch/import/rules'>;
+  unicorn?: boolean;
   /**
    * Whether oxlint is enabled and therefore eslint rules that are covered by oxlint should be disabled.
    *
@@ -88,4 +113,4 @@ export type OptionsConfig = {
      */
     oxlintConfigPath: string;
   };
-};
+}

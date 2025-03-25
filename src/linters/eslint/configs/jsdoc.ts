@@ -1,10 +1,13 @@
+import { GLOB_TS, GLOB_TSX } from '../globs';
 import { pluginJsdoc } from '../plugins';
-import type { OptionsConfig, TypedFlatConfigItem } from '../types';
-import { getRulesFromOptionsOverrides } from '../utils';
+import type { TypedFlatConfigItem } from '../types';
 
-export function jsdoc(
-  options: Exclude<OptionsConfig['jsdoc'], boolean> = {}
-): TypedFlatConfigItem[] {
+/**
+ * Jsdoc ESLint configuration. The configuration for `eslint-plugin-jsdoc`.
+ *
+ * @returns An array of ESLint configurations.
+ */
+export function jsdoc(): TypedFlatConfigItem[] {
   return [
     {
       name: 'yunarch/jsdoc/rules',
@@ -20,10 +23,20 @@ export function jsdoc(
           'error',
           { enableRestElementFixer: false, checkDestructured: false },
         ],
-        'jsdoc/require-throws': 'error',
         'jsdoc/tag-lines': ['error', 'any', { startLines: 1 }],
-        // Overrides
-        ...getRulesFromOptionsOverrides(options),
+        'jsdoc/require-throws': 'error',
+      },
+    },
+    {
+      name: 'yunarch/jsdoc/typescript/rules',
+      files: [GLOB_TS, GLOB_TSX],
+      rules: {
+        ...pluginJsdoc.configs['flat/recommended-typescript-error'].rules,
+        ...pluginJsdoc.configs['flat/contents-typescript-error'].rules,
+        ...pluginJsdoc.configs['flat/logical-typescript-error'].rules,
+        ...pluginJsdoc.configs['flat/stylistic-typescript-error'].rules,
+        'jsdoc/require-hyphen-before-param-description': ['error', 'always'],
+        'jsdoc/require-throws': 'error',
       },
     },
   ];

@@ -1,14 +1,27 @@
+import { GLOB_SRC, GLOB_SRC_EXT } from '../globs';
 import { pluginOxlint, pluginPrettier } from '../plugins';
-import { OptionsConfig, TypedFlatConfigItem } from '../types';
+import type { OptionsConfig, TypedFlatConfigItem } from '../types';
 
 /**
- * Disables ESLint rules.
+ * Disables ESLint configuration.
+ *
+ * @param options - Configuration options.
+ * @returns An array of ESLint configurations.
  */
 export function disables(options: {
   oxlint?: OptionsConfig['oxlint'];
 }): TypedFlatConfigItem[] {
   const { oxlint } = options;
   return [
+    {
+      name: 'yunarch/disables/cli',
+      files: [`**/cli/${GLOB_SRC}`, `**/cli.${GLOB_SRC_EXT}`],
+      rules: {
+        'no-console': 'off',
+        '@typescript-eslint/no-floating-promises': 'off',
+        'unicorn/no-process-exit': 'off',
+      },
+    },
     {
       name: 'yunarch/disables/prettier',
       rules: {

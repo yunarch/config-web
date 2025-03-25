@@ -1,6 +1,3 @@
 {
-  "extends": "./src/ts/tsconfig-base.jsonc",
-  "compilerOptions": {
-    "types": ["node"]
-  }
+  "extends": "./src/ts/tsconfig-base.jsonc"
 }

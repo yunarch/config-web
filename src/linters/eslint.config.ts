@@ -1,20 +1,29 @@
-import { getOverridesFromOptionsConfig, interopDefault } from './eslint/utils';
+import { FlatConfigComposer } from 'eslint-flat-config-utils';
 import { base } from './eslint/configs/base';
+import { disables } from './eslint/configs/disables';
+import { imports } from './eslint/configs/imports';
+import { jsdoc } from './eslint/configs/jsdoc';
+import { typescript } from './eslint/configs/typescript';
+import { unicorn } from './eslint/configs/unicorn';
 import type {
   Awaitable,
   ConfigNames,
   OptionsConfig,
   TypedFlatConfigItem,
 } from './eslint/types';
-import { FlatConfigComposer } from 'eslint-flat-config-utils';
-import { jsdoc } from './eslint/configs/jsdoc';
-import { imports } from './eslint/configs/imports';
-import { unicorn } from './eslint/configs/unicorn';
-import { disables } from './eslint/configs/disables';
+import { interopDefault } from './eslint/utils';
 
+/**
+ * Eslint configuration factory.
+ *
+ * @param options - Configuration options.
+ * @returns A composer of ESLint configurations.
+ */
 export function factoryEslintConfig(options: OptionsConfig = {}) {
   const {
     gitignore = true,
+    ignores,
+    extraFileExtensions,
     imports: enableImports = true,
     jsdoc: enableJsdoc = true,
     unicorn: enableUnicorn = true,
@@ -23,16 +32,7 @@ export function factoryEslintConfig(options: OptionsConfig = {}) {
   const willUseOtherLinters = !!oxlint;
   const configs: Awaitable<TypedFlatConfigItem[]>[] = [];
   if (gitignore) {
-    if (typeof gitignore !== 'boolean') {
-      configs.push(
-        interopDefault(import('eslint-config-flat-gitignore')).then((r) => [
-          r({
-            name: 'yunarch/gitignore',
-            ...gitignore,
-          }),
-        ])
-      );
-    } else {
+    if (typeof gitignore === 'boolean') {
       configs.push(
         interopDefault(import('eslint-config-flat-gitignore')).then((r) => [
           r({
@@ -41,24 +41,41 @@ export function factoryEslintConfig(options: OptionsConfig = {}) {
           }),
         ])
       );
+    } else {
+      configs.push(
+        interopDefault(import('eslint-config-flat-gitignore')).then((r) => [
+          r({
+            name: 'yunarch/gitignore',
+            ...gitignore,
+          }),
+        ])
+      );
     }
   }
-  configs.push(base(options.base, options.ignores, willUseOtherLinters));
+  configs.push(base(options.base, ignores, willUseOtherLinters));
+  if (options.typescript) {
+    configs.push(
+      typescript(
+        options.typescript === true ? {} : options.typescript,
+        extraFileExtensions
+      )
+    );
+  }
   if (enableImports) {
-    configs.push(imports(getOverridesFromOptionsConfig(options, 'imports')));
+    configs.push(imports());
   }
   if (enableJsdoc) {
-    configs.push(jsdoc(getOverridesFromOptionsConfig(options, 'jsdoc')));
+    configs.push(jsdoc());
   }
   if (enableUnicorn) {
-    configs.push(unicorn(getOverridesFromOptionsConfig(options, 'unicorn')));
+    configs.push(unicorn());
   }
 
   // Add disables, this should be always the last one
   configs.push(disables({ oxlint }));
 
   // Compose eslint configs
-  const composer = new FlatConfigComposer<TypedFlatConfigItem, ConfigNames>();
-  composer.append(...configs);
+  let composer = new FlatConfigComposer<TypedFlatConfigItem, ConfigNames>();
+  composer = composer.append(...configs);
   return composer;
 }

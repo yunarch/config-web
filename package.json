@@ -29,8 +29,8 @@
   },
   "files": ["README.md", "LICENSE.md", "dist"],
   "bin": {
-    "swagger-sync": "./dist/cli/swagger-sync.js",
-    "turbo-select": "./dist/cli/turbo-select.js"
+    "swagger-sync": "./dist/bin/swagger-sync.js",
+    "turbo-select": "./dist/bin/turbo-select.js"
   },
   "exports": {
     ".": "./dist/index.js",
@@ -48,7 +48,7 @@
     "lint:ts": "tsc --noEmit",
     "clean": "rimraf dist",
     "build": "bun run eslint:typegen && tsup",
-    "eslint:typegen": "bun run ./src/linters/eslint/scripts/typegen.ts",
+    "eslint:typegen": "bun run ./src/eslint/scripts/typegen.ts",
     "eslint:inspect": "bunx @eslint/config-inspector --config eslint.config.ts"
   },
   "peerDependencies": {

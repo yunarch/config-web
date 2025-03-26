@@ -38,8 +38,8 @@ export default defineConfig([
   },
   // Cli
   {
-    entry: ['./src/cli/swagger-sync.ts', './src/cli/turbo-select.ts'],
-    outDir: './dist/cli',
+    entry: ['./src/bin/swagger-sync.ts', './src/bin/turbo-select.ts'],
+    outDir: './dist/bin',
     format: 'esm',
     minify: true,
     clean: true,
@@ -47,21 +47,21 @@ export default defineConfig([
   },
   // Formatters
   {
-    entry: ['./src/formatters/prettier.config.ts'],
+    entry: ['./src/configs/formatters/prettier.config.ts'],
     outDir: './dist/formatters',
     format: 'esm',
     minify: true,
     clean: true,
     onSuccess: async () => {
       await parseJSONC(
-        './src/formatters/biome.config.jsonc',
+        './src/configs/formatters/biome.config.jsonc',
         './dist/formatters/biome.config.json'
       );
     },
   },
   // Linters
   {
-    entry: ['./src/linters/eslint.config.ts'],
+    entry: ['./src/configs/linters/eslint.config.ts'],
     outDir: './dist/linters',
     format: 'esm',
     dts: true,
@@ -70,22 +70,22 @@ export default defineConfig([
     shims: true,
     onSuccess: async () => {
       await parseJSONC(
-        './src/linters/oxlint.config.jsonc',
+        './src/configs/linters/oxlint.config.jsonc',
         './dist/linters/oxlint.config.json'
       );
     },
   },
   // Typescript
   {
-    entry: ['./src/ts/reset.d.ts'],
+    entry: ['./src/configs/ts/reset.d.ts'],
     outDir: './dist/ts',
     format: 'esm',
     clean: true,
     onSuccess: async () => {
       await unlink('./dist/ts/reset.d.js');
-      await copyFile('./src/ts/reset.d.ts', './dist/ts/reset.d.ts');
+      await copyFile('./src/configs/ts/reset.d.ts', './dist/ts/reset.d.ts');
       await parseJSONC(
-        './src/ts/tsconfig-base.jsonc',
+        './src/configs/ts/tsconfig-base.jsonc',
         './dist/ts/tsconfig-base.json'
       );
     },

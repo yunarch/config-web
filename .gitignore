@@ -89,4 +89,4 @@ build
 mockServiceWorker.js
 
 # Others
-src/linters/**/typegen.d.ts
+src/eslint/**/typegen.d.ts

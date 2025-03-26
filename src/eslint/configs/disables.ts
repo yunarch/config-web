@@ -18,6 +18,8 @@ export function disables(options: {
       files: [
         `**/scripts/${GLOB_SRC}`,
         `**/tasks/${GLOB_SRC}`,
+        `**/bin/${GLOB_SRC}`,
+        `**/bin.${GLOB_SRC_EXT}`,
         `**/cli/${GLOB_SRC}`,
         `**/cli.${GLOB_SRC_EXT}`,
       ],

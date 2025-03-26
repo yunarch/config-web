@@ -52,7 +52,6 @@ export function typescript(
       rules: {
         ...pluginTsEslint.configs.strict.at(-1)?.rules,
         ...pluginTsEslint.configs.stylistic.at(-1)?.rules,
-        '@typescript-eslint/explicit-function-return-type': 'off',
         '@typescript-eslint/ban-ts-comment': [
           'error',
           { 'ts-expect-error': 'allow-with-description' },
@@ -66,35 +65,9 @@ export function typescript(
             prefer: 'type-imports',
           },
         ],
+        '@typescript-eslint/default-param-last': 'error',
+        '@typescript-eslint/explicit-function-return-type': 'off',
         '@typescript-eslint/method-signature-style': ['error', 'property'], // https://www.totaltypescript.com/method-shorthand-syntax-considered-harmful
-        '@typescript-eslint/no-dupe-class-members': 'error',
-        '@typescript-eslint/no-empty-object-type': [
-          'error',
-          { allowInterfaces: 'always' },
-        ],
-        '@typescript-eslint/no-import-type-side-effects': 'error',
-        '@typescript-eslint/no-redeclare': ['error', { builtinGlobals: false }],
-        '@typescript-eslint/no-unused-vars': [
-          'error',
-          {
-            args: 'after-used',
-            argsIgnorePattern: '^_',
-            ignoreRestSiblings: false,
-            vars: 'all',
-            varsIgnorePattern: '^_',
-          },
-        ],
-        '@typescript-eslint/no-use-before-define': [
-          'error',
-          { classes: false, functions: false, variables: true },
-        ],
-        '@typescript-eslint/unified-signatures': [
-          'error',
-          {
-            ignoreDifferentlyNamedParameters: true,
-            ignoreOverloadsWithDifferentJSDoc: true,
-          },
-        ],
         '@typescript-eslint/naming-convention': [
           'error',
           // Anything type-like should be written in PascalCase.
@@ -117,10 +90,37 @@ export function typescript(
             selector: 'interface',
           },
         ],
-        '@typescript-eslint/default-param-last': 'error',
+        '@typescript-eslint/no-dupe-class-members': 'error',
+        '@typescript-eslint/no-empty-object-type': [
+          'error',
+          { allowInterfaces: 'always' },
+        ],
+        '@typescript-eslint/no-import-type-side-effects': 'error',
         '@typescript-eslint/no-loop-func': 'error',
+        '@typescript-eslint/no-redeclare': ['error', { builtinGlobals: false }],
         '@typescript-eslint/no-shadow': 'error',
+        '@typescript-eslint/no-unused-vars': [
+          'error',
+          {
+            args: 'after-used',
+            argsIgnorePattern: '^_',
+            ignoreRestSiblings: false,
+            vars: 'all',
+            varsIgnorePattern: '^_',
+          },
+        ],
+        '@typescript-eslint/no-use-before-define': [
+          'error',
+          { classes: false, functions: false, variables: true },
+        ],
         '@typescript-eslint/no-useless-empty-export': 'warn',
+        '@typescript-eslint/unified-signatures': [
+          'error',
+          {
+            ignoreDifferentlyNamedParameters: true,
+            ignoreOverloadsWithDifferentJSDoc: true,
+          },
+        ],
       },
     },
     ...(hasTypeAware
@@ -132,15 +132,15 @@ export function typescript(
             rules: {
               ...pluginTsEslint.configs.strictTypeCheckedOnly.at(-1)?.rules,
               ...pluginTsEslint.configs.stylisticTypeCheckedOnly.at(-1)?.rules,
+              '@typescript-eslint/no-misused-promises': [
+                'error',
+                { checksVoidReturn: { attributes: false } },
+              ],
               '@typescript-eslint/require-array-sort-compare': [
                 'error',
                 { ignoreStringArrays: true },
               ],
               '@typescript-eslint/switch-exhaustiveness-check': 'warn',
-              '@typescript-eslint/no-misused-promises': [
-                'error',
-                { checksVoidReturn: { attributes: false } },
-              ],
             },
           },
         ] as TypedFlatConfigItem[])

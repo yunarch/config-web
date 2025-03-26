@@ -1,5 +1,5 @@
 import { exec } from 'node:child_process';
-import { styleText, promisify, types } from 'node:util';
+import { promisify, styleText, types } from 'node:util';
 import { Command } from 'commander';
 import ora from 'ora';
 

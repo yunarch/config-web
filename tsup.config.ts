@@ -1,4 +1,4 @@
-import { readFile, writeFile, unlink, copyFile } from 'node:fs/promises';
+import { copyFile, readFile, unlink, writeFile } from 'node:fs/promises';
 import { defineConfig } from 'tsup';
 
 /**

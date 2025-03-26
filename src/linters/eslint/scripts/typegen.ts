@@ -1,11 +1,13 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { builtinRules } from 'eslint/use-at-your-own-risk';
 import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
+import { builtinRules } from 'eslint/use-at-your-own-risk';
 import { base } from '../configs/base';
+import { disables } from '../configs/disables';
 import { imports } from '../configs/imports';
 import { jsdoc } from '../configs/jsdoc';
+import { perfectionist } from '../configs/perfectionist';
 import { typescript } from '../configs/typescript';
 import { unicorn } from '../configs/unicorn';
 import { combine } from '../utils';
@@ -24,7 +26,9 @@ const configs = await combine(
   typescript({ tsconfigPath: './tsconfig.json' }), // It doesn't matter if the file doesn't exist is just for the typegen generation.
   imports(),
   jsdoc(),
-  unicorn()
+  unicorn(),
+  perfectionist(),
+  disables({})
 );
 
 const configNames = configs.map((i) => i.name).filter(Boolean);

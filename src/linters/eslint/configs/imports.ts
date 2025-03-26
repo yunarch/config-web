@@ -17,53 +17,28 @@ export function imports(): TypedFlatConfigItem[] {
       rules: {
         ...pluginImport.flatConfigs.recommended.rules,
         'import-x/first': 'error',
-        'import-x/newline-after-import': 'warn',
-        'import-x/no-absolute-path': 'warn',
-        'import-x/no-cycle': ['error', { ignoreExternal: false, maxDepth: 3 }],
+        'import-x/newline-after-import': ['error', { count: 1 }],
+        'import-x/no-absolute-path': 'error',
         'import-x/no-amd': 'error',
-        'import-x/no-mutable-exports': 'error',
-        'import-x/no-relative-packages': 'warn',
-        'import-x/no-self-import': 'error',
-        'import-x/no-useless-path-segments': 'warn',
+        'import-x/no-cycle': ['error', { ignoreExternal: false, maxDepth: 3 }],
         'import-x/no-duplicates': ['error', { 'prefer-inline': true }],
         'import-x/no-dynamic-require': 'error',
-        'import-x/order': [
-          'warn',
-          {
-            groups: [
-              'builtin', // Node.js built-in modules
-              'external', // Packages
-              'internal', // Aliased modules
-              'parent', // Relative parent
-              'sibling', // Relative sibling
-              'index', // Relative index
-            ],
-            pathGroups: [
-              {
-                pattern: '@/**',
-                group: 'internal',
-              },
-              {
-                pattern: '~/**',
-                group: 'internal',
-              },
-            ],
-            alphabetize: { order: 'asc' },
-            'newlines-between': 'never',
-          },
-        ],
+        'import-x/no-mutable-exports': 'error',
+        'import-x/no-relative-packages': 'error',
+        'import-x/no-self-import': 'error',
+        'import-x/no-useless-path-segments': 'error',
       },
     },
     {
       name: 'yunarch/import/typescript/rules',
       files: [GLOB_TS, GLOB_TSX],
+      rules: {
+        ...pluginImport.flatConfigs.typescript.rules,
+      },
       settings: {
         'import-x/resolver': {
           typescript: true,
         },
-      },
-      rules: {
-        ...pluginImport.flatConfigs.typescript.rules,
       },
     },
   ];

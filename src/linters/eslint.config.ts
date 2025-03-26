@@ -3,6 +3,7 @@ import { base } from './eslint/configs/base';
 import { disables } from './eslint/configs/disables';
 import { imports } from './eslint/configs/imports';
 import { jsdoc } from './eslint/configs/jsdoc';
+import { perfectionist } from './eslint/configs/perfectionist';
 import { typescript } from './eslint/configs/typescript';
 import { unicorn } from './eslint/configs/unicorn';
 import type {
@@ -70,9 +71,7 @@ export function factoryEslintConfig(options: OptionsConfig = {}) {
   if (enableUnicorn) {
     configs.push(unicorn());
   }
-
-  // Add disables, this should be always the last one
-  configs.push(disables({ oxlint }));
+  configs.push(perfectionist(), disables({ oxlint }));
 
   // Compose eslint configs
   let composer = new FlatConfigComposer<TypedFlatConfigItem, ConfigNames>();

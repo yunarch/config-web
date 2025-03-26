@@ -21,10 +21,10 @@ export function jsdoc(): TypedFlatConfigItem[] {
         'jsdoc/require-hyphen-before-param-description': ['error', 'always'],
         'jsdoc/require-param': [
           'error',
-          { enableRestElementFixer: false, checkDestructured: false },
+          { checkDestructured: false, enableRestElementFixer: false },
         ],
-        'jsdoc/tag-lines': ['error', 'any', { startLines: 1 }],
         'jsdoc/require-throws': 'error',
+        'jsdoc/tag-lines': ['error', 'any', { startLines: 1 }],
       },
     },
     {

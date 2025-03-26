@@ -82,13 +82,13 @@ This package comes with configurations for both `Prettier` and `Biome` to ensure
 The easiest way to use the prettier configuration as-is is to set it directly in your `package.json`:
 
 ```json
-"prettier": "@yunarch/config-web/formatter-prettier"
+"prettier": "@yunarch/config-web/prettier"
 ```
 
 Or you can create a [configuration file](https://prettier.io/docs/configuration) to also allow further customization:
 
 ```js
-import defaultConfig from "@yunarch/config-web/formatter-prettier";
+import defaultConfig from "@yunarch/config-web/prettier";
 
 /** @type {import("prettier").Options} */
 export default {
@@ -103,7 +103,7 @@ To use the Biome formatter, create a `biome.json` [configuration file](https://b
 
 ```jsonc
 {
-  "extends": ["@yunarch/config-web/formatter-biome"],
+  "extends": ["@yunarch/config-web/biome-formatter"],
   // Add your overrides here...
 }
 ```
@@ -125,7 +125,7 @@ Typically, you only need to use the `config` configuration as it is:
 
 ```js
 // eslint.config.js
-import { config } from "@yunarch/config-web/linter-eslint";
+import { config } from "@yunarch/config-web/eslint";
 
 export default config();
 ```
@@ -133,7 +133,7 @@ export default config();
 And that's it! However, if needed, you can configure each integration individually:
 
 ```js
-import { config } from "@yunarch/config-web/linter-eslint";
+import { config } from "@yunarch/config-web/eslint";
 
 export default config({
   typescript: true,
@@ -146,7 +146,7 @@ export default config({
 The `config` function also accepts multiple custom configuration overrides:
 
 ```js
-import { config } from "@yunarch/config-web/linter-eslint";
+import { config } from "@yunarch/config-web/eslint";
 
 export default config(
   {
@@ -172,7 +172,7 @@ Thanks to [eslint-flat-config-utils](https://github.com/antfu/eslint-flat-config
 
 ```js
 // eslint.config.js
-import { config } from "@yunarch/config-web/linter-eslint";
+import { config } from "@yunarch/config-web/eslint";
 
 export default config()
   // overrides any named configs
@@ -212,7 +212,7 @@ export default config()
 By providing the `tsconfigPath` in the `typescript` configuration it will automatically enable [type aware rules](https://typescript-eslint.io/getting-started/typed-linting/) which may/will impact the linter's performance.
 
 ```js
-import { config } from "@yunarch/config-web/linter-eslint";
+import { config } from "@yunarch/config-web/eslint";
 
 export default config({
   typescript: {
@@ -229,7 +229,7 @@ export default config({
 If you want to offload certain rules to Oxlint, which will reduce linting time, you can configure it as follows:
 
 ```js
-import { config } from "@yunarch/config-web/linter-eslint";
+import { config } from "@yunarch/config-web/eslint";
 
 export default config({
   oxlint: {
@@ -247,7 +247,7 @@ To use the oxlint linter, create a `.oxlintrc.json` [configuration file](https:/
 
 ```jsonc
 {
-  "extends": ["@yunarch/config-web/linter-oxlint"],
+  "extends": ["@yunarch/config-web/oxlint"],
   "rules": {
     // Add your rules overrides here...
   },
@@ -261,7 +261,7 @@ If you want to enable or disable specific plugins, you must provide the full lis
 
 ```jsonc
 {
-  "extends": ["@yunarch/config-web/formatter-biome"],
+  "extends": ["@yunarch/config-web/oxlint"],
   "plugins": ["typescript", "unicorn", "react", "nextjs"], // Add all the plugins you want to use
   // ...
 }

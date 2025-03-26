@@ -34,10 +34,10 @@
   },
   "exports": {
     ".": "./dist/index.js",
-    "./formatter-prettier": "./dist/formatters/prettier.config.js",
-    "./formatter-biome": "./dist/formatters/biome.config.json",
-    "./linter-eslint": "./dist/linters/eslint.config.js",
-    "./linter-oxlint": "./dist/linters/oxlint.config.json",
+    "./prettier": "./dist/formatters/prettier.config.js",
+    "./eslint": "./dist/linters/eslint.config.js",
+    "./oxlint": "./dist/linters/oxlint.config.json",
+    "./biome-formatter": "./dist/formatters/biome.config.json",
     "./tsconfig-base": "./dist/ts/tsconfig-base.json",
     "./reset.d.ts": "./dist/ts/reset.d.ts"
   },

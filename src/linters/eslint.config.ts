@@ -84,5 +84,8 @@ export function config(
     ...configs,
     ...(userConfigs as Awaitable<TypedFlatConfigItem>[])
   );
+  composer = composer.renamePlugins({
+    'import-x': 'import',
+  });
   return composer;
 }

@@ -114,3 +114,7 @@ export interface OptionsConfig {
     oxlintConfigPath: string;
   };
 }
+
+export type UserConfig = Awaitable<
+  TypedFlatConfigItem | TypedFlatConfigItem[] | Linter.Config[]
+>;

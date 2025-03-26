@@ -1,9 +1,9 @@
 import { GLOB_ASTRO_TS, GLOB_MARKDOWN, GLOB_TS, GLOB_TSX } from '../globs';
-import { pluginTsEslint } from '../plugins';
+import { pluginTsESlint } from '../plugins';
 import type { OptionsConfig, TypedFlatConfigItem } from '../types';
 
 /**
- * Typescript eslint configuration.
+ * Typescript ESlint configuration.
  *
  * @param options - Configuration options.
  * @param extraFileExtensions - Additional file extensions to lint.
@@ -13,7 +13,6 @@ export function typescript(
   options: Exclude<NonNullable<OptionsConfig['typescript']>, boolean>,
   extraFileExtensions: OptionsConfig['extraFileExtensions'] = []
 ): TypedFlatConfigItem[] {
-  const hasTypeAware = !!options.tsconfigPath && !options.disableTypeAware;
   const filesGlob = [GLOB_TS, GLOB_TSX];
   const filesTypeAwareGlob = options.filesTypeAware ?? [GLOB_TS, GLOB_TSX];
   const ignoresTypeAwareGlob = options.ignoresTypeAware ?? [
@@ -24,7 +23,7 @@ export function typescript(
     {
       name: 'yunarch/typescript/setup',
       plugins: {
-        '@typescript-eslint': pluginTsEslint.plugin,
+        '@typescript-eslint': pluginTsESlint.plugin,
       },
     },
     makeParserConfig('yunarch/typescript/parser', filesGlob, {
@@ -32,7 +31,7 @@ export function typescript(
       extraFileExtensions,
       parserOptions: options.parserOptions,
     }),
-    ...(hasTypeAware
+    ...(options.tsconfigPath
       ? [
           makeParserConfig(
             'yunarch/typescript/parser/type-aware',
@@ -50,8 +49,8 @@ export function typescript(
       name: 'yunarch/typescript/rules',
       files: filesGlob,
       rules: {
-        ...pluginTsEslint.configs.strict.at(-1)?.rules,
-        ...pluginTsEslint.configs.stylistic.at(-1)?.rules,
+        ...pluginTsESlint.configs.strict.at(-1)?.rules,
+        ...pluginTsESlint.configs.stylistic.at(-1)?.rules,
         '@typescript-eslint/ban-ts-comment': [
           'error',
           { 'ts-expect-error': 'allow-with-description' },
@@ -123,15 +122,15 @@ export function typescript(
         ],
       },
     },
-    ...(hasTypeAware
+    ...(options.tsconfigPath && !options.disableTypeAware
       ? ([
           {
             name: 'yunarch/typescript/rules/type-aware',
             files: filesTypeAwareGlob,
             ignores: ignoresTypeAwareGlob,
             rules: {
-              ...pluginTsEslint.configs.strictTypeCheckedOnly.at(-1)?.rules,
-              ...pluginTsEslint.configs.stylisticTypeCheckedOnly.at(-1)?.rules,
+              ...pluginTsESlint.configs.strictTypeCheckedOnly.at(-1)?.rules,
+              ...pluginTsESlint.configs.stylisticTypeCheckedOnly.at(-1)?.rules,
               '@typescript-eslint/no-misused-promises': [
                 'error',
                 { checksVoidReturn: { attributes: false } },
@@ -174,7 +173,7 @@ function makeParserConfig(
     files,
     ...(options.ignores ? { ignores: options.ignores } : {}),
     languageOptions: {
-      parser: pluginTsEslint.parser as never,
+      parser: pluginTsESlint.parser as never,
       parserOptions: {
         extraFileExtensions: options.extraFileExtensions?.map(
           (extension) => `.${extension}`

@@ -11,16 +11,21 @@ import type {
   ConfigNames,
   OptionsConfig,
   TypedFlatConfigItem,
+  UserConfig,
 } from './eslint/types';
 import { interopDefault } from './eslint/utils';
 
 /**
- * Eslint configuration factory.
+ * ESlint configuration factory.
  *
  * @param options - Configuration options.
+ * @param userConfigs - User configurations.
  * @returns A composer of ESLint configurations.
  */
-export function factoryEslintConfig(options: OptionsConfig = {}) {
+export function config(
+  options: OptionsConfig = {},
+  ...userConfigs: UserConfig[]
+) {
   const {
     gitignore = true,
     ignores,
@@ -75,6 +80,9 @@ export function factoryEslintConfig(options: OptionsConfig = {}) {
 
   // Compose eslint configs
   let composer = new FlatConfigComposer<TypedFlatConfigItem, ConfigNames>();
-  composer = composer.append(...configs);
+  composer = composer.append(
+    ...configs,
+    ...(userConfigs as Awaitable<TypedFlatConfigItem>[])
+  );
   return composer;
 }

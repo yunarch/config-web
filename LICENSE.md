@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2025 @yunarch
+Copyright (c) 2025-Present @yunarch <https://github.com/yunarch>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

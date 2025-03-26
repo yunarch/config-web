@@ -1,5 +1,5 @@
 import globals from 'globals';
-import { pluginEslint } from '../plugins';
+import { pluginESlint } from '../plugins';
 import type { OptionsConfig, TypedFlatConfigItem } from '../types';
 
 /**
@@ -108,7 +108,7 @@ export function base(
     {
       name: 'yunarch/base/rules',
       rules: {
-        ...pluginEslint.configs.recommended.rules,
+        ...pluginESlint.configs.recommended.rules,
         'array-callback-return': ['error', { allowImplicit: true }],
         'block-scoped-var': 'error',
         camelcase: [

@@ -89,7 +89,7 @@
   "linter": {
     "enabled": false
   },
-  // Disable organizeImports as we prefer sort it by eslint or OxLint
+  // Disable organizeImports as we prefer sort it by ESlint or Oxlint
   "organizeImports": {
     "enabled": false
   }

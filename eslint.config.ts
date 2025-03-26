@@ -1,6 +1,6 @@
-import { factoryEslintConfig } from './src/linters/eslint.config';
+import { config } from './src/linters/eslint.config';
 
-export default factoryEslintConfig({
+export default config({
   typescript: {
     tsconfigPath: './tsconfig.json',
   },

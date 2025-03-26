@@ -30,7 +30,7 @@ export function perfectionist(): TypedFlatConfigItem[] {
               'object',
               'unknown',
             ],
-            newlinesBetween: 'ignore',
+            newlinesBetween: 'never',
             order: 'asc',
             type: 'natural',
           },

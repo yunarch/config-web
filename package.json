@@ -29,8 +29,8 @@
   },
   "files": ["README.md", "LICENSE.md", "dist"],
   "bin": {
-    "swagger-sync": "./dist/bin/swagger-sync.js",
-    "turbo-select": "./dist/bin/turbo-select.js"
+    "swagger-sync": "./dist/cli/swagger-sync.js",
+    "turbo-select": "./dist/cli/turbo-select.js"
   },
   "exports": {
     ".": "./dist/index.js",

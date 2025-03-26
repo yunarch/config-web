@@ -38,8 +38,8 @@ export default defineConfig([
   },
   // Cli
   {
-    entry: ['./src/bin/swagger-sync.ts', './src/bin/turbo-select.ts'],
-    outDir: './dist/bin',
+    entry: ['./src/cli/swagger-sync.ts', './src/cli/turbo-select.ts'],
+    outDir: './dist/cli',
     format: 'esm',
     minify: true,
     clean: true,

@@ -55,7 +55,7 @@
       "**/.tmp",
       "**/.history",
       "**/mockServiceWorker.js",
-      "**/CHANGELOG*.md",
+      "**/CHANGELOG*",
       "**/LICENSE*"
     ],
     "useEditorconfig": true,

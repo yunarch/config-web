@@ -89,7 +89,7 @@ export interface OptionsConfig {
    *
    * @default true
    */
-  imports?: boolean;
+  import?: boolean;
   /**
    * Enable `eslint-plugin-jsdoc` rules.
    *

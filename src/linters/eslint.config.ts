@@ -30,7 +30,7 @@ export function config(
     gitignore = true,
     ignores,
     extraFileExtensions,
-    imports: enableImports = true,
+    import: enableImports = true,
     jsdoc: enableJsdoc = true,
     unicorn: enableUnicorn = true,
     oxlint,

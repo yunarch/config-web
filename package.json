@@ -52,15 +52,19 @@
     "eslint:inspect": "bunx @eslint/config-inspector --config eslint.config.ts"
   },
   "peerDependencies": {
-    "@biomejs/biome": "1",
-    "prettier": "3",
-    "oxlint": "0.16.3"
+    "@biomejs/biome": ">= 1 | < 2",
+    "prettier": ">= 3 | < 4",
+    "eslint": ">=9.5.0 | < 10",
+    "oxlint": ">=0.16.2 | < 1"
   },
   "peerDependenciesMeta": {
     "@biomejs/biome": {
       "optional": true
     },
     "prettier": {
+      "optional": true
+    },
+    "eslint": {
       "optional": true
     },
     "oxlint": {

@@ -55,7 +55,9 @@
     "@biomejs/biome": ">= 1 | < 2",
     "prettier": ">= 3 | < 4",
     "eslint": ">=9.5.0 | < 10",
-    "oxlint": ">=0.16.2 | < 1"
+    "oxlint": ">=0.16.2 | < 1",
+    "@tanstack/react-query": ">=5.0.0 | < 6",
+    "@tanstack/react-router": ">=1.0.0 | < 2"
   },
   "peerDependenciesMeta": {
     "@biomejs/biome": {
@@ -68,6 +70,12 @@
       "optional": true
     },
     "oxlint": {
+      "optional": true
+    },
+    "@tanstack/react-query": {
+      "optional": true
+    },
+    "@tanstack/react-router": {
       "optional": true
     }
   },
@@ -87,6 +95,8 @@
     "eslint-plugin-unicorn": "58.0.0",
     "eslint-plugin-perfectionist": "4.10.1",
     "eslint-plugin-oxlint": "0.16.3",
+    "@tanstack/eslint-plugin-query": "5.68.0",
+    "@tanstack/eslint-plugin-router": "1.114.29",
     "typescript-eslint": "8.28.0",
     "globals": "16.0.0"
   },

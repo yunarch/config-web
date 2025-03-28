@@ -8,6 +8,7 @@ import { disables } from '../configs/disables';
 import { imports } from '../configs/imports';
 import { jsdoc } from '../configs/jsdoc';
 import { perfectionist } from '../configs/perfectionist';
+import { tanstack } from '../configs/tanstack';
 import { typescript } from '../configs/typescript';
 import { unicorn } from '../configs/unicorn';
 import { combine } from '../utils';
@@ -27,6 +28,7 @@ const configs = await combine(
   imports(),
   jsdoc(),
   unicorn(),
+  tanstack(true),
   perfectionist(),
   disables({})
 );

@@ -103,6 +103,28 @@ export interface OptionsConfig {
    */
   unicorn?: boolean;
   /**
+   * Enable tanstack plugins rules.
+   * If `true`, it will enable all tanstack eslint plugins, otherwise you can specify which ones to enable.
+   *
+   * @default false
+   */
+  tanstack?:
+    | boolean
+    | {
+        /**
+         * Enable `@tanstack/eslint-plugin-query` plugin and its recommended rules.
+         *
+         * @default false
+         */
+        enableQuery?: boolean;
+        /**
+         * Enable `@tanstack/eslint-plugin-router` plugin and its recommended rules.
+         *
+         * @default false
+         */
+        enableRouter?: boolean;
+      };
+  /**
    * Whether oxlint is enabled and therefore eslint rules that are covered by oxlint should be disabled.
    *
    * @default undefined

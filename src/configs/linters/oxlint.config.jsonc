@@ -60,19 +60,6 @@
     "es6": true,
     "browser": true
   },
-  // "plugins": [
-  //   "typescript",
-  //   "unicorn",
-  //   "react",
-  //   "react-perf",
-  //   "oxc",
-  //   "import",
-  //   "jsdoc",
-  //   "jsx-a11y",
-  //   "node",
-  //   "promise",
-  //   "vitest"
-  // ],
   "categories": {
     "correctness": "error",
     "perf": "error"

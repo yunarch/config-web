@@ -115,7 +115,7 @@ To use the Biome formatter, create a `biome.json` [configuration file](https://b
 
 We offer a strict yet configurable ESLint setup with autocomplete support. Additionally, since the ESLint ecosystem is extensive but can sometimes be slow, this configuration allows leveraging Oxlint for certain rules, boosting speed without compromising flexibility.
 
-For small projects, `oxlint` or enabling the linter in `Biome` should be sufficient. However, if you want to maintain consistent code style across multiple projects, this configuration ensures that uniformity.
+For small projects, `Oxlint` or enabling the linter in `Biome` should be sufficient. However, for big projects or if you want to maintain consistent code style across multiple projects, we recommend ESlint and for performance boost ESlint + Oxlint.
 
 ### ESlint
 
@@ -268,7 +268,9 @@ If you want to enable or disable specific plugins, you must provide the full lis
 ```
 
 > [!WARNING]
-> When customizing plugins, you must define the full list. At the moment Oxlint does not support selectively enabling or disabling individual plugins.
+> Setting the `plugins` field will overwrite the base set of plugins. The plugins array should reflect all of the plugins you want to use.
+>
+> By default it will use `"plugins": ["typescript", "unicorn", "react", "oxc"]`.
 
 ## 🔵 Typescript
 

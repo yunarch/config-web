@@ -1,4 +1,6 @@
 export { default as pluginESlint } from '@eslint/js';
+export { default as pluginTanstackQuery } from '@tanstack/eslint-plugin-query';
+export { default as pluginTanstackRouter } from '@tanstack/eslint-plugin-router';
 export { default as pluginPrettier } from 'eslint-config-prettier';
 export { default as pluginImport } from 'eslint-plugin-import-x';
 export { default as pluginJsdoc } from 'eslint-plugin-jsdoc';

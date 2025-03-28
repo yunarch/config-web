@@ -4,6 +4,36 @@ import type { Linter } from 'eslint'
 
 export interface RuleOptions {
   /**
+   * Exhaustive deps rule for useQuery
+   * @see https://tanstack.com/query/latest/docs/eslint/exhaustive-deps
+   */
+  '@tanstack/query/exhaustive-deps'?: Linter.RuleEntry<[]>
+  /**
+   * Ensure correct order of inference sensitive properties for infinite queries
+   * @see https://tanstack.com/query/latest/docs/eslint/infinite-query-property-order
+   */
+  '@tanstack/query/infinite-query-property-order'?: Linter.RuleEntry<[]>
+  /**
+   * Disallows rest destructuring in queries
+   * @see https://tanstack.com/query/latest/docs/eslint/no-rest-destructuring
+   */
+  '@tanstack/query/no-rest-destructuring'?: Linter.RuleEntry<[]>
+  /**
+   * Disallow putting the result of query hooks directly in a React hook dependency array
+   * @see https://tanstack.com/query/latest/docs/eslint/no-unstable-deps
+   */
+  '@tanstack/query/no-unstable-deps'?: Linter.RuleEntry<[]>
+  /**
+   * Makes sure that QueryClient is stable
+   * @see https://tanstack.com/query/latest/docs/eslint/stable-query-client
+   */
+  '@tanstack/query/stable-query-client'?: Linter.RuleEntry<[]>
+  /**
+   * Ensure correct order of inference sensitive properties for createRoute functions
+   * @see https://tanstack.com/router/latest/docs/eslint/create-route-property-order
+   */
+  '@tanstack/router/create-route-property-order'?: Linter.RuleEntry<[]>
+  /**
    * Require that function overload signatures be consecutive
    * @see https://typescript-eslint.io/rules/adjacent-overload-signatures
    */
@@ -8873,4 +8903,4 @@ type Yoda = []|[("always" | "never")]|[("always" | "never"), {
 }]
 
 // Names of all the configs
-export type ConfigNames = 'yunarch/base/ignores' | 'yunarch/base/setup' | 'yunarch/base/rules' | 'yunarch/typescript/setup' | 'yunarch/typescript/parser' | 'yunarch/typescript/parser/type-aware' | 'yunarch/typescript/rules' | 'yunarch/typescript/rules/type-aware' | 'yunarch/import/rules' | 'yunarch/import/typescript/rules' | 'yunarch/jsdoc/rules' | 'yunarch/jsdoc/typescript/rules' | 'yunarch/unicorn/rules' | 'yunarch/perfectionist/rules' | 'yunarch/disables/cli' | 'yunarch/disables/dts' | 'yunarch/disables/prettier';
+export type ConfigNames = 'yunarch/base/ignores' | 'yunarch/base/setup' | 'yunarch/base/rules' | 'yunarch/typescript/setup' | 'yunarch/typescript/parser' | 'yunarch/typescript/parser/type-aware' | 'yunarch/typescript/rules' | 'yunarch/typescript/rules/type-aware' | 'yunarch/import/rules' | 'yunarch/import/typescript/rules' | 'yunarch/jsdoc/rules' | 'yunarch/jsdoc/typescript/rules' | 'yunarch/unicorn/rules' | 'yunarch/tanstack/query/rules' | 'yunarch/tanstack/router/rules' | 'yunarch/perfectionist/rules' | 'yunarch/disables/cli' | 'yunarch/disables/dts' | 'yunarch/disables/prettier';

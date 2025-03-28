@@ -103,6 +103,23 @@ export interface OptionsConfig {
    */
   unicorn?: boolean;
   /**
+   * Enable test support rules.
+   * It only adds support for `@vitest/eslint-plugin`
+   *
+   * @default false
+   */
+  test?:
+    | boolean
+    | {
+        /**
+         * Enables vitest type testing feature.
+         *
+         * @see https://vitest.dev/guide/testing-types
+         * @default false
+         */
+        enableTypeTesting?: boolean;
+      };
+  /**
    * Enable tanstack plugins rules.
    * If `true`, it will enable all tanstack eslint plugins, otherwise you can specify which ones to enable.
    *

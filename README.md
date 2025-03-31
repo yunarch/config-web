@@ -97,6 +97,8 @@ export default {
 };
 ```
 
+> Add a `.prettierignore` file to ignore certain files and folder completly or use the CLI option [--ignore-path](https://prettier.io/docs/cli#--ignore-path) to indicate a path to a file containing patterns that describe files to ignore. By default, Prettier looks for `./.gitignore` and `./.prettierignore`.
+
 ### Biome
 
 To use the Biome formatter, create a `biome.json` [configuration file](https://biomejs.dev/reference/configuration/):
@@ -110,6 +112,8 @@ To use the Biome formatter, create a `biome.json` [configuration file](https://b
 
 > [!IMPORTANT]
 > We disable the `organizeImports` options as we want that to be manage by the linter configuration that we offer. feel free to enable it if you prefer to use Biome for these tasks. Remember to disable it on the configuration for the ESlinter if you use it.
+
+> Enable [vcs.useIgnoreFile](https://biomejs.dev/guides/integrate-in-vcs/#use-the-ignore-file), to allow Biome to ignore all the files and directories listed in your VCS ignore file.
 
 ## 🧹 Linting
 

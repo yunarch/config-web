@@ -46,6 +46,8 @@
     "postinstall": "husky && bun run eslint:typegen",
     "lint": "eslint .",
     "lint:ts": "tsc --noEmit",
+    "format": "biome format",
+    "format:all": "biome format --write",
     "clean": "rimraf dist",
     "build": "bun run eslint:typegen && tsup",
     "eslint:typegen": "bun run ./src/eslint/scripts/typegen.ts",

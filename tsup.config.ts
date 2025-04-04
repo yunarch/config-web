@@ -82,12 +82,14 @@ export default defineConfig([
     format: 'esm',
     clean: true,
     onSuccess: async () => {
-      await unlink('./dist/ts/reset.d.js');
-      await copyFile('./src/configs/ts/reset.d.ts', './dist/ts/reset.d.ts');
-      await parseJSONC(
-        './src/configs/ts/tsconfig-base.jsonc',
-        './dist/ts/tsconfig-base.json'
-      );
+      await Promise.all([
+        unlink('./dist/ts/reset.d.js'),
+        copyFile('./src/configs/ts/reset.d.ts', './dist/ts/reset.d.ts'),
+        parseJSONC(
+          './src/configs/ts/tsconfig-base.jsonc',
+          './dist/ts/tsconfig-base.json'
+        ),
+      ]);
     },
   },
 ]);

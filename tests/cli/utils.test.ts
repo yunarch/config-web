@@ -1,6 +1,6 @@
 import ora from 'ora';
 import { describe, expect, it, vi } from 'vitest';
-import { runTask } from '../utils';
+import { runTask } from '../../src/cli/utils';
 
 vi.mock('ora', () => {
   return {

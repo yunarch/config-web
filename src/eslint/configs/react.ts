@@ -11,12 +11,13 @@ import { interopDefault } from '../utils';
 /**
  * React ESlint configuration.
  *
- * @param isTypeAware - Whether to enable react type-aware rules.
+ * @param options - Configuration options.
  * @returns An array of ESLint configurations.
  */
-export async function react(
-  isTypeAware: boolean
-): Promise<TypedFlatConfigItem[]> {
+export async function react(options: {
+  isTypescriptEnabled: boolean;
+  isTypeAware: boolean;
+}): Promise<TypedFlatConfigItem[]> {
   const [pluginReact, pluginReactHooks, pluginReactRefresh] = await Promise.all(
     [
       interopDefault(import('@eslint-react/eslint-plugin')),
@@ -57,21 +58,25 @@ export async function react(
         ...pluginReactRefresh.configs.recommended.rules,
       },
     },
-    {
-      name: 'yunarch/react/typescript/rules',
-      files: [GLOB_TS, GLOB_TSX],
-      ignores: [`${GLOB_MARKDOWN}/**`, GLOB_ASTRO_TS],
-      languageOptions: {
-        parserOptions: {
-          projectService: true,
-        },
-      },
-      rules: {
-        ...pluginReact.configs['recommended-typescript'].rules,
-        ...(isTypeAware
-          ? pluginReact.configs['recommended-type-checked'].rules
-          : {}),
-      },
-    },
+    ...(options.isTypescriptEnabled
+      ? [
+          {
+            name: 'yunarch/react/typescript/rules',
+            files: [GLOB_TS, GLOB_TSX],
+            ignores: [`${GLOB_MARKDOWN}/**`, GLOB_ASTRO_TS],
+            languageOptions: {
+              parserOptions: {
+                projectService: true,
+              },
+            },
+            rules: {
+              ...pluginReact.configs['recommended-typescript'].rules,
+              ...(options.isTypeAware
+                ? pluginReact.configs['recommended-type-checked'].rules
+                : {}),
+            },
+          },
+        ]
+      : []),
   ];
 }

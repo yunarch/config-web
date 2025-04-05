@@ -30,9 +30,9 @@ const configs = await combine(
   imports(),
   jsdoc(),
   unicorn(),
-  react(true),
+  react({ isTypescriptEnabled: true, isTypeAware: true }), // All enabled for typegen generation.
   test({}),
-  tanstack(true),
+  tanstack(true), // All enabled for typegen generation.
   perfectionist(),
   disables({})
 );

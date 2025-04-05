@@ -81,10 +81,13 @@ export function config(
   }
   if (options.react) {
     configs.push(
-      react(
-        typeof options.typescript === 'object' &&
-          !!options.typescript.tsconfigPath
-      )
+      react({
+        isTypescriptEnabled: !!options.typescript,
+        isTypeAware:
+          typeof options.typescript === 'object' &&
+          !!options.typescript.tsconfigPath &&
+          !options.typescript.disableTypeAware,
+      })
     );
   }
   if (options.test) {

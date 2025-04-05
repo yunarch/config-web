@@ -45,16 +45,12 @@
       },
       "peerDependencies": {
         "@biomejs/biome": ">= 1 | < 2",
-        "@tanstack/react-query": ">=5.0.0 | < 6",
-        "@tanstack/react-router": ">=1.0.0 | < 2",
         "eslint": ">=9.5.0 | < 10",
         "oxlint": ">=0.16.2 | < 1",
         "prettier": ">= 3 | < 4",
       },
       "optionalPeers": [
         "@biomejs/biome",
-        "@tanstack/react-query",
-        "@tanstack/react-router",
         "eslint",
         "oxlint",
         "prettier",

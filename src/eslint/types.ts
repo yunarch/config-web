@@ -103,6 +103,12 @@ export interface OptionsConfig {
    */
   unicorn?: boolean;
   /**
+   * Enable react rules.
+   *
+   * @default false
+   */
+  react?: boolean;
+  /**
    * Enable test support rules.
    * It only adds support for `@vitest/eslint-plugin`
    *

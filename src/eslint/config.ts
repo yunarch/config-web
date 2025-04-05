@@ -4,6 +4,7 @@ import { disables } from './configs/disables';
 import { imports } from './configs/imports';
 import { jsdoc } from './configs/jsdoc';
 import { perfectionist } from './configs/perfectionist';
+import { react } from './configs/react';
 import { tanstack } from './configs/tanstack';
 import { test } from './configs/test';
 import { typescript } from './configs/typescript';
@@ -77,6 +78,14 @@ export function config(
   }
   if (enableUnicorn) {
     configs.push(unicorn());
+  }
+  if (options.react) {
+    configs.push(
+      react(
+        typeof options.typescript === 'object' &&
+          !!options.typescript.tsconfigPath
+      )
+    );
   }
   if (options.test) {
     configs.push(test(options.test === true ? {} : options.test));

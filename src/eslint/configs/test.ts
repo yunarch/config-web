@@ -1,6 +1,6 @@
 import { GLOB_TESTS } from '../globs';
-import { pluginVitest } from '../plugins';
 import type { OptionsConfig, TypedFlatConfigItem } from '../types';
+import { interopDefault } from '../utils';
 
 /**
  * Test ESLint configuration.
@@ -8,10 +8,11 @@ import type { OptionsConfig, TypedFlatConfigItem } from '../types';
  * @param options - The options for the test configuration.
  * @returns An array of ESLint configurations.
  */
-export function test(
+export async function test(
   options: Exclude<NonNullable<OptionsConfig['test']>, boolean>
-): TypedFlatConfigItem[] {
+): Promise<TypedFlatConfigItem[]> {
   const { enableTypeTesting } = options;
+  const pluginVitest = await interopDefault(import('@vitest/eslint-plugin'));
   return [
     {
       name: 'yunarch/test/setup',

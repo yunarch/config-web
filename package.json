@@ -44,11 +44,12 @@
   "type": "module",
   "scripts": {
     "postinstall": "husky && bun run eslint:typegen",
-    "lint": "eslint .",
+    "lint": "turbo run lint:code lint:ts",
+    "lint:code": "eslint .",
     "lint:ts": "tsc --noEmit",
     "format": "biome format",
     "format:all": "biome format --write",
-    "clean": "rimraf dist coverage",
+    "clean": "rimraf dist coverage .turbo",
     "build": "bun run eslint:typegen && tsup",
     "eslint:typegen": "bun run ./src/eslint/scripts/typegen.ts",
     "eslint:inspect": "bunx @eslint/config-inspector --config eslint.config.ts",
@@ -112,6 +113,7 @@
     "rimraf": "6.0.1",
     "tsup": "8.4.0",
     "typescript": "5.8.3",
+    "turbo": "2.5.0",
     "vitest": "3.1.1",
     "@types/node": "22.14.0"
   },

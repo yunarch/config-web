@@ -1,0 +1,21 @@
+name: Generate release
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📝 Generate version
+        uses: googleapis/release-please-action@v4
+        id: release
+        with:
+          target-branch: main
+          release-type: node

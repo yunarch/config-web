@@ -95,7 +95,7 @@
     "eslint-plugin-react-hooks": "5.2.0",
     "eslint-plugin-react-refresh": "0.4.19",
     "eslint-plugin-oxlint": "0.16.5",
-    "@tanstack/eslint-plugin-query": "5.72.1",
+    "@tanstack/eslint-plugin-query": "5.72.2",
     "@tanstack/eslint-plugin-router": "1.115.0",
     "@vitest/eslint-plugin": "1.1.40",
     "typescript-eslint": "8.29.1",

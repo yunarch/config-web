@@ -57,10 +57,10 @@
     "test:watch": "vitest watch"
   },
   "peerDependencies": {
-    "@biomejs/biome": ">= 1 | < 2",
-    "prettier": ">= 3 | < 4",
-    "eslint": ">=9.5.0 | < 10",
-    "oxlint": ">=0.16.2 | < 1"
+    "@biomejs/biome": ">= 1 || < 2",
+    "prettier": ">= 3 || < 4",
+    "eslint": ">=9.5.0 || < 10",
+    "oxlint": ">=0.16.2 || < 1"
   },
   "peerDependenciesMeta": {
     "@biomejs/biome": {
@@ -86,18 +86,18 @@
     "eslint-config-flat-gitignore": "2.1.0",
     "eslint-import-resolver-typescript": "4.3.2",
     "@eslint/js": "9.24.0",
-    "eslint-config-prettier": "10.1.1",
-    "eslint-plugin-import-x": "4.10.2",
+    "eslint-config-prettier": "10.1.2",
+    "eslint-plugin-import-x": "4.10.3",
     "eslint-plugin-jsdoc": "50.6.9",
     "eslint-plugin-unicorn": "58.0.0",
     "eslint-plugin-perfectionist": "4.11.0",
-    "@eslint-react/eslint-plugin": "1.42.1",
+    "@eslint-react/eslint-plugin": "1.47.2",
     "eslint-plugin-react-hooks": "5.2.0",
     "eslint-plugin-react-refresh": "0.4.19",
-    "eslint-plugin-oxlint": "0.16.5",
-    "@tanstack/eslint-plugin-query": "5.72.1",
+    "eslint-plugin-oxlint": "0.16.6",
+    "@tanstack/eslint-plugin-query": "5.73.3",
     "@tanstack/eslint-plugin-router": "1.115.0",
-    "@vitest/eslint-plugin": "1.1.40",
+    "@vitest/eslint-plugin": "1.1.42",
     "typescript-eslint": "8.29.1",
     "globals": "16.0.0"
   },
@@ -108,14 +108,14 @@
     "@biomejs/biome": "1.9.4",
     "eslint": "9.24.0",
     "eslint-typegen": "2.1.0",
-    "oxlint": "0.16.5",
+    "oxlint": "0.16.6",
     "husky": "9.1.7",
     "rimraf": "6.0.1",
     "tsup": "8.4.0",
     "typescript": "5.8.3",
     "turbo": "2.5.0",
     "vitest": "3.1.1",
-    "@types/node": "22.14.0"
+    "@types/node": "22.14.1"
   },
   "packageManager": "bun@1.2.9"
 }

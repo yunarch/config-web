@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/package",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "name": "@yunarch/config-web",
   "description": "Shared configurations for web projects.",
   "keywords": [
@@ -27,7 +27,11 @@
     "bun": ">=1",
     "node": ">=22"
   },
-  "files": ["README.md", "LICENSE.md", "dist"],
+  "files": [
+    "README.md",
+    "LICENSE.md",
+    "dist"
+  ],
   "bin": {
     "swagger-sync": "./dist/cli/swagger-sync.js",
     "turbo-select": "./dist/cli/turbo-select.js"

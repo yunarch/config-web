@@ -1,6 +1,6 @@
 import ora from 'ora';
 import { describe, expect, it, vi } from 'vitest';
-import { runTask } from '../../src/cli/utils';
+import { runTask } from '../utils';
 
 vi.mock('ora', () => {
   return {
@@ -25,10 +25,10 @@ describe('runTask', () => {
 
   it('should execute a string command and return its output', async () => {
     const result = await runTask({
-      command: 'echo -n Hello, World!',
+      command: 'echo Hello, World!',
       name: 'Test Command',
     });
-    expect(result).toBe('Hello, World!');
+    expect(result.trimEnd()).toBe('Hello, World!');
     expect(ora).toHaveBeenCalledWith('Test Command');
   });
 

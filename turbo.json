@@ -2,8 +2,13 @@
   "$schema": "https://turbo.build/schema.json",
   "ui": "tui",
   "tasks": {
-    "lint": {},
     "lint:code": {},
-    "lint:ts": {}
+    "lint:ts": {},
+    "test": {},
+    "build": {
+      "dependsOn": ["lint:code", "lint:ts", "test"],
+      "outputs": ["dist/**"],
+      "cache": false
+    }
   }
 }

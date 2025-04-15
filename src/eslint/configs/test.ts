@@ -19,19 +19,6 @@ export async function test(
       plugins: {
         vitest: pluginVitest,
       },
-    },
-    {
-      name: 'yunarch/test/rules',
-      files: [...GLOB_TESTS],
-      rules: {
-        ...pluginVitest.configs.recommended.rules,
-        'vitest/consistent-test-it': [
-          'error',
-          { fn: 'it', withinDescribe: 'it' },
-        ],
-        'vitest/prefer-hooks-in-order': 'error',
-        'vitest/prefer-lowercase-title': 'error',
-      },
       ...(enableTypeTesting
         ? {
             settings: {
@@ -46,6 +33,19 @@ export async function test(
             },
           }
         : {}),
+    },
+    {
+      name: 'yunarch/test/rules',
+      files: [...GLOB_TESTS],
+      rules: {
+        ...pluginVitest.configs.recommended.rules,
+        'vitest/consistent-test-it': [
+          'error',
+          { fn: 'it', withinDescribe: 'it' },
+        ],
+        'vitest/prefer-hooks-in-order': 'error',
+        'vitest/prefer-lowercase-title': 'error',
+      },
     },
   ];
 }

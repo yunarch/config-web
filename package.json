@@ -51,8 +51,8 @@
     "eslint:inspect": "bunx @eslint/config-inspector --config eslint.config.ts",
     "lint:code": "eslint .",
     "lint:ts": "tsc --noEmit",
-    "test": "vitest run",
-    "test:watch": "vitest watch",
+    "test": "vitest --typecheck run",
+    "test:watch": "vitest --typecheck watch",
     "build": "bun run eslint:typegen && tsup",
     "lint": "turbo run lint:code lint:ts",
     "release": "turbo run build && bun publish --dry-run && bunx bumpp && bun publish"

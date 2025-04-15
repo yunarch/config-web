@@ -2,7 +2,7 @@ import { exec } from 'node:child_process';
 import { promisify } from 'node:util';
 import { describe, expect, it } from 'vitest';
 
-const CLI_PATH = './src/cli/swagger-sync.ts';
+const CLI_PATH = './src/cli/swagger-sync/index.ts';
 const run = async (params: string[] = []) => {
   return promisify(exec)(`bun ${CLI_PATH} ${params.join(' ')}`);
 };

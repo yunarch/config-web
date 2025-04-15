@@ -1,7 +1,7 @@
 import { execSync } from 'node:child_process';
 import { styleText } from 'node:util';
 import select from '@inquirer/select';
-import { createBaseProgram } from './utils';
+import { createBaseProgram } from '../utils';
 
 /**
  * Prompts the user to select a package from the Turborepo package list.

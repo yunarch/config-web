@@ -17,7 +17,7 @@
         "eslint-config-prettier": "10.1.2",
         "eslint-flat-config-utils": "2.0.1",
         "eslint-import-resolver-typescript": "4.3.2",
-        "eslint-plugin-import-x": "4.10.4",
+        "eslint-plugin-import-x": "4.10.5",
         "eslint-plugin-jsdoc": "50.6.9",
         "eslint-plugin-oxlint": "0.16.6",
         "eslint-plugin-perfectionist": "4.11.0",
@@ -284,7 +284,7 @@
 
     "@pkgjs/parseargs": ["@pkgjs/parseargs@0.11.0", "", {}, "sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg=="],
 
-    "@pkgr/core": ["@pkgr/core@0.2.3", "", {}, "sha512-yMV8bb9prWI21N6FsrnPCbhoYb8UUvYCDGoSvPHBloVC095Ef2ker43hzXkJ6TpJPw53S8FeFYkARa7GGIGwxg=="],
+    "@pkgr/core": ["@pkgr/core@0.2.4", "", {}, "sha512-ROFF39F6ZrnzSUEmQQZUar0Jt4xVoP9WnDRdWwF4NNcXs3xBTLgBUDoOwW141y1jP+S8nahIbdxbFC7IShw9Iw=="],
 
     "@rollup/rollup-android-arm-eabi": ["@rollup/rollup-android-arm-eabi@4.40.0", "", { "os": "android", "cpu": "arm" }, "sha512-+Fbls/diZ0RDerhE8kyC6hjADCXA1K4yVNlH0EYfd2XjyH0UGgzaQ8MlT0pCXAThfxv3QUAczHaL+qSv1E4/Cg=="],
 
@@ -564,7 +564,7 @@
 
     "eslint-import-resolver-typescript": ["eslint-import-resolver-typescript@4.3.2", "", { "dependencies": { "debug": "^4.4.0", "get-tsconfig": "^4.10.0", "is-bun-module": "^2.0.0", "stable-hash": "^0.0.5", "tinyglobby": "^0.2.12", "unrs-resolver": "^1.4.1" }, "peerDependencies": { "eslint": "*", "eslint-plugin-import": "*", "eslint-plugin-import-x": "*" }, "optionalPeers": ["eslint-plugin-import", "eslint-plugin-import-x"] }, "sha512-T2LqBXj87ndEC9t1LrDiPkzalSFzD4rrXr6BTzGdgMx1jdQM4T972guQvg7Ih+LNO51GURXI/qMHS5GF3h1ilw=="],
 
-    "eslint-plugin-import-x": ["eslint-plugin-import-x@4.10.4", "", { "dependencies": { "@pkgr/core": "^0.2.3", "@types/doctrine": "^0.0.9", "@typescript-eslint/utils": "^8.30.1", "debug": "^4.4.0", "doctrine": "^3.0.0", "eslint-import-resolver-node": "^0.3.9", "get-tsconfig": "^4.10.0", "is-glob": "^4.0.3", "minimatch": "^9.0.3 || ^10.0.1", "semver": "^7.7.1", "stable-hash": "^0.0.5", "tslib": "^2.8.1", "unrs-resolver": "^1.5.0" }, "peerDependencies": { "eslint": "^8.57.0 || ^9.0.0" } }, "sha512-UNjPJmwmFoIHRKV8dB3C8EKyF8TTa8fghoA0tGixSB5H/PFZXkQ/UEafpTCckjHury+ykWjVwdkw+5YpomGuaA=="],
+    "eslint-plugin-import-x": ["eslint-plugin-import-x@4.10.5", "", { "dependencies": { "@pkgr/core": "^0.2.4", "@types/doctrine": "^0.0.9", "@typescript-eslint/utils": "^8.30.1", "debug": "^4.4.0", "doctrine": "^3.0.0", "eslint-import-resolver-node": "^0.3.9", "get-tsconfig": "^4.10.0", "is-glob": "^4.0.3", "minimatch": "^9.0.3 || ^10.0.1", "semver": "^7.7.1", "stable-hash": "^0.0.5", "tslib": "^2.8.1", "unrs-resolver": "^1.5.0" }, "peerDependencies": { "eslint": "^8.57.0 || ^9.0.0" } }, "sha512-cmteCl8P5q1lkuL/4qqQw1uvnQHytpv2fjHFZ2UIqSfkM0RwWm/KLgasXKIqDRjgMnmUJTeyP8+9hDpJJuiZgg=="],
 
     "eslint-plugin-jsdoc": ["eslint-plugin-jsdoc@50.6.9", "", { "dependencies": { "@es-joy/jsdoccomment": "~0.49.0", "are-docs-informative": "^0.0.2", "comment-parser": "1.4.1", "debug": "^4.3.6", "escape-string-regexp": "^4.0.0", "espree": "^10.1.0", "esquery": "^1.6.0", "parse-imports": "^2.1.1", "semver": "^7.6.3", "spdx-expression-parse": "^4.0.0", "synckit": "^0.9.1" }, "peerDependencies": { "eslint": "^7.0.0 || ^8.0.0 || ^9.0.0" } }, "sha512-7/nHu3FWD4QRG8tCVqcv+BfFtctUtEDWc29oeDXB4bwmDM2/r1ndl14AG/2DUntdqH7qmpvdemJKwb3R97/QEw=="],
 

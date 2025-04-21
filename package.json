@@ -86,7 +86,7 @@
     "eslint-flat-config-utils": "2.0.1",
     "eslint-config-flat-gitignore": "2.1.0",
     "eslint-import-resolver-typescript": "4.3.2",
-    "@eslint/js": "9.24.0",
+    "@eslint/js": "9.25.0",
     "eslint-config-prettier": "10.1.2",
     "eslint-plugin-import-x": "4.10.4",
     "eslint-plugin-jsdoc": "50.6.9",

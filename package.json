@@ -107,7 +107,7 @@
     "@commitlint/config-conventional": "19.8.0",
     "prettier": "3.5.3",
     "@biomejs/biome": "1.9.4",
-    "eslint": "9.24.0",
+    "eslint": "9.25.0",
     "eslint-typegen": "2.1.0",
     "oxlint": "0.16.6",
     "husky": "9.1.7",

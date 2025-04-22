@@ -4,7 +4,7 @@ import { Command } from 'commander';
 import ora from 'ora';
 
 // Async version of exec
-const asyncExec = promisify(exec);
+export const asyncExec = promisify(exec);
 
 /**
  * Executes a given task with a spinner to indicate progress.

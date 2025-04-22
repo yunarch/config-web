@@ -64,6 +64,7 @@
     "correctness": "error",
     "perf": "error"
   },
+  "plugins": [], // Empty plugins to force user to define them
   "rules": {
     /* Perf */
     "react/no-array-index-key": "warn",

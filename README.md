@@ -252,6 +252,7 @@ To use the oxlint linter, create a `.oxlintrc.json` [configuration file](https:/
 ```jsonc
 {
   "extends": ["@yunarch/config-web/oxlint"],
+  "plugins": ["typescript", "unicorn", "react", "oxc"],
   "rules": {
     // Add your rules overrides here...
   },
@@ -261,20 +262,8 @@ To use the oxlint linter, create a `.oxlintrc.json` [configuration file](https:/
 }
 ```
 
-If you want to enable or disable specific plugins, you must provide the full list of [plugins](https://oxc.rs/docs/guide/usage/linter/plugins.html#supported-plugins) to be used:
-
-```jsonc
-{
-  "extends": ["@yunarch/config-web/oxlint"],
-  "plugins": ["typescript", "unicorn", "react", "nextjs"], // Add all the plugins you want to use
-  // ...
-}
-```
-
-> [!WARNING]
-> Setting the `plugins` field will overwrite the base set of plugins. The plugins array should reflect all of the plugins you want to use.
->
-> By default it will use `"plugins": ["typescript", "unicorn", "react", "oxc"]`.
+> [!NOTE]
+> You must provide the full list of [plugins](https://oxc.rs/docs/guide/usage/linter/plugins.html#supported-plugins) to be used.
 
 ## 🔵 Typescript
 

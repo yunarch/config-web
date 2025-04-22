@@ -312,7 +312,7 @@ Learn more from [Typescript docs here](https://www.typescriptlang.org/tsconfig/#
 
 This package ships with useful command-line tools to streamline your workflow.
 
-- **`swagger-sync`**: CLI tool designed to synchronize a local Swagger file with a remote API and generate API models. It helps keep your API documentation up to date with your actual API and automatically generates models based on the Swagger specification.
+- **`openapi-sync`**: CLI tool designed to convert OpenAPI 3.0/3.1 schemas to TypeScript types and create type-safe fetching based on a openapi schema file and keep them in sync.
 - **`turbo-select`**: CLI tool for filtering and selecting a single package from your Turborepo package list and executing a script command. Additionally, it can prompt you to select an environment mode (development, staging, production) — useful for adjusting settings based on the environment (e.g., when using Vite).
 
 > [!NOTE]

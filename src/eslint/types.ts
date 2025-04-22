@@ -32,7 +32,7 @@ export interface OptionsConfig {
    */
   gitignore?: boolean | FlatGitignoreOptions;
   /**
-   * Custom ignores.
+   * Custom ignores. It extends the default ignores.
    */
   ignores?: Linter.Config['ignores'];
   /**

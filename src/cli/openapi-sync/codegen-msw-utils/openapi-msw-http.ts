@@ -47,7 +47,7 @@ type ExtractContent<T> = T extends { content?: infer C }
 /**
  * Type guard to get the parameters of a path.
  */
-type OpenapiPathParams<
+export type OpenapiPathParams<
   P extends keyof paths,
   M extends keyof paths[P],
 > = 'parameters' extends keyof paths[P][M]
@@ -59,7 +59,7 @@ type OpenapiPathParams<
 /**
  * Type guard to get the request body of a path.
  */
-type OpenapiPathRequestBody<
+export type OpenapiPathRequestBody<
   P extends keyof paths,
   M extends keyof paths[P],
 > = paths[P][M] extends { requestBody?: infer RB }
@@ -71,7 +71,7 @@ type OpenapiPathRequestBody<
 /**
  * Type guard to get the response body of a path.
  */
-type OpenapiPathResponseBody<
+export type OpenapiPathResponseBody<
   P extends keyof paths,
   M extends keyof paths[P],
 > = paths[P][M] extends { responses?: infer R }

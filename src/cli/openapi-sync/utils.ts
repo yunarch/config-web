@@ -15,9 +15,12 @@ export async function prepareOutputDirectory(output: string) {
   if (path.extname(output) !== '') {
     throw new Error('Output must be a directory.');
   }
-  const dir = path.isAbsolute(output)
-    ? path.relative('./', `.${output}`)
-    : path.relative('./', output);
+  const cwdPath = process.cwd();
+  const absolutePath = path.resolve(output);
+  const isInsideCwd = absolutePath.startsWith(cwdPath);
+  const dir = isInsideCwd
+    ? absolutePath
+    : path.resolve(cwdPath, path.relative(path.parse(output).root, output));
   if (!existsSync(dir)) {
     await runTask({
       name: 'Generating output directory',

@@ -3,14 +3,12 @@ import { mkdir, readFile, rm } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { afterAll, beforeAll, describe, it, vi } from 'vitest';
-import { TEMPLATE } from '../../../src/cli/openapi-sync/codegen-msw-utils/openapi-msw-http';
-import { createCliExecutor, createRelativeResolver } from '../../test-utils';
+import { TEMPLATE } from '../../src/cli/openapi-sync/codegen-msw-utils/openapi-msw-http';
+import { createCliExecutor, createRelativeResolver } from '../test-utils';
 
 const resolve = createRelativeResolver(import.meta.url);
-const run = createCliExecutor(
-  resolve('../../../src/cli/openapi-sync/index.ts')
-);
-const INPUT_PATH = resolve('./mocks/input-openapi.json');
+const run = createCliExecutor(resolve('../../src/cli/openapi-sync/index.ts'));
+const INPUT_PATH = resolve('./mocks/openapi-sync-input.json');
 
 vi.mock('ora', () => {
   return {

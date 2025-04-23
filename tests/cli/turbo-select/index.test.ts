@@ -1,11 +1,10 @@
-import { exec } from 'node:child_process';
-import { promisify } from 'node:util';
 import { describe, expect, it } from 'vitest';
+import { createCliExecutor, createRelativeResolver } from '../../test-utils';
 
-const CLI_PATH = './src/cli/turbo-select/index.ts';
-const run = async (params: string[] = []) => {
-  return promisify(exec)(`bun ${CLI_PATH} ${params.join(' ')}`);
-};
+const resolve = createRelativeResolver(import.meta.url);
+const run = createCliExecutor(
+  resolve('../../../src/cli/turbo-select/index.ts')
+);
 
 describe('turbo-select', () => {
   it('should fail and throw an error with missing required options', async () => {

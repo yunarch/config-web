@@ -79,6 +79,12 @@ export function config(
   if (enableUnicorn) {
     configs.push(unicorn());
   }
+  if (options.test) {
+    configs.push(test(options.test === true ? {} : options.test));
+  }
+  if (options.tanstack) {
+    configs.push(tanstack(options.tanstack));
+  }
   if (options.react) {
     configs.push(
       react({
@@ -89,12 +95,6 @@ export function config(
           !options.typescript.disableTypeAware,
       })
     );
-  }
-  if (options.test) {
-    configs.push(test(options.test === true ? {} : options.test));
-  }
-  if (options.tanstack) {
-    configs.push(tanstack(options.tanstack));
   }
   configs.push(perfectionist(), disables({ oxlint }));
 

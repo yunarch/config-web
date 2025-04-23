@@ -20,7 +20,7 @@ const configs = await combine(
   {
     plugins: {
       '': {
-        // eslint-disable-next-line @typescript-eslint/no-deprecated -- Deprecated but still needed, no known alternative.
+        // eslint-disable-next-line @typescript-eslint/no-deprecated -- Deprecated but still needed, no known alternative atm.
         rules: Object.fromEntries(builtinRules.entries()),
       },
     },
@@ -30,9 +30,9 @@ const configs = await combine(
   imports(),
   jsdoc(),
   unicorn(),
-  react({ isTypescriptEnabled: true, isTypeAware: true }), // All enabled for typegen generation.
   test({}),
   tanstack(true), // All enabled for typegen generation.
+  react({ isTypescriptEnabled: true, isTypeAware: true }), // All enabled for typegen generation.
   perfectionist(),
   disables({})
 );

@@ -109,8 +109,7 @@ export interface OptionsConfig {
    */
   react?: boolean;
   /**
-   * Enable test support rules.
-   * It only adds support for `@vitest/eslint-plugin`
+   * Enable vitest (`@vitest/eslint-plugin`) support rules.
    *
    * @default false
    */

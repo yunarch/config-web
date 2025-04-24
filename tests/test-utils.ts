@@ -6,7 +6,7 @@ import { promisify } from 'node:util';
 /**
  * Creates a CLI executor function for a given command or script path.
  *
- * @param cliPath - The path to the CLI script or executable.
+ * @param cli - The CLI script or executable.
  * @returns A function that runs the CLI with specified arguments and returns a Promise with the result.
  *
  * @example
@@ -15,9 +15,9 @@ import { promisify } from 'node:util';
  * await run(['--version']);
  * ```
  */
-export function createCliExecutor(cliPath: string) {
+export function createCliExecutor(cli: string) {
   return async (params: string[] = []) => {
-    return promisify(exec)(`bun ${cliPath} ${params.join(' ')}`);
+    return promisify(exec)(`bun ${cli} ${params.join(' ')}`);
   };
 }
 

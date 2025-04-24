@@ -34,6 +34,9 @@ export function disables(options: {
       files: [GLOB_DTS],
       rules: {
         '@typescript-eslint/consistent-indexed-object-style': 'off',
+        'import/no-duplicates': 'off',
+        'no-restricted-syntax': 'off',
+        'unused-imports/no-unused-vars': 'off',
       },
     },
     {

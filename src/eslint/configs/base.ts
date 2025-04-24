@@ -1,5 +1,5 @@
 import globals from 'globals';
-import { pluginESlint } from '../plugins';
+import { pluginESlint, pluginUnusedImports } from '../plugins';
 import type { OptionsConfig, TypedFlatConfigItem } from '../types';
 
 /**
@@ -107,6 +107,9 @@ export function base(
     },
     {
       name: 'yunarch/base/rules',
+      plugins: {
+        'unused-imports': pluginUnusedImports,
+      },
       rules: {
         ...pluginESlint.configs.recommended.rules,
         'array-callback-return': ['error', { allowImplicit: true }],
@@ -171,11 +174,10 @@ export function base(
         'no-unused-vars': [
           'error',
           {
-            args: 'after-used',
-            argsIgnorePattern: '^_',
-            ignoreRestSiblings: false,
+            args: 'none',
+            caughtErrors: 'none',
+            ignoreRestSiblings: true,
             vars: 'all',
-            varsIgnorePattern: '^_',
           },
         ],
         'no-useless-call': 'error',
@@ -197,6 +199,17 @@ export function base(
         'prefer-spread': 'error',
         'prefer-template': 'warn',
         'symbol-description': 'error',
+        'unused-imports/no-unused-imports': 'error',
+        'unused-imports/no-unused-vars': [
+          'error',
+          {
+            args: 'after-used',
+            argsIgnorePattern: '^_',
+            ignoreRestSiblings: true,
+            vars: 'all',
+            varsIgnorePattern: '^_',
+          },
+        ],
         yoda: 'warn',
       },
     },

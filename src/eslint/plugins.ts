@@ -6,4 +6,5 @@ export { default as pluginJsdoc } from 'eslint-plugin-jsdoc';
 export { default as pluginOxlint } from 'eslint-plugin-oxlint';
 export { default as pluginPerfectionist } from 'eslint-plugin-perfectionist';
 export { default as pluginUnicorn } from 'eslint-plugin-unicorn';
+export { default as pluginUnusedImports } from 'eslint-plugin-unused-imports';
 export { default as pluginTsESlint } from 'typescript-eslint';

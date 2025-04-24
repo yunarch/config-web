@@ -98,16 +98,7 @@ export function typescript(
         '@typescript-eslint/no-loop-func': 'error',
         '@typescript-eslint/no-redeclare': ['error', { builtinGlobals: false }],
         '@typescript-eslint/no-shadow': 'error',
-        '@typescript-eslint/no-unused-vars': [
-          'error',
-          {
-            args: 'after-used',
-            argsIgnorePattern: '^_',
-            ignoreRestSiblings: false,
-            vars: 'all',
-            varsIgnorePattern: '^_',
-          },
-        ],
+        '@typescript-eslint/no-unused-vars': 'off', // handled by `unused-imports/no-unused-vars`
         '@typescript-eslint/no-use-before-define': [
           'error',
           { classes: false, functions: false, variables: true },

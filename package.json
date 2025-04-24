@@ -27,6 +27,7 @@
     "bun": ">=1",
     "node": ">=22"
   },
+  "sideEffects": false,
   "files": ["README.md", "LICENSE.md", "dist"],
   "bin": {
     "openapi-sync": "./dist/cli/openapi-sync/index.js",
@@ -115,8 +116,8 @@
     "lint-staged": "15.5.1",
     "rimraf": "6.0.1",
     "tsup": "8.4.0",
-    "typescript": "5.8.3",
     "turbo": "2.5.1",
+    "typescript": "5.8.3",
     "vitest": "3.1.2",
     "@types/node": "22.14.1"
   },

@@ -78,7 +78,8 @@ This package comes with configurations for both `Prettier` and `Biome` to ensure
 > While both `Prettier` and `Biome` are configured to format code in the same way, there are some [differences](https://biomejs.dev/formatter/differences-with-prettier/) between the two.
 >
 > Language support for [Prettier](https://prettier.io/docs/) and [Biome](https://biomejs.dev/internals/language-support/).
->
+
+> [!WARNING]
 > While it's technically possible to use both tools in the same project, **each file should be formatted by only one formatter** to avoid conflicts. This repository uses this hybrid setup, but for simplicity and consistency, **we recommend choosing a single formatter** for your own project.
 
 ### Prettier

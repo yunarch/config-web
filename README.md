@@ -76,6 +76,10 @@ This package comes with configurations for both `Prettier` and `Biome` to ensure
 
 > [!NOTE]
 > While both `Prettier` and `Biome` are configured to format code in the same way, there are some [differences](https://biomejs.dev/formatter/differences-with-prettier/) between the two.
+>
+> Language support for [Prettier](https://prettier.io/docs/) and [Biome](https://biomejs.dev/internals/language-support/).
+>
+> While it's technically possible to use both tools in the same project, **each file should be formatted by only one formatter** to avoid conflicts. This repository uses this hybrid setup, but for simplicity and consistency, **we recommend choosing a single formatter** for your own project.
 
 ### Prettier
 
@@ -88,7 +92,7 @@ The easiest way to use the prettier configuration as-is is to set it directly in
 Or you can create a [configuration file](https://prettier.io/docs/configuration) to also allow further customization:
 
 ```js
-import defaultConfig from "@yunarch/config-web/prettier";
+import defaultConfig from '@yunarch/config-web/prettier';
 
 /** @type {import("prettier").Options} */
 export default {
@@ -111,7 +115,7 @@ To use the Biome formatter, create a `biome.json` [configuration file](https://b
 ```
 
 > [!IMPORTANT]
-> We disable the `organizeImports` options as we want that to be manage by the linter configuration that we offer. feel free to enable it if you prefer to use Biome for these tasks. Remember to disable it on the configuration for the ESlinter if you use it.
+> We disable the `organizeImports` options as we want that to be manage by the linter configuration that we offer. feel free to enable it if you prefer to use Biome for these tasks. **Remember to disable it on ESlint configuration** if you use it.
 
 > Enable [vcs.useIgnoreFile](https://biomejs.dev/guides/integrate-in-vcs/#use-the-ignore-file), to allow Biome to ignore all the files and directories listed in your VCS ignore file.
 
@@ -129,7 +133,7 @@ Typically, you only need to use the `config` configuration as it is:
 
 ```js
 // eslint.config.js
-import { config } from "@yunarch/config-web/eslint";
+import { config } from '@yunarch/config-web/eslint';
 
 export default config();
 ```
@@ -137,7 +141,7 @@ export default config();
 And that's it! However, if needed, you can configure each integration individually:
 
 ```js
-import { config } from "@yunarch/config-web/eslint";
+import { config } from '@yunarch/config-web/eslint';
 
 export default config({
   typescript: true,
@@ -150,7 +154,7 @@ export default config({
 The `config` function also accepts multiple custom configuration overrides:
 
 ```js
-import { config } from "@yunarch/config-web/eslint";
+import { config } from '@yunarch/config-web/eslint';
 
 export default config(
   {
@@ -159,7 +163,7 @@ export default config(
   // From the second arguments they are ESLint Flat Configs
   // you can have multiple configs
   {
-    files: ["**/*.ts"],
+    files: ['**/*.ts'],
     rules: {},
   },
   {
@@ -176,30 +180,30 @@ Thanks to [eslint-flat-config-utils](https://github.com/antfu/eslint-flat-config
 
 ```js
 // eslint.config.js
-import { config } from "@yunarch/config-web/eslint";
+import { config } from '@yunarch/config-web/eslint';
 
 export default config()
   // overrides any named configs
-  .override("yunarch/unicorn/rules", {
+  .override('yunarch/unicorn/rules', {
     rules: {
-      "unicorn/no-array-for-each": "off",
+      'unicorn/no-array-for-each': 'off',
     },
   })
   // Override a whole configuration by a custom function to replace the config entirely.
-  .override("yunarch/perfectionist/rules", (config) => {
+  .override('yunarch/perfectionist/rules', (config) => {
     return {
       ...config,
       rules: {
-        "perfectionist/sort-imports": "off",
+        'perfectionist/sort-imports': 'off',
       },
     };
   })
   // Provide overrides to multiple configs as an object map.
   // Same as calling override multiple times.
   .overrides({
-    "yunarch/unicorn/rules": {
+    'yunarch/unicorn/rules': {
       rules: {
-        "unicorn/no-array-for-each": "off",
+        'unicorn/no-array-for-each': 'off',
       },
     },
   })
@@ -216,11 +220,11 @@ export default config()
 By providing the `tsconfigPath` in the `typescript` configuration it will automatically enable [type aware rules](https://typescript-eslint.io/getting-started/typed-linting/) which may/will impact the linter's performance.
 
 ```js
-import { config } from "@yunarch/config-web/eslint";
+import { config } from '@yunarch/config-web/eslint';
 
 export default config({
   typescript: {
-    tsconfigPath: "./tsconfig.json",
+    tsconfigPath: './tsconfig.json',
   },
 });
 ```
@@ -233,11 +237,11 @@ export default config({
 If you want to offload certain rules to Oxlint, which will reduce linting time, you can configure it as follows:
 
 ```js
-import { config } from "@yunarch/config-web/eslint";
+import { config } from '@yunarch/config-web/eslint';
 
 export default config({
   oxlint: {
-    oxlintConfigPath: "./.oxlintrc.json",
+    oxlintConfigPath: './.oxlintrc.json',
   },
 });
 ```
@@ -279,7 +283,7 @@ Create the `tsconfig.json` file with the following content:
 Additionally, this package includes a `ts-reset` configuration to enhance TypeScript's built-in types. To use it, create a `reset.d.ts` file in your project with the following content:
 
 ```ts
-import "@yunarch/config-web/reset.d.ts";
+import '@yunarch/config-web/reset.d.ts';
 ```
 
 Then, include this file in your `tsconfig.json`, for example:

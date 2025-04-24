@@ -42,6 +42,7 @@
     "./reset.d.ts": "./dist/ts/reset.d.ts"
   },
   "type": "module",
+  "prettier": "./src/configs/formatters/prettier.config.js",
   "scripts": {
     "postinstall": "husky && bun run eslint:typegen",
     "format": "biome format",

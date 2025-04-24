@@ -14,7 +14,7 @@ env:
 
 jobs:
   lint:
-    name: Code Linting
+    name: Code linting
     runs-on: ubuntu-latest
     steps:
       - name: 📁 Checkout
@@ -33,7 +33,7 @@ jobs:
       - name: 🔍 Lint files
         run: bun run lint
   test:
-    name: Unit Testing
+    name: Unit testing
     runs-on: ubuntu-latest
     steps:
       - name: 📁 Checkout
@@ -51,4 +51,3 @@ jobs:
             ${{ runner.os }}-turbo-${{ github.job }}
       - name: 🧪 Test files
         run: bun run test
-

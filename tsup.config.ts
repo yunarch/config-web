@@ -35,6 +35,7 @@ export default defineConfig([
     outDir: './dist',
     format: 'esm',
     minify: true,
+    clean: true,
   },
   // Cli
   {
@@ -50,7 +51,7 @@ export default defineConfig([
   },
   // Formatters
   {
-    entry: ['./src/configs/formatters/prettier.config.ts'],
+    entry: ['./src/configs/formatters/prettier.config.js'],
     outDir: './dist/formatters',
     format: 'esm',
     minify: true,

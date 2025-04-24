@@ -1,17 +1,34 @@
 {
+  // Formatter
+  "editor.formatOnSave": true,
   "editor.defaultFormatter": "biomejs.biome",
+
+  // Auto fix
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.oxc": "explicit",
+    "source.fixAll.biome": "explicit",
+    "source.removeUnusedImports": "never",
+    "source.organizeImports": "never"
+  },
+  "files.trimTrailingWhitespace": true,
+
+  // IDE options
+  "explorer.sortOrder": "type",
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
+  "workbench.editor.highlightModifiedTabs": true,
+  "problems.decorations.enabled": true,
+
+  // Add prettier for files that biome doesn't support
+  // https://biomejs.dev/internals/language-support/
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "[markdown]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "editor.formatOnSave": true,
-  "editor.bracketPairColorization.enabled": true,
-  "editor.guides.bracketPairs": "active",
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit",
-    "source.removeUnusedImports": "always"
-  },
-  "explorer.sortOrder": "type",
-  "files.trimTrailingWhitespace": true,
-  "workbench.editor.highlightModifiedTabs": true,
-  "problems.decorations.enabled": true
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

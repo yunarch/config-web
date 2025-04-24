@@ -22,6 +22,12 @@ export const config = {
   htmlWhitespaceSensitivity: 'css',
   embeddedLanguageFormatting: 'auto',
   overrides: [
+    {
+      files: '**/*.jsonc',
+      options: {
+        trailingComma: 'none',
+      },
+    },
     // Use a html parse for handlebars files
     {
       files: '**/*.hbs',

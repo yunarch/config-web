@@ -94,7 +94,7 @@
     "eslint-plugin-perfectionist": "4.12.3",
     "eslint-plugin-import-x": "4.11.0",
     "eslint-plugin-unused-imports": "4.1.4",
-    "eslint-plugin-jsdoc": "50.6.10",
+    "eslint-plugin-jsdoc": "50.6.11",
     "eslint-config-prettier": "10.1.2",
     "eslint-plugin-oxlint": "0.16.7",
     "@vitest/eslint-plugin": "1.1.43",
@@ -116,7 +116,7 @@
     "lint-staged": "15.5.1",
     "rimraf": "6.0.1",
     "tsup": "8.4.0",
-    "turbo": "2.5.1",
+    "turbo": "2.5.2",
     "typescript": "5.8.3",
     "vitest": "3.1.2",
     "@types/node": "22.15.2"

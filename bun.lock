@@ -20,7 +20,7 @@
         "eslint-plugin-import-x": "4.10.6",
         "eslint-plugin-jsdoc": "50.6.10",
         "eslint-plugin-oxlint": "0.16.7",
-        "eslint-plugin-perfectionist": "4.12.2",
+        "eslint-plugin-perfectionist": "4.12.3",
         "eslint-plugin-react-hooks": "5.2.0",
         "eslint-plugin-react-refresh": "0.4.20",
         "eslint-plugin-unicorn": "58.0.0",
@@ -549,7 +549,7 @@
 
     "eslint-plugin-oxlint": ["eslint-plugin-oxlint@0.16.7", "", { "dependencies": { "jsonc-parser": "^3.3.1" } }, "sha512-1XBlEkJdVguNRKk65MAavP4SY5hxMIOrx+uFl5Ijvji5xV+QgYksV11fUNE85Uik7+IjDVLXQFDWZfWHrr4dxw=="],
 
-    "eslint-plugin-perfectionist": ["eslint-plugin-perfectionist@4.12.2", "", { "dependencies": { "@typescript-eslint/types": "^8.31.0", "@typescript-eslint/utils": "^8.31.0", "natural-orderby": "^5.0.0" }, "peerDependencies": { "eslint": ">=8.45.0" } }, "sha512-OWh3y2c7oMNEbyk8BmcQgMil13FAMViQbycV04TNztf6YSheOtbagcpwJkc3aZt6lYDyL0zpY/aPjwi7fxT+5A=="],
+    "eslint-plugin-perfectionist": ["eslint-plugin-perfectionist@4.12.3", "", { "dependencies": { "@typescript-eslint/types": "^8.31.0", "@typescript-eslint/utils": "^8.31.0", "natural-orderby": "^5.0.0" }, "peerDependencies": { "eslint": ">=8.45.0" } }, "sha512-V0dmpq6fBbn0BYofHsiRuuY9wgkKMDkdruM0mIRBIJ8XZ8vEaTAZqFsywm40RuWNVnduWBt5HO1ZZ+flE2yqjg=="],
 
     "eslint-plugin-react-debug": ["eslint-plugin-react-debug@1.48.4", "", { "dependencies": { "@eslint-react/ast": "1.48.4", "@eslint-react/core": "1.48.4", "@eslint-react/eff": "1.48.4", "@eslint-react/kit": "1.48.4", "@eslint-react/shared": "1.48.4", "@eslint-react/var": "1.48.4", "@typescript-eslint/scope-manager": "^8.30.1", "@typescript-eslint/type-utils": "^8.30.1", "@typescript-eslint/types": "^8.30.1", "@typescript-eslint/utils": "^8.30.1", "string-ts": "^2.2.1", "ts-pattern": "^5.7.0" }, "peerDependencies": { "eslint": "^8.57.0 || ^9.0.0", "typescript": "^4.9.5 || ^5.3.3" }, "optionalPeers": ["typescript"] }, "sha512-qDHXi11k6yQGCezkeHJOWOO/DzQ48Im5LxwsmbYyCN1dCKkfZ3sYtgMa+y5p7ffl6gandWDioFYNRSlXFb0Phw=="],
 

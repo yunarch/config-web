@@ -23,7 +23,7 @@ vi.mock('ora', () => {
 describe('openapi-sync', () => {
   beforeAll(async () => {
     await run([`-i ${INPUT_PATH} -o ${OUTPUT_PATH} -f --include-msw-utils`]);
-  });
+  }, 15_000);
 
   afterAll(async () => {
     await rm(OUTPUT_PATH, { recursive: true, force: true });

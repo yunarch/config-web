@@ -42,12 +42,5 @@ jobs:
         uses: oven-sh/setup-bun@v2
       - name: 📦 Install dependencies
         run: bun install --frozen-lockfile
-      - name: ♻️ Cache for turborepo
-        uses: actions/cache@v4
-        with:
-          path: .turbo
-          key: ${{ runner.os }}-turbo-${{ github.job }}-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-turbo-${{ github.job }}
       - name: 🧪 Test files
         run: bun run test

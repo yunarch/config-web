@@ -95,7 +95,7 @@
     "react/no-unknown-property": "error",
     "unicorn/no-abusive-eslint-disable": "error",
     "unicorn/no-anonymous-default-export": "error",
-    "unicorn/no-length-as-slice-end": "error",
+    "unicorn/no-length-as-slice-end": "error", // ! In eslint-plugin-unicorn v59.0.0 is now no-unnecessary-slice-end
     "unicorn/no-magic-array-flat-depth": "error",
     "unicorn/no-process-exit": "error",
     "unicorn/prefer-modern-math-apis": "error",

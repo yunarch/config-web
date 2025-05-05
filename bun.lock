@@ -38,7 +38,7 @@
         "eslint-typegen": "2.1.0",
         "husky": "9.1.7",
         "lint-staged": "15.5.1",
-        "oxlint": "0.16.8",
+        "oxlint": "0.16.9",
         "prettier": "3.5.3",
         "rimraf": "6.0.1",
         "tsup": "8.4.0",

@@ -35,7 +35,7 @@
         "@commitlint/config-conventional": "19.8.1",
         "@types/node": "22.15.17",
         "eslint": "9.26.0",
-        "eslint-typegen": "2.1.0",
+        "eslint-typegen": "2.2.0",
         "husky": "9.1.7",
         "lint-staged": "15.5.2",
         "oxlint": "0.16.10",
@@ -603,7 +603,7 @@
 
     "eslint-scope": ["eslint-scope@8.3.0", "", { "dependencies": { "esrecurse": "^4.3.0", "estraverse": "^5.2.0" } }, "sha512-pUNxi75F8MJ/GdeKtVLSbYg4ZI34J6C0C7sbL4YOp2exGwen7ZsuBqKzUhXd0qMQ362yET3z+uPwKeg/0C2XCQ=="],
 
-    "eslint-typegen": ["eslint-typegen@2.1.0", "", { "dependencies": { "json-schema-to-typescript-lite": "^14.1.0", "ohash": "^2.0.11" }, "peerDependencies": { "eslint": "^9.0.0" } }, "sha512-tY9TTx07InS+mQ/+zYnCMHkdsS00GPaQy84PwHiQd2XWwXIptRExKcz1kI8eG1CGg1sBs9mONwSfbGMbvI4fNA=="],
+    "eslint-typegen": ["eslint-typegen@2.2.0", "", { "dependencies": { "json-schema-to-typescript-lite": "^14.1.0", "ohash": "^2.0.11" }, "peerDependencies": { "eslint": "^9.0.0" } }, "sha512-OVgibKnRNnlSs4MhMz8uTRLSSIsvTXjH7a1gzXvyDIVU/txX1t8Zr9I/vOSwWIhtACX5DCPLo9CuyvA9usyjyw=="],
 
     "eslint-visitor-keys": ["eslint-visitor-keys@4.2.0", "", {}, "sha512-UyLnSehNt62FFhSwjZlHmeokpRK59rcz29j+F1/aDgbkbRTk7wIc9XzdoasMUbRNKDM0qQt/+BJ4BrpFeABemw=="],
 

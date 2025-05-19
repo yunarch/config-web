@@ -50,7 +50,7 @@
     "format": "biome format && prettier \"**/*.{html,md,yaml,yml}\" --check",
     "format:all": "biome format --write && prettier \"**/*.{html,md,yaml,yml}\" --write",
     "clean": "rimraf dist coverage .turbo",
-    "eslint:typegen": "bun run ./src/eslint/scripts/typegen.ts",
+    "eslint:typegen": "bun run ./src/linters/eslint/scripts/typegen.ts",
     "eslint:inspect": "bunx @eslint/config-inspector --config eslint.config.ts",
     "test": "vitest --typecheck run",
     "test:watch": "vitest --typecheck watch",

@@ -41,9 +41,9 @@ export default defineConfig([
       await Promise.all([
         // Typescript
         mkdir('./dist/ts', { recursive: true }),
-        copyFile('./src/configs/ts/reset.d.ts', './dist/ts/reset.d.ts'),
+        copyFile('./src/ts/reset.d.ts', './dist/ts/reset.d.ts'),
         parseJSONC(
-          './src/configs/ts/tsconfig-base.jsonc',
+          './src/ts/tsconfig-base.jsonc',
           './dist/ts/tsconfig-base.json'
         ),
       ]);
@@ -63,21 +63,21 @@ export default defineConfig([
   },
   // Formatters
   {
-    entry: ['./src/configs/formatters/prettier.config.js'],
+    entry: ['./src/formatters/prettier.config.js'],
     outDir: './dist/formatters',
     format: 'esm',
     minify: true,
     clean: true,
     onSuccess: async () => {
       await parseJSONC(
-        './src/configs/formatters/biome.config.jsonc',
+        './src/formatters/biome.config.jsonc',
         './dist/formatters/biome.config.json'
       );
     },
   },
   // Linters
   {
-    entry: ['./src/configs/linters/eslint.config.ts'],
+    entry: ['./src/linters/eslint.config.ts'],
     outDir: './dist/linters',
     format: 'esm',
     dts: true,
@@ -86,7 +86,7 @@ export default defineConfig([
     shims: true,
     onSuccess: async () => {
       await parseJSONC(
-        './src/configs/linters/oxlint.config.jsonc',
+        './src/linters/oxlint.config.jsonc',
         './dist/linters/oxlint.config.json'
       );
     },

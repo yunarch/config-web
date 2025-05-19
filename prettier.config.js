@@ -1,4 +1,4 @@
-import prettierConfig from './src/configs/formatters/prettier.config.js';
+import prettierConfig from './src/formatters/prettier.config.js';
 
 const config = {
   ...prettierConfig,

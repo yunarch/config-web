@@ -1,4 +1,4 @@
 {
-  "extends": "./src/configs/ts/tsconfig-base.jsonc",
+  "extends": "./src/ts/tsconfig-base.jsonc",
   "exclude": ["node_modules", "./tests/**/fixtures"]
 }

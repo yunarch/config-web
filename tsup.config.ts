@@ -1,4 +1,4 @@
-import { copyFile, readFile, unlink, writeFile } from 'node:fs/promises';
+import { copyFile, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { defineConfig } from 'tsup';
 
 /**
@@ -36,6 +36,18 @@ export default defineConfig([
     format: 'esm',
     minify: true,
     clean: true,
+    onSuccess: async () => {
+      // Copy config files to the dist directory.
+      await Promise.all([
+        // Typescript
+        mkdir('./dist/ts', { recursive: true }),
+        copyFile('./src/configs/ts/reset.d.ts', './dist/ts/reset.d.ts'),
+        parseJSONC(
+          './src/configs/ts/tsconfig-base.jsonc',
+          './dist/ts/tsconfig-base.json'
+        ),
+      ]);
+    },
   },
   // Cli
   {
@@ -77,23 +89,6 @@ export default defineConfig([
         './src/configs/linters/oxlint.config.jsonc',
         './dist/linters/oxlint.config.json'
       );
-    },
-  },
-  // Typescript
-  {
-    entry: ['./src/configs/ts/reset.d.ts'],
-    outDir: './dist/ts',
-    format: 'esm',
-    clean: true,
-    onSuccess: async () => {
-      await Promise.all([
-        unlink('./dist/ts/reset.d.js'),
-        copyFile('./src/configs/ts/reset.d.ts', './dist/ts/reset.d.ts'),
-        parseJSONC(
-          './src/configs/ts/tsconfig-base.jsonc',
-          './dist/ts/tsconfig-base.json'
-        ),
-      ]);
     },
   },
 ]);

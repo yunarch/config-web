@@ -3,6 +3,53 @@ import { pluginTsESlint } from '../plugins';
 import type { OptionsConfig, TypedFlatConfigItem } from '../types';
 
 /**
+ * Make a parser configuration.
+ *
+ * @param name - The name of the parser configuration.
+ * @param files - The files that this parser configuration should apply to.
+ * @param options - The parser configuration options.
+ * @returns A parser configuration.
+ */
+function makeParserConfig(
+  name: string,
+  files: string[],
+  options: {
+    ignores: string[] | undefined;
+    extraFileExtensions: OptionsConfig['extraFileExtensions'];
+    parserOptions: Exclude<
+      NonNullable<OptionsConfig['typescript']>,
+      boolean
+    >['parserOptions'];
+    tsconfigPath?: string | string[];
+  }
+): TypedFlatConfigItem {
+  return {
+    name,
+    files,
+    ...(options.ignores ? { ignores: options.ignores } : {}),
+    languageOptions: {
+      parser: pluginTsESlint.parser as never,
+      parserOptions: {
+        extraFileExtensions: options.extraFileExtensions?.map(
+          (extension) => `.${extension}`
+        ),
+        sourceType: 'module',
+        ...(options.tsconfigPath
+          ? {
+              projectService: {
+                allowDefaultProject: ['./*.js'],
+                defaultProject: options.tsconfigPath,
+              },
+              tsconfigRootDir: process.cwd(),
+            }
+          : {}),
+        ...options.parserOptions,
+      },
+    },
+  };
+}
+
+/**
  * Typescript ESlint configuration.
  *
  * @param options - Configuration options.
@@ -104,6 +151,10 @@ export function typescript(
           { classes: false, functions: false, variables: true },
         ],
         '@typescript-eslint/no-useless-empty-export': 'warn',
+        '@typescript-eslint/restrict-template-expressions': [
+          'error',
+          { allowNumber: true, allowBoolean: true },
+        ],
         '@typescript-eslint/unified-signatures': [
           'error',
           {
@@ -130,57 +181,14 @@ export function typescript(
                 'error',
                 { ignoreStringArrays: true },
               ],
+              '@typescript-eslint/restrict-template-expressions': [
+                'error',
+                { allowNumber: true, allowBoolean: true },
+              ],
               '@typescript-eslint/switch-exhaustiveness-check': 'warn',
             },
           },
         ] as TypedFlatConfigItem[])
       : []),
   ];
-}
-
-/**
- * Make a parser configuration.
- *
- * @param name - The name of the parser configuration.
- * @param files - The files that this parser configuration should apply to.
- * @param options - The parser configuration options.
- * @returns A parser configuration.
- */
-function makeParserConfig(
-  name: string,
-  files: string[],
-  options: {
-    ignores: string[] | undefined;
-    extraFileExtensions: OptionsConfig['extraFileExtensions'];
-    parserOptions: Exclude<
-      NonNullable<OptionsConfig['typescript']>,
-      boolean
-    >['parserOptions'];
-    tsconfigPath?: string | string[];
-  }
-): TypedFlatConfigItem {
-  return {
-    name,
-    files,
-    ...(options.ignores ? { ignores: options.ignores } : {}),
-    languageOptions: {
-      parser: pluginTsESlint.parser as never,
-      parserOptions: {
-        extraFileExtensions: options.extraFileExtensions?.map(
-          (extension) => `.${extension}`
-        ),
-        sourceType: 'module',
-        ...(options.tsconfigPath
-          ? {
-              projectService: {
-                allowDefaultProject: ['./*.js'],
-                defaultProject: options.tsconfigPath,
-              },
-              tsconfigRootDir: process.cwd(),
-            }
-          : {}),
-        ...options.parserOptions,
-      },
-    },
-  };
 }

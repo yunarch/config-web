@@ -1,16 +1,25 @@
-# Description
+## Description
 
-<!-- Please include a summary of the changes and the related issue. -->
-<!-- Please also provide relevant motivation and context. -->
-<!-- List any dependencies required for this change. -->
+<!--
+Please include a summary of the changes.
 
-## Solution for the Issue
+This PR [adds/removes/fixes/replaces] the [feature/bug/etc].
+-->
 
-<!-- Describe how you have addressed the linked issue. -->
+## Related Tickets & Documents
 
-## Testing Done
+- Related Issue #
+- Fixes #
 
-<!-- Describe the tests you have conducted to verify your changes. -->
+## QA Instructions
+
+<!--
+Please provide some steps for the reviewer to test your change if needs to be tested locally.
+
+1. Click a link
+2. Do this thing
+3. Validate you see the thing working
+-->
 
 ## Screenshots (if applicable)
 

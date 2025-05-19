@@ -72,10 +72,12 @@ export async function react(options: {
             rules: {
               ...pluginReact.configs['recommended-typescript'].rules,
               ...(options.isTypeAware
-                ? pluginReact.configs['recommended-type-checked'].rules
+                ? {
+                    ...pluginReact.configs['recommended-type-checked'].rules,
+                  }
                 : {}),
             },
-          },
+          } as TypedFlatConfigItem,
         ]
       : []),
   ];

@@ -1,4 +1,6 @@
-<h1><a href="https://npm.im/@yunarch/config-web">@yunarch/config-web</a></h1>
+<h1>@yunarch/config-web</h1>
+
+[![NPM version](https://img.shields.io/npm/v/@yunarch/config-web?color=3eb910&label=)](https://www.npmjs.com/package/@yunarch/config-web)
 
 > A curated set of linters (ESLint, Oxlint), formatters (Prettier, Biome), TypeScript configurations for web projects, and useful CLI tools.
 

@@ -14,3 +14,28 @@ export const GLOB_TESTS = [
   `**/*.bench.${GLOB_SRC_EXT}`,
   `**/*.benchmark.${GLOB_SRC_EXT}`,
 ];
+
+/**
+ * @param patterns - The patterns to expand.
+ * @returns The expanded patterns or the original patterns if no expansion is needed.
+ */
+export function expandExtendedGlobs(patterns: string[]) {
+  const expanded = [];
+  for (const pattern of patterns) {
+    if (pattern.endsWith('?([cm])[jt]s?(x)')) {
+      expanded.push(
+        pattern.replaceAll(
+          '?([cm])[jt]s?(x)',
+          '{js,jsx,cjs,cjsx,mjs,mjsx,ts,tsx,cts,ctsx,mts,mtjsx}'
+        )
+      );
+    } else if (pattern.endsWith('?([cm])ts')) {
+      expanded.push(pattern.replaceAll('?([cm])ts', '{ts,cts,mts}'));
+    } else if (pattern.endsWith('?([cm])tsx')) {
+      expanded.push(pattern.replaceAll('?([cm])tsx', '{tsx,ctsx,mtsx}'));
+    } else {
+      expanded.push(pattern);
+    }
+  }
+  return expanded;
+}

@@ -8,4 +8,7 @@ export default config({
   test: {
     enableTypeTesting: true,
   },
+  oxlint: {
+    oxlintConfigPath: './.oxlintrc.json',
+  },
 });

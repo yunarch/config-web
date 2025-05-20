@@ -110,6 +110,7 @@ To use the Biome formatter, create a `biome.json` [configuration file](https://b
 
 ```jsonc
 {
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "extends": ["@yunarch/config-web/biome-formatter"],
   // Add your overrides here...
 }
@@ -256,8 +257,9 @@ To use the oxlint linter, create a `.oxlintrc.json` [configuration file](https:/
 
 ```jsonc
 {
+  "$schema": "https://raw.githubusercontent.com/oxc-project/oxc/main/npm/oxlint/configuration_schema.json",
   "extends": ["@yunarch/config-web/oxlint"],
-  "plugins": ["typescript", "unicorn", "react", "oxc"],
+  "categories": { "correctness": "error", "perf": "error" },
   "rules": {
     // Add your rules overrides here...
   },
@@ -267,8 +269,8 @@ To use the oxlint linter, create a `.oxlintrc.json` [configuration file](https:/
 }
 ```
 
-> [!NOTE]
-> You must provide the full list of [plugins](https://oxc.rs/docs/guide/usage/linter/plugins.html#supported-plugins) to be used.
+> [!TIP]
+> For optimal results, we recommend setting the [categories](https://oxc.rs/docs/guide/usage/linter/config.html#enabling-groups-of-rules-categories) `correctness` and `perf` to `error` as shown above. However, feel free to enable any categories you prefer or need.
 
 ## 🔵 Typescript
 

@@ -123,5 +123,8 @@
     "vitest": "3.1.4",
     "@types/node": "22.15.20"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "packageManager": "bun@1.2.13"
 }

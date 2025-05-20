@@ -45,7 +45,7 @@
   "type": "module",
   "scripts": {
     "postinstall": "husky && bun run gen",
-    "gen": "turbo run gen:eslint-typegen gen:oxlint-compatgen",
+    "gen": "bun run gen:eslint-typegen && bun run gen:oxlint-compatgen",
     "gen:eslint-typegen": "bun run ./scripts/eslint-typegen.ts",
     "gen:oxlint-compatgen": "bun run ./scripts/oxlint-compatgen.ts && prettier --write ./src/linters/oxlint.config.jsonc",
     "lint": "turbo run lint:code lint:ts",

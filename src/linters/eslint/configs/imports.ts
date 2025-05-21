@@ -1,3 +1,5 @@
+import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
+import { createNodeResolver } from 'eslint-plugin-import-x';
 import { GLOB_TS, GLOB_TSX } from '../globs';
 import { pluginImport } from '../plugins';
 import type { TypedFlatConfigItem } from '../types';
@@ -9,6 +11,12 @@ import type { TypedFlatConfigItem } from '../types';
  */
 export function imports(): TypedFlatConfigItem[] {
   return [
+    {
+      name: 'yunarch/import/setup',
+      settings: {
+        'import-x/resolver-next': [createNodeResolver()],
+      },
+    },
     {
       name: 'yunarch/import/rules',
       plugins: {
@@ -36,9 +44,7 @@ export function imports(): TypedFlatConfigItem[] {
         ...pluginImport.flatConfigs.typescript.rules,
       },
       settings: {
-        'import-x/resolver': {
-          typescript: true,
-        },
+        'import-x/resolver-next': [createTypeScriptImportResolver()],
       },
     },
   ];

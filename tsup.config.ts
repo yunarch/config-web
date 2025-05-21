@@ -52,6 +52,7 @@ export default defineConfig([
   // Cli
   {
     entry: [
+      './src/cli/bun-run-all/index.ts',
       './src/cli/openapi-sync/index.ts',
       './src/cli/turbo-select/index.ts',
     ],

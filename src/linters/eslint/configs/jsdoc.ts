@@ -36,6 +36,10 @@ export function jsdoc(): TypedFlatConfigItem[] {
         ...pluginJsdoc.configs['flat/logical-typescript-error'].rules,
         ...pluginJsdoc.configs['flat/stylistic-typescript-error'].rules,
         'jsdoc/require-hyphen-before-param-description': ['error', 'always'],
+        'jsdoc/require-param': [
+          'error',
+          { checkDestructured: false, enableRestElementFixer: false },
+        ],
         'jsdoc/require-throws': 'error',
       },
     },

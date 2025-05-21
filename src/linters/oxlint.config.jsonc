@@ -404,7 +404,10 @@
         "jsdoc/empty-tags": "error",
         "jsdoc/implements-on-classes": "error",
         "jsdoc/no-defaults": "error",
-        "jsdoc/require-param": "error",
+        "jsdoc/require-param": [
+          "error",
+          { "checkDestructured": false, "enableRestElementFixer": false }
+        ],
         "jsdoc/require-param-description": "error",
         "jsdoc/require-param-name": "error",
         "jsdoc/require-param-type": "off",

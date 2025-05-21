@@ -40,6 +40,14 @@ export function disables(options: {
       },
     },
     {
+      name: 'yunarch/disables/config-files',
+      files: [`**/*.config.${GLOB_SRC_EXT}`, `**/*.config.*.${GLOB_SRC_EXT}`],
+      rules: {
+        'no-console': 'off',
+        '@typescript-eslint/explicit-function-return-type': 'off',
+      },
+    },
+    {
       name: 'yunarch/disables/prettier',
       rules: {
         ...pluginPrettier.rules,

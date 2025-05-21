@@ -478,6 +478,16 @@
         "@typescript-eslint/consistent-indexed-object-style": "off",
         "import/no-duplicates": "off"
       }
+    },
+    {
+      "files": [
+        "**/*.config.{js,jsx,cjs,cjsx,mjs,mjsx,ts,tsx,cts,ctsx,mts,mtjsx}",
+        "**/*.config.*.{js,jsx,cjs,cjsx,mjs,mjsx,ts,tsx,cts,ctsx,mts,mtjsx}"
+      ],
+      "rules": {
+        "no-console": "off",
+        "@typescript-eslint/explicit-function-return-type": "off"
+      }
     }
   ]
 }

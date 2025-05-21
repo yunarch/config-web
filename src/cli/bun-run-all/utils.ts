@@ -31,7 +31,7 @@ function reportExecutionLog({
   console.log(
     styleText('bold', 'Tasks:\t'),
     `${failedTasksText}${successTasksText}`,
-    styleText('gray', `, ${tasks} total`)
+    styleText('gray', `-- ${tasks} total`)
   );
   console.log(
     styleText(['white', 'bold'], 'Time:\t'),

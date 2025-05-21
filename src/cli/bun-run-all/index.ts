@@ -1,3 +1,4 @@
+#!/usr/bin/env bun
 import { styleText } from 'node:util';
 import { createBaseProgram } from '../utils';
 import { runParallel, runSequential } from './utils';

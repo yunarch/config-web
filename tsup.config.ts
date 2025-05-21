@@ -58,7 +58,7 @@ export default defineConfig([
     ],
     outDir: './dist/cli',
     format: 'esm',
-    minify: false,
+    minify: true,
     clean: true,
     shims: true,
   },

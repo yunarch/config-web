@@ -96,6 +96,7 @@ export function typescript(
       name: 'yunarch/typescript/rules',
       files: filesGlob,
       rules: {
+        ...pluginTsESlint.configs.eslintRecommended.rules,
         ...pluginTsESlint.configs.strict.at(-1)?.rules,
         ...pluginTsESlint.configs.stylistic.at(-1)?.rules,
         '@typescript-eslint/ban-ts-comment': [

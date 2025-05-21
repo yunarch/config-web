@@ -48,7 +48,7 @@
     "postinstall": "husky && bun run gen",
     "gen": "bun run gen:eslint-typegen && bun run gen:oxlint-compatgen",
     "gen:eslint-typegen": "bun run ./scripts/eslint-typegen.ts",
-    "gen:oxlint-compatgen": "bun run ./scripts/oxlint-compatgen.ts && prettier --write ./src/linters/oxlint.config.jsonc",
+    "gen:oxlint-compatgen": "bun run ./scripts/oxlint-compatgen.ts && biome format --write ./src/linters/oxlint.config.jsonc",
     "lint": "bun run lint:code && bun run lint:ts",
     "lint:code": "oxlint && eslint .",
     "lint:ts": "tsc --noEmit",

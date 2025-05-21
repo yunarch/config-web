@@ -280,6 +280,7 @@ Create the `tsconfig.json` file with the following content:
 
 ```jsonc
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "@yunarch/config-web/tsconfig-base",
   // Add your overrides here...
 }
@@ -295,6 +296,7 @@ Then, include this file in your `tsconfig.json`, for example:
 
 ```jsonc
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "@yunarch/config-web/tsconfig-base",
   "include": ["./reset.d.ts" /* other files... */],
   // Add your overrides here...

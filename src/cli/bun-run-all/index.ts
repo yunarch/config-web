@@ -5,7 +5,7 @@ import { runParallel, runSequential } from './utils';
 createBaseProgram()
   .name('bun-run-all')
   .description(
-    'Run given package scripts in parallel or sequential by using bun shell.'
+    'Run given package scripts in parallel or sequential by using bun.'
   )
   .argument('<scripts...>', "A list of package scripts' names.")
   .option(

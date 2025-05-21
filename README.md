@@ -312,6 +312,7 @@ Learn more from [Typescript docs here](https://www.typescriptlang.org/tsconfig/#
 
 This package ships with useful command-line tools to streamline your workflow.
 
+- **`bun-run-all`**: CLI tool for running npm package scripts in parallel or sequential by using bun.
 - **`openapi-sync`**: CLI tool designed to convert OpenAPI 3.0/3.1 schemas to TypeScript types and create type-safe fetching based on a openapi schema file and keep them in sync.
 - **`turbo-select`**: CLI tool for filtering and selecting a single package from your Turborepo package list and executing a script command. Additionally, it can prompt you to select an environment mode (development, staging, production) — useful for adjusting settings based on the environment (e.g., when using Vite).
 

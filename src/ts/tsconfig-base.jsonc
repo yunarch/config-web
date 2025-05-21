@@ -22,7 +22,6 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "forceConsistentCasingInFileNames": true,
-    "noUncheckedIndexedAccess": true,
 
     /* Types */
     "declaration": true,

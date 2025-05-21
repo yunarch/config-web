@@ -3,7 +3,6 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as categoriesRules from 'eslint-plugin-oxlint/rules-by-category';
 import { config } from '../src/linters/eslint.config';
-import { expandExtendedGlobs } from '../src/linters/eslint/globs';
 
 // Define the plugins scopes on oxlint with their possible scopes for eslint
 const PLUGINS_SCOPES_OXLINT_ESLINT = {
@@ -86,7 +85,7 @@ for (const c of eslintConfigs) {
   // Override rules
   if (c.files) {
     const override = {
-      files: expandExtendedGlobs(c.files.flat()),
+      files: c.files,
       rules: {} as Record<string, unknown>,
     };
     for (const rule in c.rules) {

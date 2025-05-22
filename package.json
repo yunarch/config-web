@@ -50,7 +50,7 @@
     "bun-run-all": "bun ./src/cli/bun-run-all/index.ts",
     "gen": "bun bun-run-all gen:eslint-typegen gen:oxlint-compatgen",
     "gen:eslint-typegen": "bun run ./scripts/eslint-typegen.ts",
-    "gen:oxlint-compatgen": "bun run ./scripts/oxlint-compatgen.ts && biome format --write ./src/linters/oxlint.config.jsonc",
+    "gen:oxlint-compatgen": "bun run ./scripts/oxlint-compatgen.ts",
     "lint": "bun bun-run-all lint:code lint:ts -t",
     "lint:code": "oxlint && eslint .",
     "lint:ts": "tsc --noEmit",

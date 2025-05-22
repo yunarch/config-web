@@ -13,8 +13,13 @@ const PLUGINS_SCOPES_OXLINT_ESLINT = {
   nextjs: ['next'],
   node: ['node'],
   promise: ['promise'],
-  react: ['react', '@eslint-react', '@eslint-react/dom'],
-  'react-hooks': ['react-hooks', '@eslint-react/hooks-extra'],
+  react: [
+    'react',
+    '@eslint-react',
+    '@eslint-react/dom',
+    'react-hooks',
+    '@eslint-react/hooks-extra',
+  ],
   'react-perf': ['react-perf'],
   typescript: ['typescript'],
   unicorn: ['unicorn'],
@@ -22,7 +27,7 @@ const PLUGINS_SCOPES_OXLINT_ESLINT = {
 } as const;
 
 // Define oxlint plugins, rules and overrides
-const oxlintPlugins = new Set<string>();
+const oxlintPlugins = new Set<string>(['eslint']);
 const oxlintRules: Record<string, unknown> = {};
 const oxlintOverrideRules: Record<string, unknown>[] = [];
 
@@ -118,6 +123,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 await fs.writeFile(
   `${__dirname}/../src/linters/oxlint.config.jsonc`,
   JSON.stringify({
+    $schema:
+      'https://raw.githubusercontent.com/oxc-project/oxc/main/npm/oxlint/configuration_schema.json',
     ignorePatterns: [
       // Node modules
       '**/node_modules/',

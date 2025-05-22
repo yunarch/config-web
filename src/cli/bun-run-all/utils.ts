@@ -24,7 +24,7 @@ function reportExecutionLog({
   const successTasks = tasks - failedTasks;
   const executionTime = getExecutionTime(start);
   const failedTasksText =
-    failedTasks > 0 ? styleText('red', `${failedTasks} failed`) : '';
+    failedTasks > 0 ? styleText('red', `${failedTasks} failed/`) : '';
   const successTasksText =
     successTasks > 0 ? styleText('green', `${successTasks} successful`) : '';
   console.log('');

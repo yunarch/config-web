@@ -35,7 +35,7 @@ function reportExecutionLog({
   );
   console.log(
     styleText(['white', 'bold'], 'Time:\t'),
-    styleText('gray', executionTime)
+    styleText('gray', `${executionTime}\n`)
   );
 }
 

@@ -274,6 +274,10 @@ To use the oxlint linter, create a `.oxlintrc.json` [configuration file](https:/
 > [!TIP]
 > For optimal results, we recommend setting the [categories](https://oxc.rs/docs/guide/usage/linter/config.html#enabling-groups-of-rules-categories) `correctness` and `perf` to `error` as shown above. However, feel free to enable any categories you prefer or need.
 
+> [!CAUTION]
+> Currently, `Oxlint` does not resolve configuration file paths automatically. To extend a config, you must explicitly provide the full path, like so:
+> `"extends": ["./node_modules/@yunarch/config-web/dist/linters/oxlint.config.json"]`
+
 ## 🔵 Typescript
 
 Create the `tsconfig.json` file with the following content:

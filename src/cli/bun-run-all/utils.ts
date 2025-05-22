@@ -29,7 +29,7 @@ function reportExecutionLog({
     successTasks > 0 ? styleText('green', `${successTasks} successful`) : '';
   console.log('');
   console.log(
-    styleText('bold', 'Tasks:\t'),
+    styleText(['white', 'bold'], 'Tasks:\t'),
     `${failedTasksText}${successTasksText}`,
     styleText('gray', `-- ${tasks} total`)
   );

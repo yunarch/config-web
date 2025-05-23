@@ -6,6 +6,9 @@ on:
       - main
   pull_request:
 
+permissions:
+  contents: read
+
 env:
   CI: true
   TURBO_TELEMETRY_DISABLED: 1

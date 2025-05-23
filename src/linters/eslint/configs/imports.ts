@@ -12,12 +12,6 @@ import type { TypedFlatConfigItem } from '../types';
 export function imports(): TypedFlatConfigItem[] {
   return [
     {
-      name: 'yunarch/import/setup',
-      settings: {
-        'import-x/resolver-next': [createNodeResolver()],
-      },
-    },
-    {
       name: 'yunarch/import/rules',
       plugins: {
         import: pluginImport,
@@ -35,6 +29,9 @@ export function imports(): TypedFlatConfigItem[] {
         'import/no-relative-packages': 'error',
         'import/no-self-import': 'error',
         'import/no-useless-path-segments': 'error',
+      },
+      settings: {
+        'import-x/resolver-next': [createNodeResolver()],
       },
     },
     {

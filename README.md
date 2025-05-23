@@ -290,7 +290,7 @@ Create the `tsconfig.json` file with the following content:
 }
 ```
 
-Additionally, this package includes a `ts-reset` configuration to enhance TypeScript's built-in types. To use it, create a `reset.d.ts` file in your project with the following content:
+Additionally, this package includes a [`ts-reset`](https://www.totaltypescript.com/ts-reset) configuration to enhance TypeScript's built-in types. To use it, create a `reset.d.ts` file in your project with the following content:
 
 ```ts
 import '@yunarch/config-web/reset.d.ts';

@@ -38,6 +38,7 @@
         "eslint": "9.27.0",
         "eslint-typegen": "2.2.0",
         "husky": "9.1.7",
+        "jsonc-parser": "3.3.1",
         "lint-staged": "16.0.0",
         "oxlint": "0.16.11",
         "prettier": "3.5.3",

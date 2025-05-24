@@ -1,4 +1,5 @@
 import { copyFile, mkdir, readFile, writeFile } from 'node:fs/promises';
+import { parse } from 'jsonc-parser';
 import { defineConfig } from 'tsup';
 
 /**
@@ -9,20 +10,7 @@ import { defineConfig } from 'tsup';
  */
 async function parseJSONC(filePath: string, outputPath: string) {
   const data = await readFile(filePath, 'utf8');
-  const jsonString = data
-    .replaceAll(
-      /(?<temp1>"(?:[^"\\]+|\\.)*")|\/\/[^\r\n]*|\/\*[^]*?\*\//g,
-      (match: string, str: string) => {
-        return str || match.replaceAll(/[^\t\r\n ]/g, ' ');
-      }
-    )
-    .replaceAll(
-      /(?<temp2>"(?<temp1>[^"\\]+|\\.)*")|,\s*(?=[}\]])/g,
-      (match: string, str: string) => {
-        return str || match.replaceAll(/[^\t\r\n ]/g, ' ');
-      }
-    );
-  const jsonObject = JSON.parse(jsonString) as Record<string, unknown>;
+  const jsonObject = parse(data) as Record<string, unknown>;
   if ('$schema' in jsonObject) delete jsonObject.$schema;
   await writeFile(outputPath, JSON.stringify(jsonObject));
 }

@@ -20,6 +20,7 @@ export function unicorn(): TypedFlatConfigItem[] {
           { cases: { camelCase: true, kebabCase: true, pascalCase: true } },
         ],
         'unicorn/no-array-reduce': 'off',
+        'unicorn/no-null': 'off',
         'unicorn/prefer-number-properties': [
           'error',
           { checkInfinity: true, checkNaN: true },

@@ -21,7 +21,7 @@ const PLUGINS_SCOPES_OXLINT_ESLINT = {
     '@eslint-react/hooks-extra',
   ],
   'react-perf': ['react-perf'],
-  typescript: ['typescript'],
+  typescript: ['@typescript-eslint'],
   unicorn: ['unicorn'],
   vitest: ['vitest'],
 } as const;

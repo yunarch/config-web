@@ -49,7 +49,15 @@
     "**/CHANGELOG*.md",
     "**/LICENSE*"
   ],
-  "plugins": ["eslint", "import", "jsdoc", "unicorn", "vitest", "react"],
+  "plugins": [
+    "eslint",
+    "typescript",
+    "import",
+    "jsdoc",
+    "unicorn",
+    "vitest",
+    "react"
+  ],
   "rules": {
     "for-direction": "error",
     "no-async-promise-executor": "error",

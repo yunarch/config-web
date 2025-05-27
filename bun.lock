@@ -8,7 +8,7 @@
         "@eslint/js": "9.27.0",
         "@inquirer/confirm": "5.1.12",
         "@inquirer/select": "4.2.3",
-        "@tanstack/eslint-plugin-query": "5.74.7",
+        "@tanstack/eslint-plugin-query": "5.78.0",
         "@tanstack/eslint-plugin-router": "1.115.0",
         "@total-typescript/ts-reset": "0.6.1",
         "@vitest/eslint-plugin": "1.2.1",
@@ -310,7 +310,7 @@
 
     "@rollup/rollup-win32-x64-msvc": ["@rollup/rollup-win32-x64-msvc@4.41.1", "", { "os": "win32", "cpu": "x64" }, "sha512-Wq2zpapRYLfi4aKxf2Xff0tN+7slj2d4R87WEzqw7ZLsVvO5zwYCIuEGSZYiK41+GlwUo1HiR+GdkLEJnCKTCw=="],
 
-    "@tanstack/eslint-plugin-query": ["@tanstack/eslint-plugin-query@5.74.7", "", { "dependencies": { "@typescript-eslint/utils": "^8.18.1" }, "peerDependencies": { "eslint": "^8.57.0 || ^9.0.0" } }, "sha512-EeHuaaYiCOD+XOGyB7LMNEx9OEByAa5lkgP+S3ZggjKJpmIO6iRWeoIYYDKo2F8uc3qXcVhTfC7pn7NddQiNtA=="],
+    "@tanstack/eslint-plugin-query": ["@tanstack/eslint-plugin-query@5.78.0", "", { "dependencies": { "@typescript-eslint/utils": "^8.18.1" }, "peerDependencies": { "eslint": "^8.57.0 || ^9.0.0" } }, "sha512-hYkhWr3UP0CkAsn/phBVR98UQawbw8CmTSgWtdgEBUjI60/GBaEIkpgi/Bp/2I8eIDK4+vdY7ac6jZx+GR+hEQ=="],
 
     "@tanstack/eslint-plugin-router": ["@tanstack/eslint-plugin-router@1.115.0", "", { "dependencies": { "@typescript-eslint/utils": "^8.23.0" }, "peerDependencies": { "eslint": "^8.57.0 || ^9.0.0" } }, "sha512-vwKP9NjzAQ2nU3qADDoTSTxD1vNduLcK0312AWkXkicCWUZQZJtmRuZXPk9cEfuzDD2BAJCIUmlaF1K0vq4oRw=="],
 

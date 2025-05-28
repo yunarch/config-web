@@ -118,7 +118,7 @@
     "eslint-typegen": "2.2.0",
     "oxlint": "0.16.12",
     "husky": "9.1.7",
-    "lint-staged": "16.0.0",
+    "lint-staged": "16.1.0",
     "rimraf": "6.0.1",
     "tsup": "8.5.0",
     "typescript": "5.8.3",

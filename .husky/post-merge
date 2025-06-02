@@ -1,13 +1,21 @@
+. "$(dirname -- "$0")/common.sh"
+
+BLUE="\033[34m"
+YELLOW="\033[33m"
+MAGENTA="\033[35m"
+GREEN="\033[32m"
+RESET="\033[0m"
+
 function changed {
     git diff --name-only HEAD@{1} HEAD | grep "^$1" >/dev/null 2>&1
 }
 
-echo "\u001B[34m🔍 Checking for changes in lock file...\u001B[0m"
+printf "\n${BLUE}🔍 Checking for changes in lock file...${RESET}\n"
 
 if changed "bun.lock"; then
-    echo "\u001B[33m📦 The lock file has changed. Running \u001B[35minstall\u001B[33m to bring your dependencies up to date.\u001B[0m"
+    printf "${YELLOW}📦 The lock file has changed. Running ${MAGENTA}install${YELLOW} to bring your dependencies up to date.${RESET}\n\n"
     bun install
 fi
 
-echo "\u001B[32m✅ You are up to date.\u001B[0m"
+printf "\n${GREEN}✅ You are up to date.${RESET}\n"
 exit 0

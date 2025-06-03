@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { writeFile } from 'node:fs/promises';
 import { styleText } from 'node:util';
 import confirm from '@inquirer/confirm';

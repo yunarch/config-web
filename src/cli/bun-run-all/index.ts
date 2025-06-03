@@ -39,11 +39,17 @@ createBaseProgram()
           process.exit(1);
         }
         if (sequential) {
-          await runSequential(scripts, { continueOnError, reportTime });
-          process.exit(0);
+          const exitCode = await runSequential(scripts, {
+            continueOnError,
+            reportTime,
+          });
+          process.exit(exitCode);
         }
-        await runParallel(scripts, { continueOnError, reportTime });
-        process.exit(0);
+        const exitCode = await runParallel(scripts, {
+          continueOnError,
+          reportTime,
+        });
+        process.exit(exitCode);
       } catch (error) {
         console.error(error);
         process.exit(1);

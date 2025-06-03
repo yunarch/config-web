@@ -106,6 +106,7 @@ function spawnProc({
  *
  * @param scripts - List of scripts to run.
  * @param options - Options for running the scripts.
+ * @returns The exit code indicating success or failure.
  */
 export async function runParallel(
   scripts: string[],
@@ -117,13 +118,15 @@ export async function runParallel(
     spawnProc({ index, script, continueOnError, reportTime })
   );
   const promises = await Promise.allSettled(procs.map((proc) => proc.exited));
+  const failedTasks = promises.filter(
+    (promise) => promise.status === 'rejected' || promise.value !== 0
+  ).length;
   reportExecutionLog({
     start,
     tasks: scripts.length,
-    failedTasks: promises.filter(
-      (promise) => promise.status === 'rejected' || promise.value !== 0
-    ).length,
+    failedTasks,
   });
+  return failedTasks > 0 ? 1 : 0;
 }
 
 /**
@@ -131,6 +134,7 @@ export async function runParallel(
  *
  * @param scripts - List of scripts to run.
  * @param options - Options for running the scripts.
+ * @returns The exit code indicating success or failure.
  */
 export async function runSequential(
   scripts: string[],
@@ -146,4 +150,5 @@ export async function runSequential(
     if (exitCode !== 0) failedTasks++;
   }
   reportExecutionLog({ start, tasks: scripts.length, failedTasks });
+  return failedTasks > 0 ? 1 : 0;
 }

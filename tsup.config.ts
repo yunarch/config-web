@@ -24,9 +24,22 @@ export default defineConfig([
     format: 'esm',
     minify: true,
     clean: true,
+    shims: true,
     onSuccess: async () => {
       // Copy config files to the dist directory.
       await Promise.all([
+        // Formatters
+        mkdir('./dist/formatters', { recursive: true }),
+        parseJSONC(
+          './src/formatters/biome.config.jsonc',
+          './dist/formatters/biome.config.json'
+        ),
+        // Linters
+        mkdir('./dist/linters', { recursive: true }),
+        parseJSONC(
+          './src/linters/oxlint.config.jsonc',
+          './dist/linters/oxlint.config.json'
+        ),
         // Typescript
         mkdir('./dist/ts', { recursive: true }),
         copyFile('./src/ts/reset.d.ts', './dist/ts/reset.d.ts'),
@@ -52,17 +65,15 @@ export default defineConfig([
   },
   // Formatters
   {
+    // TODO - Refactor to prettier.config.ts when https://github.com/nodejs/node/pull/57298 is released
+    // TODO - Atm whe do not give ts support for prettier.config file
     entry: ['./src/formatters/prettier.config.js'],
     outDir: './dist/formatters',
     format: 'esm',
+    // dts: true, // TODO - Enable when we use prettier.config.ts
     minify: true,
     clean: true,
-    onSuccess: async () => {
-      await parseJSONC(
-        './src/formatters/biome.config.jsonc',
-        './dist/formatters/biome.config.json'
-      );
-    },
+    shims: true,
   },
   // Linters
   {
@@ -73,11 +84,15 @@ export default defineConfig([
     minify: true,
     clean: true,
     shims: true,
-    onSuccess: async () => {
-      await parseJSONC(
-        './src/linters/oxlint.config.jsonc',
-        './dist/linters/oxlint.config.json'
-      );
-    },
+  },
+  // Typescript
+  {
+    entry: ['./src/ts/utils.ts'],
+    outDir: './dist/ts',
+    format: 'esm',
+    dts: true,
+    minify: true,
+    clean: true,
+    shims: true,
   },
 ]);

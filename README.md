@@ -24,6 +24,8 @@
     - [Enabling ESLint and Oxlint Simultaneously](#enabling-eslint-and-oxlint-simultaneously)
   - [Oxlint](#oxlint)
 - [🔵 Typescript](#-typescript)
+  - [ts-reset](#ts-reset)
+  - [Utilities](#utilities)
 - [🔧 CLI Tools](#-cli-tools)
 - [📜 License](#-license)
 
@@ -42,7 +44,7 @@ This package provides ready-to-use configurations for:
 
 - **Code Formatting:** Prettier, Biome
 - **Linting:** ESLint, Oxlint
-- **TypeScript:** Best-practice default config.
+- **TypeScript:** Best-practice default config and utilities.
 - **CLI Tools:** Useful command-line tools for streamlining workflows
 
 > [!Tip]
@@ -290,7 +292,11 @@ Create the `tsconfig.json` file with the following content:
 }
 ```
 
-Additionally, this package includes a [`ts-reset`](https://www.totaltypescript.com/ts-reset) configuration to enhance TypeScript's built-in types. To use it, create a `reset.d.ts` file in your project with the following content:
+Learn more from [Typescript docs here](https://www.typescriptlang.org/tsconfig/#extends).
+
+### ts-reset
+
+This package also includes a [`ts-reset`](https://www.totaltypescript.com/ts-reset) configuration to enhance TypeScript's built-in types. To use it, create a `reset.d.ts` file in your project with the following content:
 
 ```ts
 import '@yunarch/config-web/reset.d.ts';
@@ -310,7 +316,15 @@ Then, include this file in your `tsconfig.json`, for example:
 > [!TIP]
 > You can use a glob pattern like `"include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]` to automatically include all relevant files, so you don't have to add them manually.
 
-Learn more from [Typescript docs here](https://www.typescriptlang.org/tsconfig/#extends).
+### Utilities
+
+As an enhacement of `ts-reset` this package also includes utilities designed to help you write stricter and more maintainable code. TypeScript uses structural typing, which means it doesn’t always prevent objects from having excess properties. Unlike `ts-reset`, which modifies built-in types globally, these utilities are opt-in. Giving you control over when and where to enforce stricter typing.
+
+To use them, simply import the desired utility from:
+
+```tsx
+import { typedObjectEntries, typedObjectFromEntries, ... } from "@yunarch/config-web/ts-utils";
+```
 
 ## 🔧 CLI Tools
 

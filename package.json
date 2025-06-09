@@ -113,7 +113,7 @@
     "eslint-plugin-react-hooks": "5.2.0",
     "eslint-plugin-react-refresh": "0.4.20",
     "@tanstack/eslint-plugin-query": "5.78.0",
-    "@tanstack/eslint-plugin-router": "1.115.0",
+    "@tanstack/eslint-plugin-router": "1.120.17",
     "@vitest/eslint-plugin": "1.2.1"
   },
   "devDependencies": {

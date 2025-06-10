@@ -47,8 +47,8 @@
     "./tsconfig-base": "./dist/ts/tsconfig-base.json",
     "./reset.d.ts": "./dist/ts/reset.d.ts",
     "./ts-utils": {
-      "types": "./dist/ts/ts-utils.d.ts",
-      "default": "./dist/ts/ts-utils.js"
+      "types": "./dist/ts/utils.d.ts",
+      "default": "./dist/ts/utils.js"
     }
   },
   "type": "module",

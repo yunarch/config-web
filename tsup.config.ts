@@ -60,7 +60,6 @@ export default defineConfig([
     outDir: './dist/cli',
     format: 'esm',
     minify: true,
-    clean: true,
     shims: true,
   },
   // Formatters
@@ -72,7 +71,6 @@ export default defineConfig([
     format: 'esm',
     // dts: true, // TODO - Enable when we use prettier.config.ts
     minify: true,
-    clean: true,
     shims: true,
   },
   // Linters
@@ -82,7 +80,6 @@ export default defineConfig([
     format: 'esm',
     dts: true,
     minify: true,
-    clean: true,
     shims: true,
   },
   // Typescript
@@ -92,7 +89,6 @@ export default defineConfig([
     format: 'esm',
     dts: true,
     minify: true,
-    clean: true,
     shims: true,
   },
 ]);

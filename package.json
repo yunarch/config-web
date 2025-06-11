@@ -114,7 +114,7 @@
     "eslint-plugin-react-refresh": "0.4.20",
     "@tanstack/eslint-plugin-query": "5.78.0",
     "@tanstack/eslint-plugin-router": "1.120.17",
-    "@vitest/eslint-plugin": "1.2.1"
+    "@vitest/eslint-plugin": "1.2.2"
   },
   "devDependencies": {
     "@commitlint/cli": "19.8.1",

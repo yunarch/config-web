@@ -74,7 +74,7 @@
     "@biomejs/biome": ">= 1 || < 2",
     "prettier": ">= 3 || < 4",
     "eslint": ">=9.5.0 || < 10",
-    "oxlint": ">=0.16.2 || < 1"
+    "oxlint": ">=0.16.2 || < 2"
   },
   "peerDependenciesMeta": {
     "@biomejs/biome": {
@@ -108,7 +108,7 @@
     "eslint-plugin-unused-imports": "4.1.4",
     "eslint-plugin-jsdoc": "51.0.1",
     "eslint-config-prettier": "10.1.5",
-    "eslint-plugin-oxlint": "0.18.1",
+    "eslint-plugin-oxlint": "1.1.0",
     "@eslint-react/eslint-plugin": "1.52.2",
     "eslint-plugin-react-hooks": "5.2.0",
     "eslint-plugin-react-refresh": "0.4.20",
@@ -123,7 +123,7 @@
     "@biomejs/biome": "1.9.4",
     "eslint": "9.29.0",
     "eslint-typegen": "2.2.0",
-    "oxlint": "0.18.1",
+    "oxlint": "1.1.0",
     "husky": "9.1.7",
     "lint-staged": "16.1.2",
     "rimraf": "6.0.1",

@@ -140,6 +140,7 @@
     "no-else-return": "warn",
     "no-eval": "error",
     "no-extend-native": "error",
+    "no-extra-bind": "error",
     "no-extra-label": "error",
     "no-iterator": "error",
     "no-label-var": "error",

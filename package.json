@@ -134,8 +134,8 @@
     "@types/node": "24.0.3",
     "@types/bun": "1.2.16"
   },
+  "packageManager": "bun@1.2.16",
   "publishConfig": {
     "access": "public"
-  },
-  "packageManager": "bun@1.2.16"
+  }
 }

@@ -299,7 +299,7 @@ Learn more from [Typescript docs here](https://www.typescriptlang.org/tsconfig/#
 This package also includes a [`ts-reset`](https://www.totaltypescript.com/ts-reset) configuration to enhance TypeScript's built-in types. To use it, create a `reset.d.ts` file in your project with the following content:
 
 ```ts
-import '@yunarch/config-web/reset.d.ts';
+import '@yunarch/config-web/ts-reset.d.ts';
 ```
 
 Then, include this file in your `tsconfig.json`, for example:
@@ -318,12 +318,28 @@ Then, include this file in your `tsconfig.json`, for example:
 
 ### Utilities
 
-As an enhacement of `ts-reset` this package also includes utilities designed to help you write stricter and more maintainable code. TypeScript uses structural typing, which means it doesn’t always prevent objects from having excess properties. Unlike `ts-reset`, which modifies built-in types globally, these utilities are opt-in. Giving you control over when and where to enforce stricter typing.
+As an enhancement to the `ts-reset`, this package provides type-level utilities to help you write stricter, more maintainable TypeScript code.
 
-To use them, simply import the desired utility from:
+TypeScript uses structural typing, which means it doesn't always prevent objects from having excess properties. While `ts-reset` modifies built-in types globally, these utilities are **opt-in**, allowing you to apply stricter typing **only where you need it**.
 
-```tsx
-import { typedObjectEntries, typedObjectFromEntries, ... } from "@yunarch/config-web/ts-utils";
+> [!NOTE]
+> This package only provides **types**, as the package is intended to be used as a `devDependency` **only**. So you need to create runtime type-safe wrappers. **Each utility type includes usage guidance in its definition comments**.
+
+For example, using the exposed utility types, you can define strictly typed versions of `Object.entries` and `Object.fromEntries`, ensuring safer and more predictable object manipulation:
+
+```ts
+import type {
+  ObjectEntries,
+  ObjectFromEntries,
+} from '@yunarch/config-web/ts-utils.d.ts';
+
+// Strictly typed version of `Object.entries`
+const typedObjectEntries: ObjectEntries = Object.entries;
+const x1 = typedObjectEntries({ a: 1, b: 2 } as const);
+
+// Strictly typed version of `Object.fromEntries`
+const typedObjectFromEntries: ObjectFromEntries = Object.fromEntries;
+const x2 = typedObjectFromEntries([['a', 1]] as const);
 ```
 
 ## 🔧 CLI Tools

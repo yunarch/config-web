@@ -1,5 +1,8 @@
 import { describe, expectTypeOf, it } from 'vitest';
-import { typedObjectEntries } from '../../src/ts/utils';
+import type { ObjectEntries } from '../../src/ts/utils.d';
+
+// Type-safe version of `Object.entries`
+const typedObjectEntries: ObjectEntries = Object.entries;
 
 describe('typedObjectEntries', () => {
   it('returns correctly typed entries from a regular object', () => {

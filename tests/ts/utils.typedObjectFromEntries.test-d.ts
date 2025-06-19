@@ -1,5 +1,8 @@
 import { describe, expectTypeOf, it } from 'vitest';
-import { typedObjectFromEntries } from '../../src/ts/utils';
+import type { ObjectFromEntries } from '../../src/ts/utils.d';
+
+// Type-safe version of `Object.fromEntries`
+const typedObjectFromEntries: ObjectFromEntries = Object.fromEntries;
 
 describe('typedObjectFromEntries', () => {
   it('returns generic object with possibly undefined values from non-const entries', () => {

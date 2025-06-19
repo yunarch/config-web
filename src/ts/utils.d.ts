@@ -1,8 +1,13 @@
+/**
+ * Utility type that takes an object type and makes the hover overlay more readable.
+ *
+ * @see https://www.totaltypescript.com/concepts/the-prettify-helper
+ */
 export type Prettify<T> = {
   [K in keyof T]: T[K];
 } & {};
 
-// Types
+// Utility types for entries in various data structures
 type ObjectEntry<Base> = [keyof Base, Base[keyof Base]];
 type ArrayEntry<Base extends readonly unknown[]> = [number, Base[number]];
 type SetEntry<Base> = Base extends Set<infer V> ? [V, V] : never;
@@ -18,16 +23,16 @@ type Entry<BaseType> = BaseType extends Map<unknown, unknown>
         : never;
 
 /**
- * Utility function to have a type-safety alternative to Object.entries.
+ * Utility type to make `Object.entries` type-safe.
  *
- * @param obj - The object to create entries from.
- * @returns Object entries with typed keys and values.
+ * @example
+ * ```ts
+ * const typedObjectEntries: ObjectEntries = Object.entries;
+ * ```
  */
-export function typedObjectEntries<T extends object>(obj: T) {
-  return Object.entries(obj) as Entry<T>[];
-}
+export type ObjectEntries = <T extends object>(obj: T) => Entry<T>[];
 
-// Types
+// Utilities for handling unions and intersections in TypeScript
 type IsUnion<T, U extends T = T> = T extends unknown
   ? [U] extends [T]
     ? false
@@ -50,23 +55,25 @@ type InferKeyOptionalityFromTupleType<
 >;
 
 /**
- * Utility function to have a type-safe alternative to Object.fromEntries.
+ * Utility type to make `Object.fromEntries` type-safe.
  *
- * @param entries - The entries to create an object from.
- * @returns An object with typed keys and values based on the provided entries.
+ * @example
+ * ```ts
+ * const typedObjectFromEntries: ObjectFromEntries = Object.fromEntries;
+ * ```
  */
-export function typedObjectFromEntries<
+export type ObjectFromEntries = <
   T extends readonly [...(readonly (readonly [PropertyKey, unknown])[])],
->(entries: T) {
-  return Object.fromEntries(entries) as T extends [...T[number][]]
-    ? {
-        [K in T[number][0]]?: (readonly [K, T[number][1]] & T[number])[1];
-      }
-    : {
-        [K in keyof InferKeyOptionalityFromTupleType<T[number]>]: (readonly [
-          K,
-          T[number][1],
-        ] &
-          T[number])[1];
-      };
-}
+>(
+  entries: T
+) => T extends [...T[number][]]
+  ? {
+      [K in T[number][0]]?: (readonly [K, T[number][1]] & T[number])[1];
+    }
+  : {
+      [K in keyof InferKeyOptionalityFromTupleType<T[number]>]: (readonly [
+        K,
+        T[number][1],
+      ] &
+        T[number])[1];
+    };

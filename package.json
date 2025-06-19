@@ -45,11 +45,8 @@
     "./oxlint": "./dist/linters/oxlint.config.json",
     "./biome-formatter": "./dist/formatters/biome.config.json",
     "./tsconfig-base": "./dist/ts/tsconfig-base.json",
-    "./reset.d.ts": "./dist/ts/reset.d.ts",
-    "./ts-utils": {
-      "types": "./dist/ts/utils.d.ts",
-      "default": "./dist/ts/utils.js"
-    }
+    "./ts-reset.d.ts": "./dist/ts/reset.d.ts",
+    "./ts-utils.d.ts": "./dist/ts/utils.d.ts"
   },
   "type": "module",
   "scripts": {

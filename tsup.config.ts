@@ -43,6 +43,7 @@ export default defineConfig([
         // Typescript
         mkdir('./dist/ts', { recursive: true }),
         copyFile('./src/ts/reset.d.ts', './dist/ts/reset.d.ts'),
+        copyFile('./src/ts/utils.d.ts', './dist/ts/utils.d.ts'),
         parseJSONC(
           './src/ts/tsconfig-base.jsonc',
           './dist/ts/tsconfig-base.json'
@@ -77,15 +78,6 @@ export default defineConfig([
   {
     entry: ['./src/linters/eslint.config.ts'],
     outDir: './dist/linters',
-    format: 'esm',
-    dts: true,
-    minify: true,
-    shims: true,
-  },
-  // Typescript
-  {
-    entry: ['./src/ts/utils.ts'],
-    outDir: './dist/ts',
     format: 'esm',
     dts: true,
     minify: true,

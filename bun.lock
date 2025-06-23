@@ -30,7 +30,7 @@
         "typescript-eslint": "8.34.1",
       },
       "devDependencies": {
-        "@biomejs/biome": "1.9.4",
+        "@biomejs/biome": "2.0.4",
         "@commitlint/cli": "19.8.1",
         "@commitlint/config-conventional": "19.8.1",
         "@types/bun": "1.2.17",

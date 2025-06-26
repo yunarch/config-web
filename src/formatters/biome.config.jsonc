@@ -81,9 +81,12 @@
     }
   },
   "overrides": [
-    { "include": ["**/*.hbs"] },
-    { "include": ["**/package.json"], "formatter": { "indentStyle": "space" } },
-    { "include": ["**/*.mdx"] }
+    {
+      "include": ["**/package.json"],
+      "formatter": {
+        "indentStyle": "space"
+      }
+    }
   ],
   // Disable linter as we prefer to use OxLint or a combination of OxLint and ESLint
   "linter": {

@@ -90,7 +90,7 @@
   "dependencies": {
     "commander": "14.0.0",
     "ora": "8.2.0",
-    "@inquirer/confirm": "5.1.12",
+    "@inquirer/confirm": "5.1.13",
     "@inquirer/select": "4.2.3",
     "@total-typescript/ts-reset": "0.6.1",
     "globals": "16.2.0",

@@ -62,6 +62,7 @@ function spawnProc({
     stdout: 'pipe',
     stderr: 'pipe',
     env: {
+      ...Bun.env,
       FORCE_COLOR: '1',
     },
     onExit(_, exitCode) {

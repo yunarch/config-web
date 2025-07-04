@@ -62,7 +62,6 @@ function spawnProc({
     stdout: 'pipe',
     stderr: 'pipe',
     env: {
-      ...Bun.env,
       FORCE_COLOR: '1',
     },
     onExit(_, exitCode) {
@@ -70,7 +69,7 @@ function spawnProc({
     },
   });
   proc.stdout.pipeTo(
-    new WritableStream({
+    new WritableStream<Uint8Array>({
       write(chunk) {
         const lines = new TextDecoder().decode(chunk).split('\n');
         for (const line of lines) {
@@ -80,7 +79,7 @@ function spawnProc({
     })
   );
   proc.stderr.pipeTo(
-    new WritableStream({
+    new WritableStream<Uint8Array>({
       write(chunk) {
         const lines = new TextDecoder().decode(chunk).split('\n');
         for (const line of lines) {

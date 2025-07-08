@@ -3,6 +3,10 @@
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "biomejs.biome",
 
+  // Linters
+  "biome.requireConfiguration": true,
+  "oxc.requireConfig": true,
+
   // Auto fix
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",

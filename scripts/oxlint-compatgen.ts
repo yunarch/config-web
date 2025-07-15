@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as categoriesRules from 'eslint-plugin-oxlint/rules-by-category';
-import { config } from '../src/linters/eslint.config';
+import { config } from '../src/eslint.config';
 
 // Define the plugins scopes on oxlint with their possible scopes for eslint
 const PLUGINS_SCOPES_OXLINT_ESLINT = {
@@ -121,7 +121,7 @@ for (const c of eslintConfigs) {
 // Write `oxlint.config.jsonc` file
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 await fs.writeFile(
-  `${__dirname}/../src/linters/oxlint.config.jsonc`,
+  `${__dirname}/../src/oxlint.config.jsonc`,
   JSON.stringify({
     $schema:
       'https://raw.githubusercontent.com/oxc-project/oxc/main/npm/oxlint/configuration_schema.json',

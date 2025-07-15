@@ -10,7 +10,7 @@ describe('typedObjectFromEntries', () => {
       ['key1', 1],
       ['key2', 2],
     ]);
-    expectTypeOf(obj).toEqualTypeOf<{ [x: string]: number | undefined }>();
+    expectTypeOf(obj).toEqualTypeOf<Record<string, number | undefined>>();
   });
 
   it('returns correctly typed object from const entries with number values', () => {

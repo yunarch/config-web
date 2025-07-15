@@ -29,7 +29,11 @@
     "node": ">=22"
   },
   "sideEffects": false,
-  "files": ["README.md", "LICENSE.md", "dist"],
+  "files": [
+    "README.md",
+    "LICENSE.md",
+    "dist"
+  ],
   "bin": {
     "bun-run-all": "./dist/cli/bun-run-all/index.js",
     "openapi-sync": "./dist/cli/openapi-sync/index.js",
@@ -68,7 +72,7 @@
     "release": "bun run lint && bun run test && bun publish --dry-run && bunx bumpp && bun run build && bun publish"
   },
   "peerDependencies": {
-    "@biomejs/biome": ">= 1.9 || < 2",
+    "@biomejs/biome": ">= 1.9 || < 3",
     "prettier": ">= 3 || < 4",
     "eslint": ">=9.5.0 || < 10",
     "oxlint": ">=0.16.2 || < 2"
@@ -117,7 +121,7 @@
     "@commitlint/cli": "19.8.1",
     "@commitlint/config-conventional": "19.8.1",
     "prettier": "3.6.2",
-    "@biomejs/biome": "1.9.4",
+    "@biomejs/biome": "2.1.1",
     "eslint": "9.31.0",
     "eslint-typegen": "2.2.1",
     "oxlint": "1.6.0",

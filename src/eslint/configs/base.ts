@@ -55,7 +55,7 @@ export const BASE_IGNORES = [
   '**/.tmp',
   '**/.history',
   '**/mockServiceWorker.js',
-  '**/CHANGELOG*.md',
+  '**/CHANGELOG*',
   '**/LICENSE*',
 ];
 

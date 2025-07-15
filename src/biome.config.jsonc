@@ -1,22 +1,16 @@
 {
   "$schema": "../node_modules/@biomejs/biome/configuration_schema.json",
-  // ======================================================================================
-  // Formatter
-  // ======================================================================================
   "formatter": {
     "enabled": true,
     "includes": [
       "**",
-      // Node modules
       "!**/node_modules/",
-      // Build artifacts
       "!**/dist/",
       "!**/out/",
       "!**/output",
       "!**/.output",
       "!**/build/",
       "!**/*.min.*",
-      // Dependencies
       "!**/package-lock.json",
       "!**/yarn.lock",
       "!**/.yarn/",
@@ -31,16 +25,13 @@
       "!**/.vite-inspect",
       "!**/.vitepress/cache",
       "!**/vite.config.*.timestamp-*",
-      // Logs
       "!**/*.log",
       "!**/npm-debug.log*",
       "!**/yarn-debug.log*",
       "!**/yarn-error.log*",
-      // Tests
       "!**/coverage/",
       "!**/.nyc_output/",
       "!**/__snapshots__",
-      // Editor/IDE/frameworks/tools configurations
       "!**/.vscode/",
       "!**/.idea/",
       "!**/.cache",
@@ -50,7 +41,6 @@
       "!**/.vercel",
       "!**/.changeset",
       "!**/.turbo/",
-      // Misc
       "!**/.DS_Store",
       "!**/Thumbs.db",
       "!**/temp",
@@ -84,34 +74,60 @@
       "bracketSpacing": true
     }
   },
-  // ======================================================================================
-  // Linter
-  // ======================================================================================
-  // Disable linter as we prefer to use ESlint or a combination of ESLint and Oxlint
   "linter": {
-    "enabled": false
+    "enabled": false,
+    "includes": [
+      "!**/node_modules/",
+      "!**/dist/",
+      "!**/out/",
+      "!**/output",
+      "!**/.output",
+      "!**/build/",
+      "!**/*.min.*",
+      "!**/package-lock.json",
+      "!**/yarn.lock",
+      "!**/.yarn/",
+      "!**/.yarnrc.yml",
+      "!**/.pnp.*",
+      "!**/.pnp",
+      "!**/.pnp.js",
+      "!**/.pnp.cjs",
+      "!**/bun.lock",
+      "!**/bun.lockb",
+      "!**/pnpm-lock.yaml",
+      "!**/.vite-inspect",
+      "!**/.vitepress/cache",
+      "!**/vite.config.*.timestamp-*",
+      "!**/*.log",
+      "!**/npm-debug.log*",
+      "!**/yarn-debug.log*",
+      "!**/yarn-error.log*",
+      "!**/coverage/",
+      "!**/.nyc_output/",
+      "!**/__snapshots__",
+      "!**/.vscode/",
+      "!**/.idea/",
+      "!**/.cache",
+      "!**/.nuxt",
+      "!**/.next",
+      "!**/.svelte-kit",
+      "!**/.vercel",
+      "!**/.changeset",
+      "!**/.turbo/",
+      "!**/.DS_Store",
+      "!**/Thumbs.db",
+      "!**/temp",
+      "!**/.temp",
+      "!**/tmp",
+      "!**/.tmp",
+      "!**/.history",
+      "!**/mockServiceWorker.js",
+      "!**/CHANGELOG*",
+      "!**/LICENSE*"
+    ]
   },
-  // ======================================================================================
-  // Overrides
-  // ======================================================================================
   "overrides": [
-    // Format overrides
-    {
-      "includes": ["**/package.json"],
-      "formatter": {
-        "indentStyle": "space"
-      }
-    }
+    { "includes": ["**/package.json"], "formatter": { "indentStyle": "space" } }
   ],
-  // ======================================================================================
-  // Assistants configuration
-  // ======================================================================================
-  "assist": {
-    "actions": {
-      "source": {
-        // Disable organizeImports as we prefer sort it by ESlint or Oxlint
-        "organizeImports": "off"
-      }
-    }
-  }
+  "assist": { "actions": { "source": { "organizeImports": "off" } } }
 }

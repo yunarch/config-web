@@ -46,7 +46,7 @@
     "**/.tmp",
     "**/.history",
     "**/mockServiceWorker.js",
-    "**/CHANGELOG*.md",
+    "**/CHANGELOG*",
     "**/LICENSE*"
   ],
   "plugins": [

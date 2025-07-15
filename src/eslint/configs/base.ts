@@ -2,6 +2,63 @@ import globals from 'globals';
 import { pluginESlint, pluginUnusedImports } from '../plugins';
 import type { OptionsConfig, TypedFlatConfigItem } from '../types';
 
+export const BASE_IGNORES = [
+  // Node modules
+  '**/node_modules/',
+  // Build artifacts
+  '**/dist/',
+  '**/out/',
+  '**/output',
+  '**/.output',
+  '**/build/',
+  '**/*.min.*',
+  // Dependencies
+  '**/package-lock.json',
+  '**/yarn.lock',
+  '**/.yarn/',
+  '**/.yarnrc.yml',
+  '**/.pnp.*',
+  '**/.pnp',
+  '**/.pnp.js',
+  '**/.pnp.cjs',
+  '**/bun.lock',
+  '**/bun.lockb',
+  '**/pnpm-lock.yaml',
+  '**/.vite-inspect',
+  '**/.vitepress/cache',
+  '**/vite.config.*.timestamp-*',
+  // Logs
+  '**/*.log',
+  '**/npm-debug.log*',
+  '**/yarn-debug.log*',
+  '**/yarn-error.log*',
+  // Tests
+  '**/coverage/',
+  '**/.nyc_output/',
+  '**/__snapshots__',
+  // Editor/IDE/frameworks/tools configurations
+  '**/.vscode/',
+  '**/.idea/',
+  '**/.cache',
+  '**/.nuxt',
+  '**/.next',
+  '**/.svelte-kit',
+  '**/.vercel',
+  '**/.changeset',
+  '**/.turbo/',
+  // Misc
+  '**/.DS_Store',
+  '**/Thumbs.db',
+  '**/temp',
+  '**/.temp',
+  '**/tmp',
+  '**/.tmp',
+  '**/.history',
+  '**/mockServiceWorker.js',
+  '**/CHANGELOG*.md',
+  '**/LICENSE*',
+];
+
 /**
  * Base ESLint configuration.
  *
@@ -19,63 +76,7 @@ export function base(
   return [
     {
       name: 'yunarch/base/ignores',
-      ignores: [
-        // Node modules
-        '**/node_modules/',
-        // Build artifacts
-        '**/dist/',
-        '**/out/',
-        '**/output',
-        '**/.output',
-        '**/build/',
-        '**/*.min.*',
-        // Dependencies
-        '**/.yarn/',
-        '**/.yarnrc.yml',
-        '**/package-lock.json',
-        '**/yarn.lock',
-        '**/bun.lock',
-        '**/bun.lockb',
-        '**/pnpm-lock.yaml',
-        '**/.vite-inspect',
-        '**/.vitepress/cache',
-        '**/vite.config.*.timestamp-*',
-        // Logs
-        '**/*.log',
-        '**/npm-debug.log*',
-        '**/yarn-debug.log*',
-        '**/yarn-error.log*',
-        '.pnp.*',
-        '**/.pnp',
-        '**/.pnp.js',
-        '**/.pnp.cjs',
-        // Tests
-        '**/coverage/',
-        '**/.nyc_output/',
-        '**/__snapshots__',
-        // Editor/IDE/frameworks/tools configurations
-        '**/.vscode/',
-        '**/.idea/',
-        '**/.cache',
-        '**/.nuxt',
-        '**/.next',
-        '**/.svelte-kit',
-        '**/.vercel',
-        '**/.changeset',
-        '**/.turbo/',
-        // Misc
-        '**/.DS_Store',
-        '**/Thumbs.db',
-        '**/temp',
-        '**/.temp',
-        '**/tmp',
-        '**/.tmp',
-        '**/.history',
-        '**/mockServiceWorker.js',
-        '**/CHANGELOG*.md',
-        '**/LICENSE*',
-        ...(ignores ?? []),
-      ],
+      ignores: [...BASE_IGNORES, ...(ignores ?? [])],
     },
     {
       name: 'yunarch/base/setup',

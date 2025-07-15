@@ -3,6 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as categoriesRules from 'eslint-plugin-oxlint/rules-by-category';
 import { config } from '../src/eslint.config';
+import { BASE_IGNORES } from '../src/eslint/configs/base';
 
 // Define the plugins scopes on oxlint with their possible scopes for eslint
 const PLUGINS_SCOPES_OXLINT_ESLINT = {
@@ -125,62 +126,7 @@ await fs.writeFile(
   JSON.stringify({
     $schema:
       'https://raw.githubusercontent.com/oxc-project/oxc/main/npm/oxlint/configuration_schema.json',
-    ignorePatterns: [
-      // Node modules
-      '**/node_modules/',
-      // Build artifacts
-      '**/dist/',
-      '**/out/',
-      '**/output',
-      '**/.output',
-      '**/build/',
-      '**/*.min.*',
-      // Dependencies
-      '**/package-lock.json',
-      '**/yarn.lock',
-      '**/.yarn/',
-      '**/.yarnrc.yml',
-      '**/.pnp.*',
-      '**/.pnp',
-      '**/.pnp.js',
-      '**/.pnp.cjs',
-      '**/bun.lock',
-      '**/bun.lockb',
-      '**/pnpm-lock.yaml',
-      '**/.vite-inspect',
-      '**/.vitepress/cache',
-      '**/vite.config.*.timestamp-*',
-      // Logs
-      '**/*.log',
-      '**/npm-debug.log*',
-      '**/yarn-debug.log*',
-      '**/yarn-error.log*',
-      // Tests
-      '**/coverage/',
-      '**/.nyc_output/',
-      '**/__snapshots__',
-      // Editor/IDE/frameworks/tools configurations
-      '**/.vscode/',
-      '**/.idea/',
-      '**/.cache',
-      '**/.nuxt',
-      '**/.next',
-      '**/.svelte-kit',
-      '**/.vercel',
-      '**/.changeset',
-      '**/.turbo/',
-      // Misc
-      '**/.DS_Store',
-      '**/Thumbs.db',
-      '**/temp',
-      '**/.temp',
-      '**/tmp',
-      '**/.tmp',
-      '**/.history',
-      '**/mockServiceWorker.js',
-      '**/CHANGELOG*.md',
-      '**/LICENSE*',
-    ],
+    ignorePatterns: [...BASE_IGNORES],
     plugins: [...oxlintPlugins],
     rules: oxlintRules,
     overrides: oxlintOverrideRules,

@@ -145,7 +145,7 @@ export async function runSequential(
   let failedTasks = 0;
   for (const [index, script] of scripts.entries()) {
     const proc = spawnProc({ index, script, continueOnError, reportTime });
-    // eslint-disable-next-line no-await-in-loop -- Intentional sequential execution.
+    // oxlint-disable-next-line no-await-in-loop -- Intentional sequential execution.
     const exitCode = await proc.exited;
     if (exitCode !== 0) failedTasks++;
   }

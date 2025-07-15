@@ -3,17 +3,17 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
 import { builtinRules } from 'eslint/use-at-your-own-risk';
-import { base } from '../src/linters/eslint/configs/base';
-import { disables } from '../src/linters/eslint/configs/disables';
-import { imports } from '../src/linters/eslint/configs/imports';
-import { jsdoc } from '../src/linters/eslint/configs/jsdoc';
-import { perfectionist } from '../src/linters/eslint/configs/perfectionist';
-import { react } from '../src/linters/eslint/configs/react';
-import { tanstack } from '../src/linters/eslint/configs/tanstack';
-import { test } from '../src/linters/eslint/configs/test';
-import { typescript } from '../src/linters/eslint/configs/typescript';
-import { unicorn } from '../src/linters/eslint/configs/unicorn';
-import { combine } from '../src/linters/eslint/utils';
+import { base } from '../src/eslint/configs/base';
+import { disables } from '../src/eslint/configs/disables';
+import { imports } from '../src/eslint/configs/imports';
+import { jsdoc } from '../src/eslint/configs/jsdoc';
+import { perfectionist } from '../src/eslint/configs/perfectionist';
+import { react } from '../src/eslint/configs/react';
+import { tanstack } from '../src/eslint/configs/tanstack';
+import { test } from '../src/eslint/configs/test';
+import { typescript } from '../src/eslint/configs/typescript';
+import { unicorn } from '../src/eslint/configs/unicorn';
+import { combine } from '../src/eslint/utils';
 
 // Define configs
 const configs = await combine(
@@ -47,7 +47,4 @@ const dtsWithRileList = `${dts}\n\n// Names of all the configs\nexport type Conf
 
 // Write typegen.d.ts
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-await fs.writeFile(
-  `${__dirname}/../src/linters/eslint/typegen.d.ts`,
-  dtsWithRileList
-);
+await fs.writeFile(`${__dirname}/../src/eslint/typegen.d.ts`, dtsWithRileList);

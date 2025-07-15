@@ -272,10 +272,8 @@ To use the Biome, create a `biome.json` [configuration file](https://biomejs.dev
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "extends": ["@yunarch/config-web/biome"],
-  "javascript": {
-    "linter": {
-      "enabled": true,
-    },
+  "linter": {
+    "enabled": true,
   },
 }
 ```
@@ -283,7 +281,7 @@ To use the Biome, create a `biome.json` [configuration file](https://biomejs.dev
 That’s it! Biome will now use the shared config to lint and format your code. However:
 
 - If you prefer not to use Biome as a linter, simply remove the `"linter"` section. Linting is disabled by default unless explicitly enabled.
-- If you prefer to use Biome only as a linter, disable the formatter `"formatter": { "enabled": false }`.
+- If you prefer to use Biome only as a linter, disable the formatter by: `"formatter": { "enabled": false }`.
 
 > [!TIP]
 > Enable [vcs.useIgnoreFile](https://biomejs.dev/guides/integrate-in-vcs/#use-the-ignore-file), to allow Biome to ignore all the files and directories listed in your VCS ignore file.

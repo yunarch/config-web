@@ -117,7 +117,7 @@
     "@commitlint/cli": "19.8.1",
     "@commitlint/config-conventional": "19.8.1",
     "prettier": "3.6.2",
-    "@biomejs/biome": "1.9.4",
+    "@biomejs/biome": "2.1.1",
     "eslint": "9.31.0",
     "eslint-typegen": "2.2.1",
     "oxlint": "1.6.0",

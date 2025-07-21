@@ -95,8 +95,8 @@
   "dependencies": {
     "commander": "14.0.0",
     "ora": "8.2.0",
-    "@inquirer/confirm": "5.1.13",
-    "@inquirer/select": "4.2.4",
+    "@inquirer/confirm": "5.1.14",
+    "@inquirer/select": "4.3.0",
     "@total-typescript/ts-reset": "0.6.1",
     "globals": "16.3.0",
     "eslint-flat-config-utils": "2.1.0",
@@ -109,7 +109,7 @@
     "eslint-plugin-import-x": "4.16.1",
     "eslint-plugin-unused-imports": "4.1.4",
     "eslint-plugin-jsdoc": "51.4.1",
-    "eslint-config-prettier": "10.1.5",
+    "eslint-config-prettier": "10.1.8",
     "eslint-plugin-oxlint": "1.7.0",
     "@eslint-react/eslint-plugin": "1.52.3",
     "eslint-plugin-react-hooks": "5.2.0",
@@ -133,10 +133,10 @@
     "typescript": "5.8.3",
     "vitest": "3.2.4",
     "jsonc-parser": "3.3.1",
-    "@types/node": "24.0.14",
-    "@types/bun": "1.2.18"
+    "@types/node": "24.0.15",
+    "@types/bun": "1.2.19"
   },
-  "packageManager": "bun@1.2.18",
+  "packageManager": "bun@1.2.19",
   "publishConfig": {
     "access": "public"
   }

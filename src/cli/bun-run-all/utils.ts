@@ -70,7 +70,7 @@ function spawnProc({
     },
   });
   proc.stdout.pipeTo(
-    new WritableStream<Uint8Array>({
+    new WritableStream({
       write(chunk) {
         const lines = new TextDecoder().decode(chunk).split('\n');
         for (const line of lines) {
@@ -80,7 +80,7 @@ function spawnProc({
     })
   );
   proc.stderr.pipeTo(
-    new WritableStream<Uint8Array>({
+    new WritableStream({
       write(chunk) {
         const lines = new TextDecoder().decode(chunk).split('\n');
         for (const line of lines) {

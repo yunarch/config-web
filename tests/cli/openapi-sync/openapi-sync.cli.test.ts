@@ -2,15 +2,15 @@ import { existsSync } from 'node:fs';
 import { readFile, rm } from 'node:fs/promises';
 import path from 'node:path';
 import { afterAll, beforeAll, describe, it, vi } from 'vitest';
-import { TEMPLATE } from '../../src/cli/openapi-sync/codegen-msw-utils/openapi-msw-http';
-import { createCliExecutor, createRelativeResolver } from '../test-utils';
+import { TEMPLATE } from '../../../src/cli/openapi-sync/codegen-msw-utils/openapi-msw-http';
+import { createCliExecutor, createRelativeResolver } from '../../test-utils';
 
 const resolve = createRelativeResolver(import.meta.url);
 const run = createCliExecutor(
-  resolve('../../src/cli/openapi-sync/openapi-sync.ts')
+  resolve('../../../src/cli/openapi-sync/openapi-sync.ts')
 );
-const INPUT_PATH = resolve('./mocks/openapi-sync-input.json');
-const OUTPUT_PATH = resolve('./tmp');
+const INPUT_PATH = resolve('../__mocks__/openapi-sync-input.json');
+const OUTPUT_PATH = resolve('./openapi-sync-tmp');
 
 vi.mock('ora', () => {
   return {

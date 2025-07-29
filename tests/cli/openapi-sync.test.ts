@@ -6,7 +6,9 @@ import { TEMPLATE } from '../../src/cli/openapi-sync/codegen-msw-utils/openapi-m
 import { createCliExecutor, createRelativeResolver } from '../test-utils';
 
 const resolve = createRelativeResolver(import.meta.url);
-const run = createCliExecutor(resolve('../../src/cli/openapi-sync/index.ts'));
+const run = createCliExecutor(
+  resolve('../../src/cli/openapi-sync/openapi-sync.ts')
+);
 const INPUT_PATH = resolve('./mocks/openapi-sync-input.json');
 const OUTPUT_PATH = resolve('./tmp');
 

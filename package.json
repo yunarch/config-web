@@ -99,7 +99,7 @@
     "@inquirer/select": "4.3.1",
     "@total-typescript/ts-reset": "0.6.1",
     "globals": "16.3.0",
-    "eslint-flat-config-utils": "2.1.0",
+    "eslint-flat-config-utils": "2.1.1",
     "eslint-config-flat-gitignore": "2.1.0",
     "eslint-import-resolver-typescript": "4.4.4",
     "@eslint/js": "9.32.0",

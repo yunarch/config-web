@@ -47,7 +47,8 @@ export default defineConfig([
   {
     entry: [
       './src/cli/bun-run-all/index.ts',
-      './src/cli/openapi-sync/index.ts',
+      './src/cli/openapi-sync/openapi-sync.ts',
+      './src/cli/openapi-sync/openapi-sync-lint-msw-handlers.ts',
       './src/cli/turbo-select/index.ts',
     ],
     outDir: './dist/cli',

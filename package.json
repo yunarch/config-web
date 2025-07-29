@@ -36,7 +36,8 @@
   ],
   "bin": {
     "bun-run-all": "./dist/cli/bun-run-all/index.js",
-    "openapi-sync": "./dist/cli/openapi-sync/index.js",
+    "openapi-sync": "./dist/cli/openapi-sync/openapi-sync.js",
+    "openapi-sync-lint-msw-handlers": "./dist/cli/openapi-sync/openapi-sync-lint-msw-handlers.js",
     "turbo-select": "./dist/cli/turbo-select/index.js"
   },
   "exports": {

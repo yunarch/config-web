@@ -1,7 +1,7 @@
 import { config } from './src/eslint.config';
 
 export default config({
-  ignores: ['./tests/**/fixtures'],
+  ignores: ['./tests/__mocks__'],
   typescript: {
     tsconfigPath: './tsconfig.json',
   },

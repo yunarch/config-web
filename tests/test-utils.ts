@@ -44,11 +44,9 @@ export function createCliExecutor(cli: string) {
 
 // Resolve paths
 const resolve = createRelativeResolver(import.meta.url);
-export const OUTPUT_GEN_PATH = resolve('./__gen__/');
-export const OPENAPI_SYNC_INPUT = resolve(
-  './__mocks__/openapi-sync-input.json'
-);
-export const OPENAPI_SYNC_OUTPUT = `${OUTPUT_GEN_PATH}/openapi-sync/`;
+export const MOCKS_PATH = resolve('./__mocks__/');
+export const OPENAPI_SYNC_INPUT = `${MOCKS_PATH}/openapi-sync-input.json`;
+export const OPENAPI_SYNC_OUTPUT = `${MOCKS_PATH}/openapi-sync-input/`;
 
 // CLI Executors
 export const openapiSyncExecutor = createCliExecutor(

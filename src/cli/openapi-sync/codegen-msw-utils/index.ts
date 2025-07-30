@@ -1,6 +1,7 @@
-import { writeFile } from 'node:fs/promises';
+import { copyFile } from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { runTask } from '../../utils';
-import { TEMPLATE } from './openapi-msw-http';
 
 /**
  * Generate MSW utils from OpenAPI schema.
@@ -11,7 +12,13 @@ export async function run(outputDirectory: string) {
   await runTask({
     name: 'Generating openapi MSW utils',
     command: async () => {
-      await writeFile(`${outputDirectory}/openapi-msw-http.ts`, TEMPLATE);
+      const currentFilePath = fileURLToPath(import.meta.url);
+      const currentDir = path.dirname(currentFilePath);
+      const openapiMswHttp = path.join(currentDir, 'openapi-msw-http.ts');
+      await copyFile(
+        openapiMswHttp,
+        path.join(outputDirectory, 'openapi-msw-http.ts')
+      );
     },
   });
 }

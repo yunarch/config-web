@@ -1,4 +1,6 @@
-export const TEMPLATE = `
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import {
   http as mswHttp,
   type DefaultBodyType,
@@ -7,9 +9,10 @@ import {
   type PathParams,
   type RequestHandlerOptions,
 } from 'msw';
-import type { paths } from './schema';
+import type { paths as ImportedPaths } from './schema';
 
 // Type definitions
+type Paths = ImportedPaths;
 type HttpMethod =
   | 'get'
   | 'put'
@@ -23,16 +26,10 @@ type HttpMethod =
 /**
  * Type guard to get the http methods available for a given path.
  */
-type Methods<Path extends keyof paths> = {
-  [M in keyof paths[Path]]: M extends HttpMethod
-    ? paths[Path][M] extends undefined
-      ? never
-      : M
-    : never;
-}[keyof paths[Path]];
+type Methods<Path extends keyof Paths> = Extract<keyof Paths[Path], HttpMethod>;
 
 /**
- * Type guard to get the content type 'application/json' or  'multipart/form-data' of a type.
+ * Type guard to get the content type 'application/json' or 'multipart/form-data' of a type.
  */
 type ExtractContent<T> = T extends { content?: infer C }
   ? undefined extends C
@@ -48,11 +45,11 @@ type ExtractContent<T> = T extends { content?: infer C }
  * Type guard to get the parameters of a path.
  */
 export type OpenapiPathParams<
-  P extends keyof paths,
-  M extends keyof paths[P],
-> = 'parameters' extends keyof paths[P][M]
-  ? 'path' extends keyof paths[P][M]['parameters']
-    ? PathParams<keyof paths[P][M]['parameters']['path']>
+  P extends keyof Paths,
+  M extends keyof Paths[P],
+> = 'parameters' extends keyof Paths[P][M]
+  ? 'path' extends keyof Paths[P][M]['parameters']
+    ? PathParams<keyof Paths[P][M]['parameters']['path']>
     : PathParams
   : PathParams;
 
@@ -60,9 +57,9 @@ export type OpenapiPathParams<
  * Type guard to get the request body of a path.
  */
 export type OpenapiPathRequestBody<
-  P extends keyof paths,
-  M extends keyof paths[P],
-> = paths[P][M] extends { requestBody?: infer RB }
+  P extends keyof Paths,
+  M extends keyof Paths[P],
+> = Paths[P][M] extends { requestBody?: infer RB }
   ? undefined extends RB
     ? DefaultBodyType
     : ExtractContent<RB>
@@ -72,9 +69,9 @@ export type OpenapiPathRequestBody<
  * Type guard to get the response body of a path.
  */
 export type OpenapiPathResponseBody<
-  P extends keyof paths,
-  M extends keyof paths[P],
-> = paths[P][M] extends { responses?: infer R }
+  P extends keyof Paths,
+  M extends keyof Paths[P],
+> = Paths[P][M] extends { responses?: infer R }
   ? undefined extends R
     ? DefaultBodyType
     : 200 extends keyof R
@@ -95,7 +92,7 @@ export type OpenapiPathResponseBody<
  *
  * @throws Error if the method is not supported.
  */
-export function http<P extends keyof paths, M extends Methods<P>>(
+export function http<P extends keyof Paths, M extends Methods<P>>(
   path: P,
   method: M,
   resolver: HttpResponseResolver<
@@ -105,19 +102,18 @@ export function http<P extends keyof paths, M extends Methods<P>>(
   >,
   options?: RequestHandlerOptions
 ): HttpHandler {
-  const uri = \`*\${path.toString().replaceAll(/{(?<temp1>[^}]+)}/g, ':$1')}\`;
+  const uri = `*${path.toString().replaceAll(/{(?<temp1>[^}]+)}/g, ':$1')}`;
   const handlers = {
-    head: mswHttp.head(uri, resolver, options),
-    get: mswHttp.get(uri, resolver, options),
-    post: mswHttp.post(uri, resolver, options),
-    put: mswHttp.put(uri, resolver, options),
-    delete: mswHttp.delete(uri, resolver, options),
-    patch: mswHttp.patch(uri, resolver, options),
-    options: mswHttp.options(uri, resolver, options),
+    head: mswHttp.head,
+    get: mswHttp.get,
+    post: mswHttp.post,
+    put: mswHttp.put,
+    delete: mswHttp.delete,
+    patch: mswHttp.patch,
+    options: mswHttp.options,
   } as const;
   if (typeof method !== 'string' || !Object.hasOwn(handlers, method)) {
     throw new Error('Unsupported Http Method');
   }
-  return handlers[method as keyof typeof handlers];
+  return handlers[method as keyof typeof handlers](uri, resolver, options);
 }
-`;

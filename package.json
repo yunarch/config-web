@@ -77,7 +77,8 @@
     "@biomejs/biome": ">= 2 || < 3",
     "prettier": ">= 3 || < 4",
     "eslint": ">=9.5.0 || < 10",
-    "oxlint": ">=0.16.2 || < 2"
+    "oxlint": ">=0.16.2 || < 2",
+    "msw": ">=2 || < 3"
   },
   "peerDependenciesMeta": {
     "@biomejs/biome": {
@@ -90,6 +91,9 @@
       "optional": true
     },
     "oxlint": {
+      "optional": true
+    },
+    "msw": {
       "optional": true
     }
   },
@@ -134,6 +138,7 @@
     "typescript": "5.8.3",
     "vitest": "3.2.4",
     "jsonc-parser": "3.3.1",
+    "msw": "2.10.4",
     "@types/node": "24.1.0",
     "@types/bun": "1.2.19"
   },

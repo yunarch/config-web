@@ -70,7 +70,7 @@
     "format:mocks": "biome format --write ./tests/__mocks__",
     "clean": "rimraf dist coverage .turbo",
     "build": "bun run gen && tsup",
-    "tests": "vitest --typecheck run",
+    "tests": "bun vitest --typecheck run",
     "tests:watch": "vitest --typecheck watch",
     "release": "bun run lint && bun run test && bun publish --dry-run && bunx bumpp && bun run build && bun publish"
   },

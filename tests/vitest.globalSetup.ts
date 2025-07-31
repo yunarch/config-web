@@ -1,3 +1,4 @@
+import { runTask } from '../src/cli/utils';
 import {
   OPENAPI_SYNC_INPUT,
   OPENAPI_SYNC_OUTPUT,
@@ -8,9 +9,14 @@ import {
  * Setup function to run before tests.
  */
 export async function setup() {
-  await openapiSyncExecutor([
-    `-i ${OPENAPI_SYNC_INPUT} -o ${OPENAPI_SYNC_OUTPUT} -f --include-msw-utils`,
-  ]);
+  await runTask({
+    name: 'Generating OpenAPI mock files\n',
+    command: async () => {
+      await openapiSyncExecutor([
+        `-i ${OPENAPI_SYNC_INPUT} -o ${OPENAPI_SYNC_OUTPUT} -f --include-msw-utils --post-script format:mocks`,
+      ]);
+    },
+  });
 }
 
 /**

@@ -1,7 +1,7 @@
 import { exec } from 'node:child_process';
 import { promisify, styleText, types } from 'node:util';
 import { Command } from 'commander';
-import ora from 'ora';
+import ora, { type Options } from 'ora';
 
 // Async version of exec
 export const asyncExec = promisify(exec);
@@ -15,10 +15,11 @@ export const asyncExec = promisify(exec);
 export async function runTask<T = string>(task: {
   command: string | Promise<T> | (() => Promise<T>);
   name: string;
+  spinner?: Options['spinner'];
 }) {
-  const { command, name } = task;
+  const { command, name, spinner: spinnerType } = task;
   const spinner = ora(name);
-  spinner.spinner = 'aesthetic';
+  spinner.spinner = spinnerType ?? 'aesthetic';
   spinner.start();
   try {
     const result =

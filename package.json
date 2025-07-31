@@ -67,6 +67,7 @@
     "lint:inspect": "bunx @eslint/config-inspector --config eslint.config.ts",
     "format": "biome format && prettier \"**/*.{html,md,yaml,yml}\" --check",
     "format:all": "biome format --write && prettier \"**/*.{html,md,yaml,yml}\" --write",
+    "format:mocks": "biome format --write ./tests/__mocks__",
     "clean": "rimraf dist coverage .turbo",
     "build": "bun run gen && tsup",
     "tests": "vitest --typecheck run",

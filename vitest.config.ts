@@ -5,4 +5,9 @@ export default defineConfig({
     globalSetup: './tests/vitest.globalSetup.ts',
     setupFiles: ['./tests/vitest.setup.ts'],
   },
+  server: {
+    watch: {
+      ignored: ['**/tests/**/package.json'],
+    },
+  },
 });

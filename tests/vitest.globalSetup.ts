@@ -16,6 +16,9 @@ export async function setup() {
         `-i ${OPENAPI_SYNC_INPUT} -o ${OPENAPI_SYNC_OUTPUT} -f --include-msw-utils --post-script format:mocks`,
       ]);
     },
+    options: {
+      showTime: true,
+    },
   });
 }
 

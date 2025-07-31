@@ -15,11 +15,15 @@ export const asyncExec = promisify(exec);
 export async function runTask<T = string>(task: {
   command: string | Promise<T> | (() => Promise<T>);
   name: string;
-  spinner?: Options['spinner'];
+  options?: {
+    spinner?: Options['spinner'];
+    showTime?: boolean;
+  };
 }) {
-  const { command, name, spinner: spinnerType } = task;
+  const { command, name, options } = task;
   const spinner = ora(name);
-  spinner.spinner = spinnerType ?? 'aesthetic';
+  spinner.spinner = options?.spinner ?? 'aesthetic';
+  const startTime = Date.now();
   spinner.start();
   try {
     const result =
@@ -28,7 +32,11 @@ export async function runTask<T = string>(task: {
         : types.isPromise(command)
           ? await command
           : await command();
-    spinner.succeed();
+    spinner.succeed(
+      options?.showTime
+        ? `${styleText('dim', `${Date.now() - startTime}ms`)} ${name}`
+        : undefined
+    );
     // Workaround to allow the terminal to change spinner loading icon to a check.
     // Just adding an await of 0ms fixes the issue.
     await new Promise((resolve) => {

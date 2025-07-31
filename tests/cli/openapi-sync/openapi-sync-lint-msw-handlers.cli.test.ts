@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { openapiSyncLintMswHandlersExecutor } from '../test-utils';
+import { openapiSyncLintMswHandlersExecutor } from '../../test-utils';
 
 describe('openapi-sync-lint-msw-handlers', () => {
   it('should fail and throw an error with missing required options', async () => {
@@ -20,5 +20,13 @@ describe('openapi-sync-lint-msw-handlers', () => {
         "error: required option '--msw-setup-const <const>' not specified"
       ),
     ]);
+  });
+
+  it('should display help information with --help flag', async () => {
+    const { stdout } = await openapiSyncLintMswHandlersExecutor(['--help']);
+    expect(stdout).toContain('Usage: openapi-sync-lint-msw-handlers [options]');
+    expect(stdout).toContain('--gen <path>');
+    expect(stdout).toContain('--msw-setup-file <path>');
+    expect(stdout).toContain('--msw-setup-const <const>');
   });
 });

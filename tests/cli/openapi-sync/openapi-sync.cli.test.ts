@@ -1,6 +1,6 @@
 import { existsSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { OPENAPI_SYNC_OUTPUT, openapiSyncExecutor } from '../test-utils';
+import { OPENAPI_SYNC_OUTPUT, openapiSyncExecutor } from '../../test-utils';
 
 describe('openapi-sync', () => {
   it('should fail and throw an error with missing required options', async () => {
@@ -40,15 +40,25 @@ describe('openapi-sync', () => {
     ]);
   });
 
-  it('should create `openapi.json` file', () => {
+  it('should display help information with --help flag', async () => {
+    const { stdout } = await openapiSyncExecutor(['--help']);
+    expect(stdout).toContain('Usage: openapi-sync [options]');
+    expect(stdout).toContain('-i, --input <path>');
+    expect(stdout).toContain('-o, --output <folder>');
+    expect(stdout).toContain('-f, --force-gen');
+    expect(stdout).toContain('--include-msw-utils');
+    expect(stdout).toContain('--post-script <script>');
+  });
+
+  it('vitest global setup `openapi-sync` should have created `openapi.json` file', () => {
     expect(existsSync(`${OPENAPI_SYNC_OUTPUT}/openapi.json`)).toBe(true);
   });
 
-  it('should create `schema.d.ts` file', () => {
+  it('vitest global setup `openapi-sync` should have created `schema.d.ts` file', () => {
     expect(existsSync(`${OPENAPI_SYNC_OUTPUT}/schema.d.ts`)).toBe(true);
   });
 
-  it('should create `openapi-msw-http.ts` file', () => {
+  it('vitest global setup `openapi-sync` should have created `openapi-msw-http.ts` file', () => {
     expect(existsSync(`${OPENAPI_SYNC_OUTPUT}/openapi-msw-http.ts`)).toBe(true);
   });
 });

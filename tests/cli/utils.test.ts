@@ -1,16 +1,6 @@
 import ora from 'ora';
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { runTask } from '../../src/cli/utils';
-
-vi.mock('ora', () => {
-  return {
-    default: vi.fn(() => ({
-      start: vi.fn(),
-      succeed: vi.fn(),
-      fail: vi.fn(),
-    })),
-  };
-});
 
 describe('runTask', () => {
   it('should fail and throw an error with invalid command', async () => {

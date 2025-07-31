@@ -35,10 +35,10 @@
     "dist"
   ],
   "bin": {
-    "bun-run-all": "./dist/cli/bun-run-all/index.js",
-    "openapi-sync": "./dist/cli/openapi-sync/openapi-sync.js",
-    "openapi-sync-lint-msw-handlers": "./dist/cli/openapi-sync/openapi-sync-lint-msw-handlers.js",
-    "turbo-select": "./dist/cli/turbo-select/index.js"
+    "bun-run-all": "./dist/cli/bun-run-all/bun-run-all.cli.js",
+    "openapi-sync": "./dist/cli/openapi-sync/openapi-sync.cli.js",
+    "openapi-sync-lint-msw-handlers": "./dist/cli/openapi-sync/openapi-sync-lint-msw-handlers.cli.js",
+    "turbo-select": "./dist/cli/turbo-select/turbo-select.cli.js"
   },
   "exports": {
     ".": "./dist/index.js",
@@ -56,7 +56,7 @@
   "type": "module",
   "scripts": {
     "postinstall": "husky && bun run gen",
-    "bun-run-all": "bun ./src/cli/bun-run-all/index.ts",
+    "bun-run-all": "bun ./src/cli/bun-run-all/bun-run-all.cli.ts",
     "gen": "bun bun-run-all gen:eslint-typegen gen:oxlint-compatgen gen:biome-compatgen",
     "gen:eslint-typegen": "bun run ./scripts/eslint-typegen.ts",
     "gen:oxlint-compatgen": "bun run ./scripts/oxlint-compatgen.ts && biome format --write ./src/oxlint.config.jsonc",

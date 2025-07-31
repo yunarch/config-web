@@ -13,7 +13,7 @@ export async function setup() {
     name: 'Generating OpenAPI mock files\n',
     command: async () => {
       await openapiSyncExecutor([
-        `-i ${OPENAPI_SYNC_INPUT} -o ${OPENAPI_SYNC_OUTPUT} -f --include-msw-utils --post-script format:mocks`,
+        `-i ${OPENAPI_SYNC_INPUT} -o ${OPENAPI_SYNC_OUTPUT} -f --include-msw-utils ${process.env.CI ? '' : '--post-script format:mocks'}`,
       ]);
     },
     options: {

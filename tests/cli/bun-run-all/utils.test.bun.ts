@@ -1,3 +1,7 @@
+// ! Workaround to test Bun module inside Vitest as vitest does not support Bun atm.
+// ! This file should be executed inside vitest (node environment) with `exec`.
+// ! Inside the `exec` it should execute `bun test` command.
+// ! see `bun-run-all.cli.test.ts` -- 'run utils.test.bun.ts with bun test runner' test for more details.
 import { afterEach } from 'node:test';
 import { describe, expect, it, vi } from 'vitest';
 import { runParallel, runSequential } from '../../../src/cli/bun-run-all/utils';

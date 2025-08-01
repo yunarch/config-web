@@ -45,7 +45,7 @@ async function generateDocs() {
   if (!existsSync(DOCS_DIR)) mkdirSync(DOCS_DIR, { recursive: true });
   const tools = findCliTools();
   const documentationPromises = tools.map(async (tool) => {
-    const helpOutput = execSync(`bun run ${tool.path} --help`, {
+    const helpOutput = execSync(`bun --bun run ${tool.path} --help`, {
       encoding: 'utf8',
       env: { FORCE_COLOR: '0' },
     });

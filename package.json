@@ -56,7 +56,7 @@
   "type": "module",
   "scripts": {
     "postinstall": "husky && bun run gen",
-    "bun-run-all": "bun --bun run ./src/cli/bun-run-all/bun-run-all.cli.ts",
+    "bun-run-all": "bun run ./src/cli/bun-run-all/bun-run-all.cli.ts",
     "gen": "bun run bun-run-all gen:cli-docs gen:eslint-typegen gen:oxlint-compatgen gen:biome-compatgen",
     "gen:cli-docs": "bun run ./scripts/cli-docsgen.ts",
     "gen:eslint-typegen": "bun run ./scripts/eslint-typegen.ts",

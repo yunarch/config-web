@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+export const TEMPLATE = `
 import {
   http as mswHttp,
   type DefaultBodyType,
@@ -102,7 +100,7 @@ export function http<P extends keyof Paths, M extends Methods<P>>(
   >,
   options?: RequestHandlerOptions
 ): HttpHandler {
-  const uri = `*${path.toString().replaceAll(/{(?<temp1>[^}]+)}/g, ':$1')}`;
+  const uri = \`*\${path.toString().replaceAll(/{(?<temp1>[^}]+)}/g, ':$1')}\`;
   const handlers = {
     head: mswHttp.head,
     get: mswHttp.get,
@@ -117,3 +115,4 @@ export function http<P extends keyof Paths, M extends Methods<P>>(
   }
   return handlers[method as keyof typeof handlers](uri, resolver, options);
 }
+`;

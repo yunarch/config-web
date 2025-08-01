@@ -17,6 +17,10 @@ createBaseProgram()
     '--select-env',
     'An environment mode (development, staging, production) If using for example vite.'
   )
+  .addHelpText(
+    'after',
+    '\nExample usage:\n\n$ turbo-select --run dev --select-env'
+  )
   .action(async ({ run, selectEnv }: { run: string; selectEnv?: boolean }) => {
     try {
       console.log(styleText('magenta', '\n🚀 Turbo-Select\n'));

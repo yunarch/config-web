@@ -16,6 +16,7 @@ createBaseProgram()
   .option('-p, --parallel', 'Run a group of tasks in parallel.')
   .option('-s, --sequential', 'Run a group of tasks sequentially.')
   .option('-t, --time', 'Report execution time for each task.')
+  .addHelpText('after', '\nExample usage:\n\n$ bun-run-all script1 script2')
   .action(
     async (
       scripts: string[],

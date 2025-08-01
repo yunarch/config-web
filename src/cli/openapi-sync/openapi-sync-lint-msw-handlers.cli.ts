@@ -24,6 +24,10 @@ createBaseProgram()
     '--msw-setup-const <const>',
     'Name of the constant that holds the MSW setup (e.g., server or worker).'
   )
+  .addHelpText(
+    'after',
+    '\nExample usage:\n\n$ openapi-sync-lint-msw-handlers --gen ./src/api/gen --msw-setup-file ./src/api/__tests__/node.ts --msw-setup-const server'
+  )
   .action(
     async ({
       gen,

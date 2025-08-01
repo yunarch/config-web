@@ -119,6 +119,10 @@ createBaseProgram()
     '--post-script <script>',
     'A package.json script to run after the code generation.'
   )
+  .addHelpText(
+    'after',
+    '\nExample usage:\n\n$ openapi-sync -i ./input.json -o ./src/api/gen --include-msw-utils'
+  )
   .action(
     async ({
       input,

@@ -57,7 +57,8 @@
   "scripts": {
     "postinstall": "husky && bun run gen",
     "bun-run-all": "bun run ./src/cli/bun-run-all/bun-run-all.cli.ts",
-    "gen": "bun run bun-run-all gen:eslint-typegen gen:oxlint-compatgen gen:biome-compatgen",
+    "gen": "bun run bun-run-all gen:cli-docs gen:eslint-typegen gen:oxlint-compatgen gen:biome-compatgen",
+    "gen:cli-docs": "bun run ./scripts/cli-docsgen.ts",
     "gen:eslint-typegen": "bun run ./scripts/eslint-typegen.ts",
     "gen:oxlint-compatgen": "bun run ./scripts/oxlint-compatgen.ts && biome format --write ./src/oxlint.config.jsonc",
     "gen:biome-compatgen": "bun run ./scripts/biome-compatgen.ts && biome format --write ./src/biome.config.jsonc",

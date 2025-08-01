@@ -1,6 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
-import { sync as globSync } from 'glob';
+import fg from 'fast-glob';
 import ts from 'typescript';
 
 // Types
@@ -30,15 +30,16 @@ export type ServicesUsagesMap = Map<
  *
  * @throws {Error} if the services directory is not found.
  */
-function extractGenApiServicesInfo(genPath: string) {
+async function extractGenApiServicesInfo(genPath: string) {
   const result: ServiceInfo[] = [];
   const servicesDir = path.join(genPath, 'services');
   if (!existsSync(servicesDir)) {
     throw new Error(`Services directory not found: ${servicesDir}`);
   }
-  const serviceFiles = globSync('**/*Service.ts', {
+  const serviceFiles = await fg('**/*Service.ts', {
     cwd: servicesDir,
     absolute: true,
+    ignore: ['**/node_modules/**'],
   });
   for (const serviceFile of serviceFiles) {
     const name = path.basename(serviceFile, '.ts');
@@ -132,14 +133,14 @@ function extractGenApiServicesInfo(genPath: string) {
  *
  * @throws {Error} if there is an error parsing a source file.
  */
-export function findServicesUsages({
+export async function findServicesUsages({
   genPath,
   srcPath,
 }: {
   genPath: string;
   srcPath: string;
-}): ServicesUsagesMap {
-  const services = extractGenApiServicesInfo(genPath);
+}): Promise<ServicesUsagesMap> {
+  const services = await extractGenApiServicesInfo(genPath);
   const result: ServicesUsagesMap = new Map();
   for (const serviceInfo of services) {
     if (!result.has(serviceInfo.name)) {
@@ -151,7 +152,7 @@ export function findServicesUsages({
     });
   }
   // Find all TypeScript files in src, excluding gen and handlers directories
-  const srcFiles = globSync('**/*.{ts,tsx}', {
+  const srcFiles = await fg('**/*.{ts,tsx}', {
     cwd: srcPath,
     absolute: true,
     ignore: ['**/node_modules/**', '**/__tests__/**'],

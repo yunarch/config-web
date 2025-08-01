@@ -56,7 +56,7 @@ createBaseProgram()
           throw new Error('MSW setup file does not exist or is not a file');
         }
         // Proceed with linting
-        const servicesUsages = findServicesUsages({
+        const servicesUsages = await findServicesUsages({
           genPath,
           srcPath,
         });

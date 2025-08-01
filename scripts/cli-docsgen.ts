@@ -1,7 +1,8 @@
-import { execSync } from 'node:child_process';
+import { exec } from 'node:child_process';
 import { existsSync, mkdirSync, readdirSync } from 'node:fs';
 import { writeFile } from 'node:fs/promises';
 import path from 'node:path';
+import { promisify } from 'node:util';
 
 const CLI_DIR = path.join(process.cwd(), 'src', 'cli');
 const DOCS_DIR = path.join(CLI_DIR, '__docs__');
@@ -45,10 +46,13 @@ async function generateDocs() {
   if (!existsSync(DOCS_DIR)) mkdirSync(DOCS_DIR, { recursive: true });
   const tools = findCliTools();
   const documentationPromises = tools.map(async (tool) => {
-    const helpOutput = execSync(`bun run ${tool.path} --help`, {
-      encoding: 'utf8',
-      env: { FORCE_COLOR: '0' },
-    });
+    const { stdout: helpOutput } = await promisify(exec)(
+      `bun run ${tool.path} --help`,
+      {
+        encoding: 'utf8',
+        env: { FORCE_COLOR: '0' },
+      }
+    );
     const markdown = `# ${tool.name}\n\n\`\`\`\n${helpOutput}\n\`\`\`\n`;
     const outputPath = path.join(DOCS_DIR, `${tool.name}.md`);
     await writeFile(outputPath, markdown, 'utf8');

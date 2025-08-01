@@ -26,7 +26,6 @@ jobs:
         uses: oven-sh/setup-bun@v2
       - name: 📦 Install dependencies
         run: bun install --frozen-lockfile
-        shell: bun
       - name: 🔍 Lint files
         run: bun run lint
   test:
@@ -39,6 +38,5 @@ jobs:
         uses: oven-sh/setup-bun@v2
       - name: 📦 Install dependencies
         run: bun install --frozen-lockfile
-        shell: bun
       - name: 🧪 Test files
         run: bun run tests

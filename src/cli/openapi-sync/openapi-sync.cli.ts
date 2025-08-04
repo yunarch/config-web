@@ -121,7 +121,14 @@ createBaseProgram()
   )
   .addHelpText(
     'after',
-    '\nExample usage:\n\n$ openapi-sync -i ./input.json -o ./src/api/gen --include-msw-utils'
+    `
+Example usage:
+${styleText('dim', '$')} \
+${styleText('cyan', 'openapi-sync')} \
+${styleText('green', '-i')} ${styleText('yellow', './openapi.json')} \
+${styleText('green', '-o')} ${styleText('yellow', './src/api/gen')} \
+${styleText('green', '--include-msw-utils')}
+`
   )
   .action(
     async ({

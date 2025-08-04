@@ -17,7 +17,7 @@ Options:
   -h, --help               display help for command
 
 Example usage:
-
 $ bun-run-all script1 script2
+
 
 ```

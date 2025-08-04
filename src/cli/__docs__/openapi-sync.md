@@ -20,7 +20,7 @@ Options:
   -h, --help              display help for command
 
 Example usage:
+$ openapi-sync -i ./openapi.json -o ./src/api/gen --include-msw-utils
 
-$ openapi-sync -i ./input.json -o ./src/api/gen --include-msw-utils
 
 ```

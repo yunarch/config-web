@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { existsSync, statSync } from 'node:fs';
 import path from 'node:path';
+import { styleText } from 'node:util';
 import { createBaseProgram } from '../utils';
 import { displayResults } from './lint-msw-handlers/displayResults';
 import { findExistingHandlers } from './lint-msw-handlers/findExistingHandlers';
@@ -26,7 +27,31 @@ createBaseProgram()
   )
   .addHelpText(
     'after',
-    '\nExample usage:\n\n$ openapi-sync-lint-msw-handlers --gen ./src/api/gen --msw-setup-file ./src/api/__tests__/node.ts --msw-setup-const server'
+    `
+Example usage:
+${styleText('dim', '$')} \
+${styleText('cyan', 'openapi-sync-lint-msw-handlers')} \
+${styleText('green', '--gen')} ${styleText('yellow', './src/api/gen')} \
+${styleText('green', '--msw-setup-file')} ${styleText('yellow', './src/api/__tests__/node.js')} \
+${styleText('green', '--msw-setup-const')} ${styleText('yellow', 'server')}
+
+Note: If the MSW setup file (passed via ${styleText('green', '--msw-setup-file')}) is a TypeScript file,
+you must run the script with a runtime that supports TypeScript (e.g. ${styleText('yellow', 'tsx')}, ${styleText('yellow', 'ts-node')}, or ${styleText('yellow', 'bun')}).
+
+Examples:
+${styleText('dim', '$')} \
+${styleText('yellow', 'tsx')} ${styleText('cyan', 'openapi-sync-lint-msw-handlers')} \
+${styleText('green', '--gen')} ${styleText('yellow', './src/api/gen')} \
+${styleText('green', '--msw-setup-file')} ${styleText('yellow', './src/api/__tests__/node.ts')} \
+${styleText('green', '--msw-setup-const')} ${styleText('yellow', 'server')}
+
+${styleText('dim', '$')} \
+${styleText('yellow', 'bun')} ${styleText('yellow', '--bun')} \
+${styleText('cyan', 'openapi-sync-lint-msw-handlers')} \
+${styleText('green', '--gen')} ${styleText('yellow', './src/api/gen')} \
+${styleText('green', '--msw-setup-file')} ${styleText('yellow', './src/api/__tests__/node.ts')} \
+${styleText('green', '--msw-setup-const')} ${styleText('yellow', 'server')}
+`
   )
   .action(
     async ({

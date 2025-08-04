@@ -17,7 +17,15 @@ Options:
   -h, --help                 display help for command
 
 Example usage:
+$ openapi-sync-lint-msw-handlers --gen ./src/api/gen --msw-setup-file ./src/api/__tests__/node.js --msw-setup-const server
 
-$ openapi-sync-lint-msw-handlers --gen ./src/api/gen --msw-setup-file ./src/api/__tests__/node.ts --msw-setup-const server
+Note: If the MSW setup file (passed via --msw-setup-file) is a TypeScript file,
+you must run the script with a runtime that supports TypeScript (e.g. tsx, ts-node, or bun).
+
+Examples:
+$ tsx openapi-sync-lint-msw-handlers --gen ./src/api/gen --msw-setup-file ./src/api/__tests__/node.ts --msw-setup-const server
+
+$ bun --bun openapi-sync-lint-msw-handlers --gen ./src/api/gen --msw-setup-file ./src/api/__tests__/node.ts --msw-setup-const server
+
 
 ```

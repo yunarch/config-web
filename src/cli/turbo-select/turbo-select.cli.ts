@@ -19,7 +19,13 @@ createBaseProgram()
   )
   .addHelpText(
     'after',
-    '\nExample usage:\n\n$ turbo-select --run dev --select-env'
+    `
+Example usage:
+${styleText('dim', '$')} \
+${styleText('cyan', 'turbo-select')} \
+${styleText('green', '--run')} ${styleText('yellow', 'dev')} \
+${styleText('green', '--select-env')}
+`
   )
   .action(async ({ run, selectEnv }: { run: string; selectEnv?: boolean }) => {
     try {

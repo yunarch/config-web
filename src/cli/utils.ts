@@ -1,10 +1,6 @@
-import { exec } from 'node:child_process';
-import { promisify, styleText, types } from 'node:util';
+import { styleText, types } from 'node:util';
 import { Command } from 'commander';
 import ora, { type Options } from 'ora';
-
-// Async version of exec
-export const asyncExec = promisify(exec);
 
 /**
  * Executes a given task with a spinner to indicate progress.
@@ -13,7 +9,7 @@ export const asyncExec = promisify(exec);
  * @returns Resolves to the command's output.
  */
 export async function runTask<T = string>(task: {
-  command: string | Promise<T> | (() => Promise<T>);
+  command: Promise<T> | (() => T | Promise<T>);
   name: string;
   options?: {
     spinner?: Options['spinner'];
@@ -26,12 +22,7 @@ export async function runTask<T = string>(task: {
   const startTime = Date.now();
   spinner.start();
   try {
-    const result =
-      typeof command === 'string'
-        ? await asyncExec(command)
-        : types.isPromise(command)
-          ? await command
-          : await command();
+    const result = types.isPromise(command) ? await command : await command();
     spinner.succeed(
       options?.showTime
         ? `${styleText('dim', `${Date.now() - startTime}ms`)} ${name}`
@@ -42,9 +33,7 @@ export async function runTask<T = string>(task: {
     await new Promise((resolve) => {
       setTimeout(resolve, 0);
     });
-    return typeof result === 'object' && result && 'stdout' in result
-      ? result.stdout
-      : result;
+    return result;
   } catch (error) {
     const e = error as { stderr?: string; message?: string };
     spinner.fail(styleText('red', e.stderr ?? e.message ?? ''));

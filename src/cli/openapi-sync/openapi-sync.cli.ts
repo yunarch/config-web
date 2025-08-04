@@ -1,10 +1,11 @@
 #!/usr/bin/env node
+import { execFileSync } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { styleText } from 'node:util';
 import confirm from '@inquirer/confirm';
-import { asyncExec, createBaseProgram, runTask } from '../utils';
+import { createBaseProgram, runTask } from '../utils';
 import { run as generateModels } from './codegen-models';
 import { run as generateMswUtils } from './codegen-msw-utils';
 import { run as generateSchemaTypeDefinition } from './codegen-schema-typedef';
@@ -58,8 +59,10 @@ async function readOpenapiSchemas(
         }
         if (inputSchemaPath.startsWith('http')) {
           try {
-            const { stdout } = await asyncExec(
-              `curl -s ${inputSchemaPath} --fail`
+            const stdout = execFileSync(
+              'curl',
+              ['-s', inputSchemaPath, '--fail'],
+              { encoding: 'utf8' }
             );
             return stdout;
           } catch {
@@ -107,9 +110,14 @@ createBaseProgram()
     '-o, --output <folder>',
     'The output folder to save the generated models and openapi schema and type definitions.'
   )
+  .option('-y, --yes', 'Skip confirmation prompts and proceed with defaults.')
   .option(
     '-f, --force-gen',
     'Force generation of typescript schemas and fetching code even if the input and output schemas are identical.'
+  )
+  .option(
+    '--fail-on-change',
+    'Fail if the input and output schemas are different.'
   )
   .option(
     '--include-msw-utils',
@@ -134,13 +142,17 @@ ${styleText('green', '--include-msw-utils')}
     async ({
       input,
       output,
+      yes,
       forceGen,
+      failOnChange,
       includeMswUtils,
       postScript,
     }: {
       input: string;
       output: string;
+      yes: boolean;
       forceGen: boolean;
+      failOnChange: boolean;
       includeMswUtils: boolean;
       postScript: string;
     }) => {
@@ -174,10 +186,13 @@ ${styleText('green', '--include-msw-utils')}
               '\n⚠️  Local and remote schemas does not match!\n'
             )
           );
-          const confirmed = await confirm({
-            message: 'Do you want to use the remote schema? (y/n)?',
-          });
-          if (confirmed) {
+          if (failOnChange) process.exit(1);
+          if (
+            yes ||
+            (await confirm({
+              message: 'Do you want to use the remote schema? (y/n)?',
+            }))
+          ) {
             await runTask({
               name: 'Replacing local schema with input schema',
               command: writeFile(outputSchemaPath, inputSchema),
@@ -200,7 +215,9 @@ ${styleText('green', '--include-msw-utils')}
         if (postScript) {
           await runTask({
             name: 'Running post script',
-            command: `node --run ${postScript}`,
+            command: () => {
+              execFileSync('node', ['--run', postScript]);
+            },
           });
         }
         // Success message

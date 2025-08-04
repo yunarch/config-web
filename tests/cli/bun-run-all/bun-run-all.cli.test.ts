@@ -1,4 +1,4 @@
-import { exec } from 'node:child_process';
+import { execFile } from 'node:child_process';
 import { rm, writeFile } from 'node:fs/promises';
 import { promisify } from 'node:util';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
@@ -50,8 +50,10 @@ describe('bun-run-all', () => {
 
   it('run utils.test.bun.ts with bun test runner', async () => {
     // stderr -> Status messages, test runner summaries, warnings, etc.
-    const { stderr } = await promisify(exec)(
-      `cd ${resolve('.')} && bun test ./utils.test.bun.ts`
+    const { stderr } = await promisify(execFile)(
+      'bun',
+      ['test', './utils.test.bun.ts'],
+      { cwd: resolve('.') }
     );
     expect(stderr).toContain('0 fail');
   });

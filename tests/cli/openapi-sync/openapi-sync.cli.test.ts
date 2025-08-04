@@ -1,6 +1,10 @@
 import { existsSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { OPENAPI_SYNC_OUTPUT, openapiSyncExecutor } from '../../test-utils';
+import {
+  MOCKS_PATH,
+  OPENAPI_SYNC_OUTPUT,
+  openapiSyncExecutor,
+} from '../../test-utils';
 
 describe('openapi-sync', () => {
   it('should fail and throw an error with missing required options', async () => {
@@ -45,9 +49,19 @@ describe('openapi-sync', () => {
     expect(stdout).toContain('Usage: openapi-sync [options]');
     expect(stdout).toContain('-i, --input <path>');
     expect(stdout).toContain('-o, --output <folder>');
+    expect(stdout).toContain('-y, --yes');
     expect(stdout).toContain('-f, --force-gen');
+    expect(stdout).toContain('--fail-on-change');
     expect(stdout).toContain('--include-msw-utils');
     expect(stdout).toContain('--post-script <script>');
+  });
+
+  it('should fail with --fail-on-change flag if files are changed', async () => {
+    await expect(
+      openapiSyncExecutor([
+        `-i ${MOCKS_PATH}/openapi-sync-input.new.json -o ${OPENAPI_SYNC_OUTPUT} --fail-on-change`,
+      ])
+    ).rejects.toThrowError();
   });
 
   it('vitest global setup `openapi-sync` should have created `openapi.json` file', () => {

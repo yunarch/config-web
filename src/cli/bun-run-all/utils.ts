@@ -3,7 +3,7 @@ import { styleText } from 'node:util';
 // List of supported colors for styling text
 const COLORS = ['blue', 'green', 'yellow', 'grey', 'white', 'cyan'] as const;
 const getExecutionTime = (start: number) => {
-  const durationMs = Number(Bun.nanoseconds() - start) / 1_000_000;
+  const durationMs = (Bun.nanoseconds() - start) / 1_000_000;
   return `${(durationMs / 1000).toFixed(2)}s`;
 };
 

@@ -46,8 +46,8 @@ export async function findExistingHandlers({
   for (const handler of handlers) {
     if (!('info' in handler)) continue; // Skip handlers without info (e.g. WebSocketHandlers do not have info)
     if (!handler.info?.path || !handler.info.method) continue; // Skip handlers without path or method
-    const path = String(handler.info.path);
-    const httpMethod = String(handler.info.method).toUpperCase();
+    const path = handler.info.path;
+    const httpMethod = handler.info.method.toUpperCase();
     const url = path.replaceAll(/:(?<temp1>[^/]+)/g, '{$1}');
     const handlerKey = `${httpMethod}:${url}`;
     result.set(handlerKey, {

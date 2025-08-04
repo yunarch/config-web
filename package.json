@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/package",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "name": "@yunarch/config-web",
   "description": "Shared configurations for web projects.",
   "license": "MIT",

@@ -1,3 +1,5 @@
+import { pathToFileURL } from 'node:url';
+
 // Types
 export type ExistingHandlersMap = Map<
   string, // handler header key [httpMethod]:[handleUrl] (e.g., "GET:/api/users")
@@ -24,10 +26,9 @@ export async function findExistingHandlers({
   mswSetupConst: string;
 }): Promise<ExistingHandlersMap> {
   const result: ExistingHandlersMap = new Map();
-  const setupModule = (await import(mswSetupFilePath)) as Record<
-    string,
-    unknown
-  >;
+  const setupModule = (await import(
+    pathToFileURL(mswSetupFilePath).href
+  )) as Record<string, unknown>;
   if (!Object.hasOwn(setupModule as object, mswSetupConst)) {
     throw new TypeError('MSW setup constant not found in the setup file');
   }

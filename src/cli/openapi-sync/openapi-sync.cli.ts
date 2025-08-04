@@ -1,10 +1,11 @@
 #!/usr/bin/env node
+import { execFileSync } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { styleText } from 'node:util';
 import confirm from '@inquirer/confirm';
-import { asyncExec, createBaseProgram, runTask } from '../utils';
+import { createBaseProgram, runTask } from '../utils';
 import { run as generateModels } from './codegen-models';
 import { run as generateMswUtils } from './codegen-msw-utils';
 import { run as generateSchemaTypeDefinition } from './codegen-schema-typedef';
@@ -58,8 +59,10 @@ async function readOpenapiSchemas(
         }
         if (inputSchemaPath.startsWith('http')) {
           try {
-            const { stdout } = await asyncExec(
-              `curl -s ${inputSchemaPath} --fail`
+            const stdout = execFileSync(
+              'curl',
+              ['-s', inputSchemaPath, '--fail'],
+              { encoding: 'utf8' }
             );
             return stdout;
           } catch {
@@ -212,7 +215,9 @@ ${styleText('green', '--include-msw-utils')}
         if (postScript) {
           await runTask({
             name: 'Running post script',
-            command: `node --run ${postScript}`,
+            command: () => {
+              execFileSync('node', ['--run', postScript]);
+            },
           });
         }
         // Success message

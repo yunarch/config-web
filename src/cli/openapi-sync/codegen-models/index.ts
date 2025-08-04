@@ -1,3 +1,4 @@
+import { execFileSync } from 'node:child_process';
 import { runTask } from '../../utils';
 
 /**
@@ -12,6 +13,16 @@ import { runTask } from '../../utils';
 export async function run(input: string, outputDirectory: string) {
   await runTask({
     name: 'Generating models',
-    command: `npx openapi-typescript-codegen --input ${input} --output ${outputDirectory} --client fetch`,
+    command: () => {
+      execFileSync('npx', [
+        'openapi-typescript-codegen',
+        '--input',
+        input,
+        '--output',
+        outputDirectory,
+        '--client',
+        'fetch',
+      ]);
+    },
   });
 }

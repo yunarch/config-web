@@ -107,9 +107,14 @@ createBaseProgram()
     '-o, --output <folder>',
     'The output folder to save the generated models and openapi schema and type definitions.'
   )
+  .option('-y, --yes', 'Skip confirmation prompts and proceed with defaults.')
   .option(
     '-f, --force-gen',
     'Force generation of typescript schemas and fetching code even if the input and output schemas are identical.'
+  )
+  .option(
+    '--fail-on-change',
+    'Fail if the input and output schemas are different.'
   )
   .option(
     '--include-msw-utils',
@@ -134,13 +139,17 @@ ${styleText('green', '--include-msw-utils')}
     async ({
       input,
       output,
+      yes,
       forceGen,
+      failOnChange,
       includeMswUtils,
       postScript,
     }: {
       input: string;
       output: string;
+      yes: boolean;
       forceGen: boolean;
+      failOnChange: boolean;
       includeMswUtils: boolean;
       postScript: string;
     }) => {
@@ -174,10 +183,13 @@ ${styleText('green', '--include-msw-utils')}
               '\n⚠️  Local and remote schemas does not match!\n'
             )
           );
-          const confirmed = await confirm({
-            message: 'Do you want to use the remote schema? (y/n)?',
-          });
-          if (confirmed) {
+          if (failOnChange) process.exit(1);
+          if (
+            yes ||
+            (await confirm({
+              message: 'Do you want to use the remote schema? (y/n)?',
+            }))
+          ) {
             await runTask({
               name: 'Replacing local schema with input schema',
               command: writeFile(outputSchemaPath, inputSchema),

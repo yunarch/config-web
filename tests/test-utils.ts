@@ -1,4 +1,4 @@
-import { exec } from 'node:child_process';
+import { execFile } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { promisify } from 'node:util';
@@ -38,7 +38,7 @@ export function createRelativeResolver(metaUrl: string) {
  */
 export function createCliExecutor(cli: string) {
   return async (params: string[] = []) => {
-    return promisify(exec)(`bun ${cli} ${params.join(' ')}`);
+    return promisify(execFile)('bun', ['run', cli, ...params], { shell: true });
   };
 }
 

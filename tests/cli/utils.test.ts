@@ -57,7 +57,7 @@ describe('runTask', () => {
     expect(result).toBe('Function resolved');
     expect(ora).toHaveBeenCalledWith('Test Function with Elapsed Time');
     expect(oraSucceedMock).toHaveBeenCalledWith(
-      '0ms Test Function with Elapsed Time'
+      expect.stringMatching(/^\d+ms Test Function with Elapsed Time$/)
     );
   });
 });

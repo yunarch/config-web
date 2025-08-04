@@ -73,7 +73,7 @@
     "build": "bun run gen && tsup",
     "tests": "vitest --typecheck run",
     "tests:watch": "vitest --typecheck watch",
-    "release": "bun run lint && bun run tests && bun publish --dry-run && bunx bumpp && bun run build && bun publish"
+    "release": "bun run lint && bun run tests && bun run build && bun publish --dry-run && bunx bumpp && bun publish"
   },
   "peerDependencies": {
     "@biomejs/biome": ">= 2 || < 3",

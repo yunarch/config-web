@@ -10,9 +10,11 @@ Options:
   -i, --input <path>      The input (local or remote) openapi schema (JSON).
   -o, --output <folder>   The output folder to save the generated models and
                           openapi schema and type definitions.
+  -y, --yes               Skip confirmation prompts and proceed with defaults.
   -f, --force-gen         Force generation of typescript schemas and fetching
                           code even if the input and output schemas are
                           identical.
+  --fail-on-change        Fail if the input and output schemas are different.
   --include-msw-utils     Include MSW mocking utilities based on the generated
                           typescript types.
   --post-script <script>  A package.json script to run after the code

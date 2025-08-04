@@ -40,7 +40,7 @@ you must run the script with a runtime that supports TypeScript (e.g. ${styleTex
 
 Examples:
 ${styleText('dim', '$')} \
-${styleText('yellow', 'tsx')} ${styleText('cyan', 'openapi-sync-lint-msw-handlers')} \
+${styleText('yellow', 'tsx')} ${styleText('cyan', './node_modules/@yunarch/config-web/dist/cli/openapi-sync/openapi-sync-lint-msw-handlers.cli.js')} \
 ${styleText('green', '--gen')} ${styleText('yellow', './src/api/gen')} \
 ${styleText('green', '--msw-setup-file')} ${styleText('yellow', './src/api/__tests__/node.ts')} \
 ${styleText('green', '--msw-setup-const')} ${styleText('yellow', 'server')}

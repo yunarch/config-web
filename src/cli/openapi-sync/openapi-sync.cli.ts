@@ -216,7 +216,7 @@ ${styleText('green', '--include-msw-utils')}
           await runTask({
             name: 'Running post script',
             command: () => {
-              execFileSync('npm', ['run', postScript]);
+              execFileSync('npm', ['run', postScript], { shell: true });
             },
           });
         }

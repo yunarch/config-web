@@ -14,15 +14,19 @@ export async function run(input: string, outputDirectory: string) {
   await runTask({
     name: 'Generating models',
     command: () => {
-      execFileSync('npx', [
-        'openapi-typescript-codegen',
-        '--input',
-        input,
-        '--output',
-        outputDirectory,
-        '--client',
-        'fetch',
-      ]);
+      execFileSync(
+        'npx',
+        [
+          'openapi-typescript-codegen',
+          '--input',
+          input,
+          '--output',
+          outputDirectory,
+          '--client',
+          'fetch',
+        ],
+        { shell: true }
+      );
     },
   });
 }

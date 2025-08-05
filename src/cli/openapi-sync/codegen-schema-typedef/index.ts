@@ -12,7 +12,9 @@ export async function run(input: string, output: string) {
   await runTask({
     name: 'Generating schema types',
     command: async () => {
-      execFileSync('npx', ['openapi-typescript', input, '-o', output]);
+      execFileSync('npx', ['openapi-typescript', input, '-o', output], {
+        shell: true,
+      });
       const content = await readFile(output, 'utf8');
       await writeFile(
         output,

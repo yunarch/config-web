@@ -62,6 +62,7 @@ The following types are allowed:
 - Use the footer to reference issues or breaking changes.
 - One or more footers MAY be provided one blank line after the body. Each footer MUST consist of a word token, followed by either a `:<space>` or `<space>#` separator, followed by a string value.
 - A footer's token MUST use `-` in place of whitespace characters, e.g., `Acked-by` (this helps differentiate the footer section from a multi-paragraph body). An exception is made for `BREAKING CHANGE`, which MAY also be used as a token.
+- A footer's token MUST not be any of the types listed above.
 - A footer's value MAY contain spaces and newlines, and parsing MUST terminate when the next valid footer token/separator pair is observed.
 - Lines should not exceed 100 characters.
 

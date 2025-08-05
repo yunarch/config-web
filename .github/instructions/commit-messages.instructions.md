@@ -12,14 +12,17 @@ This project follows the [Conventional Commits](https://www.conventionalcommits.
 Each commit message consists of:
 
 1. **Type** (required): What kind of change this commit is making
-2. **Description** (required): A short description of the change (Max 100 characters).
-3. **Body** (optional): A more detailed explanation of the change (100 characters per line).
-4. **Footer** (optional): Information about breaking changes or issue references.
+2. **gitmoji** (optional): An emoji to visually represent the type of change
+   - Use the [gitmoji](https://gitmoji.dev/) that corresponds to the type
+   - Place it after the type, e.g., `feat: 🚀 add new feature`
+3. **Description** (required): A short description of the change (Max 100 characters).
+4. **Body** (optional): A more detailed explanation of the change (100 characters per line).
+5. **Footer** (optional): Information about breaking changes or issue references.
 
 ## Format
 
 ```
-<type>: <description>
+<type>: <gitmoji> <description>
 
 <body>
 

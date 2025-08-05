@@ -35,6 +35,9 @@
   "[yaml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[instructions]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
 
   // Customize AI responses
   "github.copilot.chat.commitMessageGeneration.instructions": [

@@ -7,18 +7,6 @@ applyTo: '**'
 
 This project follows the [Conventional Commits](https://www.conventionalcommits.org/) specification for commit messages. This structured format makes the commit history more readable and allows for automated tools to generate changelogs.
 
-## Commit Message Structure
-
-Each commit message consists of:
-
-1. **Type** (required): What kind of change this commit is making
-2. **gitmoji** (optional): An emoji to visually represent the type of change
-   - Use the [gitmoji](https://gitmoji.dev/) that corresponds to the type
-   - Place it after the type, e.g., `feat: 🚀 add new feature`
-3. **Description** (required): A short description of the change (Max 100 characters).
-4. **Body** (optional): A more detailed explanation of the change (100 characters per line).
-5. **Footer** (optional): Information about breaking changes or issue references.
-
 ## Format
 
 ```
@@ -26,10 +14,16 @@ Each commit message consists of:
 
 <body>
 
-<footer>
+<footer(s)>
 ```
 
-## Types
+1. **Type** (required): What kind of change this commit is making.
+2. **gitmoji** (optional): An emoji to visually represent the type of change.
+3. **Description** (required): A short description of the change (Max 100 characters).
+4. **Body** (optional): A more detailed explanation of the change (100 characters per line).
+5. **Footer** (optional): Information about breaking changes or issue references.
+
+## Type
 
 The following types are allowed:
 
@@ -45,54 +39,70 @@ The following types are allowed:
 - **chore**: Other changes that don't modify src or test files
 - **revert**: Reverts a previous commit
 
+## Gitmoji
+
+- Use the [Gitmoji](https://gitmoji.dev/) standard for emojis.
+
 ## Description
 
-- Use the imperative, present tense: "change" not "changed" nor "changes"
-- Don't capitalize the first letter
-- No period (.) at the end
-- Max 100 characters
+- Use the imperative, present tense: "change" not "changed" nor "changes".
+- Don't capitalize the first letter.
+- No period (.) at the end.
+- Max 100 characters.
 
 ## Body
 
-- Use the imperative, present tense
-- Include motivation for the change and contrast with previous behavior
-- Lines should not exceed 100 characters
+- Use the imperative, present tense.
+- Include motivation for the change and contrast with previous behavior.
+- A longer commit body MAY be provided after the short description, providing additional contextual information about the code changes. The body MUST begin one blank line after the description and with maximum 100 characters per line.
+- A commit body is free-form and MAY consist of any number of newline separated paragraphs.
+
+## Footer(s)
+
+- Use the footer to reference issues or breaking changes.
+- One or more footers MAY be provided one blank line after the body. Each footer MUST consist of a word token, followed by either a `:<space>` or `<space>#` separator, followed by a string value.
+- A footer's token MUST use `-` in place of whitespace characters, e.g., `Acked-by` (this helps differentiate the footer section from a multi-paragraph body). An exception is made for `BREAKING CHANGE`, which MAY also be used as a token.
+- A footer's value MAY contain spaces and newlines, and parsing MUST terminate when the next valid footer token/separator pair is observed.
+- Lines should not exceed 100 characters.
 
 ## Breaking Changes
 
-Breaking changes should start with the text `BREAKING CHANGE:` with a space or two newlines. The rest of the commit message is then used for explaining the breaking change.
+Breaking changes can be indicated in the footer with a `BREAKING CHANGE:` section, by appending `!` to the type/scope or both.
 
-Another way to indicate a breaking change is to add ! directly after the <type>, for example:
+For example:
 
-```
-feat!: drop support for Node 14
-```
-
-This shorthand signals that the commit introduces a breaking change, even if BREAKING CHANGE: is not explicitly used in the footer.
-
-## Examples
+**Commit message with ! to draw attention to breaking change**
 
 ```
-feat: add project status indicator component
-
-Add a new component that shows the status of a project with color coding
-for different states (active, completed, pending)
-
-Implements #123
+feat!: send an email to the customer when a product is shipped
 ```
 
-```
-fix: correct project fetching when no filters applied
-
-The API was returning a 400 error when no filters were provided in the request.
-This change ensures a default filter is applied when none is provided.
-
-Fixes #456
-```
+**Commit message with description and breaking change footer**
 
 ```
-refactor: simplify project navigation structure
+feat: add new authentication method
 
-BREAKING CHANGE: The URL pattern for accessing project details has changed
-from /projects/{id} to /project/{id}
+BREAKING CHANGE: This changes the authentication flow.
+```
+
+**Commit message with both ! and BREAKING CHANGE footer**
+
+```
+chore!: drop support for Node 6
+
+BREAKING CHANGE: use JavaScript features not available in Node 6.
+```
+
+## Example
+
+```
+fix: 🐛 prevent racing of requests
+
+Introduce a request id and a reference to latest request. Dismiss
+incoming responses other than from latest request.
+
+Remove timeouts which were used to mitigate the racing issue but are
+obsolete now.
+
+Fixes: #(issue number)
 ```

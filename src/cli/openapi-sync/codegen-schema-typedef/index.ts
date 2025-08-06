@@ -1,6 +1,5 @@
-import { execFileSync } from 'node:child_process';
 import { readFile, writeFile } from 'node:fs/promises';
-import { runTask } from '../../utils';
+import { asyncExecFile, runTask } from '../../utils';
 
 /**
  * Generate an OpenAPI schema type definition file from an OpenAPI schema.
@@ -12,7 +11,7 @@ export async function run(input: string, output: string) {
   await runTask({
     name: 'Generating schema types',
     command: async () => {
-      execFileSync('npx', ['openapi-typescript', input, '-o', output], {
+      await asyncExecFile('npx', ['openapi-typescript', input, '-o', output], {
         shell: true,
       });
       const content = await readFile(output, 'utf8');

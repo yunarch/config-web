@@ -1,8 +1,10 @@
-import { execFile } from 'node:child_process';
 import { rm, writeFile } from 'node:fs/promises';
-import { promisify } from 'node:util';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
-import { bunRunAllExecutor, createRelativeResolver } from '../../test-utils';
+import {
+  asyncExecFile,
+  bunRunAllExecutor,
+  createRelativeResolver,
+} from '../../test-utils';
 
 const resolve = createRelativeResolver(import.meta.url);
 const INPUT_PACKAGE_JSON = resolve('package.json');
@@ -50,7 +52,7 @@ describe('bun-run-all', () => {
 
   it('run utils.test.bun.ts with bun test runner', async () => {
     // stderr -> Status messages, test runner summaries, warnings, etc.
-    const { stderr } = await promisify(execFile)(
+    const { stderr } = await asyncExecFile(
       'bun',
       ['test', './utils.test.bun.ts'],
       { cwd: resolve('.') }

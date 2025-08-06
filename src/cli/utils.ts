@@ -1,6 +1,9 @@
-import { styleText, types } from 'node:util';
+import { execFile } from 'node:child_process';
+import { promisify, styleText, types } from 'node:util';
 import { Command } from 'commander';
 import ora, { type Options } from 'ora';
+
+export const asyncExecFile = promisify(execFile);
 
 /**
  * Executes a given task with a spinner to indicate progress.

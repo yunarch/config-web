@@ -3,6 +3,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { promisify } from 'node:util';
 
+export const asyncExecFile = promisify(execFile);
+
 /**
  * Creates a function that resolves relative paths based on a given module URL.
  *
@@ -38,7 +40,7 @@ export function createRelativeResolver(metaUrl: string) {
  */
 export function createCliExecutor(cli: string) {
   return async (params: string[] = []) => {
-    return promisify(execFile)('bun', ['run', cli, ...params], { shell: true });
+    return asyncExecFile('bun', ['run', cli, ...params], { shell: true });
   };
 }
 

@@ -1,5 +1,4 @@
-import { execFileSync } from 'node:child_process';
-import { runTask } from '../../utils';
+import { asyncExecFile, runTask } from '../../utils';
 
 /**
  * Generate models and services from OpenAPI schema.
@@ -13,8 +12,8 @@ import { runTask } from '../../utils';
 export async function run(input: string, outputDirectory: string) {
   await runTask({
     name: 'Generating models',
-    command: () => {
-      execFileSync(
+    command: async () => {
+      await asyncExecFile(
         'npx',
         [
           'openapi-typescript-codegen',

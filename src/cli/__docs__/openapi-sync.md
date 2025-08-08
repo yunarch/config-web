@@ -14,11 +14,13 @@ Options:
   -f, --force-gen         Force generation of typescript schemas and fetching
                           code even if the input and output schemas are
                           identical.
-  --fail-on-change        Fail if the input and output schemas are different.
   --include-msw-utils     Include MSW mocking utilities based on the generated
                           typescript types.
   --post-script <script>  A package.json script to run after the code
                           generation.
+  --verify-openapi-sync   Verifies that the generated output is up to date with
+                          the input (e.g., in CI) to catch outdated or
+                          mismatched output without making changes.
   -h, --help              display help for command
 
 Example usage:

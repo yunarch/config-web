@@ -115,16 +115,16 @@ createBaseProgram()
     'Force generation of typescript schemas and fetching code even if the input and output schemas are identical.'
   )
   .option(
-    '--fail-on-change',
-    'Fail if the input and output schemas are different.'
-  )
-  .option(
     '--include-msw-utils',
     'Include MSW mocking utilities based on the generated typescript types.'
   )
   .option(
     '--post-script <script>',
     'A package.json script to run after the code generation.'
+  )
+  .option(
+    '--verify-openapi-sync',
+    'Verifies that the generated output is up to date with the input (e.g., in CI) to catch outdated or mismatched output without making changes.'
   )
   .addHelpText(
     'after',
@@ -143,7 +143,7 @@ ${styleText('green', '--include-msw-utils')}
       output,
       yes,
       forceGen,
-      failOnChange,
+      verifyOpenapiSync,
       includeMswUtils,
       postScript,
     }: {
@@ -151,7 +151,7 @@ ${styleText('green', '--include-msw-utils')}
       output: string;
       yes: boolean;
       forceGen: boolean;
-      failOnChange: boolean;
+      verifyOpenapiSync: boolean;
       includeMswUtils: boolean;
       postScript: string;
     }) => {
@@ -165,27 +165,40 @@ ${styleText('green', '--include-msw-utils')}
           input,
           outputSchemaPath
         );
-        // Avoid unnecessary generations
-        if (outputSchema && inputSchema === outputSchema && !forceGen) {
-          console.log(styleText('blue', '\nNo updates required.\n'));
-          process.exit(0);
+        const hasChanges = inputSchema !== outputSchema;
+        // Only verify than the output is up to date with the input.
+        // We assume than if inputSchema is equal to outputSchema, the generated output is up to date.
+        if (verifyOpenapiSync) {
+          console.log(
+            hasChanges
+              ? styleText(
+                  'yellow',
+                  '\n⚠️  Local and remote schemas does not match!\n'
+                )
+              : styleText('green', '\n✅ Local and remote schemas match!\n')
+          );
+          process.exit(hasChanges ? 1 : 0);
         }
-        // If there is no output schema, create it
-        else if (!outputSchema) {
+        // If output schema does not exists we create it always, so next time check can be faster.
+        if (outputSchema === false) {
           await runTask({
             name: 'Creating local schema',
             command: writeFile(outputSchemaPath, inputSchema),
           });
         }
-        // Sync the schemas if they are different
-        else if (outputSchema && inputSchema !== outputSchema) {
+        // If there are no changes and we are not forcing generation, exit
+        if (!hasChanges && !forceGen) {
+          console.log(styleText('blue', '\nNo updates required.\n'));
+          process.exit(0);
+        }
+        // If there are changes we will proceed with syncing the schemas process
+        else if (hasChanges) {
           console.log(
             styleText(
               'yellow',
               '\n⚠️  Local and remote schemas does not match!\n'
             )
           );
-          if (failOnChange) process.exit(1);
           if (
             yes ||
             (await confirm({

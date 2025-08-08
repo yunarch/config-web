@@ -51,15 +51,15 @@ describe('openapi-sync', () => {
     expect(stdout).toContain('-o, --output <folder>');
     expect(stdout).toContain('-y, --yes');
     expect(stdout).toContain('-f, --force-gen');
-    expect(stdout).toContain('--fail-on-change');
     expect(stdout).toContain('--include-msw-utils');
     expect(stdout).toContain('--post-script <script>');
+    expect(stdout).toContain('--verify-openapi-sync');
   });
 
-  it('should fail with --fail-on-change flag if files are changed', async () => {
+  it('should fail with --verify-openapi-sync flag if schemas are changed', async () => {
     await expect(
       openapiSyncExecutor([
-        `-i ${MOCKS_PATH}/openapi-sync-input.new.json -o ${OPENAPI_SYNC_OUTPUT} --fail-on-change`,
+        `-i ${MOCKS_PATH}/openapi-sync-input.new.json -o ${OPENAPI_SYNC_OUTPUT} --verify-openapi-sync`,
       ])
     ).rejects.toThrowError();
   });

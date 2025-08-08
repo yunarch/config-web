@@ -248,7 +248,7 @@ To use the oxlint linter, create a `.oxlintrc.json` [configuration file](https:/
 
 > [!CAUTION]
 > Currently, `Oxlint` does not resolve configuration file paths automatically. To extend a config, you must explicitly provide the full path, like so:
-> `"extends": ["./node_modules/@yunarch/config-web/dist/linters/oxlint.config.json"]`
+> `"extends": ["./node_modules/@yunarch/config-web/dist/oxlint.config.json"]`
 
 ### Enabling ESLint and Oxlint Simultaneously
 
@@ -299,6 +299,9 @@ export default config({
   },
 });
 ```
+
+> [!IMPORTANT]
+> This feature is under development and will be available in a future release.
 
 ## Typescript
 

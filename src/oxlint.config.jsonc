@@ -407,6 +407,11 @@
     {
       "files": ["**/*.{ts,cts,mts}", "**/*.{tsx,ctsx,mtsx}"],
       "rules": {
+        "@typescript-eslint/no-floating-promises": "error",
+        "@typescript-eslint/no-misused-promises": [
+          "error",
+          { "checksVoidReturn": { "attributes": false } }
+        ],
         "no-throw-literal": "off",
         "prefer-promise-reject-errors": "off",
         "require-await": "off"
@@ -491,7 +496,11 @@
         "**/cli/**/*.{js,jsx,cjs,cjsx,mjs,mjsx,ts,tsx,cts,ctsx,mts,mtjsx}",
         "**/cli.{js,jsx,cjs,cjsx,mjs,mjsx,ts,tsx,cts,ctsx,mts,mtjsx}"
       ],
-      "rules": { "no-console": "off", "unicorn/no-process-exit": "off" }
+      "rules": {
+        "@typescript-eslint/no-floating-promises": "off",
+        "no-console": "off",
+        "unicorn/no-process-exit": "off"
+      }
     },
     {
       "files": ["**/*.d.{ts,cts,mts}"],

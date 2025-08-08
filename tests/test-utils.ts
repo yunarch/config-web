@@ -51,15 +51,32 @@ export const OPENAPI_SYNC_INPUT = `${MOCKS_PATH}/openapi-sync-input.json`;
 export const OPENAPI_SYNC_OUTPUT = `${MOCKS_PATH}/openapi-sync-input/`;
 
 // CLI Executors
+const testDist = process.env.TEST_DIST === 'true';
 export const bunRunAllExecutor = createCliExecutor(
-  resolve('../src/cli/bun-run-all/bun-run-all.cli.ts')
+  resolve(
+    testDist
+      ? '../dist/cli/bun-run-all/bun-run-all.cli.js'
+      : '../src/cli/bun-run-all/bun-run-all.cli.ts'
+  )
 );
 export const openapiSyncExecutor = createCliExecutor(
-  resolve('../src/cli/openapi-sync/openapi-sync.cli.ts')
+  resolve(
+    testDist
+      ? '../dist/cli/openapi-sync/openapi-sync.cli.js'
+      : '../src/cli/openapi-sync/openapi-sync.cli.ts'
+  )
 );
 export const openapiSyncLintMswHandlersExecutor = createCliExecutor(
-  resolve('../src/cli/openapi-sync/openapi-sync-lint-msw-handlers.cli.ts')
+  resolve(
+    testDist
+      ? '../dist/cli/openapi-sync/openapi-sync-lint-msw-handlers.cli.js'
+      : '../src/cli/openapi-sync/openapi-sync-lint-msw-handlers.cli.ts'
+  )
 );
 export const turboSelectExecutor = createCliExecutor(
-  resolve('../src/cli/turbo-select/turbo-select.cli.ts')
+  resolve(
+    testDist
+      ? '../dist/cli/turbo-select/turbo-select.cli.js'
+      : '../src/cli/turbo-select/turbo-select.cli.ts'
+  )
 );

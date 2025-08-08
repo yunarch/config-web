@@ -228,7 +228,16 @@ ${styleText('green', '--include-msw-utils')}
           await runTask({
             name: 'Running post script',
             command: async () => {
-              await asyncExecFile('npm', ['run', postScript], { shell: true });
+              try {
+                const isBun = typeof Bun !== 'undefined';
+                await (isBun
+                  ? asyncExecFile('bun', ['run', postScript])
+                  : asyncExecFile('node', ['--run', postScript]));
+              } catch {
+                await asyncExecFile('npm', ['run', postScript], {
+                  shell: true,
+                });
+              }
             },
           });
         }

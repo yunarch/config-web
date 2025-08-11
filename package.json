@@ -134,7 +134,7 @@
     "@biomejs/biome": "2.1.4",
     "eslint": "9.32.0",
     "eslint-typegen": "2.3.0",
-    "oxlint": "1.11.0",
+    "oxlint": "1.11.1",
     "husky": "9.1.7",
     "lint-staged": "16.1.4",
     "rimraf": "6.0.1",

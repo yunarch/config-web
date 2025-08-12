@@ -10,7 +10,7 @@ This project follows the [Conventional Commits](https://www.conventionalcommits.
 ## Format
 
 ```
-<type>: <gitmoji> <description>
+<type>: <description>
 
 <body>
 
@@ -18,10 +18,9 @@ This project follows the [Conventional Commits](https://www.conventionalcommits.
 ```
 
 1. **Type** (required): What kind of change this commit is making.
-2. **gitmoji** (optional): An emoji to visually represent the type of change.
-3. **Description** (required): A short description of the change (Max 100 characters).
-4. **Body** (optional): A more detailed explanation of the change (100 characters per line).
-5. **Footer** (optional): Information about breaking changes or issue references.
+2. **Description** (required): A short description of the change (Max 100 characters).
+3. **Body** (optional): A more detailed explanation of the change (100 characters per line).
+4. **Footer** (optional): Information about breaking changes or issue references.
 
 ## Type
 
@@ -38,10 +37,6 @@ The following types are allowed:
 - **ci**: Changes to our CI configuration files and scripts
 - **chore**: Other changes that don't modify src or test files
 - **revert**: Reverts a previous commit
-
-## Gitmoji
-
-- Use the [Gitmoji](https://gitmoji.dev/) standard for emojis.
 
 ## Description
 
@@ -97,7 +92,7 @@ BREAKING CHANGE: use JavaScript features not available in Node 6.
 ## Example
 
 ```
-fix: 🐛 prevent racing of requests
+fix: prevent racing of requests
 
 Introduce a request id and a reference to latest request. Dismiss
 incoming responses other than from latest request.

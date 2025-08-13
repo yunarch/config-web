@@ -18,6 +18,7 @@ export const config = {
   singleAttributePerLine: false,
   requirePragma: false,
   insertPragma: false,
+  checkIgnorePragma: true,
   jsxSingleQuote: false,
   htmlWhitespaceSensitivity: 'css',
   embeddedLanguageFormatting: 'auto',

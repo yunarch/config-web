@@ -24,7 +24,13 @@ type HttpMethod =
 /**
  * Type guard to get the http methods available for a given path.
  */
-type Methods<Path extends keyof Paths> = Extract<keyof Paths[Path], HttpMethod>;
+type Methods<Path extends keyof Paths> = {
+  [M in keyof Paths[Path]]: M extends HttpMethod
+    ? Paths[Path][M] extends undefined
+      ? never
+      : M
+    : never;
+}[keyof Paths[Path]];
 
 /**
  * Type guard to get the content type 'application/json' or 'multipart/form-data' of a type.

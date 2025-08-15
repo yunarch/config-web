@@ -1,4 +1,8 @@
 . "$(dirname -- "$0")/common.sh"
 
-bun run lint
-bun run tests
+commits_to_push=$(git log @{push}.. 2>/dev/null)
+
+if [ -n "$commits_to_push" ]; then
+  bun run lint
+  bun run tests
+fi

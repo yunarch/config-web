@@ -130,7 +130,7 @@
     "@commitlint/cli": "19.8.1",
     "@commitlint/config-conventional": "19.8.1",
     "prettier": "3.6.2",
-    "@biomejs/biome": "2.2.0",
+    "@biomejs/biome": "2.2.2",
     "eslint": "9.33.0",
     "eslint-typegen": "2.3.0",
     "oxlint": "1.12.0",

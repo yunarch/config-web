@@ -119,7 +119,7 @@
     "eslint-plugin-jsdoc": "54.1.1",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-oxlint": "1.14.0",
-    "@eslint-react/eslint-plugin": "1.52.6",
+    "@eslint-react/eslint-plugin": "1.52.9",
     "eslint-plugin-react-hooks": "5.2.0",
     "eslint-plugin-react-refresh": "0.4.20",
     "@tanstack/eslint-plugin-query": "5.83.1",

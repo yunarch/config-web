@@ -15,7 +15,7 @@ import { run as generateSchemaTypeDefinition } from './codegen-schema-typedef';
  * @param output - The output directory path.
  * @returns the output directory path.
  *
- * @throws If the output path is not a directory.
+ * @throws {Error} If the output path is not a directory.
  */
 async function prepareOutputDirectory(output: string) {
   if (path.extname(output) !== '') {

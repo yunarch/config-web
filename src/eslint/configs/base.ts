@@ -1,5 +1,6 @@
+import pluginESlint from '@eslint/js';
+import pluginUnusedImports from 'eslint-plugin-unused-imports';
 import globals from 'globals';
-import { pluginESlint, pluginUnusedImports } from '../plugins';
 import type { OptionsConfig, TypedFlatConfigItem } from '../types';
 
 export const BASE_IGNORES = [

@@ -1,5 +1,5 @@
+import pluginTsESlint from 'typescript-eslint';
 import { GLOB_ASTRO_TS, GLOB_MARKDOWN, GLOB_TS, GLOB_TSX } from '../globs';
-import { pluginTsESlint } from '../plugins';
 import type { OptionsConfig, TypedFlatConfigItem } from '../types';
 
 /**

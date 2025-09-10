@@ -1,5 +1,6 @@
+import pluginPrettier from 'eslint-config-prettier';
+import pluginOxlint from 'eslint-plugin-oxlint';
 import { GLOB_DTS, GLOB_SRC, GLOB_SRC_EXT } from '../globs';
-import { pluginOxlint, pluginPrettier } from '../plugins';
 import type { OptionsConfig, TypedFlatConfigItem } from '../types';
 
 /**

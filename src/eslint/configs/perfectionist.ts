@@ -1,4 +1,4 @@
-import { pluginPerfectionist } from '../plugins';
+import pluginPerfectionist from 'eslint-plugin-perfectionist';
 import type { TypedFlatConfigItem } from '../types';
 
 /**

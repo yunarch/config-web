@@ -1,4 +1,4 @@
-import { pluginUnicorn } from '../plugins';
+import pluginUnicorn from 'eslint-plugin-unicorn';
 import type { TypedFlatConfigItem } from '../types';
 
 /**

@@ -1,5 +1,5 @@
+import pluginVitest from '@vitest/eslint-plugin';
 import { GLOB_TESTS } from '../globs';
-import { pluginVitest } from '../plugins';
 import type { OptionsConfig, TypedFlatConfigItem } from '../types';
 
 /**

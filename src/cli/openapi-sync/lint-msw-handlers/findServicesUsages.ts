@@ -185,8 +185,8 @@ export async function findServicesUsages({
     } catch (error) {
       const e =
         error instanceof Error
-          ? new TypeError(`Error parsing ${file}: ${error.message}`)
-          : new TypeError(`Error parsing ${file}: Unknown error`);
+          ? new Error(`Error parsing ${file}: ${error.message}`)
+          : new Error(`Error parsing ${file}: Unknown error`);
       throw e;
     }
   }

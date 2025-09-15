@@ -29,17 +29,17 @@ export default defineConfig([
       // Copy config files to the dist directory.
       await Promise.all([
         // Biome config
-        parseJSONC('./src/biome.config.jsonc', './dist/biome.config.json'),
+        parseJSONC('./src/config.biome.jsonc', './dist/config.biome.json'),
         // Oxlint config
-        parseJSONC('./src/oxlint.config.jsonc', './dist/oxlint.config.json'),
+        parseJSONC('./src/config.oxlint.jsonc', './dist/config.oxlint.json'),
         // Typescript
+        parseJSONC(
+          './src/config.tsconfig-base.jsonc',
+          './dist/config.tsconfig-base.json'
+        ),
         mkdir('./dist/ts', { recursive: true }),
         copyFile('./src/ts/reset.d.ts', './dist/ts/reset.d.ts'),
         copyFile('./src/ts/utils.d.ts', './dist/ts/utils.d.ts'),
-        parseJSONC(
-          './src/ts/tsconfig-base.jsonc',
-          './dist/ts/tsconfig-base.json'
-        ),
       ]);
     },
   },
@@ -59,18 +59,15 @@ export default defineConfig([
   },
   // Prettier
   {
-    // TODO - Refactor to prettier.config.ts when https://github.com/nodejs/node/pull/57298 is released
-    // TODO - Atm whe do not give ts support for prettier.config file
-    entry: ['./src/prettier.config.js'],
+    entry: ['./src/config.prettier.js'],
     outDir: './dist',
     format: 'esm',
-    // dts: true, // TODO - Enable when we use prettier.config.ts
     minify: true,
     shims: true,
   },
   // Eslint
   {
-    entry: ['./src/eslint.config.ts'],
+    entry: ['./src/config.eslint.ts'],
     outDir: './dist',
     format: 'esm',
     dts: true,

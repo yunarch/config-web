@@ -42,14 +42,14 @@
   },
   "exports": {
     ".": "./dist/index.js",
-    "./prettier": "./dist/prettier.config.js",
+    "./prettier": "./dist/config.prettier.js",
     "./eslint": {
-      "types": "./dist/eslint.config.d.ts",
-      "default": "./dist/eslint.config.js"
+      "types": "./dist/config.eslint.d.ts",
+      "default": "./dist/config.eslint.js"
     },
-    "./oxlint": "./dist/oxlint.config.json",
-    "./biome": "./dist/biome.config.json",
-    "./tsconfig-base": "./dist/ts/tsconfig-base.json",
+    "./oxlint": "./dist/config.oxlint.json",
+    "./biome": "./dist/config.biome.json",
+    "./tsconfig-base": "./dist/config.tsconfig-base.json",
     "./ts-reset.d.ts": "./dist/ts/reset.d.ts",
     "./ts-utils.d.ts": "./dist/ts/utils.d.ts"
   },
@@ -60,8 +60,8 @@
     "gen": "bun run bun-run-all gen:cli-docs gen:eslint-typegen gen:oxlint-compatgen gen:biome-compatgen",
     "gen:cli-docs": "bun run ./scripts/cli-docsgen.ts",
     "gen:eslint-typegen": "bun run ./scripts/eslint-typegen.ts",
-    "gen:oxlint-compatgen": "bun run ./scripts/oxlint-compatgen.ts && biome format --write ./src/oxlint.config.jsonc",
-    "gen:biome-compatgen": "bun run ./scripts/biome-compatgen.ts && biome format --write ./src/biome.config.jsonc",
+    "gen:oxlint-compatgen": "bun run ./scripts/oxlint-compatgen.ts && biome format --write ./src/config.oxlint.jsonc",
+    "gen:biome-compatgen": "bun run ./scripts/biome-compatgen.ts && biome format --write ./src/config.biome.jsonc",
     "lint": "bun run bun-run-all lint:code lint:ts -t",
     "lint:code": "oxlint && eslint .",
     "lint:ts": "tsc --noEmit",
@@ -100,7 +100,7 @@
     }
   },
   "dependencies": {
-    "commander": "14.0.0",
+    "commander": "14.0.1",
     "ora": "8.2.0",
     "fast-glob": "3.3.3",
     "@inquirer/confirm": "5.1.16",
@@ -116,10 +116,10 @@
     "eslint-plugin-perfectionist": "4.15.0",
     "eslint-plugin-import-x": "4.16.1",
     "eslint-plugin-unused-imports": "4.2.0",
-    "eslint-plugin-jsdoc": "56.0.2",
+    "eslint-plugin-jsdoc": "57.0.8",
     "eslint-config-prettier": "10.1.8",
-    "eslint-plugin-oxlint": "1.14.0",
-    "@eslint-react/eslint-plugin": "1.53.0",
+    "eslint-plugin-oxlint": "1.15.0",
+    "@eslint-react/eslint-plugin": "1.53.1",
     "eslint-plugin-react-hooks": "5.2.0",
     "eslint-plugin-react-refresh": "0.4.20",
     "@tanstack/eslint-plugin-query": "5.86.0",
@@ -133,7 +133,7 @@
     "@biomejs/biome": "2.2.4",
     "eslint": "9.35.0",
     "eslint-typegen": "2.3.0",
-    "oxlint": "1.14.0",
+    "oxlint": "1.15.0",
     "husky": "9.1.7",
     "lint-staged": "16.1.6",
     "rimraf": "6.0.1",
@@ -142,10 +142,10 @@
     "vitest": "3.2.4",
     "jsonc-parser": "3.3.1",
     "msw": "2.11.2",
-    "@types/node": "24.3.1",
-    "@types/bun": "1.2.21"
+    "@types/node": "24.4.0",
+    "@types/bun": "1.2.22"
   },
-  "packageManager": "bun@1.2.21",
+  "packageManager": "bun@1.2.22",
   "publishConfig": {
     "access": "public"
   }

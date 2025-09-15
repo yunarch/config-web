@@ -10,7 +10,7 @@ import { run as generateMswUtils } from './codegen-msw-utils';
 import { run as generateSchemaTypeDefinition } from './codegen-schema-typedef';
 
 /**
- * Reads the output directory path and creates it if it doesn't exist.
+ * Reads the output directory path and creates it if it does not exist.
  *
  * @param output - The output directory path.
  * @returns the output directory path.
@@ -44,6 +44,8 @@ async function prepareOutputDirectory(output: string) {
  * @param inputSchemaPath - The input OpenAPI schema path or URL.
  * @param outputSchemaPath - The output OpenAPI schema path.
  * @returns A tuple containing the input OpenAPI schema and the output OpenAPI schema (or false if it doesn't exist).
+ *
+ * @throws {Error} If the input schema path is not a JSON file or if the file does not exist.
  */
 async function readOpenapiSchemas(
   inputSchemaPath: string,

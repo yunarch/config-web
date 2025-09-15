@@ -10,6 +10,8 @@ export const asyncExecFile = promisify(execFile);
  *
  * @param task - The task to execute.
  * @returns Resolves to the command's output.
+ *
+ * @throws {Error} If the command fails.
  */
 export async function runTask<T = string>(task: {
   command: Promise<T> | (() => T | Promise<T>);

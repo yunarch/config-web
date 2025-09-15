@@ -1,4 +1,4 @@
-import { config } from './src/eslint.config';
+import { config } from './src/config.eslint';
 
 export default config({
   ignores: ['./tests/__mocks__'],

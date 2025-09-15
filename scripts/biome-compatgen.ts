@@ -11,7 +11,7 @@ const BASE_IGNORE_PATTERN = BASE_IGNORES.map((ignore) => `!${ignore}`);
 // Write `biome.config.jsonc` file
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 await fs.writeFile(
-  `${__dirname}/../src/biome.config.jsonc`,
+  `${__dirname}/../src/config.biome.jsonc`,
   JSON.stringify({
     $schema: '../node_modules/@biomejs/biome/configuration_schema.json',
     // ======================================================================================

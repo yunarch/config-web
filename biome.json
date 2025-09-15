@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-  "extends": ["./src/biome.config.jsonc"],
+  "extends": ["./src/config.biome.jsonc"],
   "vcs": {
     "enabled": true,
     "clientKind": "git",

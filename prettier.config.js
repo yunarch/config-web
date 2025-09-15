@@ -1,4 +1,4 @@
-import prettierConfig from './src/prettier.config.js';
+import prettierConfig from './src/config.prettier.js';
 
 const config = {
   ...prettierConfig,

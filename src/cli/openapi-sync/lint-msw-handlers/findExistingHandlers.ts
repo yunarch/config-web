@@ -16,7 +16,7 @@ export type ExistingHandlersMap = Map<
  * @param setupParams - The setup parameters containing the MSW setup file path and constant name.
  * @returns A map of existing MSW handlers keyed by their route pattern.
  *
- * @throws {TypeError} if the MSW setup constant is not found or does not have the expected methods or properties.
+ * @throws {Error} if the MSW setup constant is not found or does not have the expected methods or properties.
  */
 export async function findExistingHandlers({
   mswSetupFilePath,
@@ -30,7 +30,7 @@ export async function findExistingHandlers({
     pathToFileURL(mswSetupFilePath).href
   )) as Record<string, unknown>;
   if (!Object.hasOwn(setupModule as object, mswSetupConst)) {
-    throw new TypeError('MSW setup constant not found in the setup file');
+    throw new Error('MSW setup constant not found in the setup file');
   }
   const mswInit = setupModule[mswSetupConst] as
     | {
@@ -38,9 +38,7 @@ export async function findExistingHandlers({
       }
     | undefined;
   if (!mswInit || typeof mswInit.listHandlers !== 'function') {
-    throw new TypeError(
-      'MSW setup constant does not have a listHandlers() method'
-    );
+    throw new Error('MSW setup constant does not have a listHandlers() method');
   }
   const handlers = mswInit.listHandlers();
   for (const handler of handlers) {

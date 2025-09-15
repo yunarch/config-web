@@ -28,7 +28,7 @@ jobs:
         run: bun install --frozen-lockfile
       - name: 🔍 Lint files
         run: bun run lint
-  test:
+  unit_test:
     name: Unit testing
     runs-on: ubuntu-latest
     steps:
@@ -40,3 +40,15 @@ jobs:
         run: bun install --frozen-lockfile
       - name: 🧪 Test files
         run: bun run tests
+  build_test:
+    name: Build testing
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📁 Checkout
+        uses: actions/checkout@v5
+      - name: 🔧 Setup Bun
+        uses: oven-sh/setup-bun@v2
+      - name: 📦 Install dependencies
+        run: bun install --frozen-lockfile
+      - name: 🧪 Test Build
+        run: bun run build

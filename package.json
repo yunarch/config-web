@@ -142,7 +142,7 @@
     "vitest": "3.2.4",
     "jsonc-parser": "3.3.1",
     "msw": "2.11.2",
-    "@types/node": "24.4.0",
+    "@types/node": "24.5.0",
     "@types/bun": "1.2.22"
   },
   "packageManager": "bun@1.2.22",

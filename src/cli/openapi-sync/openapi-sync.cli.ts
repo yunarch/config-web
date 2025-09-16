@@ -10,7 +10,7 @@ import { run as generateMswUtils } from './codegen-msw-utils';
 import { run as generateSchemaTypeDefinition } from './codegen-schema-typedef';
 
 /**
- * Reads the output directory path and creates it if it does not exist.
+ * Reads the output directory path and creates it if it doesn't exist.
  *
  * @param output - The output directory path.
  * @returns the output directory path.

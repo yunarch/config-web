@@ -47,8 +47,10 @@ export function createCliExecutor(cli: string) {
 // Resolve paths
 const resolve = createRelativeResolver(import.meta.url);
 export const MOCKS_PATH = resolve('./__mocks__/');
+export const FIXTURES_PATH = resolve('./__fixtures__/');
 export const OPENAPI_SYNC_INPUT = `${MOCKS_PATH}/openapi-sync-input.json`;
 export const OPENAPI_SYNC_OUTPUT = `${MOCKS_PATH}/openapi-sync-input/`;
+export const FIXTURE_OXLINT_CONFIG_FILE = `${FIXTURES_PATH}/.oxlintrc.json`;
 
 // CLI Executors
 const testDist = process.env.TEST_DIST === 'true';

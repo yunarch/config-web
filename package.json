@@ -101,7 +101,7 @@
   },
   "dependencies": {
     "commander": "14.0.1",
-    "ora": "8.2.0",
+    "ora": "9.0.0",
     "fast-glob": "3.3.3",
     "@inquirer/confirm": "5.1.16",
     "@inquirer/select": "4.3.2",

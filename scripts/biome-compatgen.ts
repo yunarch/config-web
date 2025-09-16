@@ -1,12 +1,11 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { config as prettierConfig } from '../src/config.prettier';
 import { BASE_IGNORES } from '../src/eslint/configs/base';
 
 // Generate ignore patterns for Biome configuration
 const BASE_IGNORE_PATTERN = BASE_IGNORES.map((ignore) => `!${ignore}`);
-
-// TODO automate the biome config generation based on prettier and eslint configs
 
 // Write `biome.config.jsonc` file
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -20,26 +19,30 @@ await fs.writeFile(
     formatter: {
       enabled: true,
       includes: ['**', ...BASE_IGNORE_PATTERN],
-      useEditorconfig: true,
+      useEditorconfig: false,
       formatWithErrors: false,
-      indentStyle: 'space',
-      indentWidth: 2,
-      lineEnding: 'lf',
-      lineWidth: 80,
+      lineWidth: prettierConfig.printWidth,
+      indentWidth: prettierConfig.tabWidth,
+      indentStyle: prettierConfig.useTabs ? 'tab' : 'space',
+      bracketSpacing: prettierConfig.bracketSpacing,
+      bracketSameLine: prettierConfig.bracketSameLine,
+      lineEnding: prettierConfig.endOfLine,
       attributePosition: 'auto',
-      bracketSpacing: true,
     },
     javascript: {
       formatter: {
-        jsxQuoteStyle: 'double',
-        quoteProperties: 'asNeeded',
-        trailingCommas: 'es5',
-        semicolons: 'always',
-        arrowParentheses: 'always',
-        bracketSameLine: false,
-        quoteStyle: 'single',
-        attributePosition: 'auto',
-        bracketSpacing: true,
+        semicolons: prettierConfig.semi ? 'always' : undefined,
+        quoteStyle: prettierConfig.singleQuote ? 'single' : 'double',
+        arrowParentheses:
+          prettierConfig.arrowParens === 'always' ? 'always' : undefined,
+        trailingCommas: prettierConfig.trailingComma,
+        quoteProperties:
+          prettierConfig.quoteProps === 'as-needed'
+            ? 'asNeeded'
+            : prettierConfig.quoteProps === 'preserve'
+              ? 'preserve'
+              : undefined,
+        jsxQuoteStyle: prettierConfig.jsxSingleQuote ? 'single' : 'double',
       },
     },
     // ======================================================================================

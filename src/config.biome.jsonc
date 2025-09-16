@@ -52,26 +52,24 @@
       "!**/CHANGELOG*",
       "!**/LICENSE*"
     ],
-    "useEditorconfig": true,
+    "useEditorconfig": false,
     "formatWithErrors": false,
-    "indentStyle": "space",
-    "indentWidth": 2,
-    "lineEnding": "lf",
     "lineWidth": 80,
-    "attributePosition": "auto",
-    "bracketSpacing": true
+    "indentWidth": 2,
+    "indentStyle": "space",
+    "bracketSpacing": true,
+    "bracketSameLine": false,
+    "lineEnding": "lf",
+    "attributePosition": "auto"
   },
   "javascript": {
     "formatter": {
-      "jsxQuoteStyle": "double",
-      "quoteProperties": "asNeeded",
-      "trailingCommas": "es5",
       "semicolons": "always",
-      "arrowParentheses": "always",
-      "bracketSameLine": false,
       "quoteStyle": "single",
-      "attributePosition": "auto",
-      "bracketSpacing": true
+      "arrowParentheses": "always",
+      "trailingCommas": "es5",
+      "quoteProperties": "asNeeded",
+      "jsxQuoteStyle": "double"
     }
   },
   "linter": {

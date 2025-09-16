@@ -59,9 +59,10 @@ export default defineConfig([
   },
   // Prettier
   {
-    entry: ['./src/config.prettier.js'],
+    entry: ['./src/config.prettier.ts'],
     outDir: './dist',
     format: 'esm',
+    dts: true,
     minify: true,
     shims: true,
   },

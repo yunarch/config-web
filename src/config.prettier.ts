@@ -1,8 +1,6 @@
-/**
- * @see https://prettier.io/docs/configuration
- * @type {import("prettier").Config}
- */
-export const config = {
+import type { Config } from 'prettier';
+
+export const config: Config = {
   printWidth: 80,
   tabWidth: 2,
   useTabs: false,

@@ -466,6 +466,7 @@
     {
       "files": ["**/*.{js,jsx,cjs,cjsx,mjs,mjsx,ts,tsx,cts,ctsx,mts,mtjsx}"],
       "rules": {
+        "react/jsx-no-comment-textnodes": "warn",
         "react/jsx-no-duplicate-props": "warn",
         "react/no-array-index-key": "warn",
         "react/no-direct-mutation-state": "error",
@@ -477,6 +478,7 @@
     {
       "files": ["**/*.{ts,cts,mts}", "**/*.{tsx,ctsx,mtsx}"],
       "rules": {
+        "react/jsx-no-comment-textnodes": "warn",
         "react/jsx-no-duplicate-props": "off",
         "react/no-array-index-key": "warn",
         "react/no-direct-mutation-state": "error",

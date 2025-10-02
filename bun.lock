@@ -22,7 +22,7 @@
         "eslint-plugin-oxlint": "1.14.0",
         "eslint-plugin-perfectionist": "4.15.0",
         "eslint-plugin-react-hooks": "5.2.0",
-        "eslint-plugin-react-refresh": "0.4.22",
+        "eslint-plugin-react-refresh": "0.4.23",
         "eslint-plugin-unicorn": "61.0.2",
         "eslint-plugin-unused-imports": "4.2.0",
         "fast-glob": "3.3.3",
@@ -606,7 +606,7 @@
 
     "eslint-plugin-react-naming-convention": ["eslint-plugin-react-naming-convention@2.0.4", "", { "dependencies": { "@eslint-react/ast": "2.0.4", "@eslint-react/core": "2.0.4", "@eslint-react/eff": "2.0.4", "@eslint-react/kit": "2.0.4", "@eslint-react/shared": "2.0.4", "@eslint-react/var": "2.0.4", "@typescript-eslint/scope-manager": "^8.45.0", "@typescript-eslint/type-utils": "^8.45.0", "@typescript-eslint/types": "^8.45.0", "@typescript-eslint/utils": "^8.45.0", "string-ts": "^2.2.1", "ts-pattern": "^5.8.0" }, "peerDependencies": { "eslint": "^9.36.0", "typescript": "^5.9.2" } }, "sha512-/7cAWZyW/M5HH4WolPb9CwCf4HxribmQQ/tBrg28hexVx8EPDZO+PbONyESC6DvF2Y1P2N8lYo657h+y0tJhTg=="],
 
-    "eslint-plugin-react-refresh": ["eslint-plugin-react-refresh@0.4.22", "", { "peerDependencies": { "eslint": ">=8.40" } }, "sha512-atkAG6QaJMGoTLc4MDAP+rqZcfwQuTIh2IqHWFLy2TEjxr0MOK+5BSG4RzL2564AAPpZkDRsZXAUz68kjnU6Ug=="],
+    "eslint-plugin-react-refresh": ["eslint-plugin-react-refresh@0.4.23", "", { "peerDependencies": { "eslint": ">=8.40" } }, "sha512-G4j+rv0NmbIR45kni5xJOrYvCtyD3/7LjpVH8MPPcudXDcNu8gv+4ATTDXTtbRR8rTCM5HxECvCSsRmxKnWDsA=="],
 
     "eslint-plugin-react-web-api": ["eslint-plugin-react-web-api@2.0.4", "", { "dependencies": { "@eslint-react/ast": "2.0.4", "@eslint-react/core": "2.0.4", "@eslint-react/eff": "2.0.4", "@eslint-react/kit": "2.0.4", "@eslint-react/shared": "2.0.4", "@eslint-react/var": "2.0.4", "@typescript-eslint/scope-manager": "^8.45.0", "@typescript-eslint/types": "^8.45.0", "@typescript-eslint/utils": "^8.45.0", "string-ts": "^2.2.1", "ts-pattern": "^5.8.0" }, "peerDependencies": { "eslint": "^9.36.0", "typescript": "^5.9.2" } }, "sha512-U4ql2C+AQVnZeQ+nxBb3A8NA58W4tx4Fdc+cEro5/QMJKuiXltNUnhAJ5N4ttS6K0D/Iz1nHtkyULuWXFq+p1w=="],
 

@@ -2,15 +2,17 @@ version: 2
 updates:
   - package-ecosystem: bun
     directory: '/'
-    schedule:
-      interval: daily
     versioning-strategy: increase
     cooldown:
       default-days: 5
       semver-major-days: 15
       semver-minor-days: 7
       semver-patch-days: 3
+    schedule:
+      interval: weekly
+      day: sunday
   - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:
-      interval: daily
+      interval: weekly
+      day: sunday

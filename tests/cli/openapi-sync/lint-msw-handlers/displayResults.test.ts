@@ -5,7 +5,7 @@ import { consoleMock } from '../../../vitest.setup';
 describe('openapi-sync-lint-msw-handlers displayResults', () => {
   it('should display success message when no missing handlers', () => {
     displayResults([]);
-    expect(consoleMock).toHaveBeenCalledWith(
+    expect(consoleMock).toHaveBeenCalledExactlyOnceWith(
       expect.stringContaining('No missing handlers found')
     );
   });

@@ -18,7 +18,5 @@ vi.mock('ora', () => {
 
 // After each test
 afterEach(() => {
-  consoleMock.mockClear();
-  oraSucceedMock.mockClear();
-  oraFailMock.mockClear();
+  vi.clearAllMocks();
 });

@@ -13,9 +13,9 @@ describe('runTask', () => {
         name: 'Test Error',
       })
     ).rejects.toThrowError();
-    expect(ora).toHaveBeenCalledWith('Test Error');
+    expect(ora).toHaveBeenCalledExactlyOnceWith('Test Error');
     expect(oraSucceedMock).not.toHaveBeenCalled();
-    expect(oraFailMock).toHaveBeenCalledWith('Thrown error');
+    expect(oraFailMock).toHaveBeenCalledExactlyOnceWith('Thrown error');
   });
 
   it('should execute a promise and return its resolved value', async () => {
@@ -24,8 +24,8 @@ describe('runTask', () => {
       name: 'Test Promise',
     });
     expect(result).toBe('Promise resolved');
-    expect(ora).toHaveBeenCalledWith('Test Promise');
-    expect(oraSucceedMock).toHaveBeenCalledWith(undefined);
+    expect(ora).toHaveBeenCalledExactlyOnceWith('Test Promise');
+    expect(oraSucceedMock).toHaveBeenCalledExactlyOnceWith(undefined);
   });
 
   it('should execute an async function and return its resolved value', async () => {
@@ -34,8 +34,8 @@ describe('runTask', () => {
       name: 'Test Promise Function',
     });
     expect(result).toBe('Function resolved');
-    expect(ora).toHaveBeenCalledWith('Test Promise Function');
-    expect(oraSucceedMock).toHaveBeenCalledWith(undefined);
+    expect(ora).toHaveBeenCalledExactlyOnceWith('Test Promise Function');
+    expect(oraSucceedMock).toHaveBeenCalledExactlyOnceWith(undefined);
   });
 
   it('should execute a function and return its value', async () => {
@@ -44,8 +44,8 @@ describe('runTask', () => {
       name: 'Test Function',
     });
     expect(result).toBe('Function resolved');
-    expect(ora).toHaveBeenCalledWith('Test Function');
-    expect(oraSucceedMock).toHaveBeenCalledWith(undefined);
+    expect(ora).toHaveBeenCalledExactlyOnceWith('Test Function');
+    expect(oraSucceedMock).toHaveBeenCalledExactlyOnceWith(undefined);
   });
 
   it("should show the elapsed time if 'showTime' option is true", async () => {
@@ -55,8 +55,10 @@ describe('runTask', () => {
       options: { showTime: true },
     });
     expect(result).toBe('Function resolved');
-    expect(ora).toHaveBeenCalledWith('Test Function with Elapsed Time');
-    expect(oraSucceedMock).toHaveBeenCalledWith(
+    expect(ora).toHaveBeenCalledExactlyOnceWith(
+      'Test Function with Elapsed Time'
+    );
+    expect(oraSucceedMock).toHaveBeenCalledExactlyOnceWith(
       expect.stringMatching(/^\d+ms Test Function with Elapsed Time$/)
     );
   });

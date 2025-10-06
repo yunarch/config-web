@@ -29,7 +29,7 @@ export function jsdoc(): TypedFlatConfigItem[] {
       files: [GLOB_TS, GLOB_TSX],
       config: 'flat/recommended-typescript-error',
       rules: {
-        // eslint-pluging-jsdoc does not allow array of configs
+        // eslint-pluging-jsdoc does not allow array of configs so we add rules from other jsdoc ts configs here
         ...pluginJsdoc.configs['flat/contents-typescript-error'].rules,
         ...pluginJsdoc.configs['flat/logical-typescript-error'].rules,
         ...pluginJsdoc.configs['flat/stylistic-typescript-error'].rules,

@@ -27,6 +27,7 @@ export function unicorn(): TypedFlatConfigItem[] {
         ],
         'unicorn/prefer-top-level-await': 'warn',
         'unicorn/prevent-abbreviations': 'off',
+        'unicorn/no-useless-undefined': ['error', { checkArguments: false }],
       },
     },
   ];

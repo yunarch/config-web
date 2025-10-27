@@ -1,8 +1,3 @@
----
-description: 'Guidelines for writing commit messages following Conventional Commits specification'
-applyTo: '**'
----
-
 # Commit Message Guidelines
 
 This project follows the [Conventional Commits](https://www.conventionalcommits.org/) specification for commit messages. This structured format makes the commit history more readable and allows for automated tools to generate changelogs.

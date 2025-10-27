@@ -40,7 +40,9 @@
   },
 
   // Customize AI responses
+  "chat.agentSessionsViewLocation": "view",
+  "chat.useAgentsMdFile": true,
   "github.copilot.chat.commitMessageGeneration.instructions": [
-    { "file": ".github/instructions/commit-messages.instructions.md" }
+    { "file": ".github/instructions/commit-messages.md" }
   ]
 }

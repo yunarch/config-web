@@ -461,12 +461,12 @@
       ],
       "rules": {
         "vitest/expect-expect": "error",
-        "vitest/no-identical-title": "error",
         "vitest/no-commented-out-tests": "error",
-        "vitest/valid-expect": "error",
-        "vitest/valid-describe-callback": "error",
-        "vitest/require-local-test-context-for-concurrent-snapshots": "error",
+        "vitest/no-identical-title": "error",
         "vitest/no-import-node-test": "error",
+        "vitest/require-local-test-context-for-concurrent-snapshots": "error",
+        "vitest/valid-describe-callback": "error",
+        "vitest/valid-expect": "error",
         "vitest/consistent-test-it": [
           "error",
           { "fn": "it", "withinDescribe": "it" }

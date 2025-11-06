@@ -43,7 +43,7 @@ jobs:
         env:
           TEST_DIST: true
       - name: 🚀 Publish Release
-        run: bunx npm publish --provenance --dry-run
+        run: bunx npm publish --provenance
       - name: 🔖 Move tag to latest commit
         if: github.event_name == 'workflow_dispatch' && github.event.inputs.move_tag == 'true'
         run: |
@@ -57,12 +57,12 @@ jobs:
             TAG_COMMIT=$(git rev-parse "$TAG_NAME")
             if git merge-base --is-ancestor "$TAG_COMMIT" "$HEAD_COMMIT" && [ "$TAG_COMMIT" != "$HEAD_COMMIT" ]; then
               echo "Tag $TAG_NAME is behind HEAD. Moving from $TAG_COMMIT to $HEAD_COMMIT"
-              # git tag -d "$TAG_NAME"
-              # git tag "$TAG_NAME" "$HEAD_COMMIT"
-              # git push origin "$TAG_NAME" --force
+              git tag -d "$TAG_NAME"
+              git tag "$TAG_NAME" "$HEAD_COMMIT"
+              git push origin "$TAG_NAME" --force
             fi
           fi
       - name: 📝 Generate release notes
-        run: bunx changelogithub --dry
+        run: bunx changelogithub
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}

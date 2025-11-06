@@ -32,6 +32,8 @@ jobs:
           fetch-depth: 0
       - name: 🔧 Setup Bun
         uses: oven-sh/setup-bun@v2
+        with:
+          registry-url: 'https://registry.npmjs.org'
       - name: 📦 Install dependencies
         run: bun install --frozen-lockfile
       - name: 🔍 Lint files
@@ -43,7 +45,7 @@ jobs:
         env:
           TEST_DIST: true
       - name: 🚀 Publish
-        run: npm publish
+        run: bunx npm publish
       - name: 🔖 Move tag to latest commit
         if: github.event_name == 'workflow_dispatch' && github.event.inputs.move_tag == 'true'
         run: |

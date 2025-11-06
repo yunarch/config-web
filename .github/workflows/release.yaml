@@ -45,7 +45,7 @@ jobs:
       - name: 🚀 Publish Release
         run: bunx npm publish --provenance --dry-run
       - name: 🔖 Move tag to latest commit
-        if: github.event_name == 'workflow_dispatch' && github.event.inputs.move_tag == 'true'
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.move_tag == true
         run: |
           git config user.name "{{ github.actor }}"
           git config user.email "{{ github.actor }}@users.noreply.github.com"

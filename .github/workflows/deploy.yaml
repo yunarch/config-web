@@ -32,4 +32,4 @@ jobs:
         env:
           TEST_DIST: true
       - name: 🚀 Publish Release
-        run: bun publish --dry-run
+        run: bunx npm publish --provenance --dry-run

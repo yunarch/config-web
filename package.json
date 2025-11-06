@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/package",
-  "version": "0.5.8",
+  "version": "0.5.7",
   "name": "@yunarch/config-web",
   "description": "Shared configurations for web projects.",
   "license": "MIT",
@@ -73,7 +73,7 @@
     "build": "bun run gen && tsup",
     "tests": "vitest --typecheck run",
     "tests:watch": "vitest --typecheck watch",
-    "release": "bunx bumpp"
+    "release": "TEST_DIST=true bunx bumpp"
   },
   "peerDependencies": {
     "@biomejs/biome": ">= 2 || < 3",

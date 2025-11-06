@@ -8,8 +8,9 @@ on:
     inputs:
       move_tag:
         description: 'Move tag to latest commit if behind'
+        type: boolean
         required: false
-        default: 'false'
+        default: false
 
 env:
   CI: true

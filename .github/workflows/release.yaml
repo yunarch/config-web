@@ -11,13 +11,14 @@ env:
   DO_NOT_TRACK: 1
   HUSKY: 0
 
+permissions:
+  contents: write
+  id-token: write
+
 jobs:
   release:
     name: Create Release
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      id-token: write
     steps:
       - name: 📁 Checkout
         uses: actions/checkout@v5

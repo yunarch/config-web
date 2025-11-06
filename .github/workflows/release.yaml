@@ -44,8 +44,10 @@ jobs:
         run: bun run tests
         env:
           TEST_DIST: true
+      - name: Verify npm version
+        run: bunx npm --version
       - name: 🚀 Publish
-        run: bunx npm publish --provenance
+        run: bunx npm publish
       - name: 🔖 Move tag to latest commit
         if: github.event_name == 'workflow_dispatch' && github.event.inputs.move_tag == 'true'
         run: |

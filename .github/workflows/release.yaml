@@ -1,22 +1,10 @@
 name: Release
 
 on:
-  pull_request_target:
-    types: [closed]
-    branches:
-      - main
+  push:
+    tags:
+      - 'v*'
   workflow_dispatch:
-    inputs:
-      release-version:
-        description: The type of release to prepare
-        type: choice
-        options:
-          - conventional
-          - major
-          - minor
-          - patch
-        default: conventional
-        required: true
 
 env:
   CI: true
@@ -24,52 +12,7 @@ env:
   HUSKY: 0
 
 jobs:
-  # Creates a release PR when triggered manually
-  create-release-pr:
-    name: Create Release PR
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
-    if: github.event_name == 'workflow_dispatch'
-    steps:
-      - name: 📁 Checkout
-        uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
-      - name: 🔧 Setup Bun
-        uses: oven-sh/setup-bun@v2
-      - name: 🏷️ Bump version
-        id: bump
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          bunx bumpp --release ${{ github.event.inputs.release-version }} --yes --no-commit --no-tag --no-push
-          echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
-      - name: 📝 Generate changelog
-        id: changelog
-        run: |
-          CHANGELOG=$(bunx changelogithub --dry --output CHANGELOG.md | sed -r 's/\x1B[[0-9;]*[mK]//g' | awk '/^--------------$/{if(++count==1)next; if(count==2)exit} count==1')
-          echo "changelog<<EOF" >> $GITHUB_OUTPUT
-          echo "$CHANGELOG" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-      - name: 🔀 Create Pull Request
-        uses: peter-evans/create-pull-request@v7
-        with:
-          commit-message: 'chore: release v${{ steps.bump.outputs.version }}'
-          title: 'chore: release v${{ steps.bump.outputs.version }}'
-          body: |
-            # Release notes (draft)
-
-            > [!WARNING]
-            > This changelog is auto-generated and may be incomplete. The final release notes will be generated when this PR is merged and a tag is created.
-
-            ${{ steps.changelog.outputs.changelog }}
-          branch: release/v${{ steps.bump.outputs.version }}
-          base: main
-  # Creates a release when the release PR is merged
-  create-release:
-    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release/')
+  release:
     name: Create Release
     runs-on: ubuntu-latest
     permissions:
@@ -81,26 +24,17 @@ jobs:
           fetch-depth: 0
       - name: 🔧 Setup Bun
         uses: oven-sh/setup-bun@v2
-      - name: 🏷️ Get version
-        id: version
-        run: |
-          VERSION=$(node -p "require('./package.json').version")
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-      - name: 🔖 Create and push tag
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git tag -a "v${{ steps.version.outputs.version }}" -m "Release v${{ steps.version.outputs.version }}"
-          git push origin "v${{ steps.version.outputs.version }}"
+      - name: 🔍 Lint files
+        run: bun run lint
+      - name: 🔨 Build files
+        run: bun run build
+      - name: 🧪 Test distribution
+        run: bun run tests
+        env:
+          TEST_DIST: true
+      - name: 🚀 Publish Release
+        run: bunx npm publish --provenance --dry-run
       - name: 📝 Generate release notes
         run: bunx changelogithub
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-  # Publish release
-  publish-release:
-    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release/')
-    needs: [create-release]
-    name: Publish Release
-    uses: ./.github/workflows/deploy.yaml
-    permissions:
-      id-token: write

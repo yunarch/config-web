@@ -69,12 +69,11 @@ jobs:
           base: main
   # Creates a release when the release PR is merged
   create-release:
+    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release/')
     name: Create Release
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      id-token: write
-    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release/')
     steps:
       - name: 📁 Checkout
         uses: actions/checkout@v5
@@ -97,5 +96,11 @@ jobs:
         run: bunx changelogithub
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      - name: 🚀 Publish Release
-        uses: ./.github/workflows/deploy.yaml
+  # Publish release
+  publish-release:
+    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release/')
+    needs: [create-release]
+    name: Publish Release
+    uses: ./.github/workflows/deploy.yaml
+    permissions:
+      id-token: write

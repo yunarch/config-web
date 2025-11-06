@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yunarch/config-web"
+    "url": "git+https://github.com/yunarch/config-web.git"
   },
   "bugs": {
     "url": "https://github.com/yunarch/config-web/issues"
@@ -35,10 +35,10 @@
     "dist"
   ],
   "bin": {
-    "bun-run-all": "./dist/cli/bun-run-all/bun-run-all.cli.js",
-    "openapi-sync": "./dist/cli/openapi-sync/openapi-sync.cli.js",
-    "openapi-sync-lint-msw-handlers": "./dist/cli/openapi-sync/openapi-sync-lint-msw-handlers.cli.js",
-    "turbo-select": "./dist/cli/turbo-select/turbo-select.cli.js"
+    "bun-run-all": "dist/cli/bun-run-all/bun-run-all.cli.js",
+    "openapi-sync": "dist/cli/openapi-sync/openapi-sync.cli.js",
+    "openapi-sync-lint-msw-handlers": "dist/cli/openapi-sync/openapi-sync-lint-msw-handlers.cli.js",
+    "turbo-select": "dist/cli/turbo-select/turbo-select.cli.js"
   },
   "exports": {
     ".": "./dist/index.js",

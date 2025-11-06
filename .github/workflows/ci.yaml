@@ -5,6 +5,8 @@ on:
     branches:
       - main
   pull_request:
+    branches:
+      [main, master, develop, development, staging, release/**/*, hotfix/**/*]
 
 env:
   CI: true

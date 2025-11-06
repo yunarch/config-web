@@ -42,7 +42,7 @@ jobs:
         run: bun run tests
         env:
           TEST_DIST: true
-      - name: 🚀 Publish Release
+      - name: 🚀 Publish
         run: bun publish
       - name: 🔖 Move tag to latest commit
         if: github.event_name == 'workflow_dispatch' && github.event.inputs.move_tag == 'true'

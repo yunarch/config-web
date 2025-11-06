@@ -47,10 +47,8 @@ jobs:
         run: bun run tests
         env:
           TEST_DIST: true
-      - name: Verify npm version
-        run: bunx npm --version
       - name: 🚀 Publish
-        run: npm publish --dry-run
+        run: npm publish
       - name: 🔖 Move tag to latest commit
         if: github.event_name == 'workflow_dispatch' && github.event.inputs.move_tag == 'true'
         run: |
@@ -70,6 +68,6 @@ jobs:
             fi
           fi
       - name: 📝 Generate release notes
-        run: bunx changelogithub --dry
+        run: bunx changelogithub
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}

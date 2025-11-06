@@ -30,10 +30,13 @@ jobs:
         uses: actions/checkout@v5
         with:
           fetch-depth: 0
+      - name: ⚙️ Setup Node 24 (Temporary solution until Bun publish supports OIDC)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
       - name: 🔧 Setup Bun
         uses: oven-sh/setup-bun@v2
-        with:
-          registry-url: 'https://registry.npmjs.org'
       - name: 📦 Install dependencies
         run: bun install --frozen-lockfile
       - name: 🔍 Lint files
@@ -47,7 +50,7 @@ jobs:
       - name: Verify npm version
         run: bunx npm --version
       - name: 🚀 Publish
-        run: bunx npm publish
+        run: npm publish --dry-run
       - name: 🔖 Move tag to latest commit
         if: github.event_name == 'workflow_dispatch' && github.event.inputs.move_tag == 'true'
         run: |
@@ -67,6 +70,6 @@ jobs:
             fi
           fi
       - name: 📝 Generate release notes
-        run: bunx changelogithub
+        run: bunx changelogithub --dry
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}

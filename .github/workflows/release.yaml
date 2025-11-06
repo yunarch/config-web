@@ -35,7 +35,7 @@ jobs:
         env:
           TEST_DIST: true
       - name: 🚀 Publish Release
-        run: bunx npm publish --provenance --dry-run
+        run: bunx npm publish --provenance
       - name: 📝 Generate release notes
         run: bunx changelogithub
         env:

@@ -5,6 +5,11 @@ on:
     tags:
       - 'v*'
   workflow_dispatch:
+    inputs:
+      move_tag:
+        description: 'Move tag to latest commit if behind'
+        required: false
+        default: 'false'
 
 env:
   CI: true
@@ -39,7 +44,7 @@ jobs:
       - name: 🚀 Publish Release
         run: bunx npm publish --provenance --dry-run
       - name: 🔖 Move tag to latest commit
-        if: github.event_name == 'workflow_dispatch'
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.move_tag == 'true'
         run: |
           git config user.name "{{ github.actor }}"
           git config user.email "{{ github.actor }}@users.noreply.github.com"

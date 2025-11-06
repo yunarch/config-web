@@ -1,0 +1,35 @@
+name: Deploy
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+env:
+  CI: true
+  DO_NOT_TRACK: 1
+  HUSKY: 0
+
+jobs:
+  deploy_release:
+    name: Deploy release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: 📁 Checkout
+        uses: actions/checkout@v5
+      - name: 🔧 Setup Bun
+        uses: oven-sh/setup-bun@v2
+      - name: 📦 Install dependencies
+        run: bun install --frozen-lockfile
+      - name: 🔍 Lint files
+        run: bun run lint
+      - name: 🔨 Build files
+        run: bun run build
+      - name: 🧪 Test distribution
+        run: bun run tests
+        env:
+          TEST_DIST: true
+      - name: 🚀 Publish Release
+        run: bun publish --dry-run

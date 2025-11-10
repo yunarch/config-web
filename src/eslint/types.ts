@@ -107,7 +107,16 @@ export interface OptionsConfig {
    *
    * @default false
    */
-  react?: boolean;
+  react?:
+    | boolean
+    | {
+        /**
+         * Enable React strict rules.
+         *
+         * @default true
+         */
+        enableStrictRules?: boolean;
+      };
   /**
    * Enable vitest (`@vitest/eslint-plugin`) support rules.
    *

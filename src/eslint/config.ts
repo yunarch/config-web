@@ -93,6 +93,10 @@ export function config(
           typeof options.typescript === 'object' &&
           !!options.typescript.tsconfigPath &&
           !options.typescript.disableTypeAware,
+        enableStrictRules:
+          typeof options.react === 'object'
+            ? options.react.enableStrictRules
+            : true,
       })
     );
   }

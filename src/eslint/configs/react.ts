@@ -17,6 +17,7 @@ import { interopDefault } from '../utils';
 export async function react(options: {
   isTypescriptEnabled: boolean;
   isTypeAware: boolean;
+  enableStrictRules?: boolean;
 }): Promise<TypedFlatConfigItem[]> {
   const [pluginReact, pluginReactHooks, pluginReactRefresh] = await Promise.all(
     [
@@ -25,7 +26,13 @@ export async function react(options: {
       interopDefault(import('eslint-plugin-react-refresh')),
     ] as const
   );
-  const pluginReactAll = pluginReact.configs.all.plugins;
+  const pluginReactAll =
+    // ! TODO: using `as` here as a temporary workaround as `@eslint-react/eslint-plugin` types does not export plugins in configs, but they exist at runtime.
+    (
+      pluginReact.configs.all as typeof pluginReact.configs.all & {
+        plugins: Record<string, unknown>;
+      }
+    ).plugins;
   return [
     {
       name: 'yunarch/react/setup',
@@ -54,6 +61,7 @@ export async function react(options: {
       },
       rules: {
         ...pluginReact.configs.recommended.rules,
+        ...(options.enableStrictRules ? pluginReact.configs.strict.rules : {}),
         ...pluginReactHooks.configs.recommended.rules,
         ...pluginReactRefresh.configs.recommended.rules,
       },
@@ -71,9 +79,15 @@ export async function react(options: {
             },
             rules: {
               ...pluginReact.configs['recommended-typescript'].rules,
+              ...(options.enableStrictRules
+                ? pluginReact.configs['strict-typescript'].rules
+                : {}),
               ...(options.isTypeAware
                 ? {
                     ...pluginReact.configs['recommended-type-checked'].rules,
+                    ...(options.enableStrictRules
+                      ? pluginReact.configs['strict-type-checked'].rules
+                      : {}),
                   }
                 : {}),
             },

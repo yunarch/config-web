@@ -32,7 +32,11 @@ const configs = await combine(
   unicorn(),
   test({}),
   tanstack(true), // All enabled for typegen generation.
-  react({ isTypescriptEnabled: true, isTypeAware: true }), // All enabled for typegen generation.
+  react({
+    isTypescriptEnabled: true,
+    isTypeAware: true,
+    enableStrictRules: true,
+  }), // All enabled for typegen generation.
   perfectionist(),
   disables({})
 );

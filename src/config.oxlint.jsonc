@@ -495,11 +495,10 @@
       "rules": {
         "react/jsx-no-comment-textnodes": "warn",
         "react/jsx-no-duplicate-props": "warn",
-        "react/jsx-no-undef": "off",
         "react/no-array-index-key": "warn",
-        "react/no-children-prop": "off",
         "react/no-direct-mutation-state": "error",
         "react/no-string-refs": "error",
+        "react/no-children-prop": "error",
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "warn"
       }
@@ -509,11 +508,11 @@
       "rules": {
         "react/jsx-no-comment-textnodes": "warn",
         "react/jsx-no-duplicate-props": "off",
-        "react/jsx-no-undef": "off",
         "react/no-array-index-key": "warn",
-        "react/no-children-prop": "off",
         "react/no-direct-mutation-state": "error",
-        "react/no-string-refs": "error"
+        "react/no-string-refs": "error",
+        "react/jsx-no-undef": "off",
+        "react/no-children-prop": "error"
       }
     },
     {

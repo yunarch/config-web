@@ -80,23 +80,19 @@ export function config(
     configs.push(unicorn());
   }
   if (options.test) {
-    configs.push(test(options.test === true ? {} : options.test));
+    configs.push(test(options.test));
   }
   if (options.tanstack) {
     configs.push(tanstack(options.tanstack));
   }
   if (options.react) {
     configs.push(
-      react({
+      react(options.react, {
         isTypescriptEnabled: !!options.typescript,
         isTypeAware:
           typeof options.typescript === 'object' &&
           !!options.typescript.tsconfigPath &&
           !options.typescript.disableTypeAware,
-        enableStrictRules:
-          typeof options.react === 'object'
-            ? options.react.enableStrictRules
-            : true,
       })
     );
   }

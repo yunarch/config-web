@@ -5,6 +5,7 @@ export default config({
   typescript: {
     tsconfigPath: './tsconfig.json',
   },
+  react: true,
   test: {
     enableTypeTesting: true,
   },

@@ -5,20 +5,26 @@ import {
   GLOB_TS,
   GLOB_TSX,
 } from '../globs';
-import type { TypedFlatConfigItem } from '../types';
+import type { OptionsConfig, TypedFlatConfigItem } from '../types';
 import { interopDefault } from '../utils';
 
 /**
  * React ESlint configuration.
  *
  * @param options - Configuration options.
+ * @param tsOptions - TypeScript related options.
  * @returns An array of ESLint configurations.
  */
-export async function react(options: {
-  isTypescriptEnabled: boolean;
-  isTypeAware: boolean;
-  enableStrictRules?: boolean;
-}): Promise<TypedFlatConfigItem[]> {
+export async function react(
+  options: true | Exclude<NonNullable<OptionsConfig['react']>, boolean>,
+  tsOptions: {
+    isTypescriptEnabled: boolean;
+    isTypeAware: boolean;
+  }
+): Promise<TypedFlatConfigItem[]> {
+  const isTypescriptEnabled = tsOptions.isTypescriptEnabled;
+  const isTypeAware = isTypescriptEnabled && tsOptions.isTypeAware;
+  const enableStrictRules = options === true || options.enableStrictRules;
   const [pluginReact, pluginReactHooks, pluginReactRefresh] = await Promise.all(
     [
       interopDefault(import('@eslint-react/eslint-plugin')),
@@ -61,12 +67,12 @@ export async function react(options: {
       },
       rules: {
         ...pluginReact.configs.recommended.rules,
-        ...(options.enableStrictRules ? pluginReact.configs.strict.rules : {}),
+        ...(enableStrictRules ? pluginReact.configs.strict.rules : {}),
         ...pluginReactHooks.configs.recommended.rules,
         ...pluginReactRefresh.configs.recommended.rules,
       },
     },
-    ...(options.isTypescriptEnabled
+    ...(isTypescriptEnabled
       ? [
           {
             name: 'yunarch/react/typescript/rules',
@@ -79,13 +85,13 @@ export async function react(options: {
             },
             rules: {
               ...pluginReact.configs['recommended-typescript'].rules,
-              ...(options.enableStrictRules
+              ...(enableStrictRules
                 ? pluginReact.configs['strict-typescript'].rules
                 : {}),
-              ...(options.isTypeAware
+              ...(isTypeAware
                 ? {
                     ...pluginReact.configs['recommended-type-checked'].rules,
-                    ...(options.enableStrictRules
+                    ...(enableStrictRules
                       ? pluginReact.configs['strict-type-checked'].rules
                       : {}),
                   }

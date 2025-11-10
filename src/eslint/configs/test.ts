@@ -9,9 +9,9 @@ import type { OptionsConfig, TypedFlatConfigItem } from '../types';
  * @returns An array of ESLint configurations.
  */
 export function test(
-  options: Exclude<NonNullable<OptionsConfig['test']>, boolean>
+  options: true | Exclude<NonNullable<OptionsConfig['test']>, boolean>
 ): TypedFlatConfigItem[] {
-  const { enableTypeTesting } = options;
+  const enableTypeTesting = options === true || options.enableTypeTesting;
   return [
     {
       name: 'yunarch/test/setup',

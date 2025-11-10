@@ -104,6 +104,7 @@ export interface OptionsConfig {
   unicorn?: boolean;
   /**
    * Enable react rules.
+   * If `true`, it will enable react eslint plugins with recommended and strict rules, otherwise you can specify options.
    *
    * @default false
    */
@@ -113,12 +114,13 @@ export interface OptionsConfig {
         /**
          * Enable React strict rules.
          *
-         * @default true
+         * @default false
          */
         enableStrictRules?: boolean;
       };
   /**
    * Enable vitest (`@vitest/eslint-plugin`) support rules.
+   * If `true`, it will enable vitest eslint plugin with recommended rules and type testing, otherwise you can specify options.
    *
    * @default false
    */
@@ -135,7 +137,7 @@ export interface OptionsConfig {
       };
   /**
    * Enable tanstack plugins rules.
-   * If `true`, it will enable all tanstack eslint plugins, otherwise you can specify which ones to enable.
+   * If `true`, it will enable tanstack eslint plugins, otherwise you can specify options.
    *
    * @default false
    */

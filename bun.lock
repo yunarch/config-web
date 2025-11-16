@@ -1,6 +1,5 @@
 {
   "lockfileVersion": 1,
-  "configVersion": 1,
   "workspaces": {
     "": {
       "name": "@yunarch/config-web",
@@ -43,7 +42,7 @@
         "jsonc-parser": "3.3.1",
         "lint-staged": "16.2.6",
         "msw": "2.12.1",
-        "oxlint": "1.26.0",
+        "oxlint": "1.28.0",
         "prettier": "3.6.2",
         "rimraf": "6.1.0",
         "tsup": "8.5.0",

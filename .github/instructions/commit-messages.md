@@ -19,19 +19,28 @@ This project follows the [Conventional Commits](https://www.conventionalcommits.
 
 ## Type
 
-The following types are allowed:
+The following types are allowed. Always pick the most specific.
 
-- **feat**: A new feature
-- **fix**: A bug fix
-- **docs**: Documentation only changes
-- **style**: Changes that do not affect the meaning of the code (white-space, formatting, etc)
-- **refactor**: A code change that neither fixes a bug nor adds a feature
-- **perf**: A code change that improves performance
-- **test**: Adding missing tests or correcting existing tests
-- **build**: Changes that affect the build system or external dependencies
-- **ci**: Changes to our CI configuration files and scripts
-- **chore**: Other changes that don't modify src or test files
-- **revert**: Reverts a previous commit
+- **feat**: A new end-user capability or behavior. Only use when the change surfaces new functionality to stakeholders.
+- **fix**: A bug fix, regression patch, or defect mitigation, even if the code also adds tests.
+- **docs**: Documentation-only updates (README, ADRs, inline docs) that do not affect code.
+- **style**: Formatting-only adjustments that do not change runtime behavior (spacing, lint fixes).
+- **refactor**: Structural or internal code changes that neither fix a bug nor add a user-visible feature. Do not use `feat` for pure refactors.
+- **perf**: A change whose goal is performance improvement (speed, memory, resource usage).
+- **test**: Adding or adjusting tests without modifying production behavior.
+- **build**: Tooling, compiler, bundler, or dependency changes that impact the build pipeline.
+- **ci**: Updates to CI workflows, pipelines, or automation scripts.
+- **chore**: Repository maintenance that does not touch `src/` or tests (e.g., config, scripts, dependency bumps).
+- **revert**: Reverts a previous commit.
+
+### Choosing the right type
+
+- Reserve `feat` for changes a user can notice (new routes, buttons, API capabilities). Everything else should use a more specific type.
+- Use `fix` whenever you resolve a defect, even if the implementation contains new functionality internally.
+- Prefer `refactor` for code reshuffles, component extractions, or renames that keep behavior the same.
+- Tag dependency bumps, tooling tweaks, and scripts as `build` or `chore` depending on whether they affect the build system.
+- Use `test` for test-only commits and `docs` for documentation-only commits; mixing them with `feat` makes the changelog noisy.
+- CI workflow updates belong to `ci`, and performance-focused work should be `perf`.
 
 ## Description
 

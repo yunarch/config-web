@@ -1,6 +1,5 @@
 {
   "lockfileVersion": 1,
-  "configVersion": 1,
   "workspaces": {
     "": {
       "name": "@yunarch/config-web",
@@ -19,7 +18,7 @@
         "eslint-flat-config-utils": "2.1.4",
         "eslint-import-resolver-typescript": "4.4.4",
         "eslint-plugin-import-x": "4.16.1",
-        "eslint-plugin-jsdoc": "61.2.1",
+        "eslint-plugin-jsdoc": "61.4.1",
         "eslint-plugin-oxlint": "1.29.0",
         "eslint-plugin-perfectionist": "4.15.1",
         "eslint-plugin-react-hooks": "7.0.1",
@@ -617,7 +616,7 @@
 
     "eslint-plugin-import-x": ["eslint-plugin-import-x@4.16.1", "", { "dependencies": { "@typescript-eslint/types": "^8.35.0", "comment-parser": "^1.4.1", "debug": "^4.4.1", "eslint-import-context": "^0.1.9", "is-glob": "^4.0.3", "minimatch": "^9.0.3 || ^10.0.1", "semver": "^7.7.2", "stable-hash-x": "^0.2.0", "unrs-resolver": "^1.9.2" }, "peerDependencies": { "@typescript-eslint/utils": "^8.0.0", "eslint": "^8.57.0 || ^9.0.0", "eslint-import-resolver-node": "*" }, "optionalPeers": ["@typescript-eslint/utils", "eslint-import-resolver-node"] }, "sha512-vPZZsiOKaBAIATpFE2uMI4w5IRwdv/FpQ+qZZMR4E+PeOcM4OeoEbqxRMnywdxP19TyB/3h6QBB0EWon7letSQ=="],
 
-    "eslint-plugin-jsdoc": ["eslint-plugin-jsdoc@61.2.1", "", { "dependencies": { "@es-joy/jsdoccomment": "~0.76.0", "@es-joy/resolve.exports": "1.2.0", "are-docs-informative": "^0.0.2", "comment-parser": "1.4.1", "debug": "^4.4.3", "escape-string-regexp": "^4.0.0", "espree": "^10.4.0", "esquery": "^1.6.0", "html-entities": "^2.6.0", "object-deep-merge": "^2.0.0", "parse-imports-exports": "^0.2.4", "semver": "^7.7.3", "spdx-expression-parse": "^4.0.0", "to-valid-identifier": "^1.0.0" }, "peerDependencies": { "eslint": "^7.0.0 || ^8.0.0 || ^9.0.0" } }, "sha512-Htacti3dbkNm4rlp/Bk9lqhv+gi6US9jyN22yaJ42G6wbteiTbNLChQwi25jr/BN+NOzDWhZHvCDdrhX0F8dXQ=="],
+    "eslint-plugin-jsdoc": ["eslint-plugin-jsdoc@61.4.1", "", { "dependencies": { "@es-joy/jsdoccomment": "~0.76.0", "@es-joy/resolve.exports": "1.2.0", "are-docs-informative": "^0.0.2", "comment-parser": "1.4.1", "debug": "^4.4.3", "escape-string-regexp": "^4.0.0", "espree": "^10.4.0", "esquery": "^1.6.0", "html-entities": "^2.6.0", "object-deep-merge": "^2.0.0", "parse-imports-exports": "^0.2.4", "semver": "^7.7.3", "spdx-expression-parse": "^4.0.0", "to-valid-identifier": "^1.0.0" }, "peerDependencies": { "eslint": "^7.0.0 || ^8.0.0 || ^9.0.0" } }, "sha512-3c1QW/bV25sJ1MsIvsvW+EtLtN6yZMduw7LVQNVt72y2/5BbV5Pg5b//TE5T48LRUxoEQGaZJejCmcj3wCxBzw=="],
 
     "eslint-plugin-oxlint": ["eslint-plugin-oxlint@1.29.0", "", { "dependencies": { "jsonc-parser": "^3.3.1" } }, "sha512-VmaZ1I0lXJVJokOpnV8F7e339hcFPln5EWY8KGCdTkBnrkRmAeH25GRO6F37lZEDO9e+px5xjqbkq9g3lejBdg=="],
 

@@ -1,6 +1,5 @@
 {
   "lockfileVersion": 1,
-  "configVersion": 1,
   "workspaces": {
     "": {
       "name": "@yunarch/config-web",
@@ -12,7 +11,7 @@
         "@tanstack/eslint-plugin-query": "5.91.2",
         "@tanstack/eslint-plugin-router": "1.133.19",
         "@total-typescript/ts-reset": "0.6.1",
-        "@vitest/eslint-plugin": "1.4.3",
+        "@vitest/eslint-plugin": "1.5.0",
         "commander": "14.0.2",
         "eslint-config-flat-gitignore": "2.1.0",
         "eslint-config-prettier": "10.1.8",
@@ -449,7 +448,7 @@
 
     "@unrs/resolver-binding-win32-x64-msvc": ["@unrs/resolver-binding-win32-x64-msvc@1.11.1", "", { "os": "win32", "cpu": "x64" }, "sha512-lrW200hZdbfRtztbygyaq/6jP6AKE8qQN2KvPcJ+x7wiD038YtnYtZ82IMNJ69GJibV7bwL3y9FgK+5w/pYt6g=="],
 
-    "@vitest/eslint-plugin": ["@vitest/eslint-plugin@1.4.3", "", { "dependencies": { "@typescript-eslint/scope-manager": "^8.46.1", "@typescript-eslint/utils": "^8.46.1" }, "peerDependencies": { "eslint": ">=8.57.0", "typescript": ">=5.0.0", "vitest": "*" }, "optionalPeers": ["typescript", "vitest"] }, "sha512-ba+YDKyZdViNAOg8P86a9tIEawPA/O+nLbwhg8g7nkqsLOAVum6GoZhkNxgwX621oqWAbB8N2xb+G5kkpXehcA=="],
+    "@vitest/eslint-plugin": ["@vitest/eslint-plugin@1.5.0", "", { "dependencies": { "@typescript-eslint/scope-manager": "^8.46.1", "@typescript-eslint/utils": "^8.46.1" }, "peerDependencies": { "eslint": ">=8.57.0", "typescript": ">=5.0.0", "vitest": "*" }, "optionalPeers": ["typescript", "vitest"] }, "sha512-j3uuIAPTYWYnSit9lspb08/EKsxEmGqjQf+Wpb1DQkxc+mMkhL58ZknDCgjYhY4Zu76oxZ0hVWTHlmRW0mJq5w=="],
 
     "@vitest/expect": ["@vitest/expect@4.0.10", "", { "dependencies": { "@standard-schema/spec": "^1.0.0", "@types/chai": "^5.2.2", "@vitest/spy": "4.0.10", "@vitest/utils": "4.0.10", "chai": "^6.2.1", "tinyrainbow": "^3.0.3" } }, "sha512-3QkTX/lK39FBNwARCQRSQr0TP9+ywSdxSX+LgbJ2M1WmveXP72anTbnp2yl5fH+dU6SUmBzNMrDHs80G8G2DZg=="],
 

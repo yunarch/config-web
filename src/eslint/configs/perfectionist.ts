@@ -27,10 +27,9 @@ export function perfectionist(): TypedFlatConfigItem[] {
               'internal',
               ['parent', 'sibling', 'index'],
               'side-effect',
-              'object',
               'unknown',
             ],
-            newlinesBetween: 'never',
+            newlinesBetween: 0,
             order: 'asc',
             type: 'natural',
           },
@@ -41,7 +40,11 @@ export function perfectionist(): TypedFlatConfigItem[] {
         ],
         'perfectionist/sort-named-imports': [
           'error',
-          { groupKind: 'values-first', order: 'asc', type: 'natural' },
+          {
+            groups: ['value-import', 'type-import'],
+            order: 'asc',
+            type: 'natural',
+          },
         ],
         // Disable conflicting rules
         'import/order': 'off',

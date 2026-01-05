@@ -1,7 +1,14 @@
-import { styleText } from 'node:util';
+import { styleText, type InspectColor } from 'node:util';
 
 // List of supported colors for styling text
-const COLORS = ['blue', 'green', 'yellow', 'grey', 'white', 'cyan'] as const;
+const COLORS: InspectColor[] = [
+  'blue',
+  'green',
+  'yellow',
+  'gray',
+  'white',
+  'cyan',
+];
 const getExecutionTime = (start: number) => {
   const durationMs = (Bun.nanoseconds() - start) / 1_000_000;
   return `${(durationMs / 1000).toFixed(2)}s`;

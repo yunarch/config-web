@@ -147,6 +147,7 @@
     "no-extend-native": "error",
     "no-extra-bind": "error",
     "no-extra-label": "error",
+    "no-implicit-coercion": ["error", { "allow": ["!!", "+"] }],
     "no-iterator": "error",
     "no-label-var": "error",
     "no-labels": "error",
@@ -158,10 +159,12 @@
     "no-new-func": "error",
     "no-new-wrappers": "error",
     "no-param-reassign": "error",
+    "no-promise-executor-return": "error",
     "no-proto": "error",
     "no-return-assign": "error",
     "no-script-url": "error",
     "no-self-compare": "error",
+    "no-sequences": "error",
     "no-template-curly-in-string": "error",
     "no-unneeded-ternary": "error",
     "no-unused-expressions": "error",
@@ -169,6 +172,7 @@
     "no-useless-computed-key": "warn",
     "no-useless-concat": "error",
     "no-useless-rename": "warn",
+    "no-useless-return": "warn",
     "no-var": "error",
     "no-void": ["error", { "allowAsStatement": true }],
     "prefer-numeric-literals": "error",
@@ -246,6 +250,7 @@
     "unicorn/no-document-cookie": "error",
     "unicorn/no-empty-file": "error",
     "unicorn/no-hex-escape": "error",
+    "unicorn/no-immediate-mutation": "error",
     "unicorn/no-instanceof-builtins": "error",
     "unicorn/no-invalid-fetch-options": "error",
     "unicorn/no-invalid-remove-event-listener": "error",
@@ -288,11 +293,13 @@
     "unicorn/prefer-array-index-of": "error",
     "unicorn/prefer-array-some": "error",
     "unicorn/prefer-at": "error",
+    "unicorn/prefer-bigint-literals": "error",
     "unicorn/prefer-blob-reading-methods": "error",
     "unicorn/prefer-class-fields": "error",
     "unicorn/prefer-classlist-toggle": "error",
     "unicorn/prefer-code-point": "error",
     "unicorn/prefer-date-now": "error",
+    "unicorn/prefer-default-parameters": "error",
     "unicorn/prefer-dom-node-append": "error",
     "unicorn/prefer-dom-node-dataset": "error",
     "unicorn/prefer-dom-node-remove": "error",
@@ -300,6 +307,7 @@
     "unicorn/prefer-event-target": "error",
     "unicorn/prefer-global-this": "error",
     "unicorn/prefer-includes": "error",
+    "unicorn/prefer-keyboard-event-key": "error",
     "unicorn/prefer-logical-operator-over-ternary": "error",
     "unicorn/prefer-math-min-max": "error",
     "unicorn/prefer-math-trunc": "error",
@@ -331,6 +339,7 @@
     "unicorn/prefer-top-level-await": "warn",
     "unicorn/prefer-type-error": "error",
     "unicorn/require-array-join-separator": "error",
+    "unicorn/require-module-attributes": "error",
     "unicorn/require-module-specifiers": "error",
     "unicorn/require-number-to-fixed-digits-argument": "error",
     "unicorn/require-post-message-target-origin": "off",
@@ -423,19 +432,86 @@
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/no-dupe-class-members": "error",
         "@typescript-eslint/no-import-type-side-effects": "error",
+        "@typescript-eslint/no-loop-func": "error",
         "@typescript-eslint/no-redeclare": [
           "error",
           { "builtinGlobals": false }
         ],
-        "@typescript-eslint/no-useless-empty-export": "warn"
+        "@typescript-eslint/no-useless-empty-export": "warn",
+        "@typescript-eslint/restrict-template-expressions": [
+          "error",
+          { "allowNumber": true, "allowBoolean": true }
+        ]
       }
     },
     {
       "files": ["**/*.{ts,cts,mts}", "**/*.{tsx,ctsx,mtsx}"],
       "rules": {
+        "@typescript-eslint/await-thenable": "error",
+        "@typescript-eslint/no-array-delete": "error",
+        "@typescript-eslint/no-base-to-string": "error",
+        "@typescript-eslint/no-confusing-void-expression": "error",
+        "@typescript-eslint/no-deprecated": "error",
+        "@typescript-eslint/no-duplicate-type-constituents": "error",
+        "@typescript-eslint/no-floating-promises": "error",
+        "@typescript-eslint/no-for-in-array": "error",
+        "@typescript-eslint/no-implied-eval": "error",
+        "@typescript-eslint/no-meaningless-void-operator": "error",
+        "@typescript-eslint/no-misused-promises": [
+          "error",
+          { "checksVoidReturn": { "attributes": false } }
+        ],
+        "@typescript-eslint/no-misused-spread": "error",
+        "@typescript-eslint/no-mixed-enums": "error",
+        "@typescript-eslint/no-redundant-type-constituents": "error",
+        "@typescript-eslint/no-unnecessary-boolean-literal-compare": "error",
+        "@typescript-eslint/no-unnecessary-template-expression": "error",
+        "@typescript-eslint/no-unnecessary-type-arguments": "error",
+        "@typescript-eslint/no-unnecessary-type-assertion": "error",
+        "@typescript-eslint/no-unsafe-argument": "error",
+        "@typescript-eslint/no-unsafe-assignment": "error",
+        "@typescript-eslint/no-unsafe-call": "error",
+        "@typescript-eslint/no-unsafe-enum-comparison": "error",
+        "@typescript-eslint/no-unsafe-member-access": "error",
+        "@typescript-eslint/no-unsafe-return": "error",
+        "@typescript-eslint/no-unsafe-unary-minus": "error",
         "no-throw-literal": "off",
+        "@typescript-eslint/only-throw-error": "error",
         "prefer-promise-reject-errors": "off",
-        "require-await": "off"
+        "@typescript-eslint/prefer-promise-reject-errors": "error",
+        "@typescript-eslint/prefer-reduce-type-parameter": "error",
+        "@typescript-eslint/prefer-return-this-type": "error",
+        "@typescript-eslint/related-getter-setter-pairs": "error",
+        "require-await": "off",
+        "@typescript-eslint/require-await": "error",
+        "@typescript-eslint/restrict-plus-operands": [
+          "error",
+          {
+            "allowAny": false,
+            "allowBoolean": false,
+            "allowNullish": false,
+            "allowNumberAndString": false,
+            "allowRegExp": false
+          }
+        ],
+        "@typescript-eslint/restrict-template-expressions": [
+          "error",
+          { "allowNumber": true, "allowBoolean": true }
+        ],
+        "@typescript-eslint/return-await": [
+          "error",
+          "error-handling-correctness-only"
+        ],
+        "@typescript-eslint/unbound-method": "error",
+        "@typescript-eslint/use-unknown-in-catch-callback-variable": "error",
+        "@typescript-eslint/non-nullable-type-assertion-style": "error",
+        "@typescript-eslint/prefer-includes": "error",
+        "@typescript-eslint/prefer-nullish-coalescing": "error",
+        "@typescript-eslint/require-array-sort-compare": [
+          "error",
+          { "ignoreStringArrays": true }
+        ],
+        "@typescript-eslint/switch-exhaustiveness-check": "warn"
       }
     },
     {
@@ -478,9 +554,15 @@
       ],
       "rules": {
         "vitest/expect-expect": "error",
+        "vitest/no-conditional-expect": "error",
+        "vitest/no-disabled-tests": "warn",
+        "vitest/no-focused-tests": "error",
         "vitest/no-commented-out-tests": "error",
         "vitest/no-identical-title": "error",
         "vitest/no-import-node-test": "error",
+        "vitest/no-interpolation-in-snapshots": "error",
+        "vitest/no-mocks-import": "error",
+        "vitest/no-standalone-expect": "error",
         "vitest/require-local-test-context-for-concurrent-snapshots": "error",
         "vitest/valid-describe-callback": "error",
         "vitest/valid-expect": "error",
@@ -499,6 +581,7 @@
         "react/jsx-no-duplicate-props": "warn",
         "react/no-array-index-key": "warn",
         "react/no-direct-mutation-state": "error",
+        "react/no-redundant-should-component-update": "error",
         "react/no-string-refs": "error",
         "react/no-children-prop": "error",
         "react-hooks/rules-of-hooks": "error",
@@ -512,6 +595,7 @@
         "react/jsx-no-duplicate-props": "off",
         "react/no-array-index-key": "warn",
         "react/no-direct-mutation-state": "error",
+        "react/no-redundant-should-component-update": "error",
         "react/no-string-refs": "error",
         "react/jsx-no-undef": "off",
         "react/no-children-prop": "error"
@@ -526,7 +610,11 @@
         "**/cli/**/*.{js,jsx,cjs,cjsx,mjs,mjsx,ts,tsx,cts,ctsx,mts,mtjsx}",
         "**/cli.{js,jsx,cjs,cjsx,mjs,mjsx,ts,tsx,cts,ctsx,mts,mtjsx}"
       ],
-      "rules": { "no-console": "off", "unicorn/no-process-exit": "off" }
+      "rules": {
+        "@typescript-eslint/no-floating-promises": "off",
+        "no-console": "off",
+        "unicorn/no-process-exit": "off"
+      }
     },
     {
       "files": ["**/*.d.{ts,cts,mts}"],

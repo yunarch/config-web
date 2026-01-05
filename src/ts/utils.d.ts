@@ -12,15 +12,16 @@ type ObjectEntry<Base> = [keyof Base, Base[keyof Base]];
 type ArrayEntry<Base extends readonly unknown[]> = [number, Base[number]];
 type SetEntry<Base> = Base extends Set<infer V> ? [V, V] : never;
 type MapEntry<Base> = Base extends Map<infer K, infer V> ? [K, V] : never;
-type Entry<BaseType> = BaseType extends Map<unknown, unknown>
-  ? MapEntry<BaseType>
-  : BaseType extends Set<unknown>
-    ? SetEntry<BaseType>
-    : BaseType extends readonly unknown[]
-      ? ArrayEntry<BaseType>
-      : BaseType extends object
-        ? ObjectEntry<BaseType>
-        : never;
+type Entry<BaseType> =
+  BaseType extends Map<unknown, unknown>
+    ? MapEntry<BaseType>
+    : BaseType extends Set<unknown>
+      ? SetEntry<BaseType>
+      : BaseType extends readonly unknown[]
+        ? ArrayEntry<BaseType>
+        : BaseType extends object
+          ? ObjectEntry<BaseType>
+          : never;
 
 /**
  * Utility type to make `Object.entries` type-safe.

@@ -1,9 +1,28 @@
+#!/usr/bin/env bun
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as categoriesRules from 'eslint-plugin-oxlint/rules-by-category';
-import { config } from '../src/eslint/config';
-import { BASE_IGNORES } from '../src/eslint/configs/base';
+import { config } from '../src/linters/eslint/config';
+import { BASE_IGNORES } from '../src/linters/eslint/configs/base';
+
+// Paths
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const rootDir = path.join(__dirname, '..');
+const OUTPUT_PATH = path.join(rootDir, './src/linters/config.oxlint.jsonc');
+
+// eslint config to migrate
+const eslintConfigs = await config({
+  typescript: {
+    tsconfigPath: './tsconfig.json', // It doesn't matter if the file doesn't exist is just for the compat generation.
+  },
+  import: true,
+  jsdoc: true,
+  unicorn: true,
+  test: true,
+  tanstack: true,
+  react: true,
+});
 
 // Define the plugins scopes on oxlint with their possible scopes for eslint
 const PLUGINS_SCOPES_OXLINT_ESLINT = {
@@ -26,11 +45,6 @@ const PLUGINS_SCOPES_OXLINT_ESLINT = {
   unicorn: ['unicorn'],
   vitest: ['vitest'],
 } as const;
-
-// Define oxlint plugins, rules and overrides
-const oxlintPlugins = new Set<string>(['eslint']);
-const oxlintRules: Record<string, unknown> = {};
-const oxlintOverrideRules: Record<string, unknown>[] = [];
 
 /**
  * @param ruleName - The eslint rule name to check.
@@ -74,61 +88,59 @@ function getOxlintPluginScopeFromEslintRule(ruleName: string) {
   )?.[0];
 }
 
-// Get eslint configs
-const eslintConfigs = await config({
-  typescript: {
-    tsconfigPath: './tsconfig.json', // It doesn't matter if the file doesn't exist is just for the compat generation.
-  },
-  import: true,
-  jsdoc: true,
-  unicorn: true,
-  test: true,
-  tanstack: true,
-  react: true,
-});
-for (const c of eslintConfigs) {
-  if (!c.rules) continue;
-  // Override rules
-  if (c.files) {
-    const override = {
-      files: c.files,
-      rules: {} as Record<string, unknown>,
-    };
-    for (const rule in c.rules) {
-      const oxlintRuleName = getOxlintRuleNameFromEslintRule(rule);
-      if (oxlintRuleName) {
-        override.rules[oxlintRuleName] = c.rules[rule];
-        const oxlintPlugin = getOxlintPluginScopeFromEslintRule(rule);
-        if (oxlintPlugin) oxlintPlugins.add(oxlintPlugin);
+/**
+ * Main function to generate oxlint config from the eslint config.
+ */
+async function generateOxlintConfig() {
+  const start = Date.now();
+  const oxlintPlugins = new Set<string>(['eslint']);
+  const oxlintRules: Record<string, unknown> = {};
+  const oxlintOverrideRules: Record<string, unknown>[] = [];
+  for (const c of eslintConfigs) {
+    if (!c.rules) continue;
+    // Override rules
+    if (c.files) {
+      const override = {
+        files: c.files,
+        rules: {} as Record<string, unknown>,
+      };
+      for (const rule in c.rules) {
+        const oxlintRuleName = getOxlintRuleNameFromEslintRule(rule);
+        if (oxlintRuleName) {
+          override.rules[oxlintRuleName] = c.rules[rule];
+          const oxlintPlugin = getOxlintPluginScopeFromEslintRule(rule);
+          if (oxlintPlugin) oxlintPlugins.add(oxlintPlugin);
+        }
+      }
+      if (Object.keys(override.rules).length > 0) {
+        oxlintOverrideRules.push(override);
       }
     }
-    if (Object.keys(override.rules).length > 0) {
-      oxlintOverrideRules.push(override);
-    }
-  }
-  // Regular rules
-  else {
-    for (const rule in c.rules) {
-      const oxlintRuleName = getOxlintRuleNameFromEslintRule(rule);
-      if (oxlintRuleName) {
-        oxlintRules[oxlintRuleName] = c.rules[rule];
-        const oxlintPlugin = getOxlintPluginScopeFromEslintRule(rule);
-        if (oxlintPlugin) oxlintPlugins.add(oxlintPlugin);
+    // Regular rules
+    else {
+      for (const rule in c.rules) {
+        const oxlintRuleName = getOxlintRuleNameFromEslintRule(rule);
+        if (oxlintRuleName) {
+          oxlintRules[oxlintRuleName] = c.rules[rule];
+          const oxlintPlugin = getOxlintPluginScopeFromEslintRule(rule);
+          if (oxlintPlugin) oxlintPlugins.add(oxlintPlugin);
+        }
       }
     }
   }
+  await fs.writeFile(
+    OUTPUT_PATH,
+    JSON.stringify({
+      $schema:
+        'https://raw.githubusercontent.com/oxc-project/oxc/main/npm/oxlint/configuration_schema.json',
+      ignorePatterns: [...BASE_IGNORES],
+      plugins: [...oxlintPlugins],
+      rules: oxlintRules,
+      overrides: oxlintOverrideRules,
+    })
+  );
+  console.log(`Generated oxlint config in ${Date.now() - start}ms`);
 }
 
-// Write `oxlint.config.jsonc` file
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-await fs.writeFile(
-  `${__dirname}/../src/config.oxlint.jsonc`,
-  JSON.stringify({
-    $schema:
-      'https://raw.githubusercontent.com/oxc-project/oxc/main/npm/oxlint/configuration_schema.json',
-    ignorePatterns: [...BASE_IGNORES],
-    plugins: [...oxlintPlugins],
-    rules: oxlintRules,
-    overrides: oxlintOverrideRules,
-  })
-);
+// Run the oxlint config generator
+await generateOxlintConfig();

@@ -3,7 +3,6 @@
     "esbenp.prettier-vscode",
     "dbaeumer.vscode-eslint",
     "oxc.oxc-vscode",
-    "biomejs.biome",
 
     "vitest.explorer",
 

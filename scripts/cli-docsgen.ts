@@ -2,8 +2,12 @@
 import { existsSync, mkdirSync, readdirSync } from 'node:fs';
 import { writeFile } from 'node:fs/promises';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const CLI_DIR = path.join(process.cwd(), 'src', 'cli');
+// Paths
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const rootDir = path.join(__dirname, '..');
+const CLI_DIR = path.join(rootDir, 'src/cli');
 const DOCS_DIR = path.join(CLI_DIR, '__docs__');
 
 /**

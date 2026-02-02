@@ -1,7 +1,7 @@
 import { execFile } from 'node:child_process';
 import { promisify, styleText, types } from 'node:util';
 import { Command } from 'commander';
-import ora, { type Options } from 'ora';
+import ora, { type Options, type Ora as OraInstance } from 'ora';
 
 export const asyncExecFile = promisify(execFile);
 
@@ -14,7 +14,7 @@ export const asyncExecFile = promisify(execFile);
  * @throws {Error} If the command fails.
  */
 export async function runTask<T = string>(task: {
-  command: Promise<T> | (() => T | Promise<T>);
+  command: Promise<T> | ((spinner: OraInstance) => T | Promise<T>);
   name: string;
   options?: {
     spinner?: Options['spinner'];
@@ -27,7 +27,9 @@ export async function runTask<T = string>(task: {
   const startTime = Date.now();
   spinner.start();
   try {
-    const result = types.isPromise(command) ? await command : await command();
+    const result = types.isPromise(command)
+      ? await command
+      : await command(spinner);
     spinner.succeed(
       options?.showTime
         ? `${styleText('dim', `${Date.now() - startTime}ms`)} ${name}`

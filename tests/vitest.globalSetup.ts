@@ -11,31 +11,23 @@ import {
  * Setup function to run before tests.
  */
 export async function setup() {
-  await Promise.all([
-    runTask({
-      name: 'Generating oxlint file\n',
-      command: async () => {
-        await writeFile(
-          FIXTURE_OXLINT_CONFIG_FILE,
-          '{ "extends": ["../../.oxlintrc.json"] }'
-        );
-      },
-      options: {
-        showTime: true,
-      },
-    }),
-    runTask({
-      name: 'Generating OpenAPI mock files\n',
-      command: async () => {
-        await openapiSyncExecutor([
-          `-i ${OPENAPI_SYNC_INPUT} -o ${OPENAPI_SYNC_OUTPUT} -y -f --include-msw-utils --post-script format:mocks`,
-        ]);
-      },
-      options: {
-        showTime: true,
-      },
-    }),
-  ]);
+  await runTask({
+    name: 'Setting up test environment\n',
+    command: async (spinner) => {
+      spinner.text = 'Creating .oxlintrc.json file...';
+      await writeFile(
+        FIXTURE_OXLINT_CONFIG_FILE,
+        '{ "extends": ["../../.oxlintrc.json"] }'
+      );
+      spinner.text = 'Generating OpenAPI mock files...';
+      await openapiSyncExecutor([
+        `-i ${OPENAPI_SYNC_INPUT} -o ${OPENAPI_SYNC_OUTPUT} -y -f --include-msw-utils --post-script format:mocks`,
+      ]);
+    },
+    options: {
+      showTime: true,
+    },
+  });
 }
 
 /**

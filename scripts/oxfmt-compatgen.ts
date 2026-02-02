@@ -2,6 +2,7 @@
 import { execSync } from 'node:child_process';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { exit } from 'node:process';
 import { fileURLToPath } from 'node:url';
 import { config } from '../src/formatters/config.prettier';
 
@@ -26,7 +27,7 @@ async function generateOxfmtConfig() {
     stdio: 'inherit',
   });
   const generatedConfig = JSON.parse(
-    await fs.readFile(path.join(TMP_DIR, '.oxfmtrc.json'), 'utf-8')
+    await fs.readFile(path.join(TMP_DIR, '.oxfmtrc.json'), 'utf8')
   ) as Record<string, unknown>;
   await fs.writeFile(
     OUTPUT_PATH,
@@ -38,6 +39,7 @@ async function generateOxfmtConfig() {
   );
   await fs.rm(TMP_DIR, { recursive: true, force: true });
   console.log(`Generated oxfmt config in ${Date.now() - start}ms`);
+  exit(0);
 }
 
 // Run the oxfmt config generator

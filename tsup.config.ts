@@ -1,4 +1,4 @@
-import { copyFile, mkdir, readFile, writeFile } from 'node:fs/promises';
+import { copyFile, readFile, writeFile } from 'node:fs/promises';
 import { parse } from 'jsonc-parser';
 import { defineConfig } from 'tsup';
 
@@ -28,18 +28,22 @@ export default defineConfig([
     onSuccess: async () => {
       // Copy config files to the dist directory.
       await Promise.all([
-        // Biome config
-        parseJSONC('./src/config.biome.jsonc', './dist/config.biome.json'),
-        // Oxlint config
-        parseJSONC('./src/config.oxlint.jsonc', './dist/config.oxlint.json'),
+        // oxc
+        parseJSONC(
+          './src/formatters/config.oxfmt.jsonc',
+          './dist/config.oxfmt.json'
+        ),
+        parseJSONC(
+          './src/linters/config.oxlint.jsonc',
+          './dist/config.oxlint.json'
+        ),
         // Typescript
         parseJSONC(
-          './src/config.tsconfig-base.jsonc',
+          './src/ts/config.tsconfig-base.jsonc',
           './dist/config.tsconfig-base.json'
         ),
-        mkdir('./dist/ts', { recursive: true }),
-        copyFile('./src/ts/reset.d.ts', './dist/ts/reset.d.ts'),
-        copyFile('./src/ts/utils.d.ts', './dist/ts/utils.d.ts'),
+        copyFile('./src/ts/reset.d.ts', './dist/reset.d.ts'),
+        copyFile('./src/ts/utils.d.ts', './dist/utils.d.ts'),
       ]);
     },
   },
@@ -59,7 +63,7 @@ export default defineConfig([
   },
   // Prettier
   {
-    entry: ['./src/config.prettier.ts'],
+    entry: ['./src/formatters/config.prettier.ts'],
     outDir: './dist',
     format: 'esm',
     dts: true,
@@ -68,7 +72,7 @@ export default defineConfig([
   },
   // Eslint
   {
-    entry: ['./src/config.eslint.ts'],
+    entry: ['./src/linters/config.eslint.ts'],
     outDir: './dist',
     format: 'esm',
     dts: true,

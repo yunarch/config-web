@@ -2,8 +2,13 @@
 import { existsSync, mkdirSync, readdirSync } from 'node:fs';
 import { writeFile } from 'node:fs/promises';
 import path from 'node:path';
+import { exit } from 'node:process';
+import { fileURLToPath } from 'node:url';
 
-const CLI_DIR = path.join(process.cwd(), 'src', 'cli');
+// Paths
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const rootDir = path.join(__dirname, '..');
+const CLI_DIR = path.join(rootDir, 'src/cli');
 const DOCS_DIR = path.join(CLI_DIR, '__docs__');
 
 /**
@@ -39,6 +44,8 @@ function findCliTools() {
 
 /**
  * Generate documentation for all CLI tools.
+ *
+ * @returns A promise that resolves when the documentation has been generated.
  */
 async function generateDocs() {
   const start = Date.now();
@@ -58,3 +65,4 @@ async function generateDocs() {
 
 // Run the documentation generator
 await generateDocs();
+exit(0);

@@ -3,9 +3,9 @@
  */
 export default {
   '*': (stagedFiles) => [
+    'bun run gen',
     `oxlint ${stagedFiles.join(' ')}`,
     `eslint ${stagedFiles.join(' ')}`,
-    'bun run gen',
-    `bun run format:all`,
+    `oxfmt --write ${stagedFiles.join(' ')} ./src/cli/__docs__/`,
   ],
 };

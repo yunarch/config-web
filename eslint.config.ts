@@ -1,4 +1,4 @@
-import { config } from './src/config.eslint';
+import { config } from './src/linters/config.eslint';
 
 export default config({
   ignores: ['./tests/__mocks__', './tests/__fixtures__'],

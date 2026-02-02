@@ -1,18 +1,21 @@
 {
   "$schema": "https://json.schemastore.org/package",
-  "version": "0.6.1",
   "name": "@yunarch/config-web",
+  "version": "0.6.1",
   "description": "Shared configurations for web projects.",
-  "license": "MIT",
   "keywords": [
     "config",
     "eslint",
+    "oxfmt",
     "oxlint",
     "prettier",
-    "biome",
-    "typescript",
-    "tooling"
+    "tooling",
+    "typescript"
   ],
+  "bugs": {
+    "url": "https://github.com/yunarch/config-web/issues"
+  },
+  "license": "MIT",
   "author": {
     "name": "Adrian Lopez Gonzalez",
     "url": "https://github.com/yunarch"
@@ -21,132 +24,129 @@
     "type": "git",
     "url": "git+https://github.com/yunarch/config-web.git"
   },
-  "bugs": {
-    "url": "https://github.com/yunarch/config-web/issues"
-  },
-  "engines": {
-    "bun": ">=1",
-    "node": ">=22"
-  },
-  "sideEffects": false,
-  "files": [
-    "README.md",
-    "LICENSE.md",
-    "dist"
-  ],
   "bin": {
     "bun-run-all": "dist/cli/bun-run-all/bun-run-all.cli.js",
     "openapi-sync": "dist/cli/openapi-sync/openapi-sync.cli.js",
     "openapi-sync-lint-msw-handlers": "dist/cli/openapi-sync/openapi-sync-lint-msw-handlers.cli.js",
     "turbo-select": "dist/cli/turbo-select/turbo-select.cli.js"
   },
+  "files": [
+    "README.md",
+    "LICENSE.md",
+    "dist"
+  ],
+  "type": "module",
+  "sideEffects": false,
   "exports": {
     ".": "./dist/index.js",
     "./prettier": "./dist/config.prettier.js",
+    "./oxfmt": "./dist/config.oxfmt.json",
+    "./oxlint": "./dist/config.oxlint.json",
     "./eslint": {
       "types": "./dist/config.eslint.d.ts",
       "default": "./dist/config.eslint.js"
     },
-    "./oxlint": "./dist/config.oxlint.json",
-    "./biome": "./dist/config.biome.json",
     "./tsconfig-base": "./dist/config.tsconfig-base.json",
-    "./ts-reset.d.ts": "./dist/ts/reset.d.ts",
-    "./ts-utils.d.ts": "./dist/ts/utils.d.ts"
+    "./ts-reset.d.ts": "./dist/reset.d.ts",
+    "./ts-utils.d.ts": "./dist/utils.d.ts"
   },
-  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "postinstall": "husky && bun run gen",
     "bun-run-all": "bun run ./src/cli/bun-run-all/bun-run-all.cli.ts",
-    "gen": "bun run bun-run-all gen:cli-docs gen:eslint-typegen gen:oxlint-compatgen gen:biome-compatgen",
+    "gen": "bun run bun-run-all gen:cli-docs gen:eslint-typegen gen:oxlint-compatgen gen:oxfmt-compatgen",
     "gen:cli-docs": "bun run ./scripts/cli-docsgen.ts",
     "gen:eslint-typegen": "bun run ./scripts/eslint-typegen.ts",
-    "gen:oxlint-compatgen": "bun run ./scripts/oxlint-compatgen.ts && biome format --write ./src/config.oxlint.jsonc",
-    "gen:biome-compatgen": "bun run ./scripts/biome-compatgen.ts && biome format --write ./src/config.biome.jsonc",
+    "gen:oxlint-compatgen": "bun run ./scripts/oxlint-compatgen.ts && oxfmt format --write ./src/linters/config.oxlint.jsonc",
+    "gen:oxfmt-compatgen": "bun run ./scripts/oxfmt-compatgen.ts && oxfmt format --write ./src/formatters/config.oxfmt.jsonc",
     "lint": "bun run bun-run-all lint:code lint:ts -t",
     "lint:code": "oxlint && eslint .",
     "lint:ts": "tsc --noEmit",
     "lint:inspect": "bunx @eslint/config-inspector --config eslint.config.ts",
-    "format": "biome format && prettier \"**/*.{html,md,yaml,yml}\" --check",
-    "format:all": "biome format --write && prettier \"**/*.{html,md,yaml,yml}\" --write",
-    "format:mocks": "biome format --write ./tests/__mocks__",
+    "format": "oxfmt format --check ./",
+    "format:all": "oxfmt format --write ./",
+    "format:mocks": "oxfmt format --write ./tests/__mocks__",
     "clean": "rimraf dist coverage .turbo",
     "build": "bun run gen && tsup",
     "tests": "vitest --typecheck run",
     "tests:watch": "vitest --typecheck watch",
     "release": "bun run build && TEST_DIST=true bunx bumpp"
   },
+  "dependencies": {
+    "@eslint-react/eslint-plugin": "2.8.4",
+    "@eslint/js": "9.39.2",
+    "@inquirer/confirm": "6.0.4",
+    "@inquirer/select": "5.0.4",
+    "@tanstack/eslint-plugin-query": "5.91.4",
+    "@tanstack/eslint-plugin-router": "1.155.0",
+    "@total-typescript/ts-reset": "0.6.1",
+    "@vitest/eslint-plugin": "1.6.6",
+    "commander": "14.0.3",
+    "eslint-config-flat-gitignore": "2.1.0",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-flat-config-utils": "3.0.0",
+    "eslint-import-resolver-typescript": "4.4.4",
+    "eslint-plugin-import-x": "4.16.1",
+    "eslint-plugin-jsdoc": "62.5.0",
+    "eslint-plugin-oxlint": "1.42.0",
+    "eslint-plugin-perfectionist": "5.4.0",
+    "eslint-plugin-react-hooks": "7.0.1",
+    "eslint-plugin-react-refresh": "0.5.0",
+    "eslint-plugin-unicorn": "62.0.0",
+    "eslint-plugin-unused-imports": "4.3.0",
+    "fast-glob": "3.3.3",
+    "globals": "17.3.0",
+    "ora": "9.1.0",
+    "typescript-eslint": "8.54.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "20.4.0",
+    "@commitlint/config-conventional": "20.4.0",
+    "@types/bun": "1.3.8",
+    "@types/node": "25.2.0",
+    "eslint": "9.39.2",
+    "eslint-typegen": "2.3.0",
+    "husky": "9.1.7",
+    "jsonc-parser": "3.3.1",
+    "lint-staged": "16.2.7",
+    "msw": "2.12.7",
+    "oxfmt": "0.27.0",
+    "oxlint": "1.42.0",
+    "prettier": "3.8.1",
+    "rimraf": "6.1.2",
+    "tsup": "8.5.1",
+    "typescript": "5.9.3",
+    "vitest": "4.0.18"
+  },
   "peerDependencies": {
-    "@biomejs/biome": ">= 2 || < 3",
-    "prettier": ">= 3 || < 4",
     "eslint": ">=9.5.0 || < 10",
+    "msw": ">=2 || < 3",
+    "oxfmt": ">=0.24.0 || < 1",
     "oxlint": ">=0.16.2 || < 2",
-    "msw": ">=2 || < 3"
+    "prettier": ">= 3 || < 4"
   },
   "peerDependenciesMeta": {
-    "@biomejs/biome": {
-      "optional": true
-    },
     "prettier": {
       "optional": true
     },
-    "eslint": {
+    "oxfmt": {
       "optional": true
     },
     "oxlint": {
+      "optional": true
+    },
+    "eslint": {
       "optional": true
     },
     "msw": {
       "optional": true
     }
   },
-  "dependencies": {
-    "commander": "14.0.2",
-    "ora": "9.0.0",
-    "fast-glob": "3.3.3",
-    "@inquirer/confirm": "6.0.3",
-    "@inquirer/select": "5.0.3",
-    "@total-typescript/ts-reset": "0.6.1",
-    "globals": "17.0.0",
-    "eslint-flat-config-utils": "2.1.4",
-    "eslint-config-flat-gitignore": "2.1.0",
-    "eslint-import-resolver-typescript": "4.4.4",
-    "@eslint/js": "9.39.2",
-    "typescript-eslint": "8.51.0",
-    "eslint-plugin-unicorn": "62.0.0",
-    "eslint-plugin-perfectionist": "5.2.0",
-    "eslint-plugin-import-x": "4.16.1",
-    "eslint-plugin-unused-imports": "4.3.0",
-    "eslint-plugin-jsdoc": "61.5.0",
-    "eslint-config-prettier": "10.1.8",
-    "eslint-plugin-oxlint": "1.36.0",
-    "@eslint-react/eslint-plugin": "2.5.1",
-    "eslint-plugin-react-hooks": "7.0.1",
-    "eslint-plugin-react-refresh": "0.4.26",
-    "@tanstack/eslint-plugin-query": "5.91.2",
-    "@tanstack/eslint-plugin-router": "1.141.0",
-    "@vitest/eslint-plugin": "1.6.5"
+  "engines": {
+    "bun": ">=1",
+    "node": ">=22"
   },
-  "devDependencies": {
-    "@commitlint/cli": "20.3.0",
-    "@commitlint/config-conventional": "20.3.0",
-    "prettier": "3.7.4",
-    "@biomejs/biome": "2.3.11",
-    "oxlint": "1.36.0",
-    "eslint": "9.39.2",
-    "eslint-typegen": "2.3.0",
-    "husky": "9.1.7",
-    "lint-staged": "16.2.7",
-    "rimraf": "6.1.2",
-    "vitest": "4.0.16",
-    "msw": "2.12.7",
-    "jsonc-parser": "3.3.1",
-    "tsup": "8.5.1",
-    "typescript": "5.9.3",
-    "@types/node": "25.0.3",
-    "@types/bun": "1.3.5"
-  },
-  "packageManager": "bun@1.3.5",
-  "publishConfig": {
-    "access": "public"
-  }
+  "packageManager": "bun@1.3.8"
 }

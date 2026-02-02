@@ -27,7 +27,7 @@
     "declaration": true,
 
     /* Others */
-    "preserveWatchOutput": true
+    "preserveWatchOutput": true,
   },
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
 }

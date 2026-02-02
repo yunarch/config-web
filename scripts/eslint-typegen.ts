@@ -1,6 +1,7 @@
 #!/usr/bin/env bun
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { exit } from 'node:process';
 import { fileURLToPath } from 'node:url';
 import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
 import { builtinRules } from 'eslint/use-at-your-own-risk';
@@ -55,6 +56,7 @@ async function generateEslintTypes() {
   const dtsWithRileList = `${dts}\n\n// Names of all the configs\nexport type ConfigNames = ${configNames.map((i) => `'${i}'`).join(' | ')};`;
   await fs.writeFile(OUTPUT_PATH, dtsWithRileList);
   console.log(`Generated ESLint types in ${Date.now() - start}ms`);
+  exit(0);
 }
 
 // Run the ESLint types generator

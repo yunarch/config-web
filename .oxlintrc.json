@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/oxc-project/oxc/main/npm/oxlint/configuration_schema.json",
-  "extends": ["./src/config.oxlint.jsonc"],
+  "extends": ["./src/linters/config.oxlint.jsonc"],
   "categories": { "correctness": "error", "perf": "error" },
   "ignorePatterns": ["tests/__mocks__/**", "tests/__fixtures__/**"]
 }

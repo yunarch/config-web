@@ -41,9 +41,7 @@ type IsUnion<T, U extends T = T> = T extends unknown
   : false;
 type IfUnion<T, Yes, No> = true extends IsUnion<T> ? Yes : No;
 type UnionToIntersection<U> = (
-  U extends unknown
-    ? (k: U) => void
-    : never
+  U extends unknown ? (k: U) => void : never
 ) extends (k: infer I) => void
   ? I
   : never;

@@ -47,7 +47,7 @@
     "**/.history",
     "**/mockServiceWorker.js",
     "**/CHANGELOG*",
-    "**/LICENSE*"
+    "**/LICENSE*",
   ],
   "plugins": [
     "eslint",
@@ -56,7 +56,7 @@
     "jsdoc",
     "unicorn",
     "vitest",
-    "react"
+    "react",
   ],
   "rules": {
     "constructor-super": "error",
@@ -116,8 +116,8 @@
         "args": "none",
         "caughtErrors": "none",
         "ignoreRestSiblings": true,
-        "vars": "all"
-      }
+        "vars": "all",
+      },
     ],
     "no-useless-backreference": "error",
     "no-useless-catch": "error",
@@ -206,7 +206,7 @@
     "jsdoc/no-defaults": "error",
     "jsdoc/require-param": [
       "error",
-      { "checkDestructured": false, "enableRestElementFixer": false }
+      { "checkDestructured": false, "enableRestElementFixer": false },
     ],
     "jsdoc/require-param-description": "error",
     "jsdoc/require-param-name": "error",
@@ -232,7 +232,7 @@
     "unicorn/explicit-length-check": "error",
     "unicorn/filename-case": [
       "error",
-      { "cases": { "camelCase": true, "kebabCase": true, "pascalCase": true } }
+      { "cases": { "camelCase": true, "kebabCase": true, "pascalCase": true } },
     ],
     "unicorn/new-for-builtins": "error",
     "unicorn/no-abusive-eslint-disable": "error",
@@ -318,7 +318,7 @@
     "unicorn/prefer-node-protocol": "error",
     "unicorn/prefer-number-properties": [
       "error",
-      { "checkInfinity": true, "checkNaN": true }
+      { "checkInfinity": true, "checkNaN": true },
     ],
     "unicorn/prefer-object-from-entries": "error",
     "unicorn/prefer-optional-catch-binding": "error",
@@ -346,7 +346,7 @@
     "unicorn/switch-case-braces": "error",
     "unicorn/text-encoding-identifier-case": "error",
     "unicorn/throw-new-error": "error",
-    "sort-imports": "off"
+    "sort-imports": "off",
   },
   "overrides": [
     {
@@ -374,7 +374,7 @@
         "prefer-spread": "error",
         "@typescript-eslint/ban-ts-comment": [
           "error",
-          { "ts-expect-error": "allow-with-description" }
+          { "ts-expect-error": "allow-with-description" },
         ],
         "no-array-constructor": "off",
         "@typescript-eslint/no-array-constructor": "error",
@@ -382,7 +382,7 @@
         "@typescript-eslint/no-dynamic-delete": "error",
         "@typescript-eslint/no-empty-object-type": [
           "error",
-          { "allowInterfaces": "always" }
+          { "allowInterfaces": "always" },
         ],
         "@typescript-eslint/no-explicit-any": "error",
         "@typescript-eslint/no-extra-non-null-assertion": "error",
@@ -425,8 +425,8 @@
           {
             "disallowTypeAnnotations": false,
             "fixStyle": "inline-type-imports",
-            "prefer": "type-imports"
-          }
+            "prefer": "type-imports",
+          },
         ],
         "@typescript-eslint/default-param-last": "error",
         "@typescript-eslint/explicit-function-return-type": "off",
@@ -435,14 +435,14 @@
         "@typescript-eslint/no-loop-func": "error",
         "@typescript-eslint/no-redeclare": [
           "error",
-          { "builtinGlobals": false }
+          { "builtinGlobals": false },
         ],
         "@typescript-eslint/no-useless-empty-export": "warn",
         "@typescript-eslint/restrict-template-expressions": [
           "error",
-          { "allowNumber": true, "allowBoolean": true }
-        ]
-      }
+          { "allowNumber": true, "allowBoolean": true },
+        ],
+      },
     },
     {
       "files": ["**/*.{ts,cts,mts}", "**/*.{tsx,ctsx,mtsx}"],
@@ -459,7 +459,7 @@
         "@typescript-eslint/no-meaningless-void-operator": "error",
         "@typescript-eslint/no-misused-promises": [
           "error",
-          { "checksVoidReturn": { "attributes": false } }
+          { "checksVoidReturn": { "attributes": false } },
         ],
         "@typescript-eslint/no-misused-spread": "error",
         "@typescript-eslint/no-mixed-enums": "error",
@@ -491,32 +491,33 @@
             "allowBoolean": false,
             "allowNullish": false,
             "allowNumberAndString": false,
-            "allowRegExp": false
-          }
+            "allowRegExp": false,
+          },
         ],
         "@typescript-eslint/restrict-template-expressions": [
           "error",
-          { "allowNumber": true, "allowBoolean": true }
+          { "allowNumber": true, "allowBoolean": true },
         ],
         "@typescript-eslint/return-await": [
           "error",
-          "error-handling-correctness-only"
+          "error-handling-correctness-only",
         ],
         "@typescript-eslint/unbound-method": "error",
         "@typescript-eslint/use-unknown-in-catch-callback-variable": "error",
         "@typescript-eslint/non-nullable-type-assertion-style": "error",
         "@typescript-eslint/prefer-includes": "error",
         "@typescript-eslint/prefer-nullish-coalescing": "error",
+        "@typescript-eslint/prefer-optional-chain": "error",
         "@typescript-eslint/require-array-sort-compare": [
           "error",
-          { "ignoreStringArrays": true }
+          { "ignoreStringArrays": true },
         ],
-        "@typescript-eslint/switch-exhaustiveness-check": "warn"
-      }
+        "@typescript-eslint/switch-exhaustiveness-check": "warn",
+      },
     },
     {
       "files": ["**/*.{ts,cts,mts}", "**/*.{tsx,ctsx,mtsx}"],
-      "rules": { "import/named": "off" }
+      "rules": { "import/named": "off" },
     },
     {
       "files": ["**/*.{ts,cts,mts}", "**/*.{tsx,ctsx,mtsx}"],
@@ -529,7 +530,7 @@
         "jsdoc/no-defaults": "error",
         "jsdoc/require-param": [
           "error",
-          { "checkDestructured": false, "enableRestElementFixer": false }
+          { "checkDestructured": false, "enableRestElementFixer": false },
         ],
         "jsdoc/require-param-description": "error",
         "jsdoc/require-param-name": "error",
@@ -541,8 +542,8 @@
         "jsdoc/require-returns": "error",
         "jsdoc/require-returns-description": "error",
         "jsdoc/require-returns-type": "off",
-        "jsdoc/require-yields": "error"
-      }
+        "jsdoc/require-yields": "error",
+      },
     },
     {
       "files": [
@@ -550,7 +551,7 @@
         "**/*.spec.{js,jsx,cjs,cjsx,mjs,mjsx,ts,tsx,cts,ctsx,mts,mtjsx}",
         "**/*.test.{js,jsx,cjs,cjsx,mjs,mjsx,ts,tsx,cts,ctsx,mts,mtjsx}",
         "**/*.bench.{js,jsx,cjs,cjsx,mjs,mjsx,ts,tsx,cts,ctsx,mts,mtjsx}",
-        "**/*.benchmark.{js,jsx,cjs,cjsx,mjs,mjsx,ts,tsx,cts,ctsx,mts,mtjsx}"
+        "**/*.benchmark.{js,jsx,cjs,cjsx,mjs,mjsx,ts,tsx,cts,ctsx,mts,mtjsx}",
       ],
       "rules": {
         "vitest/expect-expect": "error",
@@ -563,16 +564,17 @@
         "vitest/no-interpolation-in-snapshots": "error",
         "vitest/no-mocks-import": "error",
         "vitest/no-standalone-expect": "error",
+        "vitest/no-unneeded-async-expect-function": "error",
         "vitest/require-local-test-context-for-concurrent-snapshots": "error",
         "vitest/valid-describe-callback": "error",
         "vitest/valid-expect": "error",
         "vitest/consistent-test-it": [
           "error",
-          { "fn": "it", "withinDescribe": "it" }
+          { "fn": "it", "withinDescribe": "it" },
         ],
         "vitest/prefer-hooks-in-order": "error",
-        "vitest/prefer-lowercase-title": "error"
-      }
+        "vitest/prefer-lowercase-title": "error",
+      },
     },
     {
       "files": ["**/*.{js,jsx,cjs,cjsx,mjs,mjsx,ts,tsx,cts,ctsx,mts,mtjsx}"],
@@ -585,8 +587,8 @@
         "react/no-string-refs": "error",
         "react/no-children-prop": "error",
         "react-hooks/rules-of-hooks": "error",
-        "react-hooks/exhaustive-deps": "warn"
-      }
+        "react-hooks/exhaustive-deps": "warn",
+      },
     },
     {
       "files": ["**/*.{ts,cts,mts}", "**/*.{tsx,ctsx,mtsx}"],
@@ -598,8 +600,8 @@
         "react/no-redundant-should-component-update": "error",
         "react/no-string-refs": "error",
         "react/jsx-no-undef": "off",
-        "react/no-children-prop": "error"
-      }
+        "react/no-children-prop": "error",
+      },
     },
     {
       "files": [
@@ -608,30 +610,30 @@
         "**/bin/**/*.{js,jsx,cjs,cjsx,mjs,mjsx,ts,tsx,cts,ctsx,mts,mtjsx}",
         "**/bin.{js,jsx,cjs,cjsx,mjs,mjsx,ts,tsx,cts,ctsx,mts,mtjsx}",
         "**/cli/**/*.{js,jsx,cjs,cjsx,mjs,mjsx,ts,tsx,cts,ctsx,mts,mtjsx}",
-        "**/cli.{js,jsx,cjs,cjsx,mjs,mjsx,ts,tsx,cts,ctsx,mts,mtjsx}"
+        "**/cli.{js,jsx,cjs,cjsx,mjs,mjsx,ts,tsx,cts,ctsx,mts,mtjsx}",
       ],
       "rules": {
         "@typescript-eslint/no-floating-promises": "off",
         "no-console": "off",
-        "unicorn/no-process-exit": "off"
-      }
+        "unicorn/no-process-exit": "off",
+      },
     },
     {
       "files": ["**/*.d.{ts,cts,mts}"],
       "rules": {
         "@typescript-eslint/consistent-indexed-object-style": "off",
-        "import/no-duplicates": "off"
-      }
+        "import/no-duplicates": "off",
+      },
     },
     {
       "files": [
         "**/*.config.{js,jsx,cjs,cjsx,mjs,mjsx,ts,tsx,cts,ctsx,mts,mtjsx}",
-        "**/*.config.*.{js,jsx,cjs,cjsx,mjs,mjsx,ts,tsx,cts,ctsx,mts,mtjsx}"
+        "**/*.config.*.{js,jsx,cjs,cjsx,mjs,mjsx,ts,tsx,cts,ctsx,mts,mtjsx}",
       ],
       "rules": {
         "no-console": "off",
-        "@typescript-eslint/explicit-function-return-type": "off"
-      }
-    }
-  ]
+        "@typescript-eslint/explicit-function-return-type": "off",
+      },
+    },
+  ],
 }

@@ -1,6 +1,7 @@
 #!/usr/bin/env bun
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { exit } from 'node:process';
 import { fileURLToPath } from 'node:url';
 import * as categoriesRules from 'eslint-plugin-oxlint/rules-by-category';
 import { config } from '../src/linters/eslint/config';
@@ -140,6 +141,7 @@ async function generateOxlintConfig() {
     })
   );
   console.log(`Generated oxlint config in ${Date.now() - start}ms`);
+  exit(0);
 }
 
 // Run the oxlint config generator

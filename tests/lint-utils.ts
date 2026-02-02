@@ -1,6 +1,6 @@
 import { ESLint } from 'eslint';
 import { it } from 'vitest';
-import { config } from '../src/eslint/config';
+import { config as eslintConfig } from '../src/linters/config.eslint';
 import { asyncExecFile, createRelativeResolver } from './test-utils';
 
 const resolve = createRelativeResolver(import.meta.url);
@@ -15,7 +15,7 @@ const FIXTURES_PATH = resolve('./__fixtures__/');
  * - output: string containing the linter's output or error message.
  */
 async function asyncExecEslint(file: string) {
-  const eslintConfigs = await config({
+  const eslintConfigs = await eslintConfig({
     typescript: {
       tsconfigPath: 'tsconfig.json',
     },
@@ -41,7 +41,7 @@ async function asyncExecEslint(file: string) {
 /**
  * Async function to execute a cli linter command against a file.
  *
- * @param linter - The linter command to execute (e.g., 'oxlint', 'biome').
+ * @param linter - The linter command to execute (e.g., 'oxlint').
  * @param file - The file to lint.
  * @returns A promise that resolves to an object containing:
  * - ok: boolean indicating if the linter passed without errors.
@@ -63,13 +63,13 @@ async function asyncExecLinter(linter: string, file: string) {
  * @param file - The path to the file to lint. It always resolves to the __fixtures__ directory.
  * @param testCase - The test case to run, containing:
  * - title: The title of the test case.
- * - expectedIdRules: An object specifying expected rule IDs for each linter (eslint, oxlint, biome).
+ * - expectedIdRules: An object specifying expected rule IDs for each linter (eslint, oxlint).
  */
 export function lintFile(
   file: string,
   testCase: {
     title: string;
-    expectedRulesIds: { eslint: string[]; oxlint?: string[]; biome?: string[] };
+    expectedRulesIds: { eslint: string[]; oxlint?: string[] };
   }
 ) {
   const testFile = `${FIXTURES_PATH}/${file}`;
@@ -94,19 +94,6 @@ export function lintFile(
       expect(ok).toBe(rulesIds.length === 0);
       for (const ruleId of rulesIds) {
         expect(output).toContain(ruleId);
-      }
-    }
-  );
-
-  // Biome tests
-  it.skipIf(expectedRulesIds.biome === undefined).concurrent(
-    `[biome] ${title}`,
-    async ({ expect }) => {
-      const rulesIds = expectedRulesIds.biome ?? [];
-      const { ok, output } = await asyncExecLinter('biome', testFile);
-      expect(ok).toBe(rulesIds.length === 0);
-      for (const idRule of rulesIds) {
-        expect(output).toContain(idRule);
       }
     }
   );

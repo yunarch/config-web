@@ -10,7 +10,7 @@ import { config } from '../src/formatters/config.prettier';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.join(__dirname, '..');
 const OUTPUT_PATH = path.join(rootDir, 'src/formatters/config.oxfmt.jsonc');
-const TMP_DIR = path.join(rootDir, 'tmp');
+const TMP_DIR = path.join(rootDir, 'tmp-oxfmt');
 
 /**
  * Main function to generate oxfmt config from the prettier config.

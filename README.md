@@ -69,7 +69,7 @@ npm install --save-dev eslint
 npm install --save-dev oxfmt
 
 // To use Oxlint
-npm install --save-dev oxlint
+npm install --save-dev oxlint oxlint-tsgolint
 ```
 
 ## Prettier
@@ -228,7 +228,7 @@ To use the oxlint linter, create a `.oxlintrc.json` [configuration file](https:/
 
 ```jsonc
 {
-  "$schema": "https://raw.githubusercontent.com/oxc-project/oxc/main/npm/oxlint/configuration_schema.json",
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
   "extends": ["@yunarch/config-web/oxlint"],
   "categories": { "correctness": "error", "perf": "error" },
   "rules": {
@@ -263,6 +263,9 @@ oxlint --type-aware
 
 > [!TIP]
 > In editor and LSP-based integrations like VS Code, type-aware linting can be enabled by setting the `typeAware` option to `true`, see the [Editors](https://oxc.rs/docs/guide/usage/linter/editors.html) page for more information.
+
+> [!WARNING]
+> Type-aware linting is powered by typescript-go so TypeScript 7.0+ is required.
 
 ### Running Oxlint and ESLint together
 

@@ -19,5 +19,6 @@
   "jsxSingleQuote": false,
   "htmlWhitespaceSensitivity": "css",
   "embeddedLanguageFormatting": "auto",
-  "ignorePatterns": []
+  "ignorePatterns": [],
+  "experimentalSortPackageJson": false
 }

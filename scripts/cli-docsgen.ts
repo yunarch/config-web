@@ -61,8 +61,8 @@ async function generateDocs() {
   });
   await Promise.all(documentationPromises);
   console.log(`Generated ${tools.length} CLI docs in ${Date.now() - start}ms`);
-  exit(0);
 }
 
 // Run the documentation generator
 await generateDocs();
+exit(0);

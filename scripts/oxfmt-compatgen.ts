@@ -42,8 +42,8 @@ async function generateOxfmtConfig() {
   );
   await fs.rm(TMP_DIR, { recursive: true, force: true });
   console.log(`Generated oxfmt config in ${Date.now() - start}ms`);
-  exit(0);
 }
 
 // Run the oxfmt config generator
 await generateOxfmtConfig();
+exit(0);

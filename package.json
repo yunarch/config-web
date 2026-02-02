@@ -77,23 +77,22 @@
   },
   "peerDependencies": {
     "prettier": ">= 3 || < 4",
+    "eslint": ">=9.5.0 || < 10",
     "oxfmt": ">=0.24.0 || < 1",
     "oxlint": ">=1.42.0 || < 2",
-    "oxlint-tsgolint": ">=0.11.4 || < 1",
-    "eslint": ">=9.5.0 || < 10",
     "msw": ">=2 || < 3"
   },
   "peerDependenciesMeta": {
     "prettier": {
       "optional": true
     },
+    "eslint": {
+      "optional": true
+    },
     "oxfmt": {
       "optional": true
     },
     "oxlint": {
-      "optional": true
-    },
-    "eslint": {
       "optional": true
     },
     "msw": {

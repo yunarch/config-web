@@ -58,8 +58,8 @@ async function generateEslintTypes() {
   const dtsWithRileList = `${dts}\n\n// Names of all the configs\nexport type ConfigNames = ${configNames.map((i) => `'${i}'`).join(' | ')};`;
   await fs.writeFile(OUTPUT_PATH, dtsWithRileList);
   console.log(`Generated ESLint types in ${Date.now() - start}ms`);
-  exit(0);
 }
 
 // Run the ESLint types generator
 await generateEslintTypes();
+exit(0);

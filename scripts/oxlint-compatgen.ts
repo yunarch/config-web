@@ -43,8 +43,8 @@ async function generateOxlintConfig() {
     })
   );
   console.log(`Generated oxlint config in ${Date.now() - start}ms`);
-  exit(0);
 }
 
 // Run the oxlint config generator
 await generateOxlintConfig();
+exit(0);

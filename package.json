@@ -73,7 +73,7 @@
     "tests": "vitest --typecheck run",
     "tests:watch": "vitest --typecheck watch",
     "tests:dist": "bun run build && TEST_DIST=true vitest --typecheck run",
-    "release": "bun run tests:dist && bunx bumpp"
+    "release": "bun run build && TEST_DIST=true bunx bumpp"
   },
   "peerDependencies": {
     "prettier": ">= 3 || < 4",
@@ -118,7 +118,7 @@
     "eslint-plugin-jsdoc": "62.5.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-oxlint": "1.43.0",
-    "@eslint-react/eslint-plugin": "2.9.0",
+    "@eslint-react/eslint-plugin": "2.9.2",
     "eslint-plugin-react-hooks": "7.0.1",
     "eslint-plugin-react-refresh": "0.5.0",
     "@tanstack/eslint-plugin-query": "5.91.4",

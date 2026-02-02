@@ -70,6 +70,10 @@ export async function react(
         ...(enableStrictRules ? pluginReact.configs.strict.rules : {}),
         ...pluginReactHooks.configs.recommended.rules,
         ...pluginReactRefresh.configs.recommended.rules,
+        // ! Disabled as its enabled by default but the documentation says:
+        // ! "This rule is experimental and may change in the future or be removed. It is not recommended for use in production code at this time."
+        // ! https://www.eslint-react.xyz/docs/rules/no-unnecessary-use-callback
+        '@eslint-react/no-unnecessary-use-callback': 'off',
       },
     },
     ...(isTypescriptEnabled

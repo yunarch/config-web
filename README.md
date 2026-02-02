@@ -14,17 +14,14 @@
 - [📖 Why use this?](#-why-use-this)
 - [📦 What’s included?](#-whats-included)
 - [⚙️ Installation](#️-installation)
-- [⚠️ Caveats](#️-caveats)
-  - [Code Formatting](#code-formatting)
-  - [Linting](#linting)
 - [Prettier](#prettier)
+- [Oxfmt](#oxfmt)
 - [ESlint](#eslint)
   - [Override configuration](#override-configuration)
   - [Typescript Type aware rules](#typescript-type-aware-rules)
 - [Oxlint](#oxlint)
-  - [Enabling ESLint and Oxlint Simultaneously](#enabling-eslint-and-oxlint-simultaneously)
-- [Biome](#biome)
-  - [Enabling ESLint and Biome Simultaneously](#enabling-eslint-and-biome-simultaneously)
+  - [Typescript Type aware rules](#typescript-type-aware-rules-1)
+  - [Running Oxlint and ESLint together](#running-oxlint-and-eslint-together)
 - [Typescript](#typescript)
   - [ts-reset](#ts-reset)
   - [Utilities](#utilities)
@@ -33,7 +30,7 @@
 
 ## 📖 Why use this?
 
-Even experienced developers can waste valuable time configuring tools from scratch. Instead of manually setting up linters, formatters, and TypeScript settings, this package provides a ready-to-use configuration that is both easy to implement and extensible. It helps maintain clean, consistent code without the overhead of ongoing tools configuration maintenance allowing users to choose between traditional options (e.g., Prettier, ESlint) and more performant alternatives (e.g., Biome, Oxlint).
+Even experienced developers can waste valuable time configuring tools from scratch. Instead of manually setting up linters, formatters, and TypeScript settings, this package provides a ready-to-use configuration that is both easy to implement and extensible. It helps maintain clean, consistent code without the overhead of ongoing tools configuration maintenance allowing users to choose between traditional options (e.g., Prettier, ESlint) and more performant alternatives (e.g., Oxfmt, Oxlint).
 
 > [!IMPORTANT]
 > Please keep in mind that this is still **a personal config** with a lot of opinions. Changes might not always work for everyone and every use case.
@@ -44,7 +41,7 @@ Even experienced developers can waste valuable time configuring tools from scrat
 
 This package provides ready-to-use configurations for:
 
-- **Shared configs for Code Style & Linting:** Pre-configured yet extensible setups for Prettier, ESLint, Oxlint, and Biome.
+- **Shared configs for Code Style & Linting:** Pre-configured yet extensible setups for Prettier and ESLint, offering high-performance alternatives via Oxfmt and Oxlint.
 - **TypeScript:** Best-practice default config and utilities.
 - **CLI Tools:** Useful command-line tools for streamlining workflows
 
@@ -65,39 +62,19 @@ npm install ---save-dev @yunarch/config-web
 // To use Prettier
 npm install --save-dev prettier
 
-// To use Biome
-npm install --save-dev @biomejs/biome
-
 // To use eslint
 npm install --save-dev eslint
+
+// To use Oxfmt
+npm install --save-dev oxfmt
 
 // To use Oxlint
 npm install --save-dev oxlint
 ```
 
-## ⚠️ Caveats
-
-### Code Formatting
-
-While both `Prettier` and `Biome` are configured to format code in the same way, there are some [differences](https://biomejs.dev/formatter/differences-with-prettier/) between the two.
-
-Language support for [Prettier](https://prettier.io/docs/) and [Biome](https://biomejs.dev/internals/language-support/).
-
-> [!WARNING]
-> While it's technically possible to use both tools in the same project, **each file should be formatted by only one formatter** to avoid conflicts. This repository uses this hybrid setup, but for simplicity and consistency, **we recommend choosing a single formatter** for your own project.
-
-### Linting
-
-We offer a strict yet configurable `ESLint` setup with autocomplete support. Additionally, since the `ESLint` ecosystem is extensive but can sometimes be slow, this configuration allows leveraging `Oxlint` or `Biome` for certain rules, boosting speed without compromising flexibility.
-
-For small projects, `Oxlint` or `Biome` should be sufficient. However, for big projects or if you want to maintain consistent code style across multiple projects. I recommend `ESlint` and if need it a performance boost then combining `ESLint` with either `Oxlint` or `Biome`.
-
-> [!NOTE]
-> Avoid using all three tools (`ESLint`, `Oxlint`, and `Biome`) simultaneously, as this may lead to conflicts between `Oxlint` and `Biome` that you'll need to manually resolve.
-
 ## Prettier
 
-The easiest way to use the prettier configuration as-is is to set it directly in your `package.json`:
+The easiest way to use the `prettier` configuration as-is is to set it directly in your `package.json`:
 
 ```json
 "prettier": "@yunarch/config-web/prettier"
@@ -116,13 +93,33 @@ export default {
 ```
 
 > [!TIP]
-> Add a `.prettierignore` file to ignore certain files and folder completly or use the CLI option [--ignore-path](https://prettier.io/docs/cli#--ignore-path) to indicate a path to a file containing patterns that describe files to ignore. By default, Prettier looks for `./.gitignore` and `./.prettierignore`.
+> Add a `.prettierignore` file to ignore certain files and folder completly or use the CLI option [--ignore-path](https://prettier.io/docs/cli#--ignore-path) to indicate a path to a file containing patterns that describe files to ignore.
+>
+> By default, Prettier looks for `./.gitignore` and `./.prettierignore`.
+
+## Oxfmt
+
+To use `Oxfmt`, create a `.oxfmtrc.json` [configuration file](https://oxc.rs/docs/guide/usage/formatter/config.html) and extend the shared preset:
+
+```jsonc
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "extends": ["@yunarch/config-web/oxfmt"],
+}
+```
+
+> [!NOTE]
+> `Oxfmt` uses `ignorePatterns` in its configuration file instead of `.prettierignore` file but for compatibility, `.prettierignore` file is also supported.
+>
+> See [Oxfmt ignore files](https://oxc.rs/docs/guide/usage/formatter/ignore-files.html) for details.
+
+> [!CAUTION]
+> Currently, `Oxfmt` does not extends configuration:
+> https://github.com/oxc-project/oxc/issues/16394
 
 ## ESlint
 
 To use the ESlint linter, create a [ESlint configuration file](https://eslint.org/docs/latest/use/configure/configuration-files):
-
-Typically, you only need to use the `config` configuration as it is:
 
 ```js
 // eslint.config.js
@@ -250,9 +247,34 @@ To use the oxlint linter, create a `.oxlintrc.json` [configuration file](https:/
 > Currently, `Oxlint` does not resolve configuration file paths automatically. To extend a config, you must explicitly provide the full path, like so:
 > `"extends": ["./node_modules/@yunarch/config-web/dist/config.oxlint.json"]`
 
-### Enabling ESLint and Oxlint Simultaneously
+### Typescript Type aware rules
 
-If you want to offload certain rules to Oxlint, which will reduce linting time, you can configure `ESlint` as follows:
+`Oxlint` Type-aware linting requires an additional dependency:
+
+```
+npm install --save-dev oxlint-tsgolint
+```
+
+To run `Oxlint` with type-aware linting, you must pass the `--type-aware` flag:
+
+```
+oxlint --type-aware
+```
+
+> [!TIP]
+> In editor and LSP-based integrations like VS Code, type-aware linting can be enabled by setting the `typeAware` option to `true`, see the [Editors](https://oxc.rs/docs/guide/usage/linter/editors.html) page for more information.
+
+### Running Oxlint and ESLint together
+
+If not all required rules are available in `Oxlint`, you can run `Oxlint` and `ESLint` side by side.
+
+Because `Oxlint` is significantly faster than `ESLint`, it is recommended to run `Oxlint` first to catch errors early, then fall back to `ESLint` only when necessary:
+
+```sh
+oxlint && eslint
+```
+
+To offload rules to `Oxlint` and significantly reduce overall linting time, you can configure `ESlint` as follows:
 
 ```js
 import { config } from '@yunarch/config-web/eslint';
@@ -264,44 +286,10 @@ export default config({
 });
 ```
 
-## Biome
+This reduces duplicate diagnostics, can help cut down your linting time considerably, and allows `ESLint` to focus only on rules that `Oxlint` does not yet support.
 
-To use the Biome, create a `biome.json` [configuration file](https://biomejs.dev/reference/configuration/):
-
-```jsonc
-{
-  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-  "extends": ["@yunarch/config-web/biome"],
-  "linter": {
-    "enabled": true,
-  },
-}
-```
-
-That’s it! Biome will now use the shared config to lint and format your code. However:
-
-- If you prefer not to use Biome as a linter, simply remove the `"linter"` section. Linting is disabled by default unless explicitly enabled.
-- If you prefer to use Biome only as a linter, disable the formatter by: `"formatter": { "enabled": false }`.
-
-> [!TIP]
-> Enable [vcs.useIgnoreFile](https://biomejs.dev/guides/integrate-in-vcs/#use-the-ignore-file), to allow Biome to ignore all the files and directories listed in your VCS ignore file.
-
-### Enabling ESLint and Biome Simultaneously
-
-If you want to offload certain rules to `Biome`, which will reduce linting time, you can configure `ESlint` as follows:
-
-```js
-import { config } from '@yunarch/config-web/eslint';
-
-export default config({
-  biome: {
-    biomeConfigPath: './biome.json',
-  },
-});
-```
-
-> [!IMPORTANT]
-> This feature is under development and will be available in a future release.
+> [!NOTE]
+> Once remaining important rules have been added in `Oxlint` you should consider moving fully to `Oxlint` if you want to use that one to simplify your setup and reduce the number of dependencies for your project.
 
 ## Typescript
 

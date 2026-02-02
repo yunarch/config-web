@@ -54,7 +54,7 @@
     "access": "public"
   },
   "scripts": {
-    "postinstall": "husky && bun run gen",
+    "prepare": "husky && bun run gen",
     "bun-run-all": "bun run ./src/cli/bun-run-all/bun-run-all.cli.ts",
     "gen": "bun run bun-run-all gen:cli-docs gen:eslint-typegen gen:oxlint-compatgen gen:oxfmt-compatgen",
     "gen:cli-docs": "bun run ./scripts/cli-docsgen.ts",

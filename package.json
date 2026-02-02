@@ -72,8 +72,8 @@
     "build": "bun run gen && tsup",
     "tests": "vitest --typecheck run",
     "tests:watch": "vitest --typecheck watch",
-    "tests:dist": "bun run build && TEST_DIST=true vitest --typecheck run && bun run clean",
-    "release": "bun run build && TEST_DIST=true bunx bumpp"
+    "tests:dist": "bun run build && TEST_DIST=true vitest --typecheck run",
+    "release": "bun run tests:dist && bunx bumpp"
   },
   "peerDependencies": {
     "prettier": ">= 3 || < 4",

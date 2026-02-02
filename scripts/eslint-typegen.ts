@@ -46,6 +46,8 @@ const configs = await combine(
 
 /**
  * Main function to generate ESLint types.
+ *
+ * @returns A promise that resolves when the ESLint types have been generated.
  */
 async function generateEslintTypes() {
   const start = Date.now();

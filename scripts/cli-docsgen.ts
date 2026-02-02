@@ -44,6 +44,8 @@ function findCliTools() {
 
 /**
  * Generate documentation for all CLI tools.
+ *
+ * @returns A promise that resolves when the documentation has been generated.
  */
 async function generateDocs() {
   const start = Date.now();

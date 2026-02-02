@@ -14,6 +14,8 @@ const TMP_DIR = path.join(rootDir, 'tmp-oxfmt');
 
 /**
  * Main function to generate oxfmt config from the prettier config.
+ *
+ * @returns A promise that resolves when the oxfmt config has been generated.
  */
 async function generateOxfmtConfig() {
   const start = Date.now();

@@ -1,4 +1,4 @@
-#!/usr/bin/env bun
+#!/usr/bin/env node
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { exit } from 'node:process';

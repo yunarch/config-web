@@ -71,12 +71,7 @@ ${styleText('green', '--include-msw-utils')}
     }) => {
       try {
         console.log(styleText('magenta', '\n🚀 openapi-sync\n'));
-        const outputDirectory = await runTask({
-          name: 'Preparing output directory',
-          command: async () => {
-            return await prepareOutputDirectory(output);
-          },
-        });
+        const outputDirectory = await prepareOutputDirectory(output);
         const outputSchemaPath = `${outputDirectory}/openapi.json`;
         const outputSchemaTypeDefs = `${outputDirectory}/schema.d.ts`;
         // Read the input and output OpenAPI schemas

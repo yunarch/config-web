@@ -1,6 +1,7 @@
 import { existsSync } from 'node:fs';
 import { mkdir } from 'node:fs/promises';
 import path from 'node:path';
+import { runTask } from '../../utils';
 
 /**
  * Reads the output directory path and creates it if it doesn't exist.
@@ -21,7 +22,12 @@ export async function prepareOutputDirectory(output: string) {
     ? absolutePath
     : path.resolve(cwdPath, path.relative(path.parse(output).root, output));
   if (!existsSync(dir)) {
-    await mkdir(dir, { recursive: true });
+    await runTask({
+      name: 'Generating output directory',
+      command: async () => {
+        await mkdir(dir, { recursive: true });
+      },
+    });
   }
   return dir;
 }

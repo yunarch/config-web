@@ -70,6 +70,7 @@ export async function react(
         ...(enableStrictRules ? pluginReact.configs.strict.rules : {}),
         ...pluginReactHooks.configs.recommended.rules,
         ...pluginReactRefresh.configs.recommended.rules,
+        ...pluginReact.configs['disable-experimental'].rules,
       },
     },
     ...(isTypescriptEnabled
@@ -96,6 +97,7 @@ export async function react(
                       : {}),
                   }
                 : {}),
+              ...pluginReact.configs['disable-experimental'].rules,
             },
           } as TypedFlatConfigItem,
         ]

@@ -6,9 +6,8 @@ import { asyncExecFile, createBaseProgram, runTask } from '../utils';
 import { run as generateModels } from './codegen-models';
 import { run as generateMswUtils } from './codegen-msw-utils';
 import { run as generateSchemaTypeDefinition } from './codegen-schema-typedef';
-import { prepareOutputDirectory } from './codegen-utils/prepareOutputDirectory';
-import { readInputOpenapiSchema } from './codegen-utils/readInputOpenapiSchema';
-import { readOutputOpenapiSchema } from './codegen-utils/readOutputOpenapiSchema';
+import { prepareOutputDirectoryTask } from './codegen-utils/prepareOutputDirectoryTask';
+import { readOpenapiSchemasTask } from './codegen-utils/readOpenapiSchemasTask';
 
 createBaseProgram()
   .name('openapi-sync')
@@ -71,23 +70,13 @@ ${styleText('green', '--include-msw-utils')}
     }) => {
       try {
         console.log(styleText('magenta', '\n🚀 openapi-sync\n'));
-        const outputDirectory = await prepareOutputDirectory(output);
+        const outputDirectory = await prepareOutputDirectoryTask(output);
         const outputSchemaPath = `${outputDirectory}/openapi.json`;
         const outputSchemaTypeDefs = `${outputDirectory}/schema.d.ts`;
-        // Read the input and output OpenAPI schemas
-        const [inputSchema, outputSchema] = await runTask({
-          name: 'Reading OpenAPI schemas',
-          command: async () => {
-            const [inputContent, outputContent] = await Promise.all([
-              readInputOpenapiSchema(input),
-              readOutputOpenapiSchema(outputSchemaPath),
-            ]);
-            return [
-              JSON.stringify(JSON.parse(inputContent)),
-              outputContent ? JSON.stringify(JSON.parse(outputContent)) : false,
-            ] as const;
-          },
-        });
+        const [inputSchema, outputSchema] = await readOpenapiSchemasTask(
+          input,
+          outputSchemaPath
+        );
         const hasChanges = inputSchema !== outputSchema;
         // Only verify than the output is up to date with the input.
         // We assume than if inputSchema is equal to outputSchema, the generated output is up to date.
@@ -156,6 +145,7 @@ ${styleText('green', '--include-msw-utils')}
             await Promise.all(promises);
           },
         });
+        // Run post script if provided
         if (postScript) {
           await runTask({
             name: 'Running post script',

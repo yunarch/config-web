@@ -11,7 +11,7 @@ import { runTask } from '../../utils';
  *
  * @throws {Error} If the output path is not a directory.
  */
-export async function prepareOutputDirectory(output: string) {
+export async function prepareOutputDirectoryTask(output: string) {
   if (path.extname(output) !== '') {
     throw new Error('Output must be a directory.');
   }

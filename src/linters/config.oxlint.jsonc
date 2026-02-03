@@ -224,6 +224,7 @@
     "no-useless-return": "warn",
     "no-var": "error",
     "no-void": ["error", { "allowAsStatement": true }],
+    "prefer-const": "warn",
     "prefer-numeric-literals": "error",
     "prefer-object-has-own": "error",
     "prefer-object-spread": "warn",
@@ -404,6 +405,7 @@
         "no-this-before-super": "off",
         "no-unsafe-negation": "off",
         "no-with": "off",
+        "prefer-const": "error",
         "@typescript-eslint/ban-ts-comment": [
           "error",
           { "ts-expect-error": "allow-with-description" },

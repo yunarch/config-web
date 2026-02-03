@@ -2,7 +2,6 @@
 import { existsSync, mkdirSync, readdirSync } from 'node:fs';
 import { writeFile } from 'node:fs/promises';
 import path from 'node:path';
-import { exit } from 'node:process';
 import { fileURLToPath } from 'node:url';
 
 // Paths
@@ -65,4 +64,3 @@ async function generateDocs() {
 
 // Run the documentation generator
 await generateDocs();
-exit(0);

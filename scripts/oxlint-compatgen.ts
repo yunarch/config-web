@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { exit } from 'node:process';
 import { fileURLToPath } from 'node:url';
 import migrateConfig from '@oxlint/migrate';
 import { config } from '../src/linters/eslint/config';
@@ -47,4 +46,3 @@ async function generateOxlintConfig() {
 
 // Run the oxlint config generator
 await generateOxlintConfig();
-exit(0);

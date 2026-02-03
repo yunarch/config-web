@@ -2,7 +2,6 @@
 import { execSync } from 'node:child_process';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { exit } from 'node:process';
 import { fileURLToPath } from 'node:url';
 import { config } from '../src/formatters/config.prettier';
 
@@ -46,4 +45,3 @@ async function generateOxfmtConfig() {
 
 // Run the oxfmt config generator
 await generateOxfmtConfig();
-exit(0);

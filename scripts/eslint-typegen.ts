@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { exit } from 'node:process';
 import { fileURLToPath } from 'node:url';
 import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
 import { builtinRules } from 'eslint/use-at-your-own-risk';
@@ -62,4 +61,3 @@ async function generateEslintTypes() {
 
 // Run the ESLint types generator
 await generateEslintTypes();
-exit(0);

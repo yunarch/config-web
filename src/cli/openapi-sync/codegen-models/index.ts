@@ -1,4 +1,4 @@
-import { asyncExecFile, runTask } from '../../utils';
+import { asyncExecFile } from '../../utils';
 
 /**
  * Generate models and services from OpenAPI schema.
@@ -10,22 +10,17 @@ import { asyncExecFile, runTask } from '../../utils';
  * @param outputDirectory - The output directory for generated models.
  */
 export async function run(input: string, outputDirectory: string) {
-  await runTask({
-    name: 'Generating models',
-    command: async () => {
-      await asyncExecFile(
-        'npx',
-        [
-          'openapi-typescript-codegen',
-          '--input',
-          input,
-          '--output',
-          outputDirectory,
-          '--client',
-          'fetch',
-        ],
-        { shell: true }
-      );
-    },
-  });
+  await asyncExecFile(
+    'npx',
+    [
+      'openapi-typescript-codegen',
+      '--input',
+      input,
+      '--output',
+      outputDirectory,
+      '--client',
+      'fetch',
+    ],
+    { shell: true }
+  );
 }

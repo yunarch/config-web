@@ -145,6 +145,7 @@
     "no-invalid-regexp": "error",
     "no-irregular-whitespace": "error",
     "no-loss-of-precision": "error",
+    "no-misleading-character-class": "error",
     "no-new-native-nonconstructor": "error",
     "no-nonoctal-decimal-escape": "error",
     "no-obj-calls": "error",
@@ -380,6 +381,7 @@
     "unicorn/prefer-structured-clone": "error",
     "unicorn/prefer-top-level-await": "warn",
     "unicorn/prefer-type-error": "error",
+    "unicorn/relative-url-style": "error",
     "unicorn/require-array-join-separator": "error",
     "unicorn/require-module-attributes": "error",
     "unicorn/require-module-specifiers": "error",
@@ -387,6 +389,15 @@
     "unicorn/switch-case-braces": "error",
     "unicorn/text-encoding-identifier-case": "error",
     "unicorn/throw-new-error": "error",
+  },
+  "settings": {
+    "jsdoc": {
+      "structuredTags": {
+        "next": { "required": ["type"] },
+        "rejects": { "required": ["type"] },
+      },
+    },
+    "vitest": { "typecheck": true },
   },
   "overrides": [
     {
@@ -441,6 +452,7 @@
         "@typescript-eslint/ban-tslint-comment": "error",
         "@typescript-eslint/consistent-generic-constructors": "error",
         "@typescript-eslint/consistent-indexed-object-style": "error",
+        "@typescript-eslint/consistent-type-assertions": "error",
         "@typescript-eslint/consistent-type-definitions": "off",
         "@typescript-eslint/no-confusing-non-null-assertion": "error",
         "no-empty-function": "error",

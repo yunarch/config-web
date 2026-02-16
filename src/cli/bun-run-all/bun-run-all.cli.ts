@@ -24,6 +24,10 @@ ${styleText('dim', '$')} \
 ${styleText('cyan', 'bun-run-all')} \
 ${styleText('yellow', 'script1')} \
 ${styleText('yellow', 'script2')}
+
+@deprecated
+Bun >=1.3.9 supports this functionality natively:
+https://bun.sh/blog/bun-v1.3.9#bun-run-parallel-and-bun-run-sequential
 `
   )
   .action(

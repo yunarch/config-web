@@ -1,6 +1,6 @@
 import { existsSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
-import { asyncExecFile, runTask } from '../../utils';
+import { runTask } from '../../utils';
 
 /**
  * Reads the input OpenAPI schema from the specified path or URL.
@@ -16,15 +16,13 @@ async function readInputOpenapiSchema(inputSchemaPath: string) {
   }
   if (inputSchemaPath.startsWith('http')) {
     try {
-      const { stdout } = await asyncExecFile(
-        'curl',
-        ['-s', inputSchemaPath, '--fail'],
-        { encoding: 'utf8' }
-      );
-      return stdout;
-    } catch {
+      const response = await fetch(inputSchemaPath);
+      if (!response.ok) throw new Error(`HTTP ${String(response.status)}`);
+      return await response.text();
+    } catch (error) {
       throw new Error(
-        `Failed to fetch remote OpenAPI file: ${inputSchemaPath}`
+        `Failed to fetch remote OpenAPI file: ${inputSchemaPath}`,
+        { cause: error }
       );
     }
   }

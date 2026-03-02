@@ -21,6 +21,7 @@ const eslintConfigs = await config({
   test: true,
   tanstack: true,
   react: true,
+  // NOTE: Do NOT pass oxlint here – we want the raw ESLint rules before oxlint disables
 });
 
 /**

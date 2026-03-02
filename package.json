@@ -64,6 +64,7 @@
     "lint:code": "oxlint --type-aware && eslint .",
     "lint:ts": "tsc --noEmit",
     "lint:inspect": "bunx @eslint/config-inspector --config eslint.config.ts",
+    "lint:diff": "bun run ./scripts/eslint-oxlint-diff.ts",
     "format": "oxfmt format --check ./",
     "format:all": "oxfmt format --write ./",
     "format:mocks": "oxfmt format --write ./tests/__mocks__",

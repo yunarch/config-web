@@ -2,8 +2,7 @@
   // Formatter
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "oxc.oxc-vscode",
-
-  // Linters
+  "prettier.requireConfig": true,
   "oxc.requireConfig": true,
 
   // Auto fix
@@ -21,6 +20,11 @@
   "editor.guides.bracketPairs": "active",
   "workbench.editor.highlightModifiedTabs": true,
   "problems.decorations.enabled": true,
+
+  // Overrides specific languages
+  "[javascript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
 
   // Customize AI responses
   "github.copilot.chat.commitMessageGeneration.instructions": [

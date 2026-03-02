@@ -1,9 +1,35 @@
-import { execFile } from 'node:child_process';
+import {
+  execFile,
+  type ExecFileOptionsWithStringEncoding,
+  type PromiseWithChild,
+} from 'node:child_process';
 import { promisify, styleText, types } from 'node:util';
 import { Command } from 'commander';
 import ora, { type Options, type Ora as OraInstance } from 'ora';
 
-export const asyncExecFile = promisify(execFile);
+const promisifiedExecFile = promisify(execFile);
+
+/**
+ * Executes a command as a child process and returns a promise that resolves with the command's output.
+ *
+ * @param file - The command to run.
+ * @param args - List of string arguments.
+ * @param options - Options for child_process.execFile.
+ * @returns A promise that resolves with the command's stdout and stderr.
+ */
+export function asyncExecFile(
+  file: string,
+  args: string[] | undefined | null,
+  options: ExecFileOptionsWithStringEncoding = {}
+): PromiseWithChild<{
+  stdout: string;
+  stderr: string;
+}> {
+  if (options.shell) {
+    return promisifiedExecFile([file, ...(args ?? [])].join(' '), options);
+  }
+  return promisifiedExecFile(file, args, options);
+}
 
 /**
  * Executes a given task with a spinner to indicate progress.

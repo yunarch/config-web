@@ -1,9 +1,10 @@
-import { execFile } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { promisify } from 'node:util';
+import { asyncExecFile } from '../src/cli/utils';
 
-export const asyncExecFile = promisify(execFile);
+// Re-export asyncExecFile so test files import it from test-utils instead of directly from src/cli/utils.
+// Centralizes the dependency for tests so we don't have to worry about path issues when importing from src/cli/utils in test files.
+export { asyncExecFile } from '../src/cli/utils';
 
 /**
  * Creates a function that resolves relative paths based on a given module URL.

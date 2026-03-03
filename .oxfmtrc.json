@@ -20,17 +20,5 @@
   "htmlWhitespaceSensitivity": "css",
   "embeddedLanguageFormatting": "auto",
   "sortPackageJson": false,
-  "ignorePatterns": [],
-  "sortImports": {
-    "groups": [
-      "builtin",
-      "external",
-      "internal",
-      ["parent", "sibling", "index"],
-      "side_effect",
-      "unknown"
-    ],
-    "newlinesBetween": false,
-    "order": "asc"
-  }
+  "ignorePatterns": []
 }

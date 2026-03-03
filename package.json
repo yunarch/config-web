@@ -134,7 +134,7 @@
     "eslint-typegen": "2.3.1",
     "oxfmt": "0.36.0",
     "oxlint": "1.51.0",
-    "oxlint-tsgolint": "0.15.0",
+    "oxlint-tsgolint": "0.16.0",
     "@oxlint/migrate": "1.51.0",
     "husky": "9.1.7",
     "lint-staged": "16.3.1",

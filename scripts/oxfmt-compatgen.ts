@@ -36,7 +36,18 @@ async function generateOxfmtConfig() {
       $schema:
         'https://raw.githubusercontent.com/oxc-project/oxc/main/npm/oxfmt/configuration_schema.json',
       ...generatedConfig,
-      experimentalSortPackageJson: false,
+      sortImports: {
+        groups: [
+          'builtin',
+          'external',
+          'internal',
+          ['parent', 'sibling', 'index'],
+          'side_effect',
+          'unknown',
+        ],
+        newlinesBetween: false,
+        order: 'asc',
+      },
     })
   );
   await fs.rm(TMP_DIR, { recursive: true, force: true });

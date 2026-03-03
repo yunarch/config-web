@@ -21,8 +21,10 @@ export function disables(options: {
         `**/tasks/${GLOB_SRC}`,
         `**/bin/${GLOB_SRC}`,
         `**/bin.${GLOB_SRC_EXT}`,
+        `**/*.bin.${GLOB_SRC_EXT}`,
         `**/cli/${GLOB_SRC}`,
         `**/cli.${GLOB_SRC_EXT}`,
+        `**/*.cli.${GLOB_SRC_EXT}`,
       ],
       rules: {
         '@typescript-eslint/no-floating-promises': 'off',

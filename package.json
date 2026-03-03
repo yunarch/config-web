@@ -102,7 +102,6 @@
     "ora": "9.3.0",
     "fast-glob": "3.3.3",
     "@inquirer/confirm": "6.0.8",
-    "@inquirer/select": "5.1.0",
     "globals": "17.4.0",
     "eslint-flat-config-utils": "3.0.1",
     "eslint-config-flat-gitignore": "2.2.1",

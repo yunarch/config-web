@@ -57,7 +57,7 @@ export default defineConfig([
     format: 'esm',
     minify: true,
     shims: true,
-    external: ['fast-glob', 'typescript'],
+    external: ['fast-glob', 'typescript', '@inquirer/confirm'],
   },
   // Prettier
   {

@@ -642,5 +642,4 @@
       "plugins": ["typescript"],
     },
   ],
-  "options": { "typeAware": true },
 }

@@ -31,9 +31,13 @@ const eslintConfigs = await config({
  */
 async function generateOxlintConfig() {
   const start = Date.now();
-  const oxlintConfig = await migrateConfig(eslintConfigs, undefined, {
-    typeAware: true,
-  });
+  const { options, ...oxlintConfig } = await migrateConfig(
+    eslintConfigs,
+    undefined,
+    {
+      typeAware: true,
+    }
+  );
   await fs.writeFile(
     OUTPUT_PATH,
     JSON.stringify({

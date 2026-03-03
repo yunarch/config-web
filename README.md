@@ -360,10 +360,8 @@ const x2 = typedObjectFromEntries([['a', 1]] as const);
 
 This package ships with useful command-line tools to streamline your workflow.
 
-- **[`bun-run-all`](./src/cli/__docs__/bun-run-all.md)**: CLI tool for running npm package scripts in parallel or sequential by using bun.
-- **[`openapi-sync`](./src/cli/__docs__/openapi-sync.md)**: CLI tool designed to convert OpenAPI 3.0/3.1 schemas to TypeScript types and create type-safe fetching based on a openapi schema file and keep them in sync.
-- **[`openapi-sync-lint-msw-handlers`](./src/cli/__docs__/openapi-sync-lint-msw-handlers.md)**: CLI tool for linting and identifying missing MSW (Mock Service Worker) handlers based on OpenAPI generated services. It analyzes your codebase to find where service methods are used and suggests appropriate handlers with detailed reporting.
-- **[`turbo-select`](./src/cli/__docs__/turbo-select.md)**: CLI tool for filtering and selecting a single package from your Turborepo package list and executing a script command. Additionally, it can prompt you to select an environment mode (development, staging, production) — useful for adjusting settings based on the environment (e.g., when using Vite).
+- **[`openapi-gen`](./src/cli/__docs__/openapi-gen.md)**: CLI tool designed to convert OpenAPI 3.0/3.1 schemas to TypeScript type-safe model interfaces and web service clients.
+- **[`openapi-msw-lint`](./src/cli/__docs__/openapi-msw-lint.md)**: CLI tool designed to lint and identifying missing MSW (Mock Service Worker) handlers based on the OpenAPI generated services from `openapi-gen`. It analyzes your codebase to find where service methods are used and suggests appropriate handlers with detailed reporting.
 
 > [!IMPORTANT]
 > These tools are **a personal configuration** with a lot of opinions. They might not work for everyone or every use case. Additionally, tools can be added or removed without being considered a breaking change.

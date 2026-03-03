@@ -1,11 +1,11 @@
 import { describe, expect, it, vi } from 'vitest';
-import { findExistingHandlers } from '../../../../src/cli/openapi-sync/lint-msw-handlers/findExistingHandlers';
+import { findExistingHandlers } from '../../../../src/cli/openapi-msw-lint/utils/findExistingHandlers';
 
 vi.mock('node:url', () => ({
   pathToFileURL: (path: string) => ({ href: path }),
 }));
 
-describe('openapi-sync-lint-msw-handlers findExistingHandlers', () => {
+describe('openapi-msw-lint findExistingHandlers', () => {
   it('should throw an error if the MSW setup constant is not found', async () => {
     vi.doMock('/path/to/msw-setup-missing-const.ts', () => ({}));
     await expect(

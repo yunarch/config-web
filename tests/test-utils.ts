@@ -49,37 +49,23 @@ export function createCliExecutor(cli: string) {
 const resolve = createRelativeResolver(import.meta.url);
 export const MOCKS_PATH = resolve('./__mocks__/');
 export const FIXTURES_PATH = resolve('./__fixtures__/');
-export const OPENAPI_SYNC_INPUT = `${MOCKS_PATH}/openapi-sync-input.json`;
-export const OPENAPI_SYNC_OUTPUT = `${MOCKS_PATH}/openapi-sync-input/`;
+export const OPENAPI_GEN_INPUT = `${MOCKS_PATH}/openapi-gen-input.json`;
+export const OPENAPI_GEN_OUTPUT = `${MOCKS_PATH}/openapi-gen-input/`;
 export const FIXTURE_OXLINT_CONFIG_FILE = `${FIXTURES_PATH}/.oxlintrc.json`;
 
 // CLI Executors
 const testDist = process.env.TEST_DIST === 'true';
-export const bunRunAllExecutor = createCliExecutor(
+export const openapiGenExecutor = createCliExecutor(
   resolve(
     testDist
-      ? '../dist/cli/bun-run-all/bun-run-all.cli.js'
-      : '../src/cli/bun-run-all/bun-run-all.cli.ts'
+      ? '../dist/cli/openapi-gen/openapi-gen.cli.js'
+      : '../src/cli/openapi-gen/openapi-gen.cli.ts'
   )
 );
-export const openapiSyncExecutor = createCliExecutor(
+export const openapiMswLintExecutor = createCliExecutor(
   resolve(
     testDist
-      ? '../dist/cli/openapi-sync/openapi-sync.cli.js'
-      : '../src/cli/openapi-sync/openapi-sync.cli.ts'
-  )
-);
-export const openapiSyncLintMswHandlersExecutor = createCliExecutor(
-  resolve(
-    testDist
-      ? '../dist/cli/openapi-sync/openapi-sync-lint-msw-handlers.cli.js'
-      : '../src/cli/openapi-sync/openapi-sync-lint-msw-handlers.cli.ts'
-  )
-);
-export const turboSelectExecutor = createCliExecutor(
-  resolve(
-    testDist
-      ? '../dist/cli/turbo-select/turbo-select.cli.js'
-      : '../src/cli/turbo-select/turbo-select.cli.ts'
+      ? '../dist/cli/openapi-msw-lint/openapi-msw-lint.cli.js'
+      : '../src/cli/openapi-msw-lint/openapi-msw-lint.cli.ts'
   )
 );

@@ -10,9 +10,9 @@ import { prepareOutputDirectoryTask } from './codegen-utils/prepareOutputDirecto
 import { readOpenapiSchemasTask } from './codegen-utils/readOpenapiSchemasTask';
 
 createBaseProgram()
-  .name('openapi-sync')
+  .name('openapi-gen')
   .description(
-    'A CLI tool to convert OpenAPI 3.0/3.1 schemas to TypeScript types and create type-safe fetching based on a openapi file and keep them in sync.'
+    'A CLI tool to convert OpenAPI 3.0/3.1 schemas to TypeScript type-safe model interfaces and web service clients.'
   )
   .requiredOption(
     '-i, --input <path>',
@@ -36,7 +36,7 @@ createBaseProgram()
     'A package.json script to run after the code generation.'
   )
   .option(
-    '--verify-openapi-sync',
+    '--verify-openapi-gen',
     'Verifies that the generated output is up to date with the input (e.g., in CI) to catch outdated or mismatched output without making changes.'
   )
   .addHelpText(
@@ -44,7 +44,7 @@ createBaseProgram()
     `
 Example usage:
 ${styleText('dim', '$')} \
-${styleText('cyan', 'openapi-sync')} \
+${styleText('cyan', 'openapi-gen')} \
 ${styleText('green', '-i')} ${styleText('yellow', './openapi.json')} \
 ${styleText('green', '-o')} ${styleText('yellow', './src/api/gen')} \
 ${styleText('green', '--include-msw-utils')}
@@ -56,7 +56,7 @@ ${styleText('green', '--include-msw-utils')}
       output,
       yes,
       forceGen,
-      verifyOpenapiSync,
+      verifyOpenapiGen,
       includeMswUtils,
       postScript,
     }: {
@@ -64,12 +64,12 @@ ${styleText('green', '--include-msw-utils')}
       output: string;
       yes: boolean;
       forceGen: boolean;
-      verifyOpenapiSync: boolean;
+      verifyOpenapiGen: boolean;
       includeMswUtils: boolean;
       postScript: string;
     }) => {
       try {
-        console.log(styleText('magenta', '\n🚀 openapi-sync\n'));
+        console.log(styleText('magenta', '\n🚀 openapi-gen\n'));
         const outputDirectory = await prepareOutputDirectoryTask(output);
         const outputSchemaPath = `${outputDirectory}/openapi.json`;
         const outputSchemaTypeDefs = `${outputDirectory}/schema.d.ts`;
@@ -80,7 +80,7 @@ ${styleText('green', '--include-msw-utils')}
         const hasChanges = inputSchema !== outputSchema;
         // Only verify than the output is up to date with the input.
         // We assume than if inputSchema is equal to outputSchema, the generated output is up to date.
-        if (verifyOpenapiSync) {
+        if (verifyOpenapiGen) {
           console.log(
             hasChanges
               ? styleText(
@@ -165,7 +165,7 @@ ${styleText('green', '--include-msw-utils')}
         }
         // Success message
         console.log(
-          styleText('green', '\n✅ openapi-sync process completed!\n')
+          styleText('green', '\n✅ openapi-gen process completed!\n')
         );
       } catch (error) {
         console.error(error);

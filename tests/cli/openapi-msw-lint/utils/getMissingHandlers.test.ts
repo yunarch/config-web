@@ -3,13 +3,13 @@ import { describe, expect, it } from 'vitest';
 import type {
   ServiceInfo,
   ServicesUsagesMap,
-} from '../../../../src/cli/openapi-sync/lint-msw-handlers/findServicesUsages';
+} from '../../../../src/cli/openapi-msw-lint/utils/findServicesUsages';
 import {
   getMissingHandlers,
   type MissingHandlerError,
-} from '../../../../src/cli/openapi-sync/lint-msw-handlers/getMissingHandlers';
+} from '../../../../src/cli/openapi-msw-lint/utils/getMissingHandlers';
 
-describe('openapi-sync-lint-msw-handlers getMissingHandlers', () => {
+describe('openapi-msw-lint getMissingHandlers', () => {
   it('should return an empty array when services and handlers are empty', () => {
     expect(
       getMissingHandlers(new Map(), new Map(), '/path/to/handlers')

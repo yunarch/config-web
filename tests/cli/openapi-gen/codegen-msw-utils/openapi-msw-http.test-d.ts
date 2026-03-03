@@ -5,7 +5,7 @@ import {
   type OpenapiPathParams,
   type OpenapiPathRequestBody,
   type OpenapiPathResponseBody,
-} from '../../../__mocks__/openapi-sync-input/openapi-msw-http';
+} from '../../../__mocks__/openapi-gen-input/openapi-msw-http';
 
 describe('openapi-msw-http type tests', () => {
   it('should have empty type for paths without parameters', () => {

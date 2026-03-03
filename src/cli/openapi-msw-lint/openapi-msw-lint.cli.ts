@@ -3,19 +3,19 @@ import { existsSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { styleText } from 'node:util';
 import { createBaseProgram } from '../utils';
-import { displayResults } from './lint-msw-handlers/displayResults';
-import { findExistingHandlers } from './lint-msw-handlers/findExistingHandlers';
-import { findServicesUsages } from './lint-msw-handlers/findServicesUsages';
-import { getMissingHandlers } from './lint-msw-handlers/getMissingHandlers';
+import { displayResults } from './utils/displayResults';
+import { findExistingHandlers } from './utils/findExistingHandlers';
+import { findServicesUsages } from './utils/findServicesUsages';
+import { getMissingHandlers } from './utils/getMissingHandlers';
 
 createBaseProgram()
-  .name('openapi-sync-lint-msw-handlers')
+  .name('openapi-msw-lint')
   .description(
-    'Lint MSW handlers against OpenAPI generated services from `openapi-sync`.\nIt checks for missing handlers based on generated services and your MSW setup.'
+    'CLI tool designed to lint and identifying missing MSW (Mock Service Worker) handlers based on the OpenAPI generated services from `openapi-gen`. It analyzes your codebase to find where service methods are used and suggests appropriate handlers with detailed reporting.'
   )
   .requiredOption(
     '--gen <path>',
-    'The output folder from `openapi-sync` script. Where the generated models and openapi schema and type definitions are saved.'
+    'The output folder from `openapi-gen` script. Where the generated models and openapi schema and type definitions are saved.'
   )
   .requiredOption(
     '--msw-setup-file <path>',
@@ -30,7 +30,7 @@ createBaseProgram()
     `
 Example usage:
 ${styleText('dim', '$')} \
-${styleText('cyan', 'openapi-sync-lint-msw-handlers')} \
+${styleText('cyan', 'openapi-msw-lint')} \
 ${styleText('green', '--gen')} ${styleText('yellow', './src/api/gen')} \
 ${styleText('green', '--msw-setup-file')} ${styleText('yellow', './src/api/__tests__/node.js')} \
 ${styleText('green', '--msw-setup-const')} ${styleText('yellow', 'server')}
@@ -40,14 +40,14 @@ you must run the script with a runtime that supports TypeScript (e.g. ${styleTex
 
 Examples:
 ${styleText('dim', '$')} \
-${styleText('yellow', 'tsx')} ${styleText('cyan', './node_modules/@yunarch/config-web/dist/cli/openapi-sync/openapi-sync-lint-msw-handlers.cli.js')} \
+${styleText('yellow', 'tsx')} ${styleText('cyan', './node_modules/@yunarch/config-web/dist/cli/openapi-msw-lint/openapi-msw-lint.cli.js')} \
 ${styleText('green', '--gen')} ${styleText('yellow', './src/api/gen')} \
 ${styleText('green', '--msw-setup-file')} ${styleText('yellow', './src/api/__tests__/node.ts')} \
 ${styleText('green', '--msw-setup-const')} ${styleText('yellow', 'server')}
 
 ${styleText('dim', '$')} \
 ${styleText('yellow', 'bun')} ${styleText('yellow', '--bun')} \
-${styleText('cyan', 'openapi-sync-lint-msw-handlers')} \
+${styleText('cyan', 'openapi-msw-lint')} \
 ${styleText('green', '--gen')} ${styleText('yellow', './src/api/gen')} \
 ${styleText('green', '--msw-setup-file')} ${styleText('yellow', './src/api/__tests__/node.ts')} \
 ${styleText('green', '--msw-setup-const')} ${styleText('yellow', 'server')}

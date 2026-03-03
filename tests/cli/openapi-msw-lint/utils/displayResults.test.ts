@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { displayResults } from '../../../../src/cli/openapi-sync/lint-msw-handlers/displayResults';
+import { displayResults } from '../../../../src/cli/openapi-msw-lint/utils/displayResults';
 import { consoleMock } from '../../../vitest.setup';
 
-describe('openapi-sync-lint-msw-handlers displayResults', () => {
+describe('openapi-msw-lint displayResults', () => {
   it('should display success message when no missing handlers', () => {
     displayResults([]);
     expect(consoleMock).toHaveBeenCalledExactlyOnceWith(

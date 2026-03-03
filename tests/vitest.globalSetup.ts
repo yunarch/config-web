@@ -2,9 +2,9 @@ import { rm, writeFile } from 'node:fs/promises';
 import { runTask } from '../src/cli/utils';
 import {
   FIXTURE_OXLINT_CONFIG_FILE,
-  OPENAPI_SYNC_INPUT,
-  OPENAPI_SYNC_OUTPUT,
-  openapiSyncExecutor,
+  OPENAPI_GEN_INPUT,
+  OPENAPI_GEN_OUTPUT,
+  openapiGenExecutor,
 } from './test-utils';
 
 /**
@@ -20,8 +20,8 @@ export async function setup() {
         '{ "extends": ["../../.oxlintrc.json"] }'
       );
       spinner.text = 'Generating OpenAPI mock files...';
-      await openapiSyncExecutor([
-        `-i ${OPENAPI_SYNC_INPUT} -o ${OPENAPI_SYNC_OUTPUT} -y -f --include-msw-utils --post-script format:mocks`,
+      await openapiGenExecutor([
+        `-i ${OPENAPI_GEN_INPUT} -o ${OPENAPI_GEN_OUTPUT} -y -f --include-msw-utils --post-script format:mocks`,
       ]);
     },
     options: {

@@ -50,10 +50,8 @@ export default defineConfig([
   // Cli
   {
     entry: [
-      './src/cli/bun-run-all/bun-run-all.cli.ts',
-      './src/cli/openapi-sync/openapi-sync.cli.ts',
-      './src/cli/openapi-sync/openapi-sync-lint-msw-handlers.cli.ts',
-      './src/cli/turbo-select/turbo-select.cli.ts',
+      './src/cli/openapi-gen/openapi-gen.cli.ts',
+      './src/cli/openapi-msw-lint/openapi-msw-lint.cli.ts',
     ],
     outDir: './dist/cli',
     format: 'esm',

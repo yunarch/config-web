@@ -1,10 +1,10 @@
-# openapi-sync
+# openapi-gen
 
 ```
-Usage: openapi-sync [options]
+Usage: openapi-gen [options]
 
-A CLI tool to convert OpenAPI 3.0/3.1 schemas to TypeScript types and create
-type-safe fetching based on a openapi file and keep them in sync.
+A CLI tool to convert OpenAPI 3.0/3.1 schemas to TypeScript type-safe model
+interfaces and web service clients.
 
 Options:
   -i, --input <path>      The input (local or remote) openapi schema (JSON).
@@ -18,13 +18,13 @@ Options:
                           typescript types.
   --post-script <script>  A package.json script to run after the code
                           generation.
-  --verify-openapi-sync   Verifies that the generated output is up to date with
+  --verify-openapi-gen    Verifies that the generated output is up to date with
                           the input (e.g., in CI) to catch outdated or
                           mismatched output without making changes.
   -h, --help              display help for command
 
 Example usage:
-$ openapi-sync -i ./openapi.json -o ./src/api/gen --include-msw-utils
+$ openapi-gen -i ./openapi.json -o ./src/api/gen --include-msw-utils
 
 
 ```

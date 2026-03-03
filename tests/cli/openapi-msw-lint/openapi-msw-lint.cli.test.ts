@@ -7,15 +7,11 @@ describe('openapi-msw-lint', () => {
       expect(openapiMswLintExecutor()).rejects.toThrow(
         "error: required option '--gen <path>' not specified"
       ),
-      expect(
-        openapiMswLintExecutor(['--gen gen'])
-      ).rejects.toThrowError(
+      expect(openapiMswLintExecutor(['--gen gen'])).rejects.toThrowError(
         "error: required option '--msw-setup-file <path>' not specified"
       ),
       expect(
-        openapiMswLintExecutor([
-          '--gen gen --msw-setup-file server.ts',
-        ])
+        openapiMswLintExecutor(['--gen gen --msw-setup-file server.ts'])
       ).rejects.toThrowError(
         "error: required option '--msw-setup-const <const>' not specified"
       ),

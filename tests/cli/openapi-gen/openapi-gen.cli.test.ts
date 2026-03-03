@@ -34,9 +34,7 @@ describe('openapi-gen', () => {
         ])
       ).rejects.toThrowError('error: Input file must be a JSON file'),
       expect(
-        openapiGenExecutor([
-          `-i https://swagger.json -o ${OPENAPI_GEN_OUTPUT}`,
-        ])
+        openapiGenExecutor([`-i https://swagger.json -o ${OPENAPI_GEN_OUTPUT}`])
       ).rejects.toThrowError('Failed to fetch remote OpenAPI file'),
       expect(
         openapiGenExecutor([`-i ./openapi.json -o ${OPENAPI_GEN_OUTPUT}`])

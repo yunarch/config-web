@@ -125,7 +125,7 @@
   },
   "devDependencies": {
     "@commitlint/cli": "20.4.2",
-    "@commitlint/config-conventional": "20.4.2",
+    "@commitlint/config-conventional": "20.4.3",
     "prettier": "3.8.1",
     "eslint": "10.0.2",
     "eslint-typegen": "2.3.1",

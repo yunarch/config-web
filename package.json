@@ -134,7 +134,7 @@
     "oxlint-tsgolint": "0.16.0",
     "@oxlint/migrate": "1.51.0",
     "husky": "9.1.7",
-    "lint-staged": "16.3.1",
+    "lint-staged": "16.3.2",
     "rimraf": "6.1.3",
     "vitest": "4.0.18",
     "msw": "2.12.10",

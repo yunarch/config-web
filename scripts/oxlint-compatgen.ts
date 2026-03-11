@@ -36,6 +36,7 @@ async function generateOxlintConfig() {
     undefined,
     {
       typeAware: true,
+      jsPlugins: false,
     }
   );
   await fs.writeFile(

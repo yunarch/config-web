@@ -133,7 +133,7 @@
     "prettier": "3.8.1",
     "eslint": "10.0.3",
     "eslint-typegen": "2.3.1",
-    "oxfmt": "0.38.0",
+    "oxfmt": "0.39.0",
     "oxlint": "1.53.0",
     "oxlint-tsgolint": "0.16.0",
     "@oxlint/migrate": "1.52.0",

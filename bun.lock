@@ -33,7 +33,7 @@
       "devDependencies": {
         "@commitlint/cli": "20.4.3",
         "@commitlint/config-conventional": "20.4.3",
-        "@oxlint/migrate": "1.52.0",
+        "@oxlint/migrate": "1.53.0",
         "@types/bun": "1.3.10",
         "@types/node": "25.4.0",
         "@yunarch/eslint-oxlint-diff": "0.2.1",
@@ -403,7 +403,7 @@
 
     "@oxlint/binding-win32-x64-msvc": ["@oxlint/binding-win32-x64-msvc@1.53.0", "", { "os": "win32", "cpu": "x64" }, "sha512-xTiOkntexCdJytZ7ArIIgl3vGW5ujMM3sJNM7/+iqGAVJagCqjFFWn68HRWRLeyT66c95uR+CeFmQFI6mLQqDw=="],
 
-    "@oxlint/migrate": ["@oxlint/migrate@1.52.0", "", { "dependencies": { "commander": "^14.0.0", "globals": "^17.0.0", "oxc-parser": "^0.116.0", "tinyglobby": "^0.2.14" }, "bin": { "migrate": "dist/bin/oxlint-migrate.mjs" } }, "sha512-s7j9AboaesCuCXvju80q16mHGa0kFo/1OYBCA3oZaXEIjcbEDMyroWoDbJ/OLouenHhK12neDoMDWBhfl6PF5g=="],
+    "@oxlint/migrate": ["@oxlint/migrate@1.53.0", "", { "dependencies": { "commander": "^14.0.0", "globals": "^17.0.0", "oxc-parser": "^0.116.0", "tinyglobby": "^0.2.14" }, "bin": { "migrate": "dist/bin/oxlint-migrate.mjs" } }, "sha512-4z6AYlOnDJ2oOoDo+hC9id9oueDLFpoeFXt7SsAva8TFRWDdEWPeuoJ/c1DCbn1GN0eorJ3vdlMb9Rf/jJUBJQ=="],
 
     "@rollup/rollup-android-arm-eabi": ["@rollup/rollup-android-arm-eabi@4.59.0", "", { "os": "android", "cpu": "arm" }, "sha512-upnNBkA6ZH2VKGcBj9Fyl9IGNPULcjXRlg0LLeaioQWueH30p6IXtJEbKAgvyv+mJaMxSm1l6xwDXYjpEMiLMg=="],
 

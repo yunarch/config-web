@@ -12,7 +12,7 @@ describe('runTask', () => {
         },
         name: 'Test Error',
       })
-    ).rejects.toThrowError();
+    ).rejects.toThrow();
     expect(ora).toHaveBeenCalledExactlyOnceWith('Test Error');
     expect(oraSucceedMock).not.toHaveBeenCalled();
     expect(oraFailMock).toHaveBeenCalledExactlyOnceWith('Thrown error');

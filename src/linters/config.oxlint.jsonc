@@ -3,6 +3,34 @@
   "plugins": ["import", "jsdoc", "unicorn"],
   "categories": { "correctness": "off" },
   "env": { "builtin": true, "browser": true, "es2024": true, "node": true },
+  "globals": {
+    "suite": "writable",
+    "test": "writable",
+    "describe": "writable",
+    "it": "writable",
+    "expectTypeOf": "writable",
+    "assertType": "writable",
+    "expect": "writable",
+    "assert": "writable",
+    "chai": "writable",
+    "vitest": "writable",
+    "vi": "writable",
+    "beforeAll": "writable",
+    "afterAll": "writable",
+    "beforeEach": "writable",
+    "afterEach": "writable",
+    "onTestFailed": "writable",
+    "onTestFinished": "writable",
+  },
+  "settings": {
+    "jsdoc": {
+      "structuredTags": {
+        "next": { "required": ["type"] },
+        "rejects": { "required": ["type"] },
+      },
+    },
+    "vitest": { "typecheck": true },
+  },
   "ignorePatterns": [
     "**/node_modules",
     "**/.pnp",
@@ -95,25 +123,6 @@
     "**/CHANGELOG*",
     "**/LICENSE*",
   ],
-  "globals": {
-    "suite": "writable",
-    "test": "writable",
-    "describe": "writable",
-    "it": "writable",
-    "expectTypeOf": "writable",
-    "assertType": "writable",
-    "expect": "writable",
-    "assert": "writable",
-    "chai": "writable",
-    "vitest": "writable",
-    "vi": "writable",
-    "beforeAll": "writable",
-    "afterAll": "writable",
-    "beforeEach": "writable",
-    "afterEach": "writable",
-    "onTestFailed": "writable",
-    "onTestFinished": "writable",
-  },
   "rules": {
     "constructor-super": "error",
     "for-direction": "error",
@@ -393,15 +402,6 @@
     "unicorn/switch-case-braces": "error",
     "unicorn/text-encoding-identifier-case": "error",
     "unicorn/throw-new-error": "error",
-  },
-  "settings": {
-    "jsdoc": {
-      "structuredTags": {
-        "next": { "required": ["type"] },
-        "rejects": { "required": ["type"] },
-      },
-    },
-    "vitest": { "typecheck": true },
   },
   "overrides": [
     {

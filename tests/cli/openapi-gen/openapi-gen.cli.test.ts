@@ -9,12 +9,12 @@ import {
 describe('openapi-gen', () => {
   it('should fail and throw an error with missing required options', async () => {
     await Promise.all([
-      expect(openapiGenExecutor()).rejects.toThrowError(
+      expect(openapiGenExecutor()).rejects.toThrow(
         "error: required option '-i, --input <path>' not specified"
       ),
       expect(
         openapiGenExecutor(['-i https://swagger.example'])
-      ).rejects.toThrowError(
+      ).rejects.toThrow(
         "error: required option '-o, --output <folder>' not specified"
       ),
     ]);
@@ -23,7 +23,7 @@ describe('openapi-gen', () => {
   it('should fail with wrong output type', async () => {
     await expect(
       openapiGenExecutor([`-i https://swagger.example -o ./tmp/openapi.json`])
-    ).rejects.toThrowError('error: Output must be a directory.');
+    ).rejects.toThrow('error: Output must be a directory.');
   });
 
   it('should fail with wrong input type', async () => {
@@ -32,13 +32,13 @@ describe('openapi-gen', () => {
         openapiGenExecutor([
           `-i https://swagger.example -o ${OPENAPI_GEN_OUTPUT}`,
         ])
-      ).rejects.toThrowError('error: Input file must be a JSON file'),
+      ).rejects.toThrow('error: Input file must be a JSON file'),
       expect(
         openapiGenExecutor([`-i https://swagger.json -o ${OPENAPI_GEN_OUTPUT}`])
-      ).rejects.toThrowError('Failed to fetch remote OpenAPI file'),
+      ).rejects.toThrow('Failed to fetch remote OpenAPI file'),
       expect(
         openapiGenExecutor([`-i ./openapi.json -o ${OPENAPI_GEN_OUTPUT}`])
-      ).rejects.toThrowError('Input file does not exist'),
+      ).rejects.toThrow('Input file does not exist'),
     ]);
   });
 
@@ -59,7 +59,7 @@ describe('openapi-gen', () => {
       openapiGenExecutor([
         `-i ${MOCKS_PATH}/openapi-gen-input.new.json -o ${OPENAPI_GEN_OUTPUT} --verify-openapi-gen`,
       ])
-    ).rejects.toThrowError();
+    ).rejects.toThrow();
   });
 
   it('vitest global setup `openapi-gen` should have created `openapi.json` file', () => {

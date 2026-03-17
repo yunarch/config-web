@@ -231,6 +231,9 @@ To use the oxlint linter, create a `.oxlintrc.json` [configuration file](https:/
   "$schema": "./node_modules/oxlint/configuration_schema.json",
   "extends": ["@yunarch/config-web/oxlint"],
   "categories": { "correctness": "error", "perf": "error" },
+  "options": {
+    "reportUnusedDisableDirectives": "warn",
+  },
   "rules": {
     // Add your rules overrides here...
   },
@@ -255,14 +258,14 @@ To use the oxlint linter, create a `.oxlintrc.json` [configuration file](https:/
 npm install --save-dev oxlint-tsgolint
 ```
 
-To run `Oxlint` with type-aware linting, you must pass the `--type-aware` flag:
+To run `Oxlint` with type-aware linting, enable the `typeAware` and/or `typeCheck` options in your `.oxlintrc.json` configuration file:
 
 ```
-oxlint --type-aware
+"options": {
+  "typeAware": true,
+  "typeCheck": true,
+},
 ```
-
-> [!TIP]
-> In editor and LSP-based integrations like VS Code, type-aware linting can be enabled by setting the `typeAware` option to `true`, see the [Editors](https://oxc.rs/docs/guide/usage/linter/editors.html) page for more information.
 
 > [!WARNING]
 > Type-aware linting is powered by typescript-go so TypeScript 7.0+ is required.

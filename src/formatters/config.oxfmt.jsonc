@@ -28,9 +28,15 @@
       "internal",
       ["parent", "sibling", "index"],
       "side_effect",
-      "unknown",
+      "unknown"
     ],
     "newlinesBetween": false,
-    "order": "asc",
+    "order": "asc"
   },
+  "overrides": [
+    {
+      "files": ["**/*.json", "**/*.jsonc"],
+      "options": { "trailingComma": "none" }
+    }
+  ]
 }

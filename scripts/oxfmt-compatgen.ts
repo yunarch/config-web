@@ -48,6 +48,14 @@ async function generateOxfmtConfig() {
         newlinesBetween: false,
         order: 'asc',
       },
+      overrides: [
+        {
+          files: ['**/*.json', '**/*.jsonc'],
+          options: {
+            trailingComma: 'none',
+          },
+        },
+      ],
     })
   );
   await fs.rm(TMP_DIR, { recursive: true, force: true });

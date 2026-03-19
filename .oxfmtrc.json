@@ -20,5 +20,11 @@
   "htmlWhitespaceSensitivity": "css",
   "embeddedLanguageFormatting": "auto",
   "sortPackageJson": false,
-  "ignorePatterns": []
+  "ignorePatterns": [],
+  "overrides": [
+    {
+      "files": ["**/*.json", "**/*.jsonc"],
+      "options": { "trailingComma": "none" }
+    }
+  ]
 }

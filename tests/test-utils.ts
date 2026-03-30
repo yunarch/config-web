@@ -58,14 +58,14 @@ const testDist = process.env.TEST_DIST === 'true';
 export const openapiGenExecutor = createCliExecutor(
   resolve(
     testDist
-      ? '../dist/cli/openapi-gen/openapi-gen.cli.js'
+      ? '../dist/cli/openapi-gen/openapi-gen.cli.mjs'
       : '../src/cli/openapi-gen/openapi-gen.cli.ts'
   )
 );
 export const openapiMswLintExecutor = createCliExecutor(
   resolve(
     testDist
-      ? '../dist/cli/openapi-msw-lint/openapi-msw-lint.cli.js'
+      ? '../dist/cli/openapi-msw-lint/openapi-msw-lint.cli.mjs'
       : '../src/cli/openapi-msw-lint/openapi-msw-lint.cli.ts'
   )
 );

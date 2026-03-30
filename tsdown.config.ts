@@ -1,6 +1,6 @@
 import { copyFile, readFile, writeFile } from 'node:fs/promises';
 import { parse } from 'jsonc-parser';
-import { defineConfig } from 'tsup';
+import { defineConfig } from 'tsdown';
 
 /**
  * Parses a JSONC file into a JSON file.
@@ -57,7 +57,15 @@ export default defineConfig([
     format: 'esm',
     minify: true,
     shims: true,
-    external: ['fast-glob', 'typescript', '@inquirer/confirm'],
+    deps: {
+      neverBundle: [
+        'commander',
+        'ora',
+        '@inquirer/confirm',
+        'fast-glob',
+        'typescript',
+      ],
+    },
   },
   // Prettier
   {
@@ -67,6 +75,9 @@ export default defineConfig([
     dts: true,
     minify: true,
     shims: true,
+    deps: {
+      neverBundle: ['prettier'],
+    },
   },
   // Eslint
   {
@@ -76,5 +87,8 @@ export default defineConfig([
     dts: true,
     minify: true,
     shims: true,
+    deps: {
+      neverBundle: ['eslint', '@typescript-eslint/parser'],
+    },
   },
 ]);

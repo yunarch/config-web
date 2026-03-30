@@ -15,10 +15,10 @@
 - [📦 What’s included?](#-whats-included)
 - [⚙️ Installation](#️-installation)
 - [Prettier](#prettier)
-- [Oxfmt](#oxfmt)
 - [ESlint](#eslint)
   - [Override configuration](#override-configuration)
   - [Typescript Type aware rules](#typescript-type-aware-rules)
+- [Oxfmt](#oxfmt)
 - [Oxlint](#oxlint)
   - [Typescript Type aware rules](#typescript-type-aware-rules-1)
   - [Running Oxlint and ESLint together](#running-oxlint-and-eslint-together)
@@ -96,26 +96,6 @@ export default {
 > Add a `.prettierignore` file to ignore certain files and folder completly or use the CLI option [--ignore-path](https://prettier.io/docs/cli#--ignore-path) to indicate a path to a file containing patterns that describe files to ignore.
 >
 > By default, Prettier looks for `./.gitignore` and `./.prettierignore`.
-
-## Oxfmt
-
-To use `Oxfmt`, create a `.oxfmtrc.json` [configuration file](https://oxc.rs/docs/guide/usage/formatter/config.html) and extend the shared preset:
-
-```jsonc
-{
-  "$schema": "./node_modules/oxfmt/configuration_schema.json",
-  "extends": ["@yunarch/config-web/oxfmt"],
-}
-```
-
-> [!NOTE]
-> `Oxfmt` uses `ignorePatterns` in its configuration file instead of `.prettierignore` file but for compatibility, `.prettierignore` file is also supported.
->
-> See [Oxfmt ignore files](https://oxc.rs/docs/guide/usage/formatter/ignore-files.html) for details.
-
-> [!CAUTION]
-> Currently, `Oxfmt` does not extends configuration:
-> https://github.com/oxc-project/oxc/issues/16394
 
 ## ESlint
 
@@ -221,6 +201,26 @@ export default config({
 
 > [!NOTE]
 > You can pass `disableTypeAware: true` to disable type-aware rules while keeping the TypeScript parser configuration which will allow you to manually enable the type-aware rules you want.
+
+## Oxfmt
+
+To use `Oxfmt`, create a `.oxfmtrc.json` [configuration file](https://oxc.rs/docs/guide/usage/formatter/config.html) and extend the shared preset:
+
+```jsonc
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "extends": ["@yunarch/config-web/oxfmt"],
+}
+```
+
+> [!NOTE]
+> `Oxfmt` uses `ignorePatterns` in its configuration file instead of `.prettierignore` file but for compatibility, `.prettierignore` file is also supported.
+>
+> See [Oxfmt ignore files](https://oxc.rs/docs/guide/usage/formatter/ignore-files.html) for details.
+
+> [!CAUTION]
+> Currently, `Oxfmt` does not extends configuration:
+> https://github.com/oxc-project/oxc/issues/16394
 
 ## Oxlint
 

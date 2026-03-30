@@ -575,10 +575,10 @@
       ],
       "rules": {
         "vitest/expect-expect": "error",
+        "vitest/no-commented-out-tests": "error",
         "vitest/no-conditional-expect": "error",
         "vitest/no-disabled-tests": "warn",
         "vitest/no-focused-tests": "error",
-        "vitest/no-commented-out-tests": "error",
         "vitest/no-identical-title": "error",
         "vitest/no-import-node-test": "error",
         "vitest/no-interpolation-in-snapshots": "error",

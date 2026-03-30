@@ -25,6 +25,7 @@
 
     /* Types */
     "declaration": true,
+    "types": [],
 
     /* Others */
     "preserveWatchOutput": true

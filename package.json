@@ -140,7 +140,7 @@
     "oxlint": "1.57.0",
     "oxlint-tsgolint": "0.18.1",
     "@oxlint/migrate": "1.57.0",
-    "@yunarch/eslint-oxlint-diff": "0.2.1",
+    "@yunarch/eslint-oxlint-diff": "0.2.2",
     "husky": "9.1.7",
     "lint-staged": "16.4.0",
     "rimraf": "6.1.3",

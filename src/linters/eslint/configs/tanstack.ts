@@ -31,15 +31,26 @@ export async function tanstack(
     const pluginTanstackRouter = await interopDefault(
       import('@tanstack/eslint-plugin-router')
     );
-    configs.push({
-      name: 'yunarch/tanstack/router/rules',
-      plugins: {
-        '@tanstack/router': pluginTanstackRouter,
+    configs.push(
+      {
+        name: 'yunarch/tanstack/router/rules',
+        plugins: {
+          '@tanstack/router': pluginTanstackRouter,
+        },
+        rules: {
+          ...pluginTanstackRouter.configs['flat/recommended'].at(0)?.rules,
+        },
       },
-      rules: {
-        ...pluginTanstackRouter.configs['flat/recommended'].at(0)?.rules,
-      },
-    });
+      {
+        files: ['**/*.{ts,tsx}'],
+        rules: {
+          '@typescript-eslint/only-throw-error': [
+            'warn',
+            { allow: ['Redirect', 'NotFoundError'] },
+          ],
+        },
+      }
+    );
   }
   return configs;
 }

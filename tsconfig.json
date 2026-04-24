@@ -3,7 +3,8 @@
   "include": ["**/*.ts"],
   "exclude": ["node_modules", "./tests/**/fixtures"],
   "compilerOptions": {
-    "declarationMap": false,
-    "types": ["node", "bun"]
+    "lib": ["ESNext", "DOM"],
+    "types": ["node", "bun"],
+    "declarationMap": false
   }
 }

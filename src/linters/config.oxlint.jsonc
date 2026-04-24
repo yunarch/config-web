@@ -620,9 +620,29 @@
     {
       "files": ["**/*.{js,jsx,cjs,cjsx,mjs,mjsx,ts,tsx,cts,ctsx,mts,mtjsx}"],
       "rules": {
-        "react/rules-of-hooks": "error",
         "react/exhaustive-deps": "warn",
+        "react/jsx-no-comment-textnodes": "warn",
+        "react/no-array-index-key": "warn",
+        "react/no-clone-element": "warn",
+        "react/no-direct-mutation-state": "error",
+        "react/no-redundant-should-component-update": "error",
+        "react/rules-of-hooks": "error",
+        "react/no-children-prop": "error",
         "react/only-export-components": ["error", {}]
+      },
+      "plugins": ["react"]
+    },
+    {
+      "files": ["**/*.{ts,cts,mts}", "**/*.{tsx,ctsx,mtsx}"],
+      "rules": {
+        "react/exhaustive-deps": "warn",
+        "react/jsx-no-comment-textnodes": "warn",
+        "react/no-array-index-key": "warn",
+        "react/no-clone-element": "warn",
+        "react/no-direct-mutation-state": "error",
+        "react/no-redundant-should-component-update": "error",
+        "react/rules-of-hooks": "error",
+        "react/no-children-prop": "error"
       },
       "plugins": ["react"]
     },

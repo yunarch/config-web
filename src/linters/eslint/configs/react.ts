@@ -25,13 +25,10 @@ export async function react(
   const isTypescriptEnabled = tsOptions.isTypescriptEnabled;
   const isTypeAware = isTypescriptEnabled && tsOptions.isTypeAware;
   const enableStrictRules = options === true || options.enableStrictRules;
-  const [pluginReact, pluginReactHooks, pluginReactRefresh] = await Promise.all(
-    [
-      interopDefault(import('@eslint-react/eslint-plugin')),
-      interopDefault(import('eslint-plugin-react-hooks')),
-      interopDefault(import('eslint-plugin-react-refresh')),
-    ] as const
-  );
+  const [pluginReact, pluginReactRefresh] = await Promise.all([
+    interopDefault(import('@eslint-react/eslint-plugin')),
+    interopDefault(import('eslint-plugin-react-refresh')),
+  ] as const);
   const pluginReactAll =
     // ! TODO: using `as` here as a temporary workaround as `@eslint-react/eslint-plugin` types does not export plugins in configs, but they exist at runtime.
     (
@@ -43,14 +40,12 @@ export async function react(
     {
       name: 'yunarch/react/setup',
       plugins: {
-        '@eslint-react': pluginReactAll['@eslint-react'],
-        '@eslint-react/dom': pluginReactAll['@eslint-react/dom'],
-        '@eslint-react/hooks-extra':
-          pluginReactAll['@eslint-react/hooks-extra'],
-        '@eslint-react/naming-convention':
+        react: pluginReactAll['@eslint-react'],
+        'react-dom': pluginReactAll['@eslint-react/dom'],
+        'react-naming-convention':
           pluginReactAll['@eslint-react/naming-convention'],
-        '@eslint-react/web-api': pluginReactAll['@eslint-react/web-api'],
-        'react-hooks': pluginReactHooks,
+        'react-rsc': pluginReactAll['@eslint-react/rsc'],
+        'react-web-api': pluginReactAll['@eslint-react/web-api'],
         'react-refresh': pluginReactRefresh,
       },
     },
@@ -68,7 +63,6 @@ export async function react(
       rules: {
         ...pluginReact.configs.recommended.rules,
         ...(enableStrictRules ? pluginReact.configs.strict.rules : {}),
-        ...pluginReactHooks.configs.recommended.rules,
         ...pluginReactRefresh.configs.recommended.rules,
         ...pluginReact.configs['disable-experimental'].rules,
       },

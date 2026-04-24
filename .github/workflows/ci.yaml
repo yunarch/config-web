@@ -26,7 +26,7 @@ jobs:
       - name: 📦 Install dependencies
         run: bun install --frozen-lockfile
       - name: 🔍 Lint files
-        run: bun run lint
+        run: bun --bun run lint
   unit_test:
     name: Unit testing
     runs-on: ubuntu-latest
@@ -38,7 +38,7 @@ jobs:
       - name: 📦 Install dependencies
         run: bun install --frozen-lockfile
       - name: 🧪 Test files
-        run: bun run tests
+        run: bun --bun run tests
   build_test:
     name: Build testing
     runs-on: ubuntu-latest

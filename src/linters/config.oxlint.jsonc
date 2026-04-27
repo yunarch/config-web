@@ -608,10 +608,10 @@
       "plugins": ["vitest"]
     },
     {
-      "files": ["**/*.{ts,tsx}"],
+      "files": ["**/*.{ts,cts,mts}", "**/*.{tsx,ctsx,mtsx}"],
       "rules": {
         "typescript/only-throw-error": [
-          "warn",
+          "error",
           { "allow": ["Redirect", "NotFoundError"] }
         ]
       },

@@ -10,7 +10,6 @@ export type Awaitable<T> = T | Promise<T>;
 export interface Rules extends RuleOptions {}
 
 export type TypedFlatConfigItem = Omit<
-  // oxlint-disable-next-line typescript/no-unnecessary-type-arguments -- Necessary for autocomplete
   Linter.Config<Linter.RulesRecord & Rules>,
   'plugins'
 > & {

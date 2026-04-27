@@ -28,7 +28,7 @@ function makeParserConfig(
     files,
     ...(options.ignores ? { ignores: options.ignores } : {}),
     languageOptions: {
-      parser: pluginTsESlint.parser as never,
+      parser: pluginTsESlint.parser,
       parserOptions: {
         extraFileExtensions: options.extraFileExtensions?.map(
           (extension) => `.${extension}`

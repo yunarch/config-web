@@ -19,6 +19,8 @@ set -e
 echo "$lint_output"
 if echo "$lint_output" | grep -q "No files found to lint."; then
   echo "Skipping lint: no files matched."
+elif [ $lint_exit_code -ne 0 ]; then
+  exit $lint_exit_code
 fi
 
 # [ESLINT] Lint the staged files

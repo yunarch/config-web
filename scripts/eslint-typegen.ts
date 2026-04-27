@@ -37,7 +37,7 @@ const configs = await combine(
   jsdoc(),
   unicorn(),
   test(true), // All enabled for typegen generation.
-  tanstack(true), // All enabled for typegen generation.
+  tanstack(true, { isTypescriptEnabled: true }), // All enabled for typegen generation.
   react(true, { isTypescriptEnabled: true, isTypeAware: true }), // All enabled for typegen generation.
   perfectionist(),
   disables({})

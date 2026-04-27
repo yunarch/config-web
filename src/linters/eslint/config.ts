@@ -83,7 +83,11 @@ export function config(
     configs.push(test(options.test));
   }
   if (options.tanstack) {
-    configs.push(tanstack(options.tanstack));
+    configs.push(
+      tanstack(options.tanstack, {
+        isTypescriptEnabled: !!options.typescript,
+      })
+    );
   }
   if (options.react) {
     configs.push(

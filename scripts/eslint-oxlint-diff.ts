@@ -36,7 +36,7 @@ async function main() {
     overrides?: { rules?: Record<string, unknown> }[];
   };
   const result = diff(eslintConfigs, oxlintConfig);
-  printDiffResult(result);
+  printDiffResult(result, { verbose: true });
 }
 
 // Run the main function

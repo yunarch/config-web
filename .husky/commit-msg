@@ -1,3 +1,0 @@
-. "$(dirname -- "$0")/common.sh"
-
-commitlint --edit $1

@@ -1,3 +1,32 @@
 . "$(dirname -- "$0")/common.sh"
 
-lint-staged
+# Get a list of staged files (ACMR: Added, Copied, Modified, Renamed)
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACMR)
+
+if [ -z "$STAGED_FILES" ]; then
+  exit 0
+fi
+
+# Run generate scripts to ensure generated files are up to date before linting and formatting
+# Note: Might require the developers to commit (or amend) the generated files after the pre-commit hook runs, but this is a better tradeoff for code consistency.
+bun run gen
+
+# [OXLINT] Lint the staged files
+set +e
+lint_output=$(bun run oxlint $STAGED_FILES 2>&1)
+lint_exit_code=$?
+set -e
+echo "$lint_output"
+if echo "$lint_output" | grep -q "No files found to lint."; then
+  echo "Skipping lint: no files matched."
+elif [ $lint_exit_code -ne 0 ]; then
+  exit $lint_exit_code
+fi
+
+# [ESLINT] Lint the staged files
+bun run eslint $STAGED_FILES
+
+# Format all files (not just staged) to ensure consistent formatting across the codebase.
+# Note: Formatting only staged files can leave unstaged files in a different format, causing future commits to include unrelated formatting diffs.
+# Note2: Might require the developers to commit (or amend) the formatted files after the pre-commit hook runs, but this is a better tradeoff for code consistency.
+bun run format:all

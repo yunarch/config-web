@@ -64,6 +64,8 @@ export async function react(
         ...pluginReact.configs.recommended.rules,
         ...(enableStrictRules ? pluginReact.configs.strict.rules : {}),
         ...pluginReactRefresh.configs.recommended.rules,
+        'react/use-state': ['warn', { enforceAssignment: false }],
+        // Disable experimental rules by default as they may cause false positives and are not stable yet.
         ...pluginReact.configs['disable-experimental'].rules,
       },
     },
@@ -91,6 +93,7 @@ export async function react(
                       : {}),
                   }
                 : {}),
+              // Disable experimental rules by default as they may cause false positives and are not stable yet.
               ...pluginReact.configs['disable-experimental'].rules,
             },
           } as TypedFlatConfigItem,

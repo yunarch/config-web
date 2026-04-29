@@ -1,4 +1,4 @@
-import type { Awaitable, TypedFlatConfigItem } from './types';
+import type { Awaitable } from './types';
 
 /**
  * Interop default export from module.
@@ -15,17 +15,4 @@ export async function interopDefault<T>(
       ? resolved.default
       : resolved
   ) as T extends { default: infer D } ? D : T;
-}
-
-/**
- * Combine array and non-array configs into a single array.
- *
- * @param configs - Configs to combine.
- * @returns A promise that resolves to a single array of configs.
- */
-export async function combine(
-  ...configs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[]>[]
-): Promise<TypedFlatConfigItem[]> {
-  const resolved = await Promise.all(configs.map((c) => Promise.resolve(c)));
-  return resolved.flat();
 }

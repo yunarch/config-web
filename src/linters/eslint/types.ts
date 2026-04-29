@@ -1,26 +1,35 @@
 import type { ParserOptions } from '@typescript-eslint/parser';
 import type { Linter } from 'eslint';
 import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore';
+import type { ConfigWithExtends } from 'eslint-flat-config-utils';
 import type { RuleOptions } from './typegen';
 
 export type { ConfigNames } from './typegen';
 
 export type Awaitable<T> = T | Promise<T>;
 
-export interface Rules extends RuleOptions {}
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Any is required for compatibility.
+export type Rules = Record<string, Linter.RuleEntry<any> | undefined> &
+  RuleOptions;
 
 export type TypedFlatConfigItem = Omit<
-  Linter.Config<Linter.RulesRecord & Rules>,
-  'plugins'
+  ConfigWithExtends,
+  'plugins' | 'rules'
 > & {
   /**
    * An object containing a name-value mapping of plugin names to plugin objects.
    * When `files` is specified, these plugins are only available to the matching files.
    *
-   * @see https://eslint.org/docs/latest/user-guide/configuring/configuration-files-new#using-plugins-in-your-configuration
+   * @see [Using plugins in your configuration](https://eslint.org/docs/latest/user-guide/configuring/configuration-files-new#using-plugins-in-your-configuration)
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Any is required for compatibility.
   plugins?: Record<string, any>;
+
+  /**
+   * An object containing the configured rules. When `files` or `ignores` are
+   * specified, these rule configurations are only available to the matching files.
+   */
+  rules?: Rules;
 };
 
 export interface OptionsConfig {

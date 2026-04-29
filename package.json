@@ -42,12 +42,12 @@
   "exports": {
     ".": "./dist/index.mjs",
     "./prettier": {
-      "default": "./dist/config.prettier.mjs",
-      "types": "./dist/config.prettier.d.mts"
+      "types": "./dist/config.prettier.d.mts",
+      "default": "./dist/config.prettier.mjs"
     },
     "./eslint": {
-      "default": "./dist/config.eslint.mjs",
-      "types": "./dist/config.eslint.d.mts"
+      "types": "./dist/config.eslint.d.mts",
+      "default": "./dist/config.eslint.mjs"
     },
     "./oxfmt": "./dist/config.oxfmt.json",
     "./oxlint": "./dist/config.oxlint.json",

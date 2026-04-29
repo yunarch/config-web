@@ -48,7 +48,6 @@ export function perfectionist(): TypedFlatConfigItem[] {
         ],
         // Disable conflicting rules
         'import/order': 'off',
-        'import-x/order': 'off',
         'sort-imports': 'off',
       },
     },

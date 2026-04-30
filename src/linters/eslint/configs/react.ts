@@ -18,12 +18,12 @@ import { interopDefault } from '../utils';
 export async function react(
   options: true | Exclude<NonNullable<OptionsConfig['react']>, boolean>,
   tsOptions: {
-    isTypescriptEnabled: boolean;
-    isTypeAware: boolean;
+    typescriptEnabled: boolean;
+    typeAware: boolean;
   }
 ): Promise<TypedFlatConfigItem[]> {
-  const isTypescriptEnabled = tsOptions.isTypescriptEnabled;
-  const isTypeAware = isTypescriptEnabled && tsOptions.isTypeAware;
+  const typescriptEnabled = tsOptions.typescriptEnabled;
+  const typeAware = typescriptEnabled && tsOptions.typeAware;
   const enableStrictRules = options === true || options.enableStrictRules;
   const [pluginReact, pluginReactRefresh] = await Promise.all([
     interopDefault(import('@eslint-react/eslint-plugin')),
@@ -61,7 +61,7 @@ export async function react(
         ...pluginReact.configs['disable-experimental'].rules,
       },
     },
-    ...(isTypescriptEnabled
+    ...(typescriptEnabled
       ? [
           {
             name: 'yunarch/react/typescript/rules',
@@ -77,7 +77,7 @@ export async function react(
               ...(enableStrictRules
                 ? pluginReact.configs['strict-typescript'].rules
                 : {}),
-              ...(isTypeAware
+              ...(typeAware
                 ? {
                     ...pluginReact.configs['recommended-type-checked'].rules,
                     ...(enableStrictRules

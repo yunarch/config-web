@@ -39,6 +39,15 @@ export function config(
     oxlint,
   } = options;
   const willUseOtherLinters = !!oxlint;
+  const typescriptEnabled =
+    options.typescript === true ||
+    (typeof options.typescript === 'object' &&
+      !!options.typescript.tsconfigPath);
+  const typeAware =
+    options.typescript === true ||
+    (typeof options.typescript === 'object' &&
+      !!options.typescript.tsconfigPath &&
+      !options.typescript.disableTypeAware);
   const configs: Awaitable<TypedFlatConfigItem[]>[] = [];
   if (gitignore) {
     if (typeof gitignore === 'boolean') {
@@ -85,22 +94,19 @@ export function config(
   if (options.tanstack) {
     configs.push(
       tanstack(options.tanstack, {
-        isTypescriptEnabled: !!options.typescript,
+        typescriptEnabled,
       })
     );
   }
   if (options.react) {
     configs.push(
       react(options.react, {
-        isTypescriptEnabled: !!options.typescript,
-        isTypeAware:
-          typeof options.typescript === 'object' &&
-          !!options.typescript.tsconfigPath &&
-          !options.typescript.disableTypeAware,
+        typescriptEnabled,
+        typeAware,
       })
     );
   }
-  configs.push(perfectionist(), disables({ oxlint }));
+  configs.push(perfectionist(), disables({ typeAware, oxlint }));
 
   // Compose eslint configs
   let composer = new FlatConfigComposer<TypedFlatConfigItem, ConfigNames>();
@@ -111,10 +117,6 @@ export function config(
   composer = composer.renamePlugins({
     'import-x': 'import',
     '@eslint-react': 'react',
-    '@eslint-react/dom': 'react-dom',
-    '@eslint-react/naming-convention': 'react-naming-convention',
-    '@eslint-react/rsc': 'react-rsc',
-    '@eslint-react/web-api': 'react-web-api',
   });
   return composer;
 }

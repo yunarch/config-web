@@ -12,10 +12,10 @@ import { interopDefault } from '../utils';
 export async function tanstack(
   options: true | Exclude<NonNullable<OptionsConfig['tanstack']>, boolean>,
   tsOptions: {
-    isTypescriptEnabled: boolean;
+    typescriptEnabled: boolean;
   }
 ): Promise<TypedFlatConfigItem[]> {
-  const isTypescriptEnabled = tsOptions.isTypescriptEnabled;
+  const typescriptEnabled = tsOptions.typescriptEnabled;
   const enableQuery = options === true || options.enableQuery;
   const enableRouter = options === true || options.enableRouter;
   const configs: TypedFlatConfigItem[] = [];
@@ -47,7 +47,7 @@ export async function tanstack(
           ...pluginTanstackRouter.configs['flat/recommended'].at(0)?.rules,
         },
       },
-      ...(isTypescriptEnabled
+      ...(typescriptEnabled
         ? [
             {
               name: 'yunarch/tanstack/router/typescript/rules',

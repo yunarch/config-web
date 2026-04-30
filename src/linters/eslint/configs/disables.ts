@@ -10,9 +10,10 @@ import type { OptionsConfig, TypedFlatConfigItem } from '../types';
  * @returns An array of ESLint configurations.
  */
 export function disables(options: {
+  typeAware: boolean;
   oxlint?: OptionsConfig['oxlint'];
 }): TypedFlatConfigItem[] {
-  const { oxlint } = options;
+  const { typeAware, oxlint } = options;
   return [
     {
       name: 'yunarch/disables/cli',
@@ -57,7 +58,9 @@ export function disables(options: {
       },
     },
     ...(oxlint?.oxlintConfigPath
-      ? pluginOxlint.buildFromOxlintConfigFile(oxlint.oxlintConfigPath)
+      ? pluginOxlint.buildFromOxlintConfigFile(oxlint.oxlintConfigPath, {
+          typeAware,
+        })
       : []),
   ];
 }

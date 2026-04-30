@@ -18,34 +18,26 @@ import { interopDefault } from '../utils';
 export async function react(
   options: true | Exclude<NonNullable<OptionsConfig['react']>, boolean>,
   tsOptions: {
-    isTypescriptEnabled: boolean;
-    isTypeAware: boolean;
+    typescriptEnabled: boolean;
+    typeAware: boolean;
   }
 ): Promise<TypedFlatConfigItem[]> {
-  const isTypescriptEnabled = tsOptions.isTypescriptEnabled;
-  const isTypeAware = isTypescriptEnabled && tsOptions.isTypeAware;
+  const typescriptEnabled = tsOptions.typescriptEnabled;
+  const typeAware = typescriptEnabled && tsOptions.typeAware;
   const enableStrictRules = options === true || options.enableStrictRules;
   const [pluginReact, pluginReactRefresh] = await Promise.all([
     interopDefault(import('@eslint-react/eslint-plugin')),
     interopDefault(import('eslint-plugin-react-refresh')),
   ] as const);
-  const pluginReactAll =
-    // ! TODO: using `as` here as a temporary workaround as `@eslint-react/eslint-plugin` types does not export plugins in configs, but they exist at runtime.
-    (
-      pluginReact.configs.all as typeof pluginReact.configs.all & {
-        plugins: Record<string, unknown>;
-      }
-    ).plugins;
+  const pluginReactAll = pluginReact.configs.all.plugins as Record<
+    string,
+    unknown
+  >;
   return [
     {
       name: 'yunarch/react/setup',
       plugins: {
         react: pluginReactAll['@eslint-react'],
-        'react-dom': pluginReactAll['@eslint-react/dom'],
-        'react-naming-convention':
-          pluginReactAll['@eslint-react/naming-convention'],
-        'react-rsc': pluginReactAll['@eslint-react/rsc'],
-        'react-web-api': pluginReactAll['@eslint-react/web-api'],
         'react-refresh': pluginReactRefresh,
       },
     },
@@ -69,7 +61,7 @@ export async function react(
         ...pluginReact.configs['disable-experimental'].rules,
       },
     },
-    ...(isTypescriptEnabled
+    ...(typescriptEnabled
       ? [
           {
             name: 'yunarch/react/typescript/rules',
@@ -85,7 +77,7 @@ export async function react(
               ...(enableStrictRules
                 ? pluginReact.configs['strict-typescript'].rules
                 : {}),
-              ...(isTypeAware
+              ...(typeAware
                 ? {
                     ...pluginReact.configs['recommended-type-checked'].rules,
                     ...(enableStrictRules

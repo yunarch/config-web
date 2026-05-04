@@ -1,10 +1,7 @@
 import { ESLint } from 'eslint';
 import { it } from 'vitest';
 import { config as eslintConfig } from '../src/linters/config.eslint';
-import { asyncExecFile, createRelativeResolver } from './test-utils';
-
-const resolve = createRelativeResolver(import.meta.url);
-const FIXTURES_PATH = resolve('./__fixtures__/');
+import { asyncExecFile, FIXTURES_LINT_RULES } from './test-utils';
 
 /**
  * Async function to execute ESLint against a file.
@@ -72,7 +69,7 @@ export function lintFile(
     expectedRulesIds: { eslint: string[]; oxlint?: string[] };
   }
 ) {
-  const testFile = `${FIXTURES_PATH}/${file}`;
+  const testFile = `${FIXTURES_LINT_RULES}/${file}`;
   const { title, expectedRulesIds } = testCase;
 
   // ESLint test

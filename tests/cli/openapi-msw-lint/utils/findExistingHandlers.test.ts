@@ -1,7 +1,7 @@
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { findExistingHandlers } from '../../../../src/cli/openapi-msw-lint/utils/findExistingHandlers';
-import { MSW_HANDLERS_FIXTURES, OPENAPI_GEN_OUTPUT } from '../../../test-utils';
+import { FIXTURES_MSW_HANDLERS, OPENAPI_GEN_OUTPUT } from '../../../test-utils';
 
 describe('openapi-msw-lint findExistingHandlers', () => {
   it('should return an empty array when no handler files exist in directory', async () => {
@@ -14,7 +14,7 @@ describe('openapi-msw-lint findExistingHandlers', () => {
 
   it('should find handlers from openapi-msw-http, native MSW and aliased imports', async () => {
     const result = await findExistingHandlers({
-      srcPath: MSW_HANDLERS_FIXTURES,
+      srcPath: FIXTURES_MSW_HANDLERS,
       genPath: OPENAPI_GEN_OUTPUT,
     });
     // All handlers must include an absolute filePath

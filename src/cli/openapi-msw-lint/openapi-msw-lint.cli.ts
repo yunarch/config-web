@@ -67,7 +67,7 @@ Note: Requires a runtime that supports TypeScript (e.g. ${styleText('yellow', 't
             }),
             findRegisteredHandlers(mswSetupFilePath),
           ]);
-        // Get missing handlers by comparing services usages with existing handlers and registered handlers
+        // Get missing handlers by comparing services usages with existing handlers
         const missingHandlers = getMissingHandlers(
           servicesUsages,
           existingHandlers,

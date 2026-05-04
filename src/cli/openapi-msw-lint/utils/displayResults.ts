@@ -1,77 +1,121 @@
 import { styleText } from 'node:util';
 import type { ServiceInfo } from './findServicesUsages';
+import type { DisconnectedHandlerWarning } from './getDisconnectedHandlers';
 import type { MissingHandlerError } from './getMissingHandlers';
 
 /**
  * Display results of the analysis in a formatted way.
  *
- * @param missingHandlers - The array of missing handler.
+ * @param missingHandlers - The array of missing handlers.
+ * @param disconnectedHandlers - The array of disconnected handler warnings.
  */
-export function displayResults(missingHandlers: MissingHandlerError[]) {
-  // Group missing handlers by service
-  const serviceGroups = new Map<
+export function displayResults(
+  missingHandlers: MissingHandlerError[],
+  disconnectedHandlers: DisconnectedHandlerWarning[] = []
+) {
+  // Display missing handlers
+  const missingHandlersGroupByService = new Map<
     string,
     { service: ServiceInfo; handlers: MissingHandlerError[] }
   >();
   for (const missingHandler of missingHandlers) {
-    if (!serviceGroups.has(missingHandler.service.name)) {
-      serviceGroups.set(missingHandler.service.name, {
+    if (!missingHandlersGroupByService.has(missingHandler.service.name)) {
+      missingHandlersGroupByService.set(missingHandler.service.name, {
         service: missingHandler.service,
         handlers: [],
       });
     }
-    serviceGroups
+    missingHandlersGroupByService
       .get(missingHandler.service.name)
       ?.handlers.push(missingHandler);
   }
-  // If no missing handlers, display a success message
-  if (serviceGroups.size === 0) {
-    console.log(styleText('green', '✔ No missing handlers found'));
-    return;
-  }
-  // Display grouped missing handlers
-  for (const { service, handlers } of serviceGroups.values()) {
-    // Display service name and path (using relative path for better readability)
+  if (missingHandlersGroupByService.size > 0) {
     console.log(
-      `${styleText('underline', service.name)}${styleText('gray', ` (${service.path})`)}`
+      styleText('red', `✖ Missing handlers (${missingHandlers.length})`)
     );
-    // Display each missing handler for this service
-    for (const [handlerIndex, handler] of handlers.entries()) {
-      const isLastHandler = handlerIndex === handlers.length - 1;
-      // Display HTTP method and URL
+    for (const {
+      service,
+      handlers,
+    } of missingHandlersGroupByService.values()) {
       console.log(
-        `  ${isLastHandler ? '└─' : '├─'} ${styleText('cyan', handler.service.toHandleHttpMethod)} ${styleText('yellow', handler.service.toHandleUrl)}`
+        `  ${styleText('underline', service.name)}${styleText('gray', ` (${service.path})`)}`
       );
-      // Display files where the handler is used
-      console.log(
-        `  ${isLastHandler ? ' ' : '│'}  ├─ ${styleText('gray', 'Used in:')}`
-      );
-      for (const [fileIndex, file] of handler.usedIn.entries()) {
-        const isLastFile = fileIndex === handler.usedIn.length - 1;
+      for (const [handlerIndex, handler] of handlers.entries()) {
+        const isLast = handlerIndex === handlers.length - 1;
         console.log(
-          `  ${isLastHandler ? ' ' : '│'}  ${isLastFile ? '│   └─' : '│   ├─'} ${file}`
+          `  ${isLast ? '└─' : '├─'} ${styleText('cyan', handler.service.toHandleHttpMethod)} ${styleText('yellow', handler.service.toHandleUrl)}`
+        );
+        console.log(
+          `  ${isLast ? ' ' : '│'}  ├─ ${styleText('gray', 'Used in:')}`
+        );
+        for (const [fileIndex, file] of handler.usedIn.entries()) {
+          const isLastFile = fileIndex === handler.usedIn.length - 1;
+          console.log(
+            `  ${isLast ? ' ' : '│'}  ${isLastFile ? '│   └─' : '│   ├─'} ${file}`
+          );
+        }
+        console.log(`  ${isLast ? ' ' : '│'}  └─ Suggested handler:`);
+        console.log(
+          `  ${isLast ? ' ' : '│'}      ${styleText('dim', '→')} ${handler.suggestedPath}`
+        );
+        if (handlerIndex < handlers.length - 1) {
+          console.log(`  ${isLast ? ' ' : '│'}`);
+        }
+      }
+      console.log('');
+    }
+  }
+  // Display disconnected handlers
+  const disconnectedHandlersGroupByUrl = new Map<
+    string,
+    DisconnectedHandlerWarning[]
+  >();
+  for (const disconnectedHandler of disconnectedHandlers) {
+    const handleKey = `${disconnectedHandler.handler.httpMethod}:${disconnectedHandler.handler.url}`;
+    if (!disconnectedHandlersGroupByUrl.has(handleKey)) {
+      disconnectedHandlersGroupByUrl.set(handleKey, []);
+    }
+    disconnectedHandlersGroupByUrl.get(handleKey)?.push(disconnectedHandler);
+  }
+  if (disconnectedHandlersGroupByUrl.size > 0) {
+    console.log(
+      styleText(
+        'yellow',
+        `⚠ Disconnected handlers (${disconnectedHandlers.length})`
+      ),
+      styleText('gray', '- Handler exists but is not registered in MSW setup')
+    );
+    for (const [url, handlers] of disconnectedHandlersGroupByUrl.entries()) {
+      console.log(`  ${styleText('underline', url)}`);
+      for (const [handlerIndex, { handler }] of handlers.entries()) {
+        const isLast = handlerIndex === handlers.length - 1;
+        console.log(
+          `  ${isLast ? '└─' : '├─'} ${styleText('gray', 'Found in:')} ${styleText('dim', handler.filePath)}`
         );
       }
-      // Display suggested handler path
-      console.log(
-        `  ${isLastHandler ? ' ' : '│'}  └─ ${styleText('green', 'Suggested handler:')}`
-      );
-      console.log(
-        `  ${isLastHandler ? ' ' : '│'}      ${styleText('dim', '→')} ${handler.suggestedPath}`
-      );
-      // Add spacing between handlers
-      if (handlerIndex < handlers.length - 1) {
-        console.log(`  ${isLastHandler ? ' ' : '│'}`);
-      }
+      console.log('');
     }
-    // Empty line between services
-    console.log('');
   }
-  // Summary at the end
-  console.log(
-    styleText(
-      'red',
-      `✘ ${missingHandlers.length} missing ${missingHandlers.length === 1 ? 'handler' : 'handlers'}`
-    )
-  );
+  // Summary
+  const parts: string[] = [];
+  if (missingHandlers.length > 0) {
+    parts.push(
+      `${missingHandlers.length} missing ${missingHandlers.length === 1 ? 'handler' : 'handlers'}`
+    );
+  }
+  if (disconnectedHandlers.length > 0) {
+    parts.push(
+      `${disconnectedHandlers.length} disconnected ${disconnectedHandlers.length === 1 ? 'handler' : 'handlers'}`
+    );
+  }
+  if (parts.length > 0) {
+    console.log(
+      styleText(
+        missingHandlers.length > 0 ? 'red' : 'yellow',
+        `Found ${parts.join(', ')}`
+      )
+    );
+  } else {
+    console.log(styleText('green', '✔ No missing handlers found'));
+  }
 }

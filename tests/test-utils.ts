@@ -51,6 +51,7 @@ export const MOCKS_PATH = resolve('./__mocks__/');
 export const FIXTURES_PATH = resolve('./__fixtures__/');
 export const OPENAPI_GEN_INPUT = `${MOCKS_PATH}/openapi-gen-input.json`;
 export const OPENAPI_GEN_OUTPUT = `${MOCKS_PATH}/openapi-gen-input/`;
+export const MSW_HANDLERS_FIXTURES = path.join(FIXTURES_PATH, 'msw-handlers');
 export const FIXTURE_OXLINT_CONFIG_FILE = `${FIXTURES_PATH}/.oxlintrc.json`;
 
 // CLI Executors

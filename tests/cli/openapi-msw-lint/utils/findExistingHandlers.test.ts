@@ -1,65 +1,53 @@
-import { describe, expect, it, vi } from 'vitest';
+import path from 'node:path';
+import { describe, expect, it } from 'vitest';
 import { findExistingHandlers } from '../../../../src/cli/openapi-msw-lint/utils/findExistingHandlers';
-
-vi.mock('node:url', () => ({
-  pathToFileURL: (path: string) => ({ href: path }),
-}));
+import { MSW_HANDLERS_FIXTURES, OPENAPI_GEN_OUTPUT } from '../../../test-utils';
 
 describe('openapi-msw-lint findExistingHandlers', () => {
-  it('should throw an error if the MSW setup constant is not found', async () => {
-    vi.doMock('/path/to/msw-setup-missing-const.ts', () => ({}));
-    await expect(
-      findExistingHandlers({
-        mswSetupFilePath: '/path/to/msw-setup-missing-const.ts',
-        mswSetupConst: 'handlers',
-      })
-    ).rejects.toThrow('MSW setup constant not found in the setup file');
-  });
-
-  it('should throw an error if the MSW setup constant does not have a listHandlers method', async () => {
-    vi.doMock('/path/to/msw-setup-missing-method.ts', () => ({
-      handlers: {},
-    }));
-    await expect(
-      findExistingHandlers({
-        mswSetupFilePath: '/path/to/msw-setup-missing-method.ts',
-        mswSetupConst: 'handlers',
-      })
-    ).rejects.toThrow(
-      'MSW setup constant does not have a listHandlers() method'
-    );
-  });
-
-  it('should find and transform existing handlers correctly', async () => {
-    vi.doMock('/path/to/msw-setup.ts', () => ({
-      handlers: {
-        listHandlers: () => [
-          { info: { method: 'GET', path: '/api/users/:id' } },
-          { info: { method: 'POST', path: '/api/users' } },
-          { info: { method: 'PUT', path: '/api/users/:id' } },
-          { info: { method: 'DELETE', path: '/api/users/:id' } },
-          { info: { method: 'GET', path: '/api/posts' } },
-          {},
-          { info: { method: 'GET' } },
-          { info: { path: '/api/comments' } },
-        ],
-      },
-    }));
+  it('should return an empty array when no handler files exist in directory', async () => {
     const result = await findExistingHandlers({
-      mswSetupFilePath: '/path/to/msw-setup.ts',
-      mswSetupConst: 'handlers',
+      srcPath: OPENAPI_GEN_OUTPUT,
+      genPath: OPENAPI_GEN_OUTPUT,
     });
-    expect(result.size).toBe(5);
-    expect(result.has('GET:/api/users/{id}')).toBe(true);
-    expect(result.has('POST:/api/users')).toBe(true);
-    expect(result.has('PUT:/api/users/{id}')).toBe(true);
-    expect(result.has('DELETE:/api/users/{id}')).toBe(true);
-    expect(result.has('GET:/api/posts')).toBe(true);
-    expect(result.has('GET:/api/comments')).toBe(false);
-    expect(result.get('GET:/api/users/{id}')).toEqual({
-      path: '/api/users/:id',
-      httpMethod: 'GET',
-      url: '/api/users/{id}',
+    expect(result.length).toBe(0);
+  });
+
+  it('should find handlers from openapi-msw-http, native MSW and aliased imports', async () => {
+    const result = await findExistingHandlers({
+      srcPath: MSW_HANDLERS_FIXTURES,
+      genPath: OPENAPI_GEN_OUTPUT,
     });
+    // All handlers must include an absolute filePath
+    for (const handler of result) {
+      expect(handler.filePath).toBeDefined();
+      expect(path.isAbsolute(handler.filePath)).toBe(true);
+    }
+    // Check specific handlers from each fixture file are found with correct keys and metadata
+    expect(
+      result.some((h) => h.httpMethod === 'GET' && h.url === '/pet/{petId}')
+    ).toBe(true);
+    expect(
+      result.find((h) => h.httpMethod === 'GET' && h.url === '/pet/{petId}')
+    ).toEqual(
+      expect.objectContaining({
+        httpMethod: 'GET',
+        url: '/pet/{petId}',
+      })
+    );
+    expect(
+      result.some(
+        (h) => h.httpMethod === 'GET' && h.url === '/pet/findByStatus'
+      )
+    ).toBe(true);
+    expect(
+      result.some((h) => h.httpMethod === 'GET' && h.url === '/api/users/{id}')
+    ).toBe(true);
+    expect(
+      result.some((h) => h.httpMethod === 'GET' && h.url === '/api/orders')
+    ).toBe(true);
+    // no-msw-handler.ts: files without MSW imports must not contribute handlers
+    for (const handler of result) {
+      expect(handler.filePath).not.toContain('no-msw-handler.ts');
+    }
   });
 });

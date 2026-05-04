@@ -1,0 +1,43 @@
+import type { ExistingHandler } from './findExistingHandlers';
+import type { RegisteredHandler } from './findRegisteredHandlers';
+
+// Types
+export type DisconnectedHandlerWarning = {
+  type: 'disconnected_handler';
+  handler: ExistingHandler;
+};
+
+/**
+ * Find handlers that exist as files (statically found) but are not registered
+ * in the MSW setup at runtime.
+ *
+ * @param existingHandlers - The map of handlers found via static analysis.
+ * @param registeredHandlers - The map of handlers registered in the MSW setup.
+ * @returns An array of disconnected handler warnings.
+ */
+export function getDisconnectedHandlers(
+  existingHandlers: ExistingHandler[],
+  registeredHandlers: RegisteredHandler[]
+): DisconnectedHandlerWarning[] {
+  const result: DisconnectedHandlerWarning[] = [];
+  for (const handler of existingHandlers) {
+    if (
+      !registeredHandlers.some(
+        (registeredHandler) =>
+          registeredHandler.httpMethod === handler.httpMethod &&
+          registeredHandler.url === handler.url
+      ) &&
+      !registeredHandlers.some(
+        (registeredHandler) =>
+          registeredHandler.httpMethod === handler.httpMethod &&
+          registeredHandler.url === `*${handler.url}`
+      )
+    ) {
+      result.push({
+        type: 'disconnected_handler',
+        handler,
+      });
+    }
+  }
+  return result;
+}

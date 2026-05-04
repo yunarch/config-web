@@ -1,5 +1,5 @@
 import path from 'node:path';
-import type { ExistingHandlersMap } from './findExistingHandlers';
+import type { ExistingHandler } from './findExistingHandlers';
 import type { ServiceInfo, ServicesUsagesMap } from './findServicesUsages';
 
 // Types
@@ -18,7 +18,7 @@ export type MissingHandlerError = {
  */
 export function getMissingHandlers(
   servicesUsages: ServicesUsagesMap,
-  existingHandlers: ExistingHandlersMap,
+  existingHandlers: ExistingHandler[],
   suggestBasePath: string
 ) {
   const result: MissingHandlerError[] = [];
@@ -28,8 +28,16 @@ export function getMissingHandlers(
       const toHandleHttpMethod = serviceInfo.toHandleHttpMethod;
       const toHandleUrl = serviceInfo.toHandleUrl;
       if (
-        !existingHandlers.has(`${toHandleHttpMethod}:${toHandleUrl}`) &&
-        !existingHandlers.has(`${toHandleHttpMethod}:*${toHandleUrl}`)
+        !existingHandlers.some(
+          (handler) =>
+            handler.httpMethod === toHandleHttpMethod &&
+            handler.url === toHandleUrl
+        ) &&
+        !existingHandlers.some(
+          (handler) =>
+            handler.httpMethod === toHandleHttpMethod &&
+            handler.url === `*${toHandleUrl}`
+        )
       ) {
         result.push({
           type: 'missing_handler',

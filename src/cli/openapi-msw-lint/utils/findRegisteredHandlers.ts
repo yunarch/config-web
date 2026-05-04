@@ -13,7 +13,7 @@ export type RegisteredHandler = {
  * Automatically detects the export that has a `listHandlers()` method.
  *
  * @param mswSetupFilePath - Path to the MSW setup file.
- * @returns A map of registered MSW handlers keyed by their route pattern.
+ * @returns An array of registered MSW handlers.
  *
  * @throws {Error} if no export with `listHandlers()` is found in the setup file.
  */

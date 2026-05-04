@@ -1,35 +1,47 @@
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
-import type {
-  ServiceInfo,
-  ServicesUsagesMap,
-} from '../../../../src/cli/openapi-msw-lint/utils/findServicesUsages';
+import type { ServiceInfo } from '../../../../src/cli/openapi-msw-lint/utils/findServicesUsages';
 import {
   getMissingHandlers,
   type MissingHandlerError,
 } from '../../../../src/cli/openapi-msw-lint/utils/getMissingHandlers';
 
+// Generates a map of service usages from an array of services.
+const generateServicesUsagesMapFromServices = (services: ServiceInfo[]) => {
+  return new Map(
+    services.map((service) => [
+      service.name,
+      new Map([
+        [
+          service.methodName,
+          {
+            serviceInfo: service,
+            files: new Set(['/path/to/used-in-component.ts']),
+          },
+        ],
+      ]),
+    ])
+  );
+};
+
+// Tests
 describe('openapi-msw-lint getMissingHandlers', () => {
   it('should return an empty array when services and handlers are empty', () => {
-    expect(
-      getMissingHandlers(new Map(), new Map(), '/path/to/handlers')
-    ).toEqual([]);
+    expect(getMissingHandlers(new Map(), [], '/path/to/handlers')).toEqual([]);
   });
 
   it('should return an empty array when services are empty', () => {
     expect(
       getMissingHandlers(
         new Map(),
-        new Map([
-          [
-            'GET:/api/users/{id}',
-            {
-              path: '/api/users/{id}',
-              httpMethod: 'GET',
-              url: '/api/users/{id}',
-            },
-          ],
-        ]),
+        [
+          {
+            httpMethod: 'GET',
+            url: '/api/users/{id}',
+            filePath: '/path/to/handler.ts',
+            isRuntimeOverride: false,
+          },
+        ],
         '/path/to/handlers'
       )
     ).toEqual([]);
@@ -48,7 +60,7 @@ describe('openapi-msw-lint getMissingHandlers', () => {
     expect(
       getMissingHandlers(
         generateServicesUsagesMapFromServices(services),
-        new Map(),
+        [],
         '/path/to/handlers'
       )
     ).toEqual([
@@ -83,16 +95,14 @@ describe('openapi-msw-lint getMissingHandlers', () => {
     expect(
       getMissingHandlers(
         generateServicesUsagesMapFromServices(services),
-        new Map([
-          [
-            'GET:/api/users/{id}',
-            {
-              path: '/api/users/{id}',
-              httpMethod: 'GET',
-              url: '/api/users/{id}',
-            },
-          ],
-        ]),
+        [
+          {
+            httpMethod: 'GET',
+            url: '/api/users/{id}',
+            filePath: '/path/to/handler.ts',
+            isRuntimeOverride: false,
+          },
+        ],
         '/path/to/handlers'
       )
     ).toEqual([
@@ -106,29 +116,64 @@ describe('openapi-msw-lint getMissingHandlers', () => {
       },
     ] as MissingHandlerError[]);
   });
-});
 
-/**
- * Generates a map of service usages from an array of services.
- *
- * @param services - The array of services to process.
- * @returns A map where the keys are service names and the values are maps of method names to their usage information.
- */
-function generateServicesUsagesMapFromServices(
-  services: ServiceInfo[]
-): ServicesUsagesMap {
-  return new Map(
-    services.map((service) => [
-      service.name,
-      new Map([
+  it('should match handlers with wildcard prefix', () => {
+    const services: ServiceInfo[] = [
+      {
+        path: '/path/to/UserService.ts',
+        name: 'UserService',
+        methodName: 'getUserById',
+        toHandleUrl: '/api/users/{id}',
+        toHandleHttpMethod: 'GET',
+      },
+    ];
+    expect(
+      getMissingHandlers(
+        generateServicesUsagesMapFromServices(services),
         [
-          service.methodName,
           {
-            serviceInfo: service,
-            files: new Set(['/path/to/used-in-component.ts']),
+            httpMethod: 'GET',
+            url: '*/api/users/{id}',
+            filePath: '/path/to/handler.ts',
+            isRuntimeOverride: false,
           },
         ],
-      ]),
-    ])
-  );
-}
+        '/path/to/handlers'
+      )
+    ).toEqual([]);
+  });
+
+  it('should handle multiple services with mixed matches', () => {
+    const services: ServiceInfo[] = [
+      {
+        path: '/path/to/UserService.ts',
+        name: 'UserService',
+        methodName: 'getUserById',
+        toHandleUrl: '/api/users/{id}',
+        toHandleHttpMethod: 'GET',
+      },
+      {
+        path: '/path/to/PetService.ts',
+        name: 'PetService',
+        methodName: 'getPetById',
+        toHandleUrl: '/pet/{petId}',
+        toHandleHttpMethod: 'GET',
+      },
+    ];
+    const result = getMissingHandlers(
+      generateServicesUsagesMapFromServices(services),
+      [
+        {
+          httpMethod: 'GET',
+          url: '/api/users/{id}',
+          filePath: '/path/to/handler.ts',
+          isRuntimeOverride: false,
+        },
+      ],
+      '/path/to/handlers'
+    );
+    expect(result).toHaveLength(1);
+    expect(result[0].service.name).toBe('PetService');
+    expect(result[0].service.methodName).toBe('getPetById');
+  });
+});

@@ -92,7 +92,7 @@ export async function findExistingHandlers({
   });
   for (const file of files) {
     const content = readFileSync(file, 'utf8');
-    // Quick check: skip files that don't mention msw or openapi-msw-http at all
+    // Quick check: skip files that don't mention `msw` at all
     if (!content.includes('msw')) continue;
     const sourceFile = ts.createSourceFile(
       file,

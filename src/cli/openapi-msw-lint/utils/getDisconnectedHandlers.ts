@@ -11,8 +11,8 @@ export type DisconnectedHandlerWarning = {
  * Find handlers that exist as files (statically found) but are not registered
  * in the MSW setup at runtime.
  *
- * @param existingHandlers - The map of handlers found via static analysis.
- * @param registeredHandlers - The map of handlers registered in the MSW setup.
+ * @param existingHandlers - The array of handlers found via static analysis.
+ * @param registeredHandlers - The array of handlers registered in the MSW setup.
  * @returns An array of disconnected handler warnings.
  */
 export function getDisconnectedHandlers(

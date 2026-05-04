@@ -21,6 +21,9 @@ export function getMissingHandlers(
   existingHandlers: ExistingHandler[],
   suggestBasePath: string
 ) {
+  const handlerKeys = new Set(
+    existingHandlers.map((h) => `${h.httpMethod}:${h.url}`)
+  );
   const result: MissingHandlerError[] = [];
   for (const [serviceName, methods] of servicesUsages.entries()) {
     for (const [methodName, serviceUsage] of methods.entries()) {
@@ -28,16 +31,8 @@ export function getMissingHandlers(
       const toHandleHttpMethod = serviceInfo.toHandleHttpMethod;
       const toHandleUrl = serviceInfo.toHandleUrl;
       if (
-        !existingHandlers.some(
-          (handler) =>
-            handler.httpMethod === toHandleHttpMethod &&
-            handler.url === toHandleUrl
-        ) &&
-        !existingHandlers.some(
-          (handler) =>
-            handler.httpMethod === toHandleHttpMethod &&
-            handler.url === `*${toHandleUrl}`
-        )
+        !handlerKeys.has(`${toHandleHttpMethod}:${toHandleUrl}`) &&
+        !handlerKeys.has(`${toHandleHttpMethod}:*${toHandleUrl}`)
       ) {
         result.push({
           type: 'missing_handler',

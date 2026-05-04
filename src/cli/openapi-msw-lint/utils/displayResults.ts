@@ -85,8 +85,8 @@ export function displayResults(
       ),
       styleText('gray', '- Handler exists but is not registered in MSW setup')
     );
-    for (const [url, handlers] of disconnectedHandlersGroupByUrl.entries()) {
-      console.log(`  ${styleText('underline', url)}`);
+    for (const [hKey, handlers] of disconnectedHandlersGroupByUrl.entries()) {
+      console.log(`  ${styleText('underline', hKey)}`);
       for (const [handlerIndex, { handler }] of handlers.entries()) {
         const isLast = handlerIndex === handlers.length - 1;
         console.log(

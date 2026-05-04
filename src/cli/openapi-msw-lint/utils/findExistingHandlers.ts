@@ -75,7 +75,7 @@ function isInsideUseCall(node: ts.Node): boolean {
  * 2. `http.get(path, resolver)`, `http.post(...)`, etc. from native `msw`
  *
  * @param options - Options for finding existing handlers.
- * @returns A map of existing MSW handlers keyed by their route pattern.
+ * @returns A promise that resolves to an array of existing MSW handlers.
  */
 export async function findExistingHandlers({
   srcPath,

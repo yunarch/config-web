@@ -99,6 +99,7 @@ describe('openapi-msw-lint displayResults', () => {
             httpMethod: 'DELETE',
             url: '/api/users/{id}',
             filePath: 'src/mocks/handlers/UserService/deleteUser.ts',
+            isRuntimeOverride: false,
           },
         },
       ]
@@ -136,6 +137,7 @@ describe('openapi-msw-lint displayResults', () => {
             httpMethod: 'DELETE',
             url: '/pet/{petId}',
             filePath: 'src/mocks/handlers/PetService/deletePet.ts',
+            isRuntimeOverride: false,
           },
         },
       ]
@@ -157,6 +159,7 @@ describe('openapi-msw-lint displayResults', () => {
             httpMethod: 'PUT',
             url: '/api/items/{id}',
             filePath: 'src/handlers/updateItem.ts',
+            isRuntimeOverride: false,
           },
         },
         {
@@ -165,6 +168,7 @@ describe('openapi-msw-lint displayResults', () => {
             httpMethod: 'PATCH',
             url: '/api/items/{id}',
             filePath: 'src/handlers/patchItem.ts',
+            isRuntimeOverride: false,
           },
         },
       ]

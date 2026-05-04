@@ -39,6 +39,7 @@ describe('openapi-msw-lint getMissingHandlers', () => {
             httpMethod: 'GET',
             url: '/api/users/{id}',
             filePath: '/path/to/handler.ts',
+            isRuntimeOverride: false,
           },
         ],
         '/path/to/handlers'
@@ -99,6 +100,7 @@ describe('openapi-msw-lint getMissingHandlers', () => {
             httpMethod: 'GET',
             url: '/api/users/{id}',
             filePath: '/path/to/handler.ts',
+            isRuntimeOverride: false,
           },
         ],
         '/path/to/handlers'
@@ -133,6 +135,7 @@ describe('openapi-msw-lint getMissingHandlers', () => {
             httpMethod: 'GET',
             url: '*/api/users/{id}',
             filePath: '/path/to/handler.ts',
+            isRuntimeOverride: false,
           },
         ],
         '/path/to/handlers'
@@ -164,6 +167,7 @@ describe('openapi-msw-lint getMissingHandlers', () => {
           httpMethod: 'GET',
           url: '/api/users/{id}',
           filePath: '/path/to/handler.ts',
+          isRuntimeOverride: false,
         },
       ],
       '/path/to/handlers'

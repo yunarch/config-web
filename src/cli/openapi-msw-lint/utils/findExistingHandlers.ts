@@ -18,6 +18,7 @@ export type ExistingHandler = {
   httpMethod: string;
   url: string;
   filePath: string;
+  isRuntimeOverride: boolean;
 };
 
 /**
@@ -47,6 +48,25 @@ function isOpenapiMswHttpImport(
   }
   // Handle bare/alias imports that end with openapi-msw-http
   return moduleSpecifier.endsWith('openapi-msw-http');
+}
+
+/**
+ * Check if a node is inside a .use() call (e.g. server.use(http.get(...)))
+ * This is used to identify runtime override handlers that should be ignored in the disconnected handlers check.
+ *
+ * @param node - The TypeScript AST node to check.
+ * @returns `true` if the node is inside a .use() call, otherwise `false`.
+ */
+function isInsideUseCall(node: ts.Node): boolean {
+  if (
+    ts.isCallExpression(node.parent) &&
+    ts.isPropertyAccessExpression(node.parent.expression) &&
+    ts.isIdentifier(node.parent.expression.name) &&
+    node.parent.expression.name.text === 'use'
+  ) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -133,7 +153,12 @@ export async function findExistingHandlers({
           if (ts.isStringLiteral(pathArg) && ts.isStringLiteral(methodArg)) {
             const url = pathArg.text;
             const httpMethod = methodArg.text.toUpperCase();
-            result.push({ httpMethod, url, filePath: file });
+            result.push({
+              httpMethod,
+              url,
+              filePath: file,
+              isRuntimeOverride: isInsideUseCall(node),
+            });
           }
         }
         // Pattern 2: native msw → http.get(path, resolver), http.post(path, resolver), etc.
@@ -151,7 +176,12 @@ export async function findExistingHandlers({
             const httpMethod = node.expression.name.text.toUpperCase();
             // Native MSW uses :param syntax, convert to {param}
             const url = pathArg.text.replaceAll(/:(?<temp1>[^/]+)/g, '{$1}');
-            result.push({ httpMethod, url, filePath: file });
+            result.push({
+              httpMethod,
+              url,
+              filePath: file,
+              isRuntimeOverride: isInsideUseCall(node),
+            });
           }
         }
       }

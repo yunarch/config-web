@@ -21,6 +21,8 @@ export function getDisconnectedHandlers(
 ): DisconnectedHandlerWarning[] {
   const result: DisconnectedHandlerWarning[] = [];
   for (const handler of existingHandlers) {
+    // Skip runtime overrides (handlers inside .use() calls)
+    if (handler.isRuntimeOverride) continue;
     if (
       !registeredHandlers.some(
         (registeredHandler) =>

@@ -14,6 +14,7 @@ describe('openapi-msw-lint getDisconnectedHandlers', () => {
         httpMethod: 'GET',
         url: '/api/users/{id}',
         filePath: '/handlers/getUser.ts',
+        isRuntimeOverride: false,
       },
     ];
     const registered: RegisteredHandler[] = [
@@ -28,11 +29,13 @@ describe('openapi-msw-lint getDisconnectedHandlers', () => {
         httpMethod: 'GET',
         url: '/api/users/{id}',
         filePath: '/handlers/getUser.ts',
+        isRuntimeOverride: false,
       },
       {
         httpMethod: 'DELETE',
         url: '/api/users/{id}',
         filePath: '/handlers/deleteUser.ts',
+        isRuntimeOverride: false,
       },
     ];
     const registered: RegisteredHandler[] = [
@@ -46,6 +49,7 @@ describe('openapi-msw-lint getDisconnectedHandlers', () => {
         httpMethod: 'DELETE',
         url: '/api/users/{id}',
         filePath: '/handlers/deleteUser.ts',
+        isRuntimeOverride: false,
       },
     });
   });
@@ -56,11 +60,13 @@ describe('openapi-msw-lint getDisconnectedHandlers', () => {
         httpMethod: 'GET',
         url: '/api/users',
         filePath: '/handlers/listUsers.ts',
+        isRuntimeOverride: false,
       },
       {
         httpMethod: 'POST',
         url: '/api/users',
         filePath: '/handlers/createUser.ts',
+        isRuntimeOverride: false,
       },
     ];
     const result = getDisconnectedHandlers(existing, []);
@@ -73,11 +79,35 @@ describe('openapi-msw-lint getDisconnectedHandlers', () => {
         httpMethod: 'GET',
         url: '/api/users/{id}',
         filePath: '/handlers/getUser.ts',
+        isRuntimeOverride: false,
       },
     ];
     const registered: RegisteredHandler[] = [
       { httpMethod: 'GET', url: '*/api/users/{id}' },
     ];
     expect(getDisconnectedHandlers(existing, registered)).toEqual([]);
+  });
+
+  it('should skip runtime override handlers (server.use())', () => {
+    const existing: ExistingHandler[] = [
+      {
+        httpMethod: 'GET',
+        url: '/api/users/{id}',
+        filePath: '/handlers/getUser.ts',
+        isRuntimeOverride: false,
+      },
+      {
+        httpMethod: 'POST',
+        url: '/api/users',
+        filePath: '/test/overrides.ts',
+        isRuntimeOverride: true,
+      },
+    ];
+    const registered: RegisteredHandler[] = [
+      { httpMethod: 'GET', url: '/api/users/{id}' },
+    ];
+    // The runtime override handler should not be flagged as disconnected
+    const result = getDisconnectedHandlers(existing, registered);
+    expect(result).toEqual([]);
   });
 });

@@ -176,4 +176,31 @@ describe('openapi-msw-lint getMissingHandlers', () => {
     expect(result[0].service.name).toBe('PetService');
     expect(result[0].service.methodName).toBe('getPetById');
   });
+
+  it('should ignore runtime override handlers and report them as missing', () => {
+    const services: ServiceInfo[] = [
+      {
+        path: '/path/to/UserService.ts',
+        name: 'UserService',
+        methodName: 'getUserById',
+        toHandleUrl: '/api/users/{id}',
+        toHandleHttpMethod: 'GET',
+      },
+    ];
+    const result = getMissingHandlers(
+      generateServicesUsagesMapFromServices(services),
+      [
+        {
+          httpMethod: 'GET',
+          url: '/api/users/{id}',
+          filePath: '/path/to/handler.ts',
+          isRuntimeOverride: true,
+        },
+      ],
+      '/path/to/handlers'
+    );
+    expect(result).toHaveLength(1);
+    expect(result[0].service.name).toBe('UserService');
+    expect(result[0].service.methodName).toBe('getUserById');
+  });
 });

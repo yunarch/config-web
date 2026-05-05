@@ -22,13 +22,15 @@ export function getMissingHandlers(
   suggestBasePath: string
 ) {
   const handlerKeys = new Set(
-    existingHandlers.map((h) => `${h.httpMethod}:${h.url}`)
+    existingHandlers
+      .filter((h) => !h.isRuntimeOverride)
+      .map((h) => `${h.httpMethod.toLowerCase()}:${h.url}`)
   );
   const result: MissingHandlerError[] = [];
   for (const [serviceName, methods] of servicesUsages.entries()) {
     for (const [methodName, serviceUsage] of methods.entries()) {
       const { serviceInfo } = serviceUsage;
-      const toHandleHttpMethod = serviceInfo.toHandleHttpMethod;
+      const toHandleHttpMethod = serviceInfo.toHandleHttpMethod.toLowerCase();
       const toHandleUrl = serviceInfo.toHandleUrl;
       if (
         !handlerKeys.has(`${toHandleHttpMethod}:${toHandleUrl}`) &&

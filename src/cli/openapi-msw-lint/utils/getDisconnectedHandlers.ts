@@ -20,15 +20,13 @@ export function getDisconnectedHandlers(
   registeredHandlers: RegisteredHandler[]
 ): DisconnectedHandlerWarning[] {
   const registeredKeys = new Set(
-    registeredHandlers.map(
-      (h) => `${h.httpMethod.toLowerCase()}:${h.url.toLowerCase()}`
-    )
+    registeredHandlers.map((h) => `${h.httpMethod.toLowerCase()}:${h.url}`)
   );
   const result: DisconnectedHandlerWarning[] = [];
   for (const handler of existingHandlers) {
     if (handler.isRuntimeOverride) continue; // Skip runtime overrides (handlers inside .use() calls)
     const toHandleHttpMethod = handler.httpMethod.toLowerCase();
-    const toHandleUrl = handler.url.toLowerCase();
+    const toHandleUrl = handler.url;
     if (
       !registeredKeys.has(`${toHandleHttpMethod}:${toHandleUrl}`) &&
       !registeredKeys.has(`${toHandleHttpMethod}:*${toHandleUrl}`)

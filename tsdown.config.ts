@@ -22,6 +22,7 @@ export default defineConfig([
     entry: ['./src/index.ts'],
     outDir: './dist',
     format: 'esm',
+    dts: false,
     minify: true,
     clean: true,
     shims: true,

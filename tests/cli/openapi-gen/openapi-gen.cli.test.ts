@@ -59,7 +59,7 @@ describe('openapi-gen', () => {
       openapiGenExecutor([
         `-i ${MOCKS_PATH}/openapi-gen-input.new.json -o ${OPENAPI_GEN_OUTPUT} --verify-openapi-gen`,
       ])
-    ).rejects.toThrow();
+    ).rejects.toThrow('Command failed:');
   });
 
   it('vitest global setup `openapi-gen` should have created `openapi.json` file', () => {

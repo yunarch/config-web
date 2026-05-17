@@ -16,10 +16,7 @@ describe('jsdoc linter tests', () => {
         'jsdoc/require-param',
         'jsdoc/require-returns',
       ],
-      oxlint: [
-        'eslint-plugin-jsdoc(require-param)',
-        'eslint-plugin-jsdoc(require-returns)',
-      ],
+      oxlint: ['jsdoc(require-param)', 'jsdoc(require-returns)'],
     },
   });
 });

@@ -1,0 +1,11 @@
+* @yunarch
+
+# Dependabot reviewers
+/action.yaml @yunarch
+/action.yml @yunarch
+/bun.lock @yunarch
+/package.json @yunarch
+/.github/workflows/*.yaml @yunarch
+/.github/workflows/*.yml @yunarch
+/**/.github/workflows/*.yaml @yunarch
+/**/.github/workflows/*.yml @yunarch

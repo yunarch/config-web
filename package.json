@@ -135,7 +135,7 @@
     "eslint": "10.4.0",
     "eslint-typegen": "2.3.1",
     "oxfmt": "0.50.0",
-    "oxlint": "1.65.0",
+    "oxlint": "1.66.0",
     "oxlint-tsgolint": "0.22.1",
     "@oxlint/migrate": "1.65.0",
     "@yunarch/eslint-oxlint-diff": "0.4.1",

@@ -26,7 +26,7 @@ function makeParserConfig(
   return {
     name,
     files,
-    ...(options.ignores ? { ignores: options.ignores } : {}),
+    ...(options.ignores && { ignores: options.ignores }),
     languageOptions: {
       parser: pluginTsESlint.parser,
       parserOptions: {
@@ -34,15 +34,13 @@ function makeParserConfig(
           (extension) => `.${extension}`
         ),
         sourceType: 'module',
-        ...(options.tsconfigPath
-          ? {
-              projectService: {
-                allowDefaultProject: ['./*.js'],
-                defaultProject: options.tsconfigPath,
-              },
-              tsconfigRootDir: process.cwd(),
-            }
-          : {}),
+        ...(options.tsconfigPath && {
+          projectService: {
+            allowDefaultProject: ['./*.js'],
+            defaultProject: options.tsconfigPath,
+          },
+          tsconfigRootDir: process.cwd(),
+        }),
         ...options.parserOptions,
       },
     },
@@ -143,7 +141,6 @@ export function typescript(
           { allowInterfaces: 'always' },
         ],
         '@typescript-eslint/no-import-type-side-effects': 'error',
-        '@typescript-eslint/no-loop-func': 'error',
         '@typescript-eslint/no-redeclare': ['error', { builtinGlobals: false }],
         '@typescript-eslint/no-shadow': 'error',
         '@typescript-eslint/no-unused-vars': 'off', // handled by `unused-imports/no-unused-vars`

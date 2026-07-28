@@ -17,23 +17,26 @@ env:
   DO_NOT_TRACK: 1
   HUSKY: 0
 
-permissions:
-  contents: write
-  id-token: write
+permissions: {}
 
 jobs:
   release:
     name: Create Release
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
     steps:
       - name: 📁 Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
+          persist-credentials: false
           fetch-depth: 0
       - name: ⚙️ Setup Node 24 (Temporary solution until Bun publish supports OIDC)
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
         with:
-          node-version: '24'
+          node-version: lts/*
+          package-manager-cache: false
           registry-url: 'https://registry.npmjs.org'
       - name: 🔧 Setup Bun
         uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
@@ -57,7 +60,6 @@ jobs:
           VERSION=$(node -p "require('./package.json').version")
           TAG_NAME="v$VERSION"
           HEAD_COMMIT=$(git rev-parse HEAD)
-
           if git rev-parse "$TAG_NAME" >/dev/null 2>&1; then
             TAG_COMMIT=$(git rev-parse "$TAG_NAME")
             if git merge-base --is-ancestor "$TAG_COMMIT" "$HEAD_COMMIT" && [ "$TAG_COMMIT" != "$HEAD_COMMIT" ]; then

@@ -11,16 +11,19 @@ env:
   DO_NOT_TRACK: 1
   HUSKY: 0
 
-permissions:
-  contents: read
+permissions: {}
 
 jobs:
   lint:
     name: Code linting
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: 📁 Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
       - name: 🔧 Set node
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
         with:
@@ -34,9 +37,13 @@ jobs:
   unit_test:
     name: Unit testing
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: 📁 Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
       - name: 🔧 Set node
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
         with:
@@ -50,9 +57,13 @@ jobs:
   build_test:
     name: Build testing
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: 📁 Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
       - name: 🔧 Set node
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
         with:

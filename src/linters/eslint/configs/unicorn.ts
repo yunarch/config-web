@@ -17,7 +17,10 @@ export function unicorn(): TypedFlatConfigItem[] {
         ...pluginUnicorn.configs.recommended.rules,
         'unicorn/filename-case': [
           'error',
-          { cases: { camelCase: true, kebabCase: true, pascalCase: true } },
+          {
+            cases: { camelCase: true, kebabCase: true, pascalCase: true },
+            checkDirectories: false,
+          },
         ],
         'unicorn/no-array-reduce': 'off',
         'unicorn/no-null': 'off',
@@ -26,7 +29,12 @@ export function unicorn(): TypedFlatConfigItem[] {
           { checkInfinity: true, checkNaN: true },
         ],
         'unicorn/prefer-top-level-await': 'warn',
-        'unicorn/prevent-abbreviations': 'off',
+        'unicorn/prefer-await': 'off',
+        'unicorn/name-replacements': 'off',
+        'unicorn/consistent-boolean-name': 'off', // To strict, users should decide depending on their needs.
+        'unicorn/no-non-function-verb-prefix': 'off', // To strict, users should decide depending on their needs.
+        'unicorn/no-declarations-before-early-exit': 'off', // Users should be in control of their code structure.
+        'unicorn/no-top-level-side-effects': 'off',
         'unicorn/no-useless-undefined': ['error', { checkArguments: false }],
       },
     },

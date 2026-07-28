@@ -16,9 +16,9 @@ jobs:
     if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     permissions:
-      security-events: write # Required for upload-sarif (used by zizmor-action) to upload SARIF files.
+      security-events: write # Required to upload SARIF results to the Security tab (only used on push to main).
       contents: read # Only needed for private repos. Needed to clone the repo.
-      actions: read # Only needed for private repos. Needed for upload-sarif to read workflow run info.
+      actions: read # Only needed for private repos. Needed for the SARIF upload to read workflow run info.
     steps:
       - name: 📁 Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
@@ -27,4 +27,8 @@ jobs:
       - name: 🌈 Run zizmor
         uses: zizmorcore/zizmor-action@6599ee8b7a49aef6a770f63d261d214911a7ce02
         with:
-          advanced-security: true
+          # On push to main, upload results to the Security tab.
+          # On pull requests, print results to the console so the job actually fails on findings.
+          advanced-security: ${{ github.event_name == 'push' }}
+          # Findings below this severity are ignored: unknown | informational | low | medium | high
+          min-severity: low

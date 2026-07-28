@@ -104,7 +104,7 @@ ${styleText('green', '--include-msw-utils')}
           process.exit(0);
         }
         // If there are changes we will proceed with syncing the schemas process
-        else if (hasChanges) {
+        if (hasChanges) {
           console.log(
             styleText(
               'yellow',

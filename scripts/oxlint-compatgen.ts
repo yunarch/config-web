@@ -31,7 +31,7 @@ const eslintConfigs = await config({
  */
 async function generateOxlintConfig() {
   const start = Date.now();
-  const { options, ...oxlintConfig } = await migrateConfig(
+  const { options: _, ...oxlintConfig } = await migrateConfig(
     eslintConfigs,
     undefined,
     {

@@ -1,0 +1,26 @@
+name: GitHub Secret Scanning with TruffleHog 🕵🏽‍♂️
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions: {}
+
+jobs:
+  TruffleHog:
+    name: Secret Scanning
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: 📁 Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: 🕵🏽‍♂️ Run TruffleHog OSS
+        uses: trufflesecurity/trufflehog@27b0417c16317ca9a472a9a8092acce143b49c55
+        with:
+          extra_args: --results=verified,unknown

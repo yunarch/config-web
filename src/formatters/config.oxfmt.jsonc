@@ -13,8 +13,6 @@
   "endOfLine": "lf",
   "quoteProps": "as-needed",
   "singleAttributePerLine": false,
-  "requirePragma": false,
-  "insertPragma": false,
   "checkIgnorePragma": true,
   "jsxSingleQuote": false,
   "htmlWhitespaceSensitivity": "css",

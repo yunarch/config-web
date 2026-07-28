@@ -54,7 +54,7 @@ export async function react(
       },
       rules: {
         ...pluginReact.configs.recommended.rules,
-        ...(enableStrictRules ? pluginReact.configs.strict.rules : {}),
+        ...(enableStrictRules && pluginReact.configs.strict.rules),
         ...pluginReactRefresh.configs.recommended.rules,
         'react/use-state': ['warn', { enforceAssignment: false }],
         // Disable experimental rules by default as they may cause false positives and are not stable yet.
@@ -74,17 +74,13 @@ export async function react(
             },
             rules: {
               ...pluginReact.configs['recommended-typescript'].rules,
-              ...(enableStrictRules
-                ? pluginReact.configs['strict-typescript'].rules
-                : {}),
-              ...(typeAware
-                ? {
-                    ...pluginReact.configs['recommended-type-checked'].rules,
-                    ...(enableStrictRules
-                      ? pluginReact.configs['strict-type-checked'].rules
-                      : {}),
-                  }
-                : {}),
+              ...(enableStrictRules &&
+                pluginReact.configs['strict-typescript'].rules),
+              ...(typeAware && {
+                ...pluginReact.configs['recommended-type-checked'].rules,
+                ...(enableStrictRules &&
+                  pluginReact.configs['strict-type-checked'].rules),
+              }),
               // Disable experimental rules by default as they may cause false positives and are not stable yet.
               ...pluginReact.configs['disable-experimental'].rules,
             },

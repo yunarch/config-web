@@ -73,7 +73,7 @@ export function lintFile(
   const { title, expectedRulesIds } = testCase;
 
   // ESLint test
-  it.concurrent(`[eslint] ${title}`, async ({ expect }) => {
+  it(`[eslint] ${title}`, async ({ expect }) => {
     const rulesIds = expectedRulesIds.eslint;
     const { ok, output } = await asyncExecEslint(testFile);
     expect(ok).toBe(rulesIds.length === 0);
@@ -83,7 +83,7 @@ export function lintFile(
   });
 
   // Oxlint tests
-  it.skipIf(expectedRulesIds.oxlint === undefined).concurrent(
+  it.skipIf(expectedRulesIds.oxlint === undefined)(
     `[oxlint] ${title}`,
     async ({ expect }) => {
       const rulesIds = expectedRulesIds.oxlint ?? [];

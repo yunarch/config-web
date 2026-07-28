@@ -220,6 +220,7 @@
     "no-multi-assign": "error",
     "no-new": "error",
     "no-new-func": "error",
+    "no-loop-func": "error",
     "no-new-wrappers": "error",
     "no-param-reassign": "error",
     "no-promise-executor-return": "error",
@@ -297,14 +298,16 @@
     "unicorn/explicit-length-check": "error",
     "unicorn/filename-case": [
       "error",
-      { "cases": { "camelCase": true, "kebabCase": true, "pascalCase": true } }
+      {
+        "cases": { "camelCase": true, "kebabCase": true, "pascalCase": true },
+        "checkDirectories": false
+      }
     ],
     "unicorn/new-for-builtins": "error",
     "unicorn/no-abusive-eslint-disable": "error",
     "unicorn/no-accessor-recursion": "error",
     "unicorn/no-anonymous-default-export": "error",
     "unicorn/no-array-callback-reference": "error",
-    "unicorn/no-array-for-each": "error",
     "unicorn/no-array-method-this-argument": "error",
     "unicorn/no-array-reverse": "error",
     "unicorn/no-array-sort": "error",
@@ -313,7 +316,6 @@
     "unicorn/no-console-spaces": "error",
     "unicorn/no-document-cookie": "error",
     "unicorn/no-empty-file": "error",
-    "unicorn/no-hex-escape": "error",
     "unicorn/no-immediate-mutation": "error",
     "unicorn/no-instanceof-builtins": "error",
     "unicorn/no-invalid-fetch-options": "error",
@@ -362,7 +364,6 @@
     "unicorn/prefer-date-now": "error",
     "unicorn/prefer-default-parameters": "error",
     "unicorn/prefer-dom-node-append": "error",
-    "unicorn/prefer-dom-node-dataset": "error",
     "unicorn/prefer-dom-node-remove": "error",
     "unicorn/prefer-dom-node-text-content": "error",
     "unicorn/prefer-event-target": "error",
@@ -435,7 +436,6 @@
         "no-useless-constructor": "error",
         "no-empty-function": "error",
         "default-param-last": "error",
-        "no-loop-func": "error",
         "no-shadow": "error",
         "no-use-before-define": [
           "error",

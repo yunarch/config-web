@@ -58,15 +58,12 @@ function isOpenapiMswHttpImport(
  * @returns `true` if the node is inside a .use() call, otherwise `false`.
  */
 function isInsideUseCall(node: ts.Node): boolean {
-  if (
+  return (
     ts.isCallExpression(node.parent) &&
     ts.isPropertyAccessExpression(node.parent.expression) &&
     ts.isIdentifier(node.parent.expression.name) &&
     node.parent.expression.name.text === 'use'
-  ) {
-    return true;
-  }
-  return false;
+  );
 }
 
 /**
@@ -105,34 +102,37 @@ export async function findExistingHandlers({
     let nativeMswHttpImportName: string | undefined;
     ts.forEachChild(sourceFile, (node) => {
       if (
-        ts.isImportDeclaration(node) &&
-        ts.isStringLiteral(node.moduleSpecifier)
+        !(
+          ts.isImportDeclaration(node) &&
+          ts.isStringLiteral(node.moduleSpecifier)
+        )
       ) {
-        const moduleSpecifier = node.moduleSpecifier.text;
-        // Check for openapi-msw-http import
-        if (
-          isOpenapiMswHttpImport(moduleSpecifier, file, genPath) &&
-          node.importClause?.namedBindings &&
-          ts.isNamedImports(node.importClause.namedBindings)
-        ) {
-          for (const element of node.importClause.namedBindings.elements) {
-            const originalName = (element.propertyName ?? element.name).text;
-            if (originalName === 'http') {
-              openapiHttpImportName = element.name.text;
-            }
+        return;
+      }
+      const moduleSpecifier = node.moduleSpecifier.text;
+      // Check for openapi-msw-http import
+      if (
+        isOpenapiMswHttpImport(moduleSpecifier, file, genPath) &&
+        node.importClause?.namedBindings &&
+        ts.isNamedImports(node.importClause.namedBindings)
+      ) {
+        for (const element of node.importClause.namedBindings.elements) {
+          const originalName = (element.propertyName ?? element.name).text;
+          if (originalName === 'http') {
+            openapiHttpImportName = element.name.text;
           }
         }
-        // Check for native msw import
-        if (
-          moduleSpecifier === 'msw' &&
-          node.importClause?.namedBindings &&
-          ts.isNamedImports(node.importClause.namedBindings)
-        ) {
-          for (const element of node.importClause.namedBindings.elements) {
-            const originalName = (element.propertyName ?? element.name).text;
-            if (originalName === 'http') {
-              nativeMswHttpImportName = element.name.text;
-            }
+      }
+      // Check for native msw import
+      if (
+        moduleSpecifier === 'msw' &&
+        node.importClause?.namedBindings &&
+        ts.isNamedImports(node.importClause.namedBindings)
+      ) {
+        for (const element of node.importClause.namedBindings.elements) {
+          const originalName = (element.propertyName ?? element.name).text;
+          if (originalName === 'http') {
+            nativeMswHttpImportName = element.name.text;
           }
         }
       }

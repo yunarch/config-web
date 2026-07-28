@@ -54,68 +54,73 @@ async function extractGenApiServicesInfo(genPath: string) {
       if (ts.isClassDeclaration(node) && node.name?.text === name) {
         for (const member of node.members) {
           if (
-            ts.isMethodDeclaration(member) &&
-            ts.isIdentifier(member.name) &&
-            member.modifiers &&
-            member.modifiers.some(
-              (m) => m.kind === ts.SyntaxKind.PublicKeyword
-            ) &&
-            member.modifiers.some((m) => m.kind === ts.SyntaxKind.StaticKeyword)
+            !(
+              ts.isMethodDeclaration(member) &&
+              ts.isIdentifier(member.name) &&
+              member.modifiers &&
+              member.modifiers.some(
+                (m) => m.kind === ts.SyntaxKind.PublicKeyword
+              ) &&
+              member.modifiers.some(
+                (m) => m.kind === ts.SyntaxKind.StaticKeyword
+              )
+            )
           ) {
-            const methodName = member.name.text;
-            let toHandleUrl: string | undefined;
-            let toHandleHttpMethod: string | undefined;
-            const findRequestInfo = (n: ts.Node) => {
-              if (
-                ts.isReturnStatement(n) &&
-                n.expression &&
-                ts.isCallExpression(n.expression) &&
-                ts.isIdentifier(n.expression.expression) &&
-                n.expression.expression.text === '__request'
-              ) {
-                const optionsArg = n.expression.arguments[1];
-                if (ts.isObjectLiteralExpression(optionsArg)) {
-                  for (const prop of optionsArg.properties) {
-                    if (
-                      ts.isPropertyAssignment(prop) &&
-                      ts.isIdentifier(prop.name) &&
-                      prop.name.text === 'url' &&
-                      ts.isStringLiteral(prop.initializer)
-                    ) {
-                      toHandleUrl = prop.initializer.text;
-                    } else if (
-                      ts.isPropertyAssignment(prop) &&
-                      ts.isIdentifier(prop.name) &&
-                      prop.name.text === 'method' &&
-                      ts.isStringLiteral(prop.initializer)
-                    ) {
-                      toHandleHttpMethod = prop.initializer.text.toUpperCase();
-                    }
+            continue;
+          }
+          const methodName = member.name.text;
+          let toHandleUrl: string | undefined;
+          let toHandleHttpMethod: string | undefined;
+          const findRequestInfo = (n: ts.Node) => {
+            if (
+              ts.isReturnStatement(n) &&
+              n.expression &&
+              ts.isCallExpression(n.expression) &&
+              ts.isIdentifier(n.expression.expression) &&
+              n.expression.expression.text === '__request'
+            ) {
+              const optionsArg = n.expression.arguments[1];
+              if (ts.isObjectLiteralExpression(optionsArg)) {
+                for (const prop of optionsArg.properties) {
+                  if (
+                    ts.isPropertyAssignment(prop) &&
+                    ts.isIdentifier(prop.name) &&
+                    prop.name.text === 'url' &&
+                    ts.isStringLiteral(prop.initializer)
+                  ) {
+                    toHandleUrl = prop.initializer.text;
+                  } else if (
+                    ts.isPropertyAssignment(prop) &&
+                    ts.isIdentifier(prop.name) &&
+                    prop.name.text === 'method' &&
+                    ts.isStringLiteral(prop.initializer)
+                  ) {
+                    toHandleHttpMethod = prop.initializer.text.toUpperCase();
                   }
                 }
               }
-              ts.forEachChild(n, findRequestInfo);
-            };
-            if (member.body) ts.forEachChild(member.body, findRequestInfo);
-            if (toHandleUrl && toHandleHttpMethod) {
-              result.push({
-                path: serviceFile,
-                name,
-                methodName,
-                toHandleUrl,
-                toHandleHttpMethod,
-              });
-            } else {
-              if (!toHandleUrl) {
-                console.warn(
-                  `No URL found for ${methodName} request in service ${name} (${serviceFile})`
-                );
-              }
-              if (!toHandleHttpMethod) {
-                console.warn(
-                  `No HTTP method found for ${methodName} request in service ${name} (${serviceFile})`
-                );
-              }
+            }
+            ts.forEachChild(n, findRequestInfo);
+          };
+          if (member.body) ts.forEachChild(member.body, findRequestInfo);
+          if (toHandleUrl && toHandleHttpMethod) {
+            result.push({
+              path: serviceFile,
+              name,
+              methodName,
+              toHandleUrl,
+              toHandleHttpMethod,
+            });
+          } else {
+            if (!toHandleUrl) {
+              console.warn(
+                `No URL found for ${methodName} request in service ${name} (${serviceFile})`
+              );
+            }
+            if (!toHandleHttpMethod) {
+              console.warn(
+                `No HTTP method found for ${methodName} request in service ${name} (${serviceFile})`
+              );
             }
           }
         }
@@ -191,8 +196,8 @@ export async function findServicesUsages({
     }
   }
   // Clean up the result map to remove empty entries and return the map of service usages
-  for (const [serviceName, methodsMap] of result.entries()) {
-    for (const [methodName, serviceUsage] of methodsMap.entries()) {
+  for (const [serviceName, methodsMap] of result) {
+    for (const [methodName, serviceUsage] of methodsMap) {
       if (serviceUsage.files.size === 0) methodsMap.delete(methodName);
     }
     if (methodsMap.size === 0) result.delete(serviceName);

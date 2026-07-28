@@ -133,8 +133,6 @@ export function base(
         'max-params': ['warn', 4],
         'new-cap': ['error', { capIsNew: false }],
         'no-alert': 'error',
-        /** @deprecated */
-        // 'new-parens': 'warn',
         'no-array-constructor': 'error',
         'no-bitwise': 'error',
         'no-caller': 'error',
@@ -146,8 +144,6 @@ export function base(
         'no-extend-native': 'error',
         'no-extra-bind': 'error',
         'no-extra-label': 'error',
-        /** @deprecated */
-        // 'no-floating-decimal': 'error',
         'no-implicit-coercion': ['error', { allow: ['!!', '+'] }],
         'no-implied-eval': 'error',
         'no-iterator': 'error',
@@ -159,6 +155,7 @@ export function base(
         'no-nested-ternary': 'error',
         'no-new': 'error',
         'no-new-func': 'error',
+        'no-loop-func': 'error',
         'no-new-wrappers': 'error',
         'no-octal-escape': 'error',
         'no-param-reassign': 'error',

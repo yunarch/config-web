@@ -18,20 +18,18 @@ export function test(
       plugins: {
         vitest: pluginVitest,
       },
-      ...(enableTypeTesting
-        ? {
-            settings: {
-              vitest: {
-                typecheck: true,
-              },
-            },
-            languageOptions: {
-              globals: {
-                ...pluginVitest.environments.env.globals,
-              },
-            },
-          }
-        : {}),
+      ...(enableTypeTesting && {
+        settings: {
+          vitest: {
+            typecheck: true,
+          },
+        },
+        languageOptions: {
+          globals: {
+            ...pluginVitest.environments.env.globals,
+          },
+        },
+      }),
     },
     {
       name: 'yunarch/test/rules',

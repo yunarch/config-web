@@ -26,7 +26,7 @@ const configs = await config({
   plugins: {
     '': {
       // eslint-disable-next-line @typescript-eslint/no-deprecated -- Deprecated but still needed, no known alternative atm.
-      rules: Object.fromEntries(builtinRules.entries()),
+      rules: Object.fromEntries(builtinRules),
     },
   },
 });

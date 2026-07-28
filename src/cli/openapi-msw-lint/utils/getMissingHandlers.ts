@@ -27,8 +27,8 @@ export function getMissingHandlers(
       .map((h) => `${h.httpMethod.toLowerCase()}:${h.url}`)
   );
   const result: MissingHandlerError[] = [];
-  for (const [serviceName, methods] of servicesUsages.entries()) {
-    for (const [methodName, serviceUsage] of methods.entries()) {
+  for (const [serviceName, methods] of servicesUsages) {
+    for (const [methodName, serviceUsage] of methods) {
       const { serviceInfo } = serviceUsage;
       const toHandleHttpMethod = serviceInfo.toHandleHttpMethod.toLowerCase();
       const toHandleUrl = serviceInfo.toHandleUrl;

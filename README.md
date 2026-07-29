@@ -204,23 +204,22 @@ export default config({
 
 ## Oxfmt
 
-To use `Oxfmt`, create a `.oxfmtrc.json` [configuration file](https://oxc.rs/docs/guide/usage/formatter/config.html) and extend the shared preset:
+To use `Oxfmt`, create an `oxfmt.config.ts` [configuration file](https://oxc.rs/docs/guide/usage/formatter/config.html) and spread the shared preset:
 
-```jsonc
-{
-  "$schema": "./node_modules/oxfmt/configuration_schema.json",
-  "extends": ["@yunarch/config-web/oxfmt"],
-}
+```ts
+import config from '@yunarch/config-web/oxfmt';
+import { defineConfig } from 'oxfmt';
+
+export default defineConfig({
+  ...config,
+  // Add your configuration overrides here...
+});
 ```
 
 > [!NOTE]
 > `Oxfmt` uses `ignorePatterns` in its configuration file instead of `.prettierignore` file but for compatibility, `.prettierignore` file is also supported.
 >
 > See [Oxfmt ignore files](https://oxc.rs/docs/guide/usage/formatter/ignore-files.html) for details.
-
-> [!CAUTION]
-> Currently, `Oxfmt` does not extends configuration:
-> https://github.com/oxc-project/oxc/issues/16394
 
 ## Oxlint
 

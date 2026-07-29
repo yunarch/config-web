@@ -31,10 +31,6 @@ export default defineConfig([
       await Promise.all([
         // oxc
         parseJSONC(
-          './src/formatters/config.oxfmt.jsonc',
-          './dist/config.oxfmt.json'
-        ),
-        parseJSONC(
           './src/linters/config.oxlint.jsonc',
           './dist/config.oxlint.json'
         ),
@@ -90,6 +86,18 @@ export default defineConfig([
     shims: true,
     deps: {
       neverBundle: ['eslint', '@typescript-eslint/parser'],
+    },
+  },
+  // Oxfmt
+  {
+    entry: ['./src/formatters/config.oxfmt.ts'],
+    outDir: './dist',
+    format: 'esm',
+    dts: true,
+    minify: true,
+    shims: true,
+    deps: {
+      neverBundle: ['oxfmt'],
     },
   },
 ]);

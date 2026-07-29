@@ -22,20 +22,35 @@ export function unicorn(): TypedFlatConfigItem[] {
             checkDirectories: false,
           },
         ],
+
         'unicorn/no-array-reduce': 'off',
         'unicorn/no-null': 'off',
+        'unicorn/no-non-function-verb-prefix': 'off', // To strict, users should decide depending on their needs.
+        'unicorn/no-declarations-before-early-exit': 'off', // To strict, users should decide depending on their needs.
+        'unicorn/no-top-level-side-effects': 'off',
+        'unicorn/no-useless-undefined': ['error', { checkArguments: false }],
+        'unicorn/no-break-in-nested-loop': 'off', // Users should be in control of their code structure.
+
+        'unicorn/prefer-top-level-await': 'warn',
+        'unicorn/prefer-iterator-to-array': 'off',
         'unicorn/prefer-number-properties': [
           'error',
           { checkInfinity: true, checkNaN: true },
         ],
-        'unicorn/prefer-top-level-await': 'warn',
-        'unicorn/prefer-await': 'off',
+        'unicorn/prefer-global-number-constants': 'off', // We use `checkInfinity` and `checkNaN` in `unicorn/prefer-number-properties` instead.
+        'unicorn/prefer-number-coercion': 'off',
+        'unicorn/prefer-math-constants': 'off',
+        'unicorn/prefer-includes-over-repeated-comparisons': 'off', // Users should be in control of their code structure.
+        'unicorn/prefer-else-if': 'off', // Users should be in control of their code structure.
+        'unicorn/prefer-simple-condition-first': 'off', // Users should be in control of their code structure.
+        'unicorn/prefer-early-return': 'off', // Users should be in control of their code structure.
+
         'unicorn/name-replacements': 'off',
+
+        'unicorn/consistent-compound-words': 'off', // To strict, users should decide depending on their needs.
         'unicorn/consistent-boolean-name': 'off', // To strict, users should decide depending on their needs.
-        'unicorn/no-non-function-verb-prefix': 'off', // To strict, users should decide depending on their needs.
-        'unicorn/no-declarations-before-early-exit': 'off', // Users should be in control of their code structure.
-        'unicorn/no-top-level-side-effects': 'off',
-        'unicorn/no-useless-undefined': ['error', { checkArguments: false }],
+
+        'unicorn/max-nested-calls': 'off', // Will make libraries like zod always complaining about this rule.
       },
     },
   ];

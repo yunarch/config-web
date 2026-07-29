@@ -52,21 +52,21 @@ export function config(
   if (gitignore) {
     if (typeof gitignore === 'boolean') {
       configs.push(
-        interopDefault(import('eslint-config-flat-gitignore')).then((r) => [
-          r({
+        (async () => [
+          (await interopDefault(import('eslint-config-flat-gitignore')))({
             name: 'yunarch/gitignore',
             strict: false,
           }),
-        ])
+        ])()
       );
     } else {
       configs.push(
-        interopDefault(import('eslint-config-flat-gitignore')).then((r) => [
-          r({
+        (async () => [
+          (await interopDefault(import('eslint-config-flat-gitignore')))({
             name: 'yunarch/gitignore',
             ...gitignore,
           }),
-        ])
+        ])()
       );
     }
   }

@@ -49,7 +49,10 @@
       "types": "./dist/config.eslint.d.mts",
       "default": "./dist/config.eslint.mjs"
     },
-    "./oxfmt": "./dist/config.oxfmt.json",
+    "./oxfmt": {
+      "types": "./dist/config.oxfmt.d.mts",
+      "default": "./dist/config.oxfmt.mjs"
+    },
     "./oxlint": "./dist/config.oxlint.json",
     "./tsconfig-base": "./dist/config.tsconfig-base.json",
     "./ts-reset.d.ts": "./dist/reset.d.ts",
@@ -63,7 +66,7 @@
     "gen": "bun run --parallel gen:cli-docs gen:eslint-typegen gen:oxlint-compatgen gen:oxfmt-compatgen",
     "gen:cli-docs": "bun run ./scripts/cli-docsgen.ts",
     "gen:eslint-typegen": "bun run ./scripts/eslint-typegen.ts",
-    "gen:oxfmt-compatgen": "bun run ./scripts/oxfmt-compatgen.ts && oxfmt format --write ./src/formatters/config.oxfmt.jsonc",
+    "gen:oxfmt-compatgen": "bun run ./scripts/oxfmt-compatgen.ts && oxfmt format --write ./src/formatters/config.oxfmt.ts",
     "gen:oxlint-compatgen": "bun run ./scripts/oxlint-compatgen.ts && oxfmt format --write ./src/linters/config.oxlint.jsonc",
     "lint": "bun run --parallel lint:code lint:ts",
     "lint:code": "oxlint && eslint .",
@@ -83,7 +86,7 @@
   "peerDependencies": {
     "prettier": ">= 3 || < 4",
     "eslint": ">=9.5.0 || < 11",
-    "oxfmt": ">=0.24.0 || < 1",
+    "oxfmt": ">=0.38.0 || < 1",
     "oxlint": ">=1.42.0 || < 2",
     "msw": ">=2 || < 3"
   },

@@ -1,4 +1,7 @@
-import pluginJsdoc, { jsdoc as proceduralJsdoc } from 'eslint-plugin-jsdoc';
+import {
+  configs as pluginJsdocConfigs,
+  jsdoc as proceduralJsdoc,
+} from 'eslint-plugin-jsdoc';
 import { GLOB_TS, GLOB_TSX } from '../globs';
 import type { TypedFlatConfigItem } from '../types';
 
@@ -30,9 +33,9 @@ export function jsdoc(): TypedFlatConfigItem[] {
       config: 'flat/recommended-typescript-error',
       rules: {
         // eslint-pluging-jsdoc does not allow array of configs so we add rules from other jsdoc ts configs here
-        ...pluginJsdoc.configs['flat/contents-typescript-error'].rules,
-        ...pluginJsdoc.configs['flat/logical-typescript-error'].rules,
-        ...pluginJsdoc.configs['flat/stylistic-typescript-error'].rules,
+        ...pluginJsdocConfigs['flat/contents-typescript-error'].rules,
+        ...pluginJsdocConfigs['flat/logical-typescript-error'].rules,
+        ...pluginJsdocConfigs['flat/stylistic-typescript-error'].rules,
         // Overrides
         'jsdoc/require-hyphen-before-param-description': ['error', 'always'],
         'jsdoc/require-param': [

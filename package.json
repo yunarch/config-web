@@ -139,7 +139,7 @@
     "eslint-typegen": "2.3.1",
     "oxfmt": "0.66.0",
     "oxlint": "1.65.0",
-    "oxlint-tsgolint": "7.0.2001",
+    "oxlint-tsgolint": "7.0.2002",
     "@oxlint/migrate": "1.65.0",
     "@yunarch/eslint-oxlint-diff": "0.4.2",
     "husky": "9.1.7",

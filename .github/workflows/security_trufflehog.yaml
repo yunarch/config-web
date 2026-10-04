@@ -21,6 +21,6 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
       - name: 🕵🏽‍♂️ Run TruffleHog OSS
-        uses: trufflesecurity/trufflehog@bcfcf73aaf4759d4dadc2783177c245a02792318
+        uses: trufflesecurity/trufflehog@4dd8831c5f12599465d4d45c3c447b4018a34c85
         with:
           extra_args: --results=verified,unknown
